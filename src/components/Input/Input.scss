@@ -1,0 +1,38 @@
+.Input {
+    width: 100%;
+    &__el {
+        background: #FFFFFF;
+        border-radius: 20px;
+        padding: 24px 30px;
+        border: 2px solid transparent;
+        transition: all .3s ease;
+        display: block;
+        width: 100%;
+        color: var(--violet);
+        outline: none;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 27px;
+
+        &::placeholder {
+            color: var(--light_violet);
+        }
+
+        &:focus {
+            border-color: var(--light_violet);
+        }
+    }
+
+    &__error {
+        color: var(--red);
+        margin-top: 15px;
+    }
+}
+
+.Input.error {
+
+    .Input__el {
+        border-color: var(--red);
+        box-shadow: 0px 0px 41px rgba(255, 74, 74, 0.15);
+    }
+}

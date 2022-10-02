@@ -1,0 +1,12 @@
+.panel {
+    padding:20px;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 100%;
+
+    &-label {
+      font-weight: 600;
+      color: var(--gray);  
+      margin-bottom: 25px;
+    }
+}

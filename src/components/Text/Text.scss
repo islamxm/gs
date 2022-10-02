@@ -1,0 +1,21 @@
+.Text {
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 24px 30px;
+    display: block;
+    width: 100%;
+    resize: none;
+    color: var(--violet);
+    font-weight: 600;
+    transition: all .3s ease;
+    border: 1px solid transparent;
+    outline: none;
+
+    &::placeholder {
+        color: var(--light_violet);
+    }
+
+    &:focus {
+        border-color: var(--light_violet);
+    }
+}

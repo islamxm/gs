@@ -1,0 +1,50 @@
+.Button {
+    cursor: pointer;
+    border: none;
+    display: flex;
+    
+    align-items: center;
+    padding: 15px;
+    min-width: 312px;
+    color: #fff;
+    transition: all .3s ease;
+    border-radius: 20px;
+    font-size: 22px;
+    line-height: 27px;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &__before {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 100%;
+    }
+
+    &__text {
+        font-weight: 600;
+    }
+
+    &__after {
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 100%;
+    }
+}
+
+.Button.default {
+    background-color: var(--violet);
+}
+
+.Button.danger {
+    background-color: var(--red);
+}

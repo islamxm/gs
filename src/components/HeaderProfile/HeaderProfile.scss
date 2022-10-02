@@ -1,0 +1,76 @@
+.HeaderProfile {
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: #fff;
+    
+
+    &__in {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    &__logo {
+        width: 335px;
+        height: 50px;
+        flex: 0 0 auto;
+        
+        img {
+            
+            height: 100%;
+            object-fit: contain;
+            display: flex;
+        }
+    }
+
+    &__main {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &_nav {
+            font-weight: 600;
+            color: #000;
+            display: flex;
+            align-items: center;
+
+            &_icon {
+                line-height: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+                cursor: pointer;
+                margin-right: 15px;
+            }
+
+            &_text {
+
+            }
+        }
+
+        &_user {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            cursor: pointer;
+
+            &_icon {
+                line-height: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 15px;
+            }
+        }
+    }
+}

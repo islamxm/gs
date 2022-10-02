@@ -1,0 +1,100 @@
+.Modal {
+
+    .ant-modal-content {
+        border-radius: 20px;
+        background-color: var(--bg);
+        overflow: hidden;
+        .ant-modal-close {
+            display: none;
+        }
+
+        .ant-modal-body {
+            padding: 35px 45px;
+            
+        }
+
+        .ant-modal-footer {
+            display: none;
+        }
+    }
+
+    &__head {
+        font-weight: 600;
+        margin-bottom: 35px;
+    }
+
+    &__form {
+
+        &_row {
+            margin-bottom: 35px;
+        }
+
+        &_upload {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background-color: #fff;
+            border-radius: 20px;
+            height: 144px;
+
+            &_prev {
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    display: flex;
+                }
+            }
+
+            input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                visibility: hidden;
+                z-index: -1;
+                pointer-events: none;
+                touch-action: none;
+            }
+
+            &_label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                max-width: 345px;
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+                background: var(--light_gray);
+                cursor: pointer;
+                border: 1px solid transparent;
+                transition: all .3s ease;
+
+                &:active {
+                    transform: scale(0.95);
+                }
+
+                &:hover {
+                    border-color: var(--violet);
+
+                }
+                &_text {
+                    text-align: center;
+                    font-weight: 600;
+                    color: var(--gray)
+                }
+            }
+        }
+
+        &_action {
+            
+            .Button {
+                width: 100%;
+            }
+        }
+    }
+}

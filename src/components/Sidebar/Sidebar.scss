@@ -1,0 +1,74 @@
+.Sidebar {
+    width: 355px;
+    height: 100%;
+    background-color: #fff;
+    flex: 0 0 auto;
+
+    padding: 22px 0;
+
+    &__head {
+        padding: 0 20px;
+        margin-bottom: 20px;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #000;
+    }
+
+    &__list {}
+
+    &__item {
+        padding-left: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 20px;
+        transition: all .3s ease;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            background-color: 
+            #F6F8FF;
+        }
+
+
+        a {
+            color: var(--gray) !important;
+            font-weight: 500;
+
+            
+        }
+
+
+        &:before {
+            position: absolute;
+            top: 24px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--gray);
+            content: '';
+        }
+
+        &:after {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            transition: all .3s ease;
+            background-color: var(--violet);
+            content: '';
+        }
+    }
+
+    &__item.active {
+        background-color: 
+        #F6F8FF;
+
+        &:after {
+            width: 6px;
+        }
+    }
+}
