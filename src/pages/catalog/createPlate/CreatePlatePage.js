@@ -15,11 +15,37 @@ import Mod from './components/Mod/Mod';
 import DefList from './components/DefList/DefList';
 
 
+import AddAlrgn from '../modals/addAlrgn/AddAlrgn';
+import EditAlrgn from '../modals/editAlrgn/EditAlrgn';
+import { useState } from 'react';
+
+
 const CreatePlatePage = () => {
+
+    const [addAllergen, setAddAllergen] = useState(false);
+    const [editAllergen, setEditAllergen] = useState(false);
+
+    const openAddAllergen = () => {
+        setAddAllergen(true)
+    }
+
+    const closeAddAllergen = () => {
+        setAddAllergen(false)
+    }
+
+    const openEditAllergen = () => {
+        setEditAllergen(true)
+    }
+
+    const closeEditAllergen = () => {
+        setEditAllergen(false)
+    }
 
 
     return (
         <div className="CreatePlatePage page">
+            <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
+            <EditAlrgn visible={editAllergen} close={closeEditAllergen}/>
             <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
@@ -29,9 +55,9 @@ const CreatePlatePage = () => {
                             <Col span={12}>
                                 <Row className="row-custom">
                                     <div className="panel" style={{display: 'flex', overflowX:'auto'}}>
-                                        {/* <PicItem/>
                                         <PicItem/>
-                                        <PicItem/> */}
+                                        <PicItem/>
+                                        <PicItem/>
                                         <Pl style={{width: 200, height: 200, flex: '0 0 auto', backgroundColor: '#F8F8F8'}} text={'Добавить картинку'}/>
                                     </div>
                                 </Row>
@@ -95,7 +121,7 @@ const CreatePlatePage = () => {
                                     <Mod/>
                                 </Row>
                                 <Row className='row-custom'>
-                                    <DefList head={'Список аллергенов'} addText={'Добавить аллерген'}/>
+                                    <DefList editModal={openEditAllergen} openModal={openAddAllergen} head={'Список аллергенов'} addText={'Добавить аллерген'}/>
                                 </Row>
                                 <Row className='row-custom'>
                                     <DefList head={'Список рекомендаций'} addText={'Добавить блюдо'}/>

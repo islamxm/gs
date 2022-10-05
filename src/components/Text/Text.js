@@ -6,11 +6,22 @@ const Text = ({
     value,
     id,
     placeholder,
-    height
+    height,
+    shadow
     
 }) => {
     return (
-        <textarea style={{height: height}} name={name} value={value} id={id} className="Text" placeholder={placeholder}></textarea>
+        <textarea 
+            style={{height: height}} 
+            name={name} 
+            value={value} 
+            id={id} 
+            className={"Text" + (shadow ? ' shadow ' : '')} 
+            placeholder={placeholder}
+            
+            >
+
+            </textarea>
     )
 }
 

@@ -1,7 +1,9 @@
 import './PicItem.scss';
-import Button from '../../../../../components/Button/Button';
+import img from '../../../../assets/img/org.png';
+import Button from '../../../../components/Button/Button';
 import { BsTrash } from 'react-icons/bs';
-import img from '../../../../../assets/img/org.png';
+
+
 
 const PicItem = ({image, remove, style}) => {
     return (
@@ -10,9 +12,9 @@ const PicItem = ({image, remove, style}) => {
                 <img src={img} alt="" />
             </div>
             <div className="PicItem__action">
-                <Button styles={{width: '100%'}} variant={'danger'} before={<BsTrash/>} text={'Удалить'} justify={'center'}/>
+                <Button styles={{width: '100%', padding: 10}} variant={'danger'} text={'Удалить'} before={<BsTrash/>} justify={'center'}/>
             </div>
-        </div>
+        </div>  
     )
 }
 

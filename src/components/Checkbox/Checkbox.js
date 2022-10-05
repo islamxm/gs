@@ -5,10 +5,14 @@ const Checkbox = ({
     name,
     id,
     onChange,
-    text
+    text,
+    shadow
 }) => {
+
+
+
     return (
-        <div className="Checkbox">
+        <div className={"Checkbox" + (shadow ? ' shadow ' : '')}>
             <input onChange={onChange} id={id} name={name} type="checkbox" checked={checked}/>
             <label htmlFor={id} className="Checkbox__label">
                 <div className="Checkbox__label_icon"></div>
