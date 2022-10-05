@@ -1,0 +1,47 @@
+.CatCard {
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #fff;
+    
+    &__img {
+        height: 175px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: flex;
+        }
+    }
+
+    &__body {
+        padding:15px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1 0 auto;
+        
+        &_name {
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        &_price {
+            font-weight: 600;
+            &_actual {
+                color:#FC5834;
+            }
+
+            &_main {
+                color: #666;
+                font-size: 14px;
+                line-height: 17px;
+                text-decoration: line-through;
+            }
+        }
+    }
+}

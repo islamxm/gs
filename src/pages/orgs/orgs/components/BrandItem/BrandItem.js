@@ -1,4 +1,4 @@
-import './OrgsItem.scss';
+import './BrandItem.scss';
 import Button from '../../../../../components/Button/Button';
 import img from '../../../../../assets/img/org-brand.png';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import EditBrand from '../../../modals/editBrand/EditBrand';
 
 
 
-const OrgsItem = ({link}) => {
+const BrandItem = ({link, image}) => {
     const {visible, showModal, hideModal} = useModal();
 
     const editModal = () => {
@@ -15,12 +15,12 @@ const OrgsItem = ({link}) => {
     }
 
     return (
-        <div className="OrgsItem">
+        <div className="BrandItem">
             <EditBrand name={'Мой бренд'} visible={visible} close={hideModal}/>
-            <Link to={link ? link : '/'} className="OrgsItem__img">
-                <img src={img} alt="" />
+            <Link to={'/organizations/item'} className="BrandItem__img">
+                <img src={image} alt="" />
             </Link>
-            <div className="OrgsItem__action">
+            <div className="BrandItem__action">
                 <Button
                     onClick={editModal}
                     text={'Изменить'}
@@ -30,4 +30,4 @@ const OrgsItem = ({link}) => {
     )
 }
 
-export default OrgsItem;
+export default BrandItem;

@@ -21,12 +21,14 @@
     &__head {
         font-weight: 600;
         margin-bottom: 35px;
+        font-size: 22px;
+        line-height: 27px;
     }
 
     &__form {
 
         &_row {
-            margin-bottom: 35px;
+            margin-bottom: 20px;
         }
 
         &_upload {
@@ -90,10 +92,79 @@
             }
         }
 
+        &_map {
+            height: 480px;
+
+        }
+
         &_action {
             
             .Button {
                 width: 100%;
+            }
+        }
+
+        &_time.disabled {
+            opacity: .5;
+        }
+
+        &_time {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .3s ease;
+            
+            &_space {
+                margin: 0 10px;
+                color: var(--violet);
+                font-size: 42px;
+                line-height: 52px;
+                font-weight: 600;
+            }
+
+            &_item.react-time-picker--disabled {
+                background-color: unset;
+            }
+
+            &_item {
+                // width: 48%;
+
+                .react-time-picker__wrapper {
+                    flex: unset;
+                    border: unset;
+
+                    .react-time-picker__inputGroup {
+                        font-size: 42px;
+                        line-height: 52px;
+                        font-weight: 600;
+                        color: var(--violet);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-width: unset;
+                        flex: unset;
+                        
+                        input {
+                            // width: 100%;
+                            outline: none;
+                            &::placeholder {
+                                color: var(--light_violet);
+                            }
+                            
+                        }
+                        .react-time-picker__inputGroup__input.react-time-picker__inputGroup__input--hasLeadingZero {
+                            width: 28px !important;
+                        }
+                        .react-time-picker__inputGroup__input {
+                            width: 60px !important;
+                            border-bottom: 2px solid var(--violet);
+                        }
+                        
+                    }
+                    .react-time-picker__clear-button {
+                        display: none;
+                    }
+                }
             }
         }
     }

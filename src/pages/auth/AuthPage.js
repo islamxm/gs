@@ -28,7 +28,8 @@ const AuthPage = () => {
                                     />
                             </div>
                             <div className="AuthPage__body_form_action">
-                                <Button 
+                                <Button
+                                    styles={{minWidth: 315}} 
                                     text={'Войти'}
                                     justify={'center'}
                                     type={'button'}/>

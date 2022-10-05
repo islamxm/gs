@@ -11,6 +11,9 @@ import DropCollapse from '../../../components/DropCollapse/DropCollapse';
 import TimeSelect from './components/timeSelect/TimeSelect';
 import { useEffect, useState } from 'react';
 import {BsTrash} from 'react-icons/bs';
+import useModal from '../../../hooks/useModal';
+import SelectLocation from '../modals/selectLocation/SelectLocation';
+
 
 const payMethodsMock = [
     {
@@ -37,114 +40,81 @@ const timezoneMock = [
 const timeSelectMock = [
     {
         name: 'ПН',
-        value: '08:00 - 20:30'
+        values: {
+            start: '08:00',
+            end: '23:00'
+        },
+        rest: false
     },
     {
         name: 'ВТ',
-        value: '08:00 - 20:30'
+        values: {
+            start: '08:00',
+            end: '23:00'
+        },
+        rest: false
     },
     {
         name: 'СР',
-        value: '08:00 - 20:30'
+        values: {
+            start: '08:00',
+            end: '23:00'
+        },
+        rest: false
     },
     {
         name: 'ЧТ',
-        value: '08:00 - 20:30'
+        values: {
+            start: '08:00',
+            end: '23:00'
+        },
+        rest: false
     },
     {
         name: 'ПТ',
-        value: '08:00 - 20:30'
+        values: {
+            start: '08:00',
+            end: '23:00'
+        },
+        rest: false
     },
     {
         name: 'СБ',
-        value: '08:00 - 20:30'
+        values: {
+            start: '08:00',
+            end: '23:00',
+        },
+        rest: false
     },
     {
         name: 'ВС',
-        value: 'Выходной'
+        values: {
+            start: 0,
+            end: 0
+        },
+        rest: true
     },
 ]
 
 const OrgsCreatePage = () => {
-    // Название организации
-    const [name, setName] = useState('')
 
-    //Описание
-    const [descr, setDescr] = useState('')
+    
 
-    //Адрес
-    const [adress, setAdress] = useState('')
+    
+    const [selectLocationModal, setSelectLocationModal] = useState(false);
 
-    //Телефон
-    const [phone, setPhone] = useState('')
 
-    //Email
-    const [email, setEmail] = useState('')
-
-    //ID кассовой станции
-    const [IDkassa, setIDkassa] = useState('')
-
-    //ID в iIko
-    const [IDilko, setIDilko] = useState('')
-
-    //Минимальная сумма заказа
-    const [minSum, setMinSum] = useState('')
-
-    //Скидка на самовывоз отсюда
-    const [discountPickup, setDiscountPickup] = useState('')
-
-    //Можно заказать отсюда
-    const [isOrder, setIsOrder] = useState(false)
-
+    const [image, setImage] = useState(null);
     //Часовой пояс
     const [tmz, setTmz] = useState('Europe/Moscow')
-
-    //Описание времени работы
-    const [timeDescr, setTimeDescr] = useState('')
 
     //время работы по дням недели
     const [weekTimes, setWeekTimes] = useState(timeSelectMock)
 
-    //Есть предзаказ
-    const [preorder, setPreorder] = useState(false)
-
-    //Шаг выбора времени предзаказа (в минутах)
-    const [preorderTime, setPreorderTime] = useState('')
-
-    //Максимальное количество шагов
-    const [maxStep, setMaxStep] = useState('')
-
-    //Уведомления в телеграм-боте и на E-Mail
-    const [push, setPush] = useState('')
-
-    //API-key бота
-    const [apiBot, setApiBot] = useState('')
-
-    //E-Mail
-    const [emailPush, setEmailPush] = useState('')
-
-    //Уведомлять о новых заказах
-    const [notNew, setNotNew] = useState(false)
-
-    //Уведомлять об ошибках iIko
-    const [notIlkoError, setNotIlkoError] = useState(false)
-
-    //Уведомлять об изменениях в заказах
-    const [notOrderChange, setNotOrderChange] = useState(false)
-
-    //Местоположение на карте
-    const [location, setLocation] = useState('')
-
-    //Есть доставка
-    const [delivery, setDelivery] = useState(false)
-
-    //Добавить полигон доставки
-    const [polygons, setPolygons] = useState([])
-
     //Способы оплаты
     const [pm, setPm] = useState([]);
 
-    const [selectedPm, setSelectedPm] = useState([])
+    const [delivery, setDelivery] = useState(false)
 
 
     const deletePayMethod = (index) => {
@@ -158,7 +128,6 @@ const OrgsCreatePage = () => {
     }
 
     const selectPayMethod = (value, index) => {
-
         let ur = pm;
         let p = ur.splice(index, 1, {value: value})
         setPm([...ur])
@@ -169,21 +138,40 @@ const OrgsCreatePage = () => {
         setTmz(value);
     }
 
+    const openSelectLocation = () => {
+        setSelectLocationModal(true)
+    }
+    const closeSelectLocation = () => {
+        setSelectLocationModal(false)
+    }
+
+    const saveTime = (index, value) => {
+        console.log(value)
+        console.log(index)
+
+        let ur = weekTimes;
+        let rm = ur.splice(index, 1, value)
+        setWeekTimes(ur);
+    }
+
+
+
 
 
 
     return (
         <div className="OrgsCreatePage page">
             <HeaderProfile/>
+
+            <SelectLocation visible={selectLocationModal} close={closeSelectLocation}/>
             <main className="Main">
                 <div className="pageBody">
                     <Sidebar/>
                     <div className="OrgsCreatePage__body pageBody-content">
-                        <Row gutter={[60, 60]} justify={'space-between'}>
+                        <Row gutter={[25, 25]} justify={'space-between'}>
                             <Col span={12}>
                                 <Row className='row-custom'>
                                     <div className="panel">
-                                        {/* <div className="panel-label"></div> */}
                                         <Pl 
                                             style={{height: 250, backgroundColor: '#F8F8F8'}} 
                                             text={'Выбрать картинку'}/>
@@ -233,7 +221,7 @@ const OrgsCreatePage = () => {
                                     <Input placeholder={'Описание времени работы'}/>
                                 </Row> 
                                 <Row className='row-custom'>
-                                    <TimeSelect list={weekTimes}/>
+                                    <TimeSelect save={saveTime} list={weekTimes}/>
                                 </Row> 
                                 <Row className='row-custom'>
                                     <Checkbox id={'2'} text={'Есть предзаказ'}/>
@@ -273,21 +261,26 @@ const OrgsCreatePage = () => {
                                             Местоположение на карте
                                         </div>
                                         <Pl 
+                                            onClick={openSelectLocation}
                                             style={{height: 200, backgroundColor: '#F8F8F8'}} 
                                             text={'Выбрать на карте'}/>
                                     </div>
                                 </Row>
                                 <Row className='row-custom'>
-                                    <Checkbox id={'7'} text={'Есть доставка'}/>
+                                    <Checkbox onChange={() => setDelivery(!delivery)} checked={delivery} id={'7'} text={'Есть доставка'}/>
                                 </Row>  
-                                <Row className='row-custom' gutter={[30, 30]}>
-                                    <Col span={12} >
-                                        <div className="panel" style={{height: 275}}>
-                                            <Pl text={'Добавить полигон доставки'}/>
-                                        </div>
-                                    </Col>
-                                    
-                                </Row>  
+                                {
+                                    delivery ? (
+                                        <Row className='row-custom' gutter={[30, 30]}>
+                                            <Col span={12} >
+                                                <div className="panel" style={{height: 275}}>
+                                                    <Pl text={'Добавить полигон доставки'}/>
+                                                </div>
+                                            </Col>
+                                            
+                                        </Row>  
+                                    ) : null
+                                }
                                 <Row className='row-custom'>
                                     {
                                         pm && pm.length > 0 ? (

@@ -1,0 +1,70 @@
+.AddMod {
+
+    &__head {
+
+    }
+
+    &__body {
+
+        &_item.active {
+
+            .AddMod__body_item_name, .AddMod__body_item_value {
+                border-color: var(--light_violet);
+            }
+
+           
+        }
+
+        &_item {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+
+            width: 100%;
+
+            &_main {
+                
+            }
+
+            &_name {
+                display: block;
+                width: 100%;
+                border: none;
+                outline: none;
+                padding: 10px 15px;
+                font-weight: 600;
+                color: var(--violet);
+                border-radius: 10px;
+                border: 1px solid transparent;
+                transition: all .3s ease;
+
+                &::placeholder {
+                    color: var(--light_violet);
+                }
+            }
+
+            &_value {
+                display: block;
+                width: 100%;
+                border: none;
+                outline: none;
+                padding: 10px 15px;
+                font-weight: 600;
+                color: var(--violet);
+                border-radius: 10px;
+                border: 1px solid transparent;
+                transition: all .3s ease;
+
+                &::placeholder {
+                    color: var(--light_violet);
+                }
+            }
+
+            &_action {
+                .Button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
