@@ -8,7 +8,7 @@ import { useState } from 'react';
 import DropCollapse from '../../../../components/DropCollapse/DropCollapse';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
 import PicItem from '../../components/PicItem/PicItem';
-import CatItem from '../../components/CatItem/CatItem';
+import StorieCatItem from '../../components/StorieCatItem/StorieCatItem';
 
 
 const SelectCat = ({visible, close}) => {
@@ -21,8 +21,8 @@ const SelectCat = ({visible, close}) => {
                     <Input placeholder={'Поиск категории'}/>
                 </div>
                 <div className="Modal__form_row" style={{overflowX: 'auto', display: 'flex'}}>
-                    <CatItem style={{marginRight: 20}}/>
-                    <CatItem style={{marginRight: 20}}/>
+                    <StorieCatItem style={{marginRight: 20}}/>
+                    <StorieCatItem style={{marginRight: 20}}/>
                     <Pl text={'Выбрать другую'} style={{backgroundColor: '#fff', height: 'unset'}}/>
                 </div>
                 <div className="Modal__form_action">

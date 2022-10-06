@@ -10,6 +10,7 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import Push from './modals/push/Push';
 import Email from './modals/email/Email';
 import User from './modals/user/User'; 
+import Discount from './modals/discount/Discount';
 
 import { useDoubleTap } from 'use-double-tap';
 
@@ -51,6 +52,7 @@ const ClientsPage = () => {
     const [push, setPush] = useState(false);
     const [email, setEmail] = useState(false);
     const [user, setUser] = useState(false);
+    const [discount, setDiscount] = useState(false);
 
     const openPush = () => {
         setPush(true)
@@ -74,6 +76,14 @@ const ClientsPage = () => {
 
     const closeUser = () => {
         setUser(false)
+    }
+
+    const openDiscount = () => {
+        setDiscount(true)
+    }
+
+    const closeDiscount = () => {
+        setDiscount(false)
     }
 
 
@@ -122,7 +132,9 @@ const ClientsPage = () => {
                 name={selectedUser?.name}  
                 bonus={selectedUser?.bonus}
                 phone={selectedUser?.phone}
+                addDiscount={openDiscount}
                 />
+            <Discount visible={discount} close={closeDiscount}/>
             <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">

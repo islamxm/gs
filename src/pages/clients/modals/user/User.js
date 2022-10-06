@@ -11,7 +11,7 @@ import OrderItem from '../../components/OrderItem/OrderItem';
 import DishItem from '../../components/DishItem/DishItem';
 
 
-const User = ({visible, close, name, bonus, phone}) => {
+const User = ({visible, close, name, bonus, phone, addDiscount}) => {
 
     const closeHandle = () => {
         close();
@@ -94,7 +94,8 @@ const User = ({visible, close, name, bonus, phone}) => {
                 </div>
                 <div className="User__action">
                     <Button styles={{marginRight: 15}} text={'Отправить Push-уведомление'} justify={'center'}/>
-                    <Button  text={'Отправить E-mail'} justify={'center'}/>
+                    <Button styles={{marginRight: 15}} text={'Отправить E-mail'} justify={'center'}/>
+                    <Button onClick={addDiscount}  text={'Сделать скидку'} justify={'center'}/>
                 </div>
             </div>
         </Modal>
