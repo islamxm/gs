@@ -10,6 +10,10 @@ import CatalogCategoryPage from "../pages/catalog/catalogCategory/CatalogCategor
 import CreatePlatePage from "../pages/catalog/createPlate/CreatePlatePage";
 import StoriesPage from "../pages/stories/StoriesPage";
 import ClientsPage from "../pages/clients/ClientsPage";
+import OrdersPage from "../pages/orders/OrdersPage";
+import StatPage from "../pages/stat/StatPage";
+
+
 
 const App = () => {
     return (
@@ -20,6 +24,8 @@ const App = () => {
             <Route path="/catalog" element={<CatalogPage/>}/>
             <Route path="/stories" element={<StoriesPage/>}/>
             <Route path="/clients" element={<ClientsPage/>}/>
+            <Route path="/orders" element={<OrdersPage/>}/>
+            <Route path="/statistic" element={<StatPage/>}/>
             <Route path="/catalog/createPlate" element={<CreatePlatePage/>}/>
             <Route path="/catalog/categoryName" element={<CatalogCategoryPage/>}/>
             <Route path="/organizations/item" element={<OrgsPage/>}/>

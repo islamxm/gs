@@ -9,10 +9,11 @@ const Input = ({
     error,
     placeholder,
     type,
-    readOnly
+    readOnly,
+    shadow
 }) => {
     return (
-        <div className={"Input" + (error ? ' error ' : '')} style={style}>
+        <div className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
             <input 
                 disabled={disabled}
                 type={type} 

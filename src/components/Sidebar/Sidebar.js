@@ -32,8 +32,8 @@ const Sidebar = () => {
                     </div>
                     <div className="Sidebar__item_submenu">
                         <Link to={'/clients'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/clients') ? ' active ' : '')}>Клиенты</Link>
-                        <Link to={'/'} className='Sidebar__item_submenu_item'>Заказы</Link>
-                        <Link to={'/'} className='Sidebar__item_submenu_item'>Статистика</Link>
+                        <Link to={'/orders'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/orders') ? ' active ' : '')}>Заказы</Link>
+                        <Link to={'/statistic'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/statistic') ? ' active ' : '')}>Статистика</Link>
                     </div>
                 </div>
             </div>
