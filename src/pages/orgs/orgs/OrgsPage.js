@@ -64,6 +64,7 @@ const OrgsPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     <Sidebar/>
+                    <div className="spc"></div>
                     <div className="OrgsPage__body pageBody-content">
                         <div className="OrgsPage__body_list">
                             {
@@ -99,6 +100,7 @@ const OrgsPage = () => {
                 
                 <div className="pageBody">
                     <Sidebar/>
+                    <div className="spc"></div>
                     <div className="OrgsPage__body pageBody-content">
                         <div className="OrgsPage__body_list">
                             {

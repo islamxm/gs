@@ -139,6 +139,7 @@ const ClientsPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     <Sidebar/>
+                    <div className="spc"></div>
                     <div className="ClientsPage__body pageBody-content">
                         <div className="ClientsPage__body_top">
                             <div className="ClientsPage__body_top_search">
@@ -149,7 +150,7 @@ const ClientsPage = () => {
                             </div>
                         </div>
                         <div className="ClientsPage__body_table">
-                            <table>
+                            <table className='gs-table'>
                                 <tr>
                                     <th>ID</th>
                                     <th>Имя</th>

@@ -37,6 +37,7 @@ const StoriesPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     <Sidebar/>
+                    <div className="spc"></div>
                     <div className="StoriesPage__body pageBody-content">
                         <Row gutter={[40, 0]}>
                             <Col span={14}>

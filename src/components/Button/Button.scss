@@ -48,3 +48,20 @@
 .Button.danger {
     background-color: var(--red);
 }
+
+.Button.light {
+    background-color: #fff;
+    border: none;
+
+    .Button__text {
+        color: var(--violet);
+    }
+
+    &:hover {
+        background-color: #fff;
+        opacity: 1;
+        .Button__text { 
+            color: var(--violet);
+        }
+    }
+}

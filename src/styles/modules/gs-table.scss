@@ -1,0 +1,110 @@
+.gs-table {
+    width: 100%;
+
+
+    &-status {
+        color: #898989;
+        font-weight: 600;
+    }
+
+    &-status.gs-table-status-new {
+        color: #30B42E;
+    }
+
+    &-status.gs-table-status-notpay {
+        color: var(--red);
+    }
+
+    &-status.gs-table-status-process {
+        color: var(--violet);
+    }
+
+    .spacer {
+        margin-bottom: 15px;
+    }
+
+    tr.row.active {
+        td {
+            color: #fff;
+            background-color: var(--violet) !important;
+        }
+    }
+
+
+    tr.row {
+        cursor: pointer;
+
+        td {
+            transition: all .3s ease;
+        }
+
+        &:nth-child(even) {
+            td {
+                background-color: #F6F8FF;
+            }
+        }
+
+    }
+    tr {
+
+        td, th {
+            // pointer-events: none;
+        }
+        &:first-child {
+            
+        }
+
+        &:nth-child(3) {
+
+            td {
+                
+                
+                &:first-child {
+                    border-radius: 10px 0 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 10px 0 0 ;
+                }
+            }
+        }
+        &:last-child {
+
+            td {
+                &:first-child {
+                    border-radius: 0 0 0 10px;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 10px 0;
+                }
+            }
+        }
+
+        th {
+            font-weight: 600;
+            color: #000;
+            padding: 20px 10px;
+            background-color: #fff;
+            text-align: left;
+            
+            
+            &:first-child {
+                border-radius: 10px 0 0 10px;
+            }
+            
+
+            &:last-child {
+                border-radius: 0 10px 10px 0;
+            }
+
+        }
+
+        td {
+            background-color: #fff;
+            padding: 20px 10px;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.OrderInfo {
+
+    &__main {
+
+        &_item {
+            margin-bottom: 20px;
+            font-weight: 600;
+
+            &_name {
+                margin-bottom: 5px;
+                color: #989898;
+            }
+
+            &_value {
+                color: var(--violet);
+            }
+        }
+    }
+}

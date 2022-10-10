@@ -50,6 +50,7 @@ const CreatePlatePage = () => {
             <main className="Main">
                 <div className="pageBody">
                     <Sidebar/>
+                    <div className="spc"></div>
                     <div className="CreatePlatePage__body pageBody-content">
                         <Row gutter={[25, 25]} justify={'space-between'}>
                             <Col span={12}>

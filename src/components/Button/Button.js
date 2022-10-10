@@ -12,6 +12,8 @@ const Button = ({text, before, after, justify, variant, type, styles, onClick}) 
                 return 'default'
             case 'danger':
                 return 'danger'
+            case 'light':
+                return 'light'
             default:
                 return 'default'
         }

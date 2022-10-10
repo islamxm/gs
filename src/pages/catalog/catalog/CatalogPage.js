@@ -18,6 +18,7 @@ const CatalogPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     <Sidebar/>
+                    <div className="spc"></div>
                     <div className="CatalogPage__body pageBody-content">
                         <div className="CatalogPage__body_list">
                             <Row gutter={[30, 30]}>

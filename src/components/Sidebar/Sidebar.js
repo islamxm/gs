@@ -36,6 +36,17 @@ const Sidebar = () => {
                         <Link to={'/statistic'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/statistic') ? ' active ' : '')}>Статистика</Link>
                     </div>
                 </div>
+                <div className={"Sidebar__item"}>
+                    <div className="Sidebar__item_head">
+                        <a className='Sidebar__item_head_nl'>Настройки</a>
+                    </div>
+                    <div className="Sidebar__item_submenu">
+                        <Link to={'/basket'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/basket') ? ' active ' : '')}>Корзина</Link>
+                        <Link to={'/integr'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/integr') ? ' active ' : '')}>Интеграции</Link>
+                        <Link to={'/settings'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/settings') ? ' active ' : '')}>Все настройки</Link>
+                        
+                    </div>
+                </div>
             </div>
         </div>
     )

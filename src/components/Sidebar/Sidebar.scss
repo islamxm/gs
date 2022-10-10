@@ -3,8 +3,12 @@
     height: 100%;
     background-color: #fff;
     flex: 0 0 auto;
-    // position: fixed;
+    position: fixed;
     padding: 22px 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: calc(25px + 80px);
 
     &__head {
         padding: 0 20px;

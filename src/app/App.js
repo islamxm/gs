@@ -12,6 +12,9 @@ import StoriesPage from "../pages/stories/StoriesPage";
 import ClientsPage from "../pages/clients/ClientsPage";
 import OrdersPage from "../pages/orders/OrdersPage";
 import StatPage from "../pages/stat/StatPage";
+import BasketPage from "../pages/basket/BasketPage";
+import IntegrPage from "../pages/integr/IntegrPage";
+import SettingsPage from "../pages/settings/SettingsPage";
 
 
 
@@ -26,6 +29,9 @@ const App = () => {
             <Route path="/clients" element={<ClientsPage/>}/>
             <Route path="/orders" element={<OrdersPage/>}/>
             <Route path="/statistic" element={<StatPage/>}/>
+            <Route path="/basket" element={<BasketPage/>}/>
+            <Route path="/integr" element={<IntegrPage/>}/>
+            <Route path="/settings" element={<SettingsPage/>}/>
             <Route path="/catalog/createPlate" element={<CreatePlatePage/>}/>
             <Route path="/catalog/categoryName" element={<CatalogCategoryPage/>}/>
             <Route path="/organizations/item" element={<OrgsPage/>}/>

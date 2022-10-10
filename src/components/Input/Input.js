@@ -10,10 +10,11 @@ const Input = ({
     placeholder,
     type,
     readOnly,
-    shadow
+    shadow,
+    onClick
 }) => {
     return (
-        <div className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
+        <div onClick={onClick} className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
             <input 
                 disabled={disabled}
                 type={type} 

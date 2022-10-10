@@ -6,13 +6,14 @@ const Checkbox = ({
     id,
     onChange,
     text,
-    shadow
+    shadow,
+    style
 }) => {
 
 
 
     return (
-        <div className={"Checkbox" + (shadow ? ' shadow ' : '')}>
+        <div style={style} className={"Checkbox" + (shadow ? ' shadow ' : '')}>
             <input onChange={onChange} id={id} name={name} type="checkbox" checked={checked}/>
             <label htmlFor={id} className="Checkbox__label">
                 <div className="Checkbox__label_icon"></div>
