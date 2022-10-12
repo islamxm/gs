@@ -11,7 +11,8 @@ const Input = ({
     type,
     readOnly,
     shadow,
-    onClick
+    onClick,
+    name
 }) => {
     return (
         <div onClick={onClick} className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
@@ -19,6 +20,7 @@ const Input = ({
                 disabled={disabled}
                 type={type} 
                 value={value} 
+                name={name}
                 onChange={onChange} 
                 onBlur={onBlur} 
                 readOnly={readOnly}

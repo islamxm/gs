@@ -15,29 +15,30 @@ import StatPage from "../pages/stat/StatPage";
 import BasketPage from "../pages/basket/BasketPage";
 import IntegrPage from "../pages/integr/IntegrPage";
 import SettingsPage from "../pages/settings/SettingsPage";
+import CheckAuth from "../hoc/ChekAuth";
 
 
 
 const App = () => {
     return (
         <Routes>
-            <Route path="/" element={<AuthPage/>}/>
+            <Route path="/" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
             <Route path="/auth" element={<AuthPage/>}/>
-            <Route path="/organizations" element={<OrgsPage/>}/>
-            <Route path="/catalog" element={<CatalogPage/>}/>
-            <Route path="/stories" element={<StoriesPage/>}/>
-            <Route path="/clients" element={<ClientsPage/>}/>
-            <Route path="/orders" element={<OrdersPage/>}/>
-            <Route path="/statistic" element={<StatPage/>}/>
-            <Route path="/basket" element={<BasketPage/>}/>
-            <Route path="/integr" element={<IntegrPage/>}/>
-            <Route path="/settings" element={<SettingsPage/>}/>
-            <Route path="/catalog/createPlate" element={<CreatePlatePage/>}/>
-            <Route path="/catalog/categoryName" element={<CatalogCategoryPage/>}/>
-            <Route path="/organizations/item" element={<OrgsPage/>}/>
-            <Route path="/organizations/create" element={<OrgsCreatePage/>}/>
-            <Route path="/organizations/edit" element={<OrgsCreatePage/>}/>
-            <Route path="*" element={<Notfound/>}/>
+            <Route path="/organizations" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
+            <Route path="/catalog" element={<CheckAuth><CatalogPage/></CheckAuth>}/>
+            <Route path="/stories" element={<CheckAuth><StoriesPage/></CheckAuth>}/>
+            <Route path="/clients" element={<CheckAuth><ClientsPage/></CheckAuth>}/>
+            <Route path="/orders" element={<CheckAuth><OrdersPage/></CheckAuth>}/>
+            <Route path="/statistic" element={<CheckAuth><StatPage/></CheckAuth>}/>
+            <Route path="/basket" element={<CheckAuth><BasketPage/></CheckAuth>}/>
+            <Route path="/integr" element={<CheckAuth><IntegrPage/></CheckAuth>}/>
+            <Route path="/settings" element={<CheckAuth><SettingsPage/></CheckAuth>}/>
+            <Route path="/catalog/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/>
+            <Route path="/catalog/categoryName" element={<CheckAuth><CatalogCategoryPage/></CheckAuth>}/>
+            <Route path="/organizations/item" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
+            <Route path="/organizations/create" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
+            <Route path="/organizations/edit" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
+            <Route path="*" element={<CheckAuth><Notfound/></CheckAuth>}/>
         </Routes>
     )
 }
