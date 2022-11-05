@@ -1,6 +1,8 @@
 import './HeaderProfile.scss';
 import logo from '../../assets/img/logo.svg';
 import {BsChevronCompactLeft, BsChevronCompactDown} from 'react-icons/bs';
+import { Dropdown } from 'antd';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 
 const HeaderProfile = () => {
@@ -18,12 +20,19 @@ const HeaderProfile = () => {
                         </span>
                         <span className="HeaderProfile__main_nav_text">Раздел</span>
                     </div>
-                    <div className="HeaderProfile__main_user">
-                        <span className="HeaderProfile__main_user_name">Alex</span>
-                        <span className="HeaderProfile__main_user_icon">
-                            <BsChevronCompactDown/>
-                        </span>
-                    </div>
+                    <Dropdown
+                        placement='bottom'
+                        trigger={['click']}
+                        overlay={<ProfileMenu/>}
+                    >
+                        <div className="HeaderProfile__main_user">
+                            <span className="HeaderProfile__main_user_name">Alex</span>
+                            <span className="HeaderProfile__main_user_icon">
+                                <BsChevronCompactDown/>
+                            </span>
+                        </div>
+                    </Dropdown>
+                    
                 </div>
             </div>
         </header>

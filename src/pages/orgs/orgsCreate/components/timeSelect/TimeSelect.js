@@ -7,7 +7,7 @@ const TimeSelect = ({list, selected, save}) => {
     const {visible, hideModal, showModal} = useModal();
 
 
-    const [timeList, setTimeList] = useState([]);
+    const [timeList, setTimeList] = useState({});
     const [editIndex, setEditIndex] = useState(0);
     const [editValue, setEditValue] = useState();
     const [editRest, setEditRest] = useState(false);

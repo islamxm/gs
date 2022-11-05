@@ -7,7 +7,8 @@ const Checkbox = ({
     onChange,
     text,
     shadow,
-    style
+    style,
+    value,
 }) => {
 
 

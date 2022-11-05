@@ -1,28 +1,32 @@
 import './BrandItem.scss';
 import Button from '../../../../../components/Button/Button';
-import img from '../../../../../assets/img/org-brand.png';
 import { Link } from 'react-router-dom';
-import useModal from '../../../../../hooks/useModal';
-import EditBrand from '../../../modals/editBrand/EditBrand';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const BrandItem = ({link, image}) => {
-    const {visible, showModal, hideModal} = useModal();
+const BrandItem = ({
+    ID,
+    ItemOrder,
+    Disabled,
+    LogoUrl,
+    MarkerID,
+    editModal
+}) => {
 
-    const editModal = () => {
-        showModal();
-    }
+
+    const nav = useNavigate()
+    
+
 
     return (
         <div className="BrandItem">
-            <EditBrand name={'Мой бренд'} visible={visible} close={hideModal}/>
-            <Link to={'/organizations/item'} className="BrandItem__img">
-                <img src={image} alt="" />
+            <Link to={`/organizations/${ID}`} className="BrandItem__img">
+                <img src={LogoUrl} alt="" />
             </Link>
             <div className="BrandItem__action">
                 <Button
-                    onClick={editModal}
+                    onClick={() => editModal(ID, ItemOrder, LogoUrl, MarkerID)}
                     text={'Изменить'}
                     justify={'center'}/>
             </div>

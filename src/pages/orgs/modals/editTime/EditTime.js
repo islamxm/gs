@@ -11,7 +11,7 @@ const EditTime = ({editIndex, visible, close, values, save, name, rest}) => {
     
     const [startVal, setStartVal] = useState('')
     const [endVal, setEndVal] = useState('')
-    const [disabled, setDisabled] = useState(!values?.start ? true : false);
+    const [disabled, setDisabled] = useState(false);
     const [checked, setChecked] = useState(false)
 
     const closeModal = () => {
@@ -21,6 +21,9 @@ const EditTime = ({editIndex, visible, close, values, save, name, rest}) => {
 
     useEffect(() => {
         setChecked(rest)
+        if(rest) {
+            setDisabled(true)
+        }
     }, [rest, visible])
 
     useEffect(() => {
@@ -77,9 +80,9 @@ const EditTime = ({editIndex, visible, close, values, save, name, rest}) => {
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <div className={"Modal__form_time" + (disabled ? ' disabled ' : '')}>
-                        <TimePicker disabled={disabled}  hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"}  disableClock format='hh:mm' onChange={setStartVal} value={startVal} />
+                        <TimePicker disabled={disabled}  hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"} minTime={'08:00:00'} maxTime={'23:00:00'}   disableClock format='HH:mm' onChange={setStartVal} value={startVal} />
                         <span className='Modal__form_time_space'>-</span>
-                        <TimePicker disabled={disabled} hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"}  disableClock format='hh:mm' onChange={setEndVal} value={endVal} />
+                        <TimePicker disabled={disabled} hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"} minTime={'08:00:00'} maxTime={'23:00:00'}  disableClock format='HH:mm' onChange={setEndVal} value={endVal} />
                     </div>
                 </div>
                 <div className="Modal__form_row">

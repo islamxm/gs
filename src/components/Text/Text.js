@@ -12,6 +12,7 @@ const Text = ({
 }) => {
     return (
         <textarea 
+            onChange={onChange}
             style={{height: height}} 
             name={name} 
             value={value} 

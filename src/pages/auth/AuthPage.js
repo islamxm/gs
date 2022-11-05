@@ -3,15 +3,15 @@ import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import {Formik, Form} from 'formik';
-import dataService from '../../services/dataService';
 import { useEffect, useState } from 'react';
 import {message} from 'antd';
 import { useDispatch } from 'react-redux';
 import { tokenUpdate } from '../../store/actions';
 import { useNavigate } from 'react-router-dom';
+import authService from '../../services/dataService';
 
 const LOCAL_STORAGE = window.localStorage;
-const ds = new dataService();
+const as = new authService();
 
 const initValues = {
     Login: '',
@@ -36,7 +36,7 @@ const AuthPage = () => {
                             initialValues={initValues}
                             onSubmit={(values, {setSubmitting}) => {
                                 setSubmitting(true);
-                                ds.auth(values).then(res => {
+                                as.auth(values).then(res => {
                                     console.log(res)
                                     if(res.error) {
                                         setError(res.message)
@@ -61,6 +61,7 @@ const AuthPage = () => {
                                             type={'text'}
                                             value={values.Login}
                                             onChange={handleChange}
+                                            showErrorText={false}
                                             error={error}
                                             />
                                     </div>
@@ -71,9 +72,11 @@ const AuthPage = () => {
                                             type={'password'}
                                             value={values.Password}
                                             onChange={handleChange}
+                                            showErrorText={false}
                                             error={error}
                                             />
                                     </div>
+                                    <div style={{color: 'var(--red)', fontWeight: 600}}>{error}</div>
                                     <div className="AuthPage__body_form_action">
                                         <Button
                                             load={isSubmitting}

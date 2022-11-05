@@ -6,35 +6,110 @@ import {Row, Col} from 'antd';
 import Pl from '../../../../components/Pl/Pl';
 import Button from '../../../../components/Button/Button';
 import {BsTrash} from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import brandImg from '../../../../assets/img/org-brand.png';
+import { useSelector } from 'react-redux';
+import orgService from '../../../../services/orgService';
+import {FiDownload} from 'react-icons/fi';
+import { MoonLoader } from 'react-spinners';
 
-const EditBrand  = ({visible, close, name, image}) => {
+const os = new orgService()
+
+const EditBrand  = ({visible, close, selected, updateList}) => {
+    const {ID,ItemOrder,LogoUrl,MarkerID} = selected;
+    const {token} = useSelector(state => state)
     const [prevImg, setPrevImg] = useState(brandImg);
+    const [image, setImage] = useState(null)
+    const [markerId, setMarkerId] = useState('')
+    const [load, setLoad] = useState(false)
+    const [deleteLoad, setDeleteLoad] = useState(false)
+    const [imgLoad, setImgLoad] = useState(false)
 
-    const handleClose = () => {
-        setPrevImg('')
+
+    useEffect(() => {
+        console.log(LogoUrl)
+        console.log(MarkerID)
+        if(LogoUrl && MarkerID) {
+            setPrevImg(LogoUrl)
+            setMarkerId(MarkerID)
+        }
+    }, [LogoUrl, MarkerID])
+
+    const closeModal = () => {
+        // setPrevImg('')
+        // setImage(null)
+        // setMarkerId('')
         close();
     }
+    const handleMarker = (e) => {
+        setMarkerId(e.target.value)
+    } 
 
     const imgHandle = (e) => {
-        setPrevImg(URL.createObjectURL(e.target.files[0]))
+        setImgLoad(true)
+        setImage(e.target.files[0])
+        //setPrevImg(URL.createObjectURL(e.target.files[0]))
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0])
+        reader.onloadend = () => {
+            setPrevImg(reader.result)
+            setImgLoad(false)
+        }
+    }
+
+    const updateBrand = () => {
+        setLoad(true)
+        const body = new FormData()
+        body.append('ID', ID)
+        body.append('ItemOrder', ItemOrder)
+        if(image) {
+            body.append('LogoUrl', image)
+        }
+        body.append('MarkerID', markerId)
+
+        os.updateBrand(token, body).then(res => {
+            updateList(res)
+            console.log(res)
+        }).finally(_ => {
+            setLoad(false)
+            closeModal()
+        })
     }
 
     const deleteBrand = () => {
-
+        setDeleteLoad(true)
+        os.deleteBrand(token, {ID}).then(res => {
+            console.log(res)
+            updateList(res)
+        }).finally(_ => {
+            setDeleteLoad(false)
+            closeModal()
+        })
     }
     
     return (
-        <Modal width={740} className='Modal' open={visible} onCancel={handleClose}>
+        <Modal width={540} className='Modal' open={visible} onCancel={closeModal}>
             <h2 className="Modal__head">Изменить бренд</h2>
             <form className="Modal__form">
                 <div className="Modal__form_row">
                     <div className="Modal__form_upload">
                         {
+                            imgLoad ? (
+                                <div className="Modal__form_upload_load">
+                                    <MoonLoader color='#fff'/>
+                                </div>
+                            ) : null
+                        }
+                        {
                             prevImg ? (
                                 <div className="Modal__form_upload_prev">
                                     <img src={prevImg} alt="" />
+                                    <div className="Modal__form_upload_prev_edit">
+                                        <input onChange={imgHandle} type="file" id="uploadBrandImgEdit"/>
+                                        <label htmlFor="uploadBrandImgEdit">
+                                            <FiDownload/>
+                                        </label>
+                                    </div>
                                 </div>
                             ) : (
                                 <>
@@ -53,24 +128,27 @@ const EditBrand  = ({visible, close, name, image}) => {
                     </div>
                 </div>
                 <div className="Modal__form_row">
-                    <Input value={name} placeholder={'Название категории'}/>
+                    <Input value={markerId} onChange={handleMarker} placeholder={'Номер метки на карте'}/>
                 </div>
                 <div className="Modal__form_action">
                     <Button 
                         type={'button'} 
-                        styles={{paddingTop: 20, paddingBottom: 20, marginBottom: 20}} 
+                        styles={{marginBottom: 20}} 
                         before={<BsTrash/>} 
                         justify={'flex-start'} 
-                        text={'Сохранить'}/>
+                        text={'Сохранить'}
+                        onClick={updateBrand}
+                        load={load}
+                        disabled={!markerId}/>
 
                     <Button 
                         onClick={deleteBrand}
                         type={'button'} 
-                        styles={{paddingTop: 20, paddingBottom: 20}} 
                         before={<BsTrash/>} 
                         justify={'flex-start'} 
                         text={'Удалить бренд'}
-                        variant={'danger'}/>
+                        variant={'danger'}
+                        load={deleteLoad}/>
                 </div>
             </form>
         </Modal>

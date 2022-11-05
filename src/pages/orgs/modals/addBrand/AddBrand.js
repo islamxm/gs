@@ -5,22 +5,56 @@ import {Row, Col} from 'antd';
 import Pl from '../../../../components/Pl/Pl';
 import Button from '../../../../components/Button/Button';
 import {BsTrash} from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import orgService from '../../../../services/orgService';
 
-const AddBrand  = ({visible, close}) => {
+
+const os = new orgService()
+
+const AddBrand  = ({visible, close, updateList}) => {
+    const {token} = useSelector(state => state)
     const [prevImg, setPrevImg] = useState(null);
+    const [image, setImage] = useState(null);
+    const [markerID, setMarkerID] = useState('')
+    const [load, setLoad] = useState(false)
 
-    const handleClose = () => {
+    const closeModal = () => {
+        setImage('')
+        setMarkerID('')
         setPrevImg('')
         close();
     }
 
-    const imgHandle = (e) => {
-        setPrevImg(URL.createObjectURL(e.target.files[0]))
+    const handleMarker = (e) => {
+        setMarkerID(e.target.value)
+    } 
+
+    const addBrand = () => {
+        const body = new FormData()
+        body.append('ItemOrder', 0)
+        body.append('LogoUrl', image)
+        body.append('MarkerID', markerID)
+
+        setLoad(true)
+        os.addBrand(token, body)
+            .then(res => updateList(res))
+            .finally(_ => {
+                setLoad(false)
+                closeModal()
+            })
     }
     
+
+    const imgHandle = (e) => {
+        setImage(e.target.files[0])
+        setPrevImg(URL.createObjectURL(e.target.files[0]))
+    }
+
+
+    
     return (
-        <Modal width={740} className='Modal' open={visible} onCancel={handleClose}>
+        <Modal width={540} className='Modal' open={visible} onCancel={closeModal}>
             <h2 className="Modal__head">Добавить бренд</h2>
             <form className="Modal__form">
                 <div className="Modal__form_row">
@@ -43,14 +77,13 @@ const AddBrand  = ({visible, close}) => {
                                 </>
                             )
                         }
-                        
                     </div>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Название категории'}/>
+                    <Input value={markerID} onChange={handleMarker} placeholder={'Номер метки на карте'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button type={'button'} styles={{paddingTop: 20, paddingBottom: 20}} before={<BsTrash/>} justify={'flex-start'} text={'Сохранить'}/>
+                    <Button onClick={addBrand} load={load} disabled={!markerID || !image} type={'button'} before={<BsTrash/>} justify={'flex-start'} text={'Сохранить'}/>
                 </div>
             </form>
         </Modal>

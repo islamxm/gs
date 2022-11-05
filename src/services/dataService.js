@@ -4,8 +4,8 @@ const headers = {
     'Accept': 'application/json',
 }
 
-class dataService {
-
+class authService {
+    
     auth = async (data) => {
         try {
             let res = await fetch(endpoints.auth, {
@@ -20,6 +20,8 @@ class dataService {
             console.log(err)
         }
     }
+
+
 }
 
-export default dataService;
+export default authService;

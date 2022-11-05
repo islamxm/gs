@@ -12,7 +12,8 @@ const Input = ({
     readOnly,
     shadow,
     onClick,
-    name
+    name,
+    showErrorText
 }) => {
     return (
         <div onClick={onClick} className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
@@ -27,7 +28,7 @@ const Input = ({
                 placeholder={placeholder}
                 className="Input__el" />
             {
-                error ? (
+                error && showErrorText ? (
                     <div className="Input__error">
                         {error}
                     </div>

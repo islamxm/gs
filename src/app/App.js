@@ -35,7 +35,9 @@ const App = () => {
             <Route path="/settings" element={<CheckAuth><SettingsPage/></CheckAuth>}/>
             <Route path="/catalog/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/>
             <Route path="/catalog/categoryName" element={<CheckAuth><CatalogCategoryPage/></CheckAuth>}/>
-            <Route path="/organizations/item" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
+            <Route path="/organizations/:brandId" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
+            <Route path="/organizations/:brandId/create" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
+            <Route path="/organizations/:brandId/:orgId" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
             <Route path="/organizations/create" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
             <Route path="/organizations/edit" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
             <Route path="*" element={<CheckAuth><Notfound/></CheckAuth>}/>

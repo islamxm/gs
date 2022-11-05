@@ -6,32 +6,27 @@ import Pl from '../../../../components/Pl/Pl';
 import Button from '../../../../components/Button/Button';
 import {BsTrash} from 'react-icons/bs';
 import { useEffect, useRef, useState } from 'react';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import brandImg from '../../../../assets/img/org-brand.png';
-
-const MapComp = () => {
-    const ref = useRef(null);
-    const [map, setMap] = useState();
-    useEffect(() => {
-        if (ref.current && !map) {
-          setMap(new window.google.maps.Map(ref.current, {center: {lat: 0, lng: 0}, zoom: 8} ));
-        }
-      }, [ref, map]);
-
-    return (
-        <div ref={ref} style={{height: '100%', width: '100%'}}/>
-    )
-}
+import { Wrapper, Status} from "@googlemaps/react-wrapper";
+import Map from '../../../../components/Map/Map';
 
 
 
-const SelectLocation = ({visible, close}) => {
-    const [selected, setSelected] = useState('');
 
+
+
+
+const SelectLocation = ({visible, close, setLocation, coords}) => {
+    const [selected, setSelected] = useState(null);
+    
 
     const hideModal = () => {
+        setSelected(null)
         close();
-        
+    }
+
+    const onSave = () => {
+        setLocation(selected)
+        hideModal()
     }
 
 
@@ -41,8 +36,9 @@ const SelectLocation = ({visible, close}) => {
             <form className="Modal__form">
                 <div className="Modal__form_row">
                     <div className="Modal__form_map">
-                        <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}> 
-                            <MapComp/>
+                        <Wrapper 
+                            apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}> 
+                            <Map coords={coords} setSelected={setSelected}/>
                         </Wrapper>
                     </div>
                     
@@ -50,7 +46,7 @@ const SelectLocation = ({visible, close}) => {
                 {
                     selected ? (
                        <div className="Modal__form_action" style={{marginTop: 30}}>
-                            <Button type={'button'}  text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'}/>
+                            <Button onClick={onSave} type={'button'}  text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'}/>
                        </div> 
                     ) : null
                 }

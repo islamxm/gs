@@ -10,7 +10,14 @@ import brandImg from '../../../assets/img/org-brand.png';
 import orgImg from '../../../assets/img/org.png';
 import useModal from '../../../hooks/useModal';
 import AddBrand from '../modals/addBrand/AddBrand';
+import orgService from '../../../services/orgService';
+import { useSelector } from 'react-redux';
+import EditBrand from '../modals/editBrand/EditBrand';
+import { useParams } from 'react-router-dom';
+import Loader from '../../../components/Loader/Loader';
 
+
+const os = new orgService();
 
 const orgMock = [
     {
@@ -23,39 +30,72 @@ const orgMock = [
     },
 ]
 
-const brandsMock = [
-    {
-        img: brandImg,
-    },
-    {
-        img: brandImg
-    }
-]
+
 
 const OrgsPage = () => {
+    const {brandId} = useParams()
+    const {token} = useSelector(state => state)
     const nav = useNavigate();
     const location = useLocation();
     const [list, setList] = useState([])
-    const {visible, showModal, hideModal} = useModal()
+    const [loadList, setLoadList] = useState(false)
+    const [selected, setSelected] = useState({})
+    const [addBrandModal, setAddBrandModal] = useState(false)
+    const [editBrandModal, setEditBrandModal] = useState(false)
 
-  
+    
 
     useEffect(() => {
-        console.log(location)
-        if(location.pathname == '/organizations/item') {
-            setList(orgMock)
-        } else {
-            setList(brandsMock)
+        
+        if(token && brandId) {
+            setLoadList(true)
+            os.getOrgs(token, {BrandID: brandId})
+                .then(res => setList(res))
+                .finally(_ => setLoadList(false))
+        }
+        if(token && !brandId) {
+            setLoadList(true)
+            os.getBrands(token)
+                .then(res => setList(res))
+                .finally(_ => setLoadList(false))
+        }
+    }, [location, token, brandId])
+
+    const updateList = () => {
+        setLoadList(true)
+        if(brandId) {
+            os.getOrgs(token, {BrandID: brandId})
+            .then(res => setList(res))
+            .finally(_ => setLoadList(false))
+        } 
+        if(!brandId) {
+            os.getBrands(token)
+                .then(res => setList(res))
+                .finally(_ => setLoadList(false))
         }
         
-    }, [location])
-
-
-    const addBrand = () => {
-        showModal();
     }
 
-    if(location.pathname == '/organizations/item') {
+
+    const openAddBrand = () => setAddBrandModal(true)
+    const closeAddBrand = () => setAddBrandModal(false)
+    const openEditBrand = (ID, ItemOrder, LogoUrl, MarkerID) => {
+        const data = {
+            ID,
+            ItemOrder,
+            LogoUrl,
+            MarkerID
+        }
+        setSelected(data)
+        setEditBrandModal(true)
+    }
+    const closeEditBrand = () => setEditBrandModal(false)
+
+    
+
+
+
+    if(location.pathname != '/organizations' && location.pathname.includes('/organizations/')) {
         return (
             <div className="OrgsPage page">
             <HeaderProfile/>
@@ -66,24 +106,30 @@ const OrgsPage = () => {
                     <Sidebar/>
                     <div className="spc"></div>
                     <div className="OrgsPage__body pageBody-content">
-                        <div className="OrgsPage__body_list">
-                            {
-                                list && list.length > 0? (
-                                    list.map((item, index) => (
-                                        <div className="OrgsPage__body_item">
-                                            <OrgItem image={item.img} name={item.title}/>
-                                        </div>
-                                    ))
-                                ) : null
-                            }
-                            <div className="OrgsPage__body_item">
-                                <Pl onClick={() => nav('/organizations/create')} style={{backgroundColor: '#fff'}} text={'Добавить ресторан'}/>
-                            </div>
-                        </div>
+                        {
+                            loadList ? (
+                                <Loader/>
+                            ) : (
+                                <div className="OrgsPage__body_list">
+                                    {
+                                        list && list.length > 0? (
+                                            list.map((item, index) => (
+                                                <div className="OrgsPage__body_item" key={index}>
+                                                    <OrgItem {...item}/>
+                                                </div>
+                                            ))
+                                        ) : null
+                                    }
+                                    <div className="OrgsPage__body_item">
+                                        <Pl onClick={() => nav(`/organizations/${brandId}/create`)} style={{backgroundColor: '#fff', minHeight: 223}} text={'Добавить ресторан'}/>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        
                         
                     </div>
                 </div>
-                
             </main>
         </div>
     
@@ -95,27 +141,42 @@ const OrgsPage = () => {
             <div className="OrgsPage page">
             <HeaderProfile/>
             
-            <AddBrand visible={visible} close={hideModal}/>
+            <EditBrand updateList={setList} visible={editBrandModal} close={closeEditBrand} selected={selected}/>
+            <AddBrand updateList={setList} visible={addBrandModal} close={closeAddBrand}/>
             <main className="Main">
                 
                 <div className="pageBody">
                     <Sidebar/>
                     <div className="spc"></div>
                     <div className="OrgsPage__body pageBody-content">
-                        <div className="OrgsPage__body_list">
-                            {
-                                list && list.length > 0? (
-                                    list.map((item, index) => (
-                                        <div className="OrgsPage__body_item">
-                                            <BrandItem image={item.img}/>
-                                        </div>
-                                    ))
-                                ) : null
-                            }
-                            <div className="OrgsPage__body_item">
-                                <Pl onClick={addBrand} style={{backgroundColor: '#fff'}} text={'Добавить бренд'}/>
-                            </div>
-                        </div>
+                        {
+                            loadList ? (
+                                <Loader/>
+                            ) : (
+                                <div className="OrgsPage__body_list">
+                                    {
+                                        list && list.length > 0? (
+                                            list.map((item, index) => (
+                                                <div className="OrgsPage__body_item" key={index}>
+                                                    <BrandItem 
+                                                        Disabled={item.Disabled}
+                                                        ID={item.ID}
+                                                        ItemOrder={item.ItemOrder}
+                                                        LogoUrl={item.LogoUrl}
+                                                        MarkerID={item.MarkerID}
+                                                        editModal={openEditBrand}
+                                                        />
+                                                </div>
+                                            ))
+                                        ) : null
+                                    }
+                                    <div className="OrgsPage__body_item">
+                                        <Pl onClick={openAddBrand} style={{backgroundColor: '#fff', height: 223}} text={'Добавить бренд'}/>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        
                         
                     </div>
                 </div>
