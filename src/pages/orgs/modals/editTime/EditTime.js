@@ -7,29 +7,45 @@ import { useEffect, useState } from 'react';
 import TimePicker from 'react-time-picker';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
 
-const EditTime = ({editIndex, visible, close, values, save, name, rest}) => {
+const EditTime = ({
+    editIndex, 
+    visible, 
+    close, 
+    values, 
+    save, 
+    name, 
+    rest, 
+    plate,
+    enabledVal,
+    ddisabledVal
+}) => {
     
     const [startVal, setStartVal] = useState('')
     const [endVal, setEndVal] = useState('')
     const [disabled, setDisabled] = useState(false);
     const [checked, setChecked] = useState(false)
+    const [enabled, setEnabled] = useState(false)
+    const [ddisabled, setDdisabled] = useState(false)
 
     const closeModal = () => {
         setChecked(false)
+        setEnabled(false)
+        setDdisabled(false)
         close();
     }
 
     useEffect(() => {
         setChecked(rest)
-        if(rest) {
+        setEnabled(enabledVal)
+        setDdisabled(ddisabledVal)
+        if(rest || enabledVal || ddisabledVal) {
             setDisabled(true)
         }
-    }, [rest, visible])
+    }, [rest, visible, enabledVal, ddisabledVal])
 
     useEffect(() => {
         setStartVal(values?.start)
         setEndVal(values?.end)
-        
     }, [values, visible])
 
     const handleWeekend = (e) => {
@@ -43,30 +59,83 @@ const EditTime = ({editIndex, visible, close, values, save, name, rest}) => {
         }
     } 
 
-    const handleSave = () => {
-        if(startVal != 0 && endVal != 0) {
-            const val = {
-                name: name,
-                values: {
-                    start: startVal,
-                    end: endVal
-                },
-                rest: checked
-            }
-            save(editIndex, val);
+    const handleEnabled = (e) => {
+        setEnabled(e.target.checked)
+        if(e.target.checked) {
+            setDdisabled(false)
+            setStartVal(0)
+            setEndVal(0)
+            setDisabled(true)
         } else {
-            const val = {
-                name: name,
-                values: {
-                    start: startVal,
-                    end: endVal
-                },
-                rest: true
+            setDisabled(false)
+        }
+    } 
+
+    const handleDdisabled = (e) => {
+        setDdisabled(e.target.checked)
+        if(e.target.checked) {
+            setEnabled(false)
+            setStartVal(0)
+            setEndVal(0)
+            setDisabled(true)
+        } else {
+            setDisabled(false)
+        }
+    }
+
+    const handleSave = () => {
+        if(!plate) {
+            if(startVal != 0 && endVal != 0) {
+                const val = {
+                    name: name,
+                    values: {
+                        start: startVal,
+                        end: endVal
+                    },
+                    rest: checked ? 'Выходной' : ''
+                }
+                save(editIndex, val);
+            } else {
+                const val = {
+                    name: name,
+                    values: {
+                        start: startVal,
+                        end: endVal
+                    },
+                    rest: 'Выходной'
+                }
+                save(editIndex, val);
             }
-            save(editIndex, val);
+            
+            close() 
+        } else {
+            if(startVal != 0 && endVal != 0) {
+                const val = {
+                    name: name,
+                    values: {
+                        start: startVal,
+                        end: endVal
+                    },
+                    enabled: '',
+                    disabled: ''
+                }
+                save(editIndex, val);
+            } else {
+                const val = {
+                    name: name,
+                    values: {
+                        start: startVal,
+                        end: endVal
+                    },
+                    enabled: enabled ? 'Весь день' : '',
+                    disabled: ddisabled ? 'Выключено' : ''
+                }
+                save(editIndex, val);
+            }
+            
+            close() 
         }
         
-        close()
     }
 
 
@@ -85,9 +154,24 @@ const EditTime = ({editIndex, visible, close, values, save, name, rest}) => {
                         <TimePicker disabled={disabled} hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"} minTime={'08:00:00'} maxTime={'23:00:00'}  disableClock format='HH:mm' onChange={setEndVal} value={endVal} />
                     </div>
                 </div>
-                <div className="Modal__form_row">
-                    <Checkbox checked={checked} onChange={handleWeekend} id={'weekend'} text={'Выходной'}/>
-                </div>
+               
+                
+                {
+                    plate ? (
+                        <>
+                            <div className="Modal__form_row">
+                                <Checkbox checked={enabled} onChange={handleEnabled} id={'dayAll'} text={'Весь день'}/>
+                            </div>
+                            <div className="Modal__form_row">
+                                <Checkbox checked={ddisabled} onChange={handleDdisabled} id={'dayOff'} text={'Выключено'}/>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="Modal__form_row">
+                            <Checkbox checked={checked} onChange={handleWeekend} id={'weekend'} text={'Выходной'}/>
+                        </div>
+                    )
+                }
                 <div className="Modal__form_action" style={{marginTop: 50}}>
                     <Button onClick={handleSave} text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'} styles={{paddingTop: 20, paddingBottom: 20}}/>
                 </div>

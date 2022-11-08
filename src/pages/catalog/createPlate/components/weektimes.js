@@ -5,7 +5,8 @@ const weektimes = [
             start: '08:00',
             end: '23:00'
         },
-        rest: ''
+        enabled: '',
+        disabled: ''
     },
     {
         name: 'ВТ',
@@ -13,7 +14,8 @@ const weektimes = [
             start: '08:00',
             end: '23:00'
         },
-        rest: ''
+        enabled: '',
+        disabled: ''
     },
     {
         name: 'СР',
@@ -21,7 +23,8 @@ const weektimes = [
             start: '08:00',
             end: '23:00'
         },
-        rest: ''
+        enabled: '',
+        disabled: ''
     },
     {
         name: 'ЧТ',
@@ -29,7 +32,8 @@ const weektimes = [
             start: '08:00',
             end: '23:00'
         },
-        rest: ''
+        enabled: '',
+        disabled: ''
     },
     {
         name: 'ПТ',
@@ -37,7 +41,8 @@ const weektimes = [
             start: '08:00',
             end: '23:00'
         },
-        rest: ''
+        enabled: '',
+        disabled: ''
     },
     {
         name: 'СБ',
@@ -45,7 +50,8 @@ const weektimes = [
             start: '08:00',
             end: '23:00',
         },
-        rest: ''
+        enabled: '',
+        disabled: ''
     },
     {
         name: 'ВС',
@@ -53,7 +59,8 @@ const weektimes = [
             start: 0,
             end: 0
         },
-        rest: 'Выходной'
+        enabled: '',
+        disabled: 'Выключено'
     },
 ]
 

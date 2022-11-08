@@ -22,8 +22,10 @@ import { useEffect, useState } from 'react';
 import PlUpload from '../../../components/PlUpload/PlUpload';
 import { useParams } from 'react-router-dom';
 import { message } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import weektimes from './components/weektimes';
 import TimeSelect from '../../orgs/orgsCreate/components/timeSelect/TimeSelect';
+import timeTransform from './components/timeTransform';
 import RecList from './components/RecList/RecList';
 
 const picListTransform = (index, list, func) => {
@@ -42,11 +44,11 @@ const delTypes = {
 const cs = new catService();
 const os = new orgService();
 
-const CreatePlatePage = () => {
+const EditPlatePage = () => {
     const {token} = useSelector(state => state)
-    const {categoryId} = useParams()
+    const {categoryId, plateId} = useParams()
     const [createdId, setCreatedId] = useState(null)
-    const [saveLoad, setSaveLoad] = useState(true)
+    const nav = useNavigate();
 
     const [IIkoID, setIIkoID] = useState('')
     const [CanOverwriteByIIko, setCanOverwriteByIIko] = useState(0)
@@ -75,10 +77,91 @@ const CreatePlatePage = () => {
     const [weekTimes, setWeekTimes] = useState(weektimes)
     const [IsDynamicTimetable, setIsDynamicTimetable] = useState(0)
 
+
+    const [massList, setMassList] = useState([])
+    const [modList, setModList] = useState([])
+    const [alList, setAlList] = useState([])
+    const [recList, setRecList] = useState([])
+
+
     // modals
     const [addAllergen, setAddAllergen] = useState(false);
     const [editAllergen, setEditAllergen] = useState(false);
 
+    useEffect(() => {
+        if(plateId && token && categoryId && orgs.length > 0) {
+            cs.getProds(token, {CategoryID: categoryId}).then(res => {
+                const thisPlate = res.find(item => item.ID == plateId);
+                console.log(thisPlate)
+                setIIkoID(thisPlate.IIkoID)
+                setCanOverwriteByIIko(thisPlate.CanOverwriteByIIko)
+                setItemOrder(thisPlate.ItemOrder)
+                setParentID(thisPlate.ParentID)
+                setIsSubCategory(thisPlate.IsSubCategory)
+                setMaxCount(thisPlate.MaxCount)
+                setName(thisPlate.Name)
+                setIsHit(thisPlate.IsHit)
+                setComposition(thisPlate.Composition)
+                setCalories(thisPlate.Calories)
+                setCarbohydrates(thisPlate.Carbohydrates)
+                setFats(thisPlate.Fats)
+                setProteins(thisPlate.Proteins)
+                setCountAdditions(thisPlate.CountAdditions)
+                setAllowedDeliveryTypes([thisPlate.AllowedDeliveryTypes])
+                // setPicture(thisPlate.Picture)
+                setPicPrevs(thisPlate.Pictures.map(item => item.Picture))
+                setMass(thisPlate.Prices[0]?.Mass)
+                setPrice(thisPlate.Prices[0]?.Price)
+                setSalePrice(thisPlate.Prices[0]?.SalePrice)
+                setIsHideInOrg(thisPlate.HiddenInOrganisations ? true : false)
+                setIsDynamicTimetable(thisPlate.IsDynamicTimetable)
+                if(thisPlate.HiddenInOrganisations) {
+                    let array = thisPlate.HiddenInOrganisations.split('//')
+                    setOrgsList(array.map((item, index) => {
+                        if(index == 0) {
+                            
+                            return {
+                                ID: item.slice(1, 2),
+                                value: orgs.find(i => i.ID == item.slice(1,2))?.value
+                            }
+                        }
+                        if(index == array.length - 1) {
+                            return {
+                                ID: item.slice(0, -1),
+                                value: orgs.find(i => i.ID == item.slice(0,-1))?.value
+                            }
+                        }
+                        return {
+                            ID: item,
+                            value: orgs.find(i => i.ID == item)?.value
+                        }
+                    }))
+                } else {
+                    setOrgsList([])
+                }
+                setWeekTimes([
+                    timeTransform(thisPlate.MonTime, 0), 
+                    timeTransform(thisPlate.TueTime, 1), 
+                    timeTransform(thisPlate.WedTime, 2),
+                    timeTransform(thisPlate.ThuTime, 3),
+                    timeTransform(thisPlate.FriTime, 4),
+                    timeTransform(thisPlate.SatTime, 5),
+                    timeTransform(thisPlate.SunTime, 6),
+                ]);
+                
+            })
+
+            cs.getPriceMass(token, {ItemID: plateId}).then(res => {
+                setMassList(res)
+            })
+            cs.getMods(token, {ID: plateId}).then(res => {
+                setModList(res)
+            })
+            cs.getAllergens(token, {ItemID: plateId}).then(res => {
+                setAlList(res)
+            })
+        }
+    }, [plateId, token, categoryId, orgs])
 
     const openAddAllergen = () => {
         setAddAllergen(true)
@@ -97,21 +180,15 @@ const CreatePlatePage = () => {
     }
 
     const deleteImage = (index) => {
-        // const pr = Picture;
-        // const rm = pr.splice(index, 1)
-        // setPicture([...pr])
-        picListTransform(index, Picture, setPicture)
-        picListTransform(index, picPrevs, setPicPrevs)
-
+        const pr = Picture;
+        const rm = pr.splice(index, 1)
+        setPicture([...pr])
     }
 
     const uploadImages = (e) => {
-        
         if(e.target.files.length > 10 || Picture.length == 10) {
             message.error('Можно загрузить не более 10 изображений')
         } else {
-            const ff = [...e.target.files].map(item => URL.createObjectURL(item))
-            setPicPrevs(state => [...state, ...ff])
             setPicture(state => [...state, ...e.target.files])
         }
     }
@@ -162,7 +239,7 @@ const CreatePlatePage = () => {
 
 
     //создаем блюдо
-    const createPlate = () => {
+    const editPlate = () => {
         const data = new FormData()
         let weekArray = []
         if(weekTimes.length > 0) {
@@ -182,7 +259,6 @@ const CreatePlatePage = () => {
                 
             }) 
         }
-        
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
         data.append('ItemOrder', ItemOrder)
@@ -202,6 +278,7 @@ const CreatePlatePage = () => {
         data.append('Price', Price)
         data.append('SalePrice', SalePrice)
         data.append('Mass', Mass)
+        data.append('IsDynamicTimetable', IsDynamicTimetable)
         data.append('MonTime', weekArray[0])
         data.append('TueTime', weekArray[1])
         data.append('WedTime', weekArray[2])
@@ -212,7 +289,7 @@ const CreatePlatePage = () => {
         if(orgsList.length > 0) {
             data.append('HiddenInOrganisations', orgsList.map(item => `/${item.ID}`).join('/') + '/')
         } else {
-            data.append('HiddenInOrganisations', '')
+            data.append('HiddenInOrganisations', 3)
         }
         if(AllowedDeliveryTypes.length == 0) {
             data.append('AllowedDeliveryTypes', '3')
@@ -226,25 +303,21 @@ const CreatePlatePage = () => {
         Picture.forEach(i => {
             data.append('Picture', i)
         })
+    }
 
-        setSaveLoad(true)
-        cs.addProd(token, data).then(res => {
-            if(res) {
-                message.success('Блюдо создано')
-                setCreatedId(res)
-            } else {
-                message.error('Произошла ошибка, повторите еще раз')
-            }
+    const deletePlate = () => {
+        cs.delProd(token, {ID: plateId}).then(res => {
+            console.log(res)
         }).finally(_ => {
-            setSaveLoad(false)
+            message.success('Блюдо успешно удалено')
+            nav(-1, {replace: true})
         })
-        
     }
 
     return (
         <div className="CreatePlatePage page">
-            <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
-            <EditAlrgn visible={editAllergen} close={closeEditAllergen}/>
+            {/* <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
+            <EditAlrgn visible={editAllergen} close={closeEditAllergen}/> */}
             <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
@@ -268,7 +341,7 @@ const CreatePlatePage = () => {
                                         }
                                         {
                                             Picture?.length < 10 ? (
-                                                <PlUpload multiple={true} id={'createPlatePics'} onChange={(e) => uploadImages(e)} style={{width: 200, height: 200, flex: '0 0 auto', backgroundColor: '#F8F8F8'}} text={'Добавить картинку'}/>
+                                                <PlUpload multiple={true} id={'editPlatePics'} onChange={(e) => uploadImages(e)} style={{width: 200, height: 200, flex: '0 0 auto', backgroundColor: '#F8F8F8'}} text={'Добавить картинку'}/>
                                             ) : null
                                         }
                                         
@@ -359,7 +432,7 @@ const CreatePlatePage = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Checkbox 
-                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyDelivery)}
+                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyDelivery.toString())}
                                         onChange={(e) => {
                                             if(e.target.checked) {
                                                 setAllowedDeliveryTypes(state => [...state, '0'])
@@ -373,7 +446,7 @@ const CreatePlatePage = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Checkbox
-                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyLocal)} 
+                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyLocal.toString())} 
                                         onChange={(e) => {
                                             if(e.target.checked) {
                                                 setAllowedDeliveryTypes(state => [...state, '1'])
@@ -448,33 +521,41 @@ const CreatePlatePage = () => {
 
                                 <Row className="row-custom">
                                     <Button
-                                        disabled={!Name || !IIkoID || Picture.length == 0}
-                                        onClick={createPlate} 
+                                        disabled={!Name || !IIkoID}
+                                        onClick={editPlate} 
                                         text={'Сохранить'} 
+                                        justify={'flex-start'} 
+                                        before={<BsTrash/>} 
+                                        styles={{width: '100%'}}/>
+                                </Row>
+                                <Row className="row-custom">
+                                    <Button
+                                        onClick={deletePlate}
+                                        variant={'danger'}
+                                        text={'Удалить блюдо'} 
                                         justify={'flex-start'} 
                                         before={<BsTrash/>} 
                                         styles={{width: '100%'}}/>
                                 </Row>
                             </Col>
                             {
-                                createdId ? (
+                                plateId ? (
                                     <Col span={12}>
                                         <Row className='row-custom'>
-                                            <ExMass plateId={createdId}/>
+                                            <ExMass plateId={plateId} list={massList}/>
                                         </Row>
                                         <Row className='row-custom'>
-                                            <Mod plateId={createdId}/>
+                                            <Mod plateId={plateId} list={modList}/>
                                         </Row>
                                         <Row className='row-custom'>
-                                            <DefList plateId={createdId} editModal={openEditAllergen} openModal={openAddAllergen} head={'Список аллергенов'} addText={'Добавить аллерген'}/>
+                                            <DefList plateId={plateId} editModal={openEditAllergen} openModal={openAddAllergen} head={'Список аллергенов'} addText={'Добавить аллерген'}/>
                                         </Row>
                                         <Row className='row-custom'>
-                                            <RecList plateId={createdId} head={'Список рекомендаций'} addText={'Добавить блюдо'}/>
+                                            <RecList plateId={plateId} head={'Список рекомендаций'} addText={'Добавить блюдо'}/>
                                         </Row>
                                     </Col>
                                 ) : null
                             }
-                            
                         </Row>
                     </div>
                 </div>
@@ -483,4 +564,4 @@ const CreatePlatePage = () => {
     )
 }
 
-export default CreatePlatePage;
+export default EditPlatePage;

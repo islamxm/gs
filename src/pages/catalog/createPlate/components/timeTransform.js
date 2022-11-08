@@ -30,14 +30,15 @@ const timeFormat = (time) => {
 }
 
 const timeTransform = (time, index) => {
-    if(time !== 'Closed') {
+    if(time !== 'Disabled' && time !== 'Enabled') {
         return {
             name: weekItemName(index),
             values: {
                 start: timeFormat(Number(time?.split('-')[0]) / 60),
                 end: timeFormat(Number(time?.split('-')[1]) / 60)
             },
-            rest: ''
+            enabled: '',
+            disabled: ''
         }
     } else {
         return {
@@ -46,7 +47,8 @@ const timeTransform = (time, index) => {
                 start: 0,
                 end: 0
             },
-            rest: 'Выходной'
+            enabled: time == 'Enabled' ? 'Весь день' : '',
+            disabled: time == 'Disabled' ? 'Выключено' : ''
         }
     }
     

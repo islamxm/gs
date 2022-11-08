@@ -38,6 +38,7 @@ const AuthPage = () => {
                                 setSubmitting(true);
                                 as.auth(values).then(res => {
                                     console.log(res)
+                                    console.log(values)
                                     if(res.error) {
                                         setError(res.message)
                                         

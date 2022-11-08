@@ -1,15 +1,14 @@
-import './DefList.scss';
+import '../DefList/DefList.scss';
 import Pl from '../../../../../components/Pl/Pl';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import catService from '../../../../../services/catService';
-import AddAlrgn from '../../../modals/addAlrgn/AddAlrgn';
-import EditAlrgn from '../../../modals/editAlrgn/EditAlrgn';
+import AddRec from '../../../modals/addRec/AddRec';
 
 const cs = new catService()
 
 
-const DefList = ({head, addText, openModal, editModal,  plateId}) => {
+const RecList = ({head, addText, openModal, editModal,  plateId}) => {
     const {token} = useSelector(state => state)
     const [list, setList] = useState([])
     const [modal, setModal] = useState(false)
@@ -17,7 +16,7 @@ const DefList = ({head, addText, openModal, editModal,  plateId}) => {
 
     useEffect(() => {
         if(token) {
-            cs.getAllergens(token, {ItemID: plateId}).then(res => {
+            cs.getRec(token, {ItemID: plateId}).then(res => {
                 console.log(res)
                 setList(res)
             })
@@ -34,7 +33,7 @@ const DefList = ({head, addText, openModal, editModal,  plateId}) => {
  
     return (
         <div className="DefList">
-            <AddAlrgn visible={modal} update={setList} data={selected} close={() => {
+            <AddRec visible={modal} update={setList} data={selected} close={() => {
                 setSelected(null)
                 setModal(false)
             }} plateId={plateId}/>
@@ -60,4 +59,4 @@ const DefList = ({head, addText, openModal, editModal,  plateId}) => {
     )
 }
 
-export default DefList;
+export default RecList;

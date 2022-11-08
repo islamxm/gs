@@ -10,7 +10,7 @@ class authService {
         try {
             let res = await fetch(endpoints.auth, {
                 method: 'POST',
-                mode: 'cors',
+                // mode: 'no-cors',
                 headers,
                 body: JSON.stringify(data)
             })

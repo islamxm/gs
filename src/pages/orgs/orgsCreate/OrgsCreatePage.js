@@ -92,7 +92,6 @@ const OrgsCreatePage = () => {
         if(orgId && brandId) {
             os.getOrgs(token, {BrandID: brandId}).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
-                console.log(thisOrg)
                 setIIkoID(thisOrg.IIkoID)
                 setIIkoIDTerminal(thisOrg.IIkoIDTerminal)
                 setOrganisationBrand(thisOrg.OrganisationBrand)
@@ -146,7 +145,7 @@ const OrgsCreatePage = () => {
     const addPayMethods = () => {
         setPm(state => [...state, paymethods[0]])
     }
-
+    
     const selectPayMethod = (value, index) => {
         let ur = pm;
         let p = ur.splice(index, 1, {value: value})
@@ -161,6 +160,7 @@ const OrgsCreatePage = () => {
     const openSelectLocation = () => {
         setSelectLocationModal(true)
     }
+
     const closeSelectLocation = () => {
         setSelectLocationModal(false)
     }
@@ -174,6 +174,17 @@ const OrgsCreatePage = () => {
         setWeekTimes([...ur]);
     }
 
+    const setLocation = (coords) => {
+        setLattitude(coords[0])
+        setLongitude(coords[1])
+        setCoords({lat: coords[0], lng: coords[1]})
+    }
+
+    const uploadImage = (e) => {
+        
+        setThumbnailPrev(URL.createObjectURL(e.target.files[0]))
+        setThumbnailPicture(e.target.files[0])
+    }
 
     const orgSubmit = () => {
         let weekArray = []
@@ -236,24 +247,6 @@ const OrgsCreatePage = () => {
         //     console.log('EDIT')
         // }
     }
-
-    
-
-    const setLocation = (coords) => {
-        setLattitude(coords[0])
-        setLongitude(coords[1])
-        setCoords({lat: coords[0], lng: coords[1]})
-    }
-
-    const uploadImage = (e) => {
-        
-        setThumbnailPrev(URL.createObjectURL(e.target.files[0]))
-        setThumbnailPicture(e.target.files[0])
-    }
-
-    useEffect(() => {
-        console.log(ThumbnailPrev)
-    }, [ThumbnailPrev])
 
 
 

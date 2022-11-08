@@ -1,20 +1,67 @@
 import './EditMass.scss';
-import { Modal } from 'antd';
+import { message, Modal } from 'antd';
 import Input from '../../../../components/Input/Input';
 import {Row, Col} from 'antd';
 import Pl from '../../../../components/Pl/Pl';
 import Button from '../../../../components/Button/Button';
 import {BsTrash} from 'react-icons/bs';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import catService from '../../../../services/catService';
 
-const EditMass = ({visible, close, mass, price, discount}) => {
+
+const cs = new catService()
+
+const EditMass = ({visible, close, selected, plateId, update}) => {
+    const {token} = useSelector(state => state)
     const [localMass, setLocalMass] = useState('');
     const [localPrice, setLocalPrice] = useState('');
     const [localDiscount, setLocalDiscount] = useState('');
+    const [saveLoad, setSaveLoad] = useState(false)
+    const [deleteLoad, setDeleteLoad] = useState(false)
     
-
+    useEffect(() => {
+        if(selected) {
+            
+            setLocalMass(selected?.Mass)
+            setLocalPrice(selected?.Price)
+            setLocalDiscount(selected?.SalePrice)
+        }
+    }, [selected])
+    
     const closeHandle = () => {
         close();
+        setLocalMass('')
+        setLocalPrice('')
+        setLocalDiscount('')
+    }
+
+    const onSave = () => {
+        setSaveLoad(true)
+        cs.editPriceMass(token, {
+            ID: selected.ID,
+            Mass: localMass,
+            Price: localPrice,
+            SalePrice: localDiscount
+        }).then(res => {
+            update(res)
+            message.success('Дополнительная масса успешно изменена')
+        }).finally(_ => {
+            setSaveLoad(false)
+            closeHandle()
+        })
+    }
+
+    const onDelete = () => {
+        setDeleteLoad(true)
+        cs.deletePriceMass(token, {ID: selected.ID}).then(res => {
+            update(res)
+            message.success('Дополнительная масса удалена')
+        }).finally(_ => {
+            setDeleteLoad(false)
+            closeHandle()
+        })
     }
 
     return (
@@ -22,17 +69,40 @@ const EditMass = ({visible, close, mass, price, discount}) => {
             <h2 className="Modal__head">Изменить массу</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
-                    <Input placeholder={'Масса'}/>
+                    <Input
+                        value={localMass} 
+                        onChange={(e) => setLocalMass(e.target.value)}
+                        placeholder={'Масса'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Цена'}/>
+                    <Input
+                        value={localPrice} 
+                        onChange={(e) => setLocalPrice(e.target.value)}
+                        placeholder={'Цена'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Цена со скидкой'}/>
+                    <Input 
+                        value={localDiscount}
+                        onChange={(e) => setLocalDiscount(e.target.value)}
+                        placeholder={'Цена со скидкой'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button type={'button'}  before={<BsTrash/>} justify={'flex-start'} text={'Сохранить'}/>
-                    <Button styles={{marginTop: 15}} variant={'danger'} type={'button'}  before={<BsTrash/>} justify={'flex-start'} text={'Сохранить'}/>
+                    <Button 
+                        disabled={!localPrice || !localMass}
+                        load={saveLoad}
+                        onClick={onSave}
+                        type={'button'}  
+                        before={<BsTrash/>} 
+                        justify={'flex-start'} 
+                        text={'Сохранить'}/>
+                    <Button 
+                        onClick={onDelete}
+                        styles={{marginTop: 15}} 
+                        variant={'danger'} 
+                        type={'button'}  
+                        before={<BsTrash/>} 
+                        justify={'flex-start'} 
+                        text={'Удалить'}/>
                 </div>
             </div>
         </Modal>

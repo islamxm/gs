@@ -19,8 +19,7 @@ const DropCollapse = ({
     checkbox,
     styles,
     del,
-    index
-    
+    index,    
 }) => {
     const [listActive, setListActive] = useState(false);
     const selectList = useRef(null);
@@ -31,8 +30,8 @@ const DropCollapse = ({
         setListActive(!listActive)
     }
     
-    const handleSelectItem = (value, index) => {
-        selectItem(value, index)
+    const handleSelectItem = (value, index, ID) => {
+        selectItem(value, index, ID)
     }
 
     useEffect(() => {
@@ -76,11 +75,11 @@ const DropCollapse = ({
                                 list.map((item, i) => {
                                     if(value == item.value) {
                                         return (
-                                            <div onClick={() => handleSelectItem(item.value, index)} className="DropCollapse__item active" key={i}>{item.value}</div>
+                                            <div onClick={() => handleSelectItem(item.value, index, item.ID)} className="DropCollapse__item active" key={i}>{item.value}</div>
                                         )
                                     } else {
                                         return (
-                                            <div onClick={() => handleSelectItem(item.value, index)} className="DropCollapse__item" key={i}>{item.value}</div>
+                                            <div onClick={() => handleSelectItem(item.value, index, item.ID)} className="DropCollapse__item" key={i}>{item.value}</div>
                                         )
                                     }
                                     

@@ -13,8 +13,16 @@
 
         }
 
-        &_list {
+        &_name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #7B99FF;
+        }
 
+        &_list {
+            margin-top: 10px;
         }
 
         &_item {

@@ -9,13 +9,15 @@ class orgService {
 
     //БРЕНДЫ
     getBrands = async (token) => {
+        console.log(endpoints.getBrands)
         try {
             let res = await fetch(endpoints.getBrands, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     ...headers
-                }
+                },
+                // mode: 'no-cors'
             })
 
             return await res.json()
@@ -64,7 +66,7 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
             })
 
             return await res.json()
@@ -83,7 +85,7 @@ class orgService {
                     ...headers
                 },
                 body: JSON.stringify(body),
-                mode: 'cors'
+                
             })
 
             return await res.json()
@@ -100,7 +102,7 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                 },
                 body,
-                // mode: 'cors'
+                
             })
 
             return await res.json()
@@ -116,7 +118,8 @@ class orgService {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
-                body
+                body,
+                
             })
 
             return await res.json()
@@ -133,7 +136,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -150,7 +154,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -167,7 +172,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -184,7 +190,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -201,7 +208,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -218,7 +226,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -235,7 +244,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()
@@ -252,7 +262,8 @@ class orgService {
                     'Authorization': `Bearer ${token}`,
                     ...headers
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                
             })
 
             return await res.json()

@@ -7,10 +7,10 @@ const PicItem = ({image, remove, style}) => {
     return (
         <div className="PicItem" style={style}>
             <div className="PicItem__img">
-                <img src={img} alt="" />
+                <img src={image} alt="" />
             </div>
             <div className="PicItem__action">
-                <Button styles={{width: '100%'}} variant={'danger'} before={<BsTrash/>} text={'Удалить'} justify={'center'}/>
+                <Button onClick={remove} styles={{width: '100%'}} variant={'danger'} before={<BsTrash/>} text={'Удалить'} justify={'center'}/>
             </div>
         </div>
     )

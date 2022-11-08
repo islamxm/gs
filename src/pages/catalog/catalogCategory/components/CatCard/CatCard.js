@@ -1,19 +1,48 @@
 import './CatCard.scss';
 import img from '../../../../../assets/img/org.png';
 
-const CatCard = () => {
+const CatCard = ({
+    AllowedDeliveryTypes,
+    Calories,
+    CanOverwriteByIIko,
+    Carbohydrates,
+    CategoryID,
+    Composition,
+    CountAdditions,
+    Disabled,
+    Fats,
+    HiddenInOrganisations,
+    ID,
+    IIkoID,
+    IsHit,
+    IsNew,
+    IsSubCategory,
+    ItemOrder,
+    MaxCount,
+    Name,
+    ParentID,
+    Pictures,
+    Prices,
+    Proteins,
+    ThumbnailPicture,
+    editPlate
+}) => {
     return (
-        <div className="CatCard">
+        <div className="CatCard" onClick={() => editPlate(ID)}>
             <div className="CatCard__img">
-                <img src={img} alt="" />
+                <img src={ThumbnailPicture} alt="" />
             </div>
             <div className="CatCard__body">
                 <div className="CatCard__body_name">
-                    Название Блюда
+                    {Name}
                 </div>
                 <div className="CatCard__body_price">
-                    <div className="CatCard__body_price_actual">500₽</div>
-                    <div className="CatCard__body_price_main">500₽</div>
+                    <div className="CatCard__body_price_actual">{Number(Prices[0]?.SalePrice) > 0 ? Prices[0]?.SalePrice : Prices[0]?.Price}₽</div>
+                    {
+                        Number(Prices[0]?.SalePrice) > 0 ? (
+                            <div className="CatCard__body_price_main">{Prices[0]?.Price}₽</div>
+                        ) : null
+                    }                    
                 </div>
             </div>
         </div>

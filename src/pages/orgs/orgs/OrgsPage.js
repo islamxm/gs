@@ -19,16 +19,6 @@ import Loader from '../../../components/Loader/Loader';
 
 const os = new orgService();
 
-const orgMock = [
-    {
-        img: orgImg,
-        title: 'Название ресторана'
-    },
-    {
-        img: orgImg,
-        title: 'Название ресторана'
-    },
-]
 
 
 
@@ -46,20 +36,29 @@ const OrgsPage = () => {
     
 
     useEffect(() => {
-        
+        console.log(token)
         if(token && brandId) {
+            
             setLoadList(true)
             os.getOrgs(token, {BrandID: brandId})
-                .then(res => setList(res))
+                .then(res => {
+                    setList(res)
+                    console.log(res)
+                })
                 .finally(_ => setLoadList(false))
         }
         if(token && !brandId) {
             setLoadList(true)
             os.getBrands(token)
-                .then(res => setList(res))
+                .then(res => {
+                    console.log(res)
+                    setList(res)
+                })
                 .finally(_ => setLoadList(false))
         }
     }, [location, token, brandId])
+
+
 
     const updateList = () => {
         setLoadList(true)

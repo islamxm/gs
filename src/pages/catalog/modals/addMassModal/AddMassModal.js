@@ -1,16 +1,50 @@
 import './AddMassModal.scss';
-import { Modal } from 'antd';
+import { message, Modal } from 'antd';
 import Input from '../../../../components/Input/Input';
 import {Row, Col} from 'antd';
 import Pl from '../../../../components/Pl/Pl';
 import Button from '../../../../components/Button/Button';
 import {BsTrash} from 'react-icons/bs';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import catService from '../../../../services/catService';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const AddMassModal = ({visible, close}) => {
+
+const cs = new catService()
+
+const AddMassModal = ({visible, close, update, plateId}) => {
+    const {token} = useSelector(state => state);
+    const [Mass, setMass] = useState('')
+    const [Price, setPrice] = useState('')
+    const [SalePrice, setSalePrice] = useState('')
+    const [load, setLoad] = useState(false)
+
+
+
 
     const closeHandle = () => {
         close();
+        setMass('')
+        setPrice('')
+        setSalePrice('')
+    }
+
+    const onSave = () => {
+        setLoad(true)
+        cs.addPriceMass(token, {
+            ItemID: plateId,
+            Mass,
+            Price,
+            SalePrice
+        }).then(res => {
+            update(res)
+            message.success('Дополнительная масса добавлена')
+        }).finally(_ => {
+            setLoad(false)
+            closeHandle()
+        })
     }
 
     return (
@@ -18,16 +52,32 @@ const AddMassModal = ({visible, close}) => {
             <h2 className="Modal__head">Добавить массу</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
-                    <Input placeholder={'Масса'}/>
+                    <Input 
+                        value={Mass}
+                        onChange={e => setMass(e.target.value)}
+                        placeholder={'Масса'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Цена'}/>
+                    <Input 
+                        value={Price}
+                        onChange={e => setPrice(e.target.value)}
+                        placeholder={'Цена'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Цена со скидкой'}/>
+                    <Input
+                        value={SalePrice}
+                        onChange={e => setSalePrice(e.target.value)}
+                        placeholder={'Цена со скидкой'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button type={'button'}  before={<BsTrash/>} justify={'flex-start'} text={'Сохранить'}/>
+                    <Button
+                        onClick={onSave}
+                        disabled={!Mass || !Price || !SalePrice}
+                        load={load}
+                        type={'button'}  
+                        before={<BsTrash/>} 
+                        justify={'flex-start'} 
+                        text={'Сохранить'}/>
                 </div>
             </div>
         </Modal>

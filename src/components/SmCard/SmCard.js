@@ -6,13 +6,13 @@ const SmCard = ({name, price, image, style}) => {
     return (
         <div className="SmCard" style={style}>
             <div className="SmCard__img">
-                <img src={img} alt="" />
+                <img src={image} alt="" />
             </div>
             <div className="SmCard__body">
                 <div className="SmCard__body_name">{name}</div>
                 {
                     price ? (
-                        <div className="SmCard__body_price">{price}</div>
+                        <div className="SmCard__body_price">{price} ₽</div>
                     ) : null
                 }
                 

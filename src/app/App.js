@@ -16,6 +16,7 @@ import BasketPage from "../pages/basket/BasketPage";
 import IntegrPage from "../pages/integr/IntegrPage";
 import SettingsPage from "../pages/settings/SettingsPage";
 import CheckAuth from "../hoc/ChekAuth";
+import EditPlatePage from "../pages/catalog/createPlate/EditPlatePage";
 
 
 
@@ -33,8 +34,10 @@ const App = () => {
             <Route path="/basket" element={<CheckAuth><BasketPage/></CheckAuth>}/>
             <Route path="/integr" element={<CheckAuth><IntegrPage/></CheckAuth>}/>
             <Route path="/settings" element={<CheckAuth><SettingsPage/></CheckAuth>}/>
-            <Route path="/catalog/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/>
-            <Route path="/catalog/categoryName" element={<CheckAuth><CatalogCategoryPage/></CheckAuth>}/>
+            {/* <Route path="/catalog/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/> */}
+            <Route path="/catalog/:categoryId/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/>
+            <Route path="/catalog/:categoryId/editPlate/:plateId" element={<CheckAuth><EditPlatePage/></CheckAuth>}/>
+            <Route path="/catalog/:categoryId" element={<CheckAuth><CatalogCategoryPage/></CheckAuth>}/>
             <Route path="/organizations/:brandId" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
             <Route path="/organizations/:brandId/create" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>
             <Route path="/organizations/:brandId/:orgId" element={<CheckAuth><OrgsCreatePage/></CheckAuth>}/>

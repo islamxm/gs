@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import EditTime from '../../../modals/editTime/EditTime';
 import useModal from '../../../../../hooks/useModal';
 
-const TimeSelect = ({list, selected, save}) => {
+const TimeSelect = ({list, selected, save, plate}) => {
     const {visible, hideModal, showModal} = useModal();
 
 
@@ -12,6 +12,8 @@ const TimeSelect = ({list, selected, save}) => {
     const [editValue, setEditValue] = useState();
     const [editRest, setEditRest] = useState(false);
     const [editName, setEditName] = useState('');
+    const [editEnabled, setEditEnabled] = useState(false)
+    const [editDisabled, setEditDisabled] = useState(false)
 
     useEffect(() => {
         setTimeList(list)
@@ -22,30 +24,61 @@ const TimeSelect = ({list, selected, save}) => {
         setEditValue(list[index].values)
         setEditName(list[index].name)
         setEditRest(list[index].rest)
+        setEditEnabled(list[index].enabled)
+        setEditDisabled(list[index].disabled)
         showModal()
     }
 
-
+ 
 
     return (
         <div className="TimeSelect">
-            <EditTime save={save} name={editName} rest={editRest} editIndex={editIndex} values={editValue} visible={visible} close={hideModal}/>
+            <EditTime
+                ddisabledVal={editDisabled}
+                enabledVal={editEnabled} 
+                plate={plate} 
+                save={save} 
+                name={editName} 
+                rest={editRest} 
+                editIndex={editIndex} 
+                values={editValue} 
+                visible={visible} 
+                close={hideModal}/>
             {
                 timeList && timeList.length > 0 ? (
                     timeList.map((item, index) => (
                         <div onClick={() => openEdit(index)} className="TimeSelect__item" key={index}>
                             <div className="TimeSelect__item_name">{item.name}</div>
-                            <div className="TimeSelect__item_value">
-                                {
-                                    !item.rest ? (
-                                        <>
-                                        {item.values.start}-{item.values.end}
-                                        </>
-                                    ) : (
-                                        'Выходной'
-                                    )
-                                }
-                            </div>
+                            {
+                                plate ? (
+                                    <div className="TimeSelect__item_value">
+                                        {   
+                                            !item.enabled && !item.disabled ? (
+                                                <>
+                                                {item.values.start}-{item.values.end}
+                                                </>
+                                            ) : (
+                                                item.enabled ?  (
+                                                    item.enabled
+                                                ) : item.disabled
+                                            )
+                                        }
+                                    </div>
+                                ) : (
+                                    <div className="TimeSelect__item_value">
+                                        {
+                                            !item.rest? (
+                                                <>
+                                                {item.values.start}-{item.values.end}
+                                                </>
+                                            ) : (
+                                                item.rest
+                                            )
+                                        }
+                                    </div>
+                                )
+                            }
+                            
                         </div>
                     ))
                 ) : null

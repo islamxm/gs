@@ -1,9 +1,26 @@
 import './Sidebar.scss';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import catService from '../../services/catService';
+import { useEffect, useState } from 'react';
+
+const cs = new catService();
 
 const Sidebar = () => {
+    const {token} = useSelector(state => state)
     const location = useLocation();
 
+
+    const [cats, setCats] = useState([])
+
+
+    useEffect(() => {
+        if(token) {
+            cs.getCats(token, {OrganisationID: 0}).then(res => {
+                setCats(res)
+            })
+        }
+    }, [token])
 
 
     return (
@@ -16,9 +33,18 @@ const Sidebar = () => {
                         <Link to={'/organizations'}>Организации</Link>
                     </div>
                 </div>
-                <div className={"Sidebar__item" + (location.pathname.includes('/catalog') ? ' active ' : '')}>
+                <div className={"Sidebar__item"}>
                     <div className="Sidebar__item_head">
-                        <Link to={'/catalog'}>Категории</Link>
+                        <Link to={'/catalog'} className={"Sidebar__item_head_nl" + (location.pathname == '/catalog' ? ' active ' : '')}>Каталог</Link>
+                    </div>
+                    <div className="Sidebar__item_submenu">
+                        {
+                            cats && cats?.length > 0 ? (
+                                cats.map((item, index) => (
+                                    <Link key={index} to={`/catalog/${item.ID}`} className={'Sidebar__item_submenu_item' + (location.pathname.match(`/catalog/${item.ID}`) ? ' active ' : '')}>{item.Name}</Link>
+                                ))
+                            ) : null
+                        }
                     </div>
                 </div>
                 <div className={"Sidebar__item" + (location.pathname.includes('/stories') ? ' active ' : '')}>

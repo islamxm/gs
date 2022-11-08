@@ -2,12 +2,32 @@ import './ExMass.scss';
 import Pl from '../../../../../components/Pl/Pl';
 import AddMassModal from '../../../modals/addMassModal/AddMassModal';
 import useModal from '../../../../../hooks/useModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditMass from '../../../modals/editMass/EditMass';
+import { useSelector } from 'react-redux';
 
-const ExMass = () => {
+import catService from '../../../../../services/catService';
+
+
+const cs = new catService()
+
+
+const ExMass = ({plateId}) => {
+    const {token} = useSelector(state => state)
     const [editMass, setEditMass] = useState(false);
     const [addMass, setAddMass] = useState(false);
+    const [selected, setSelected] = useState(null)
+    const [localList, setLocalList] = useState()
+
+
+    useEffect(() => {
+        if(token) {
+            console.log(plateId)
+            cs.getPriceMass(token, {ItemID: plateId}).then(res => {
+                setLocalList(res)
+            })
+        }
+    }, [token])
 
     const openAddMass = () => {
         setAddMass(true)
@@ -16,35 +36,38 @@ const ExMass = () => {
         setAddMass(false)
     }
 
-    const openEditMass = () => {
+    const openEditMass = ({...item}) => {
+        setSelected(item)
         setEditMass(true)
     }
     const closeEditMass = () => {
         setEditMass(false)
+        setSelected(null)
     }
 
 
     return (
         <div className="ExMass">
-            <AddMassModal visible={addMass} close={closeAddMass}/>
-            <EditMass visible={editMass} close={closeEditMass}/>
+            <AddMassModal plateId={plateId} update={setLocalList} visible={addMass} close={closeAddMass}/>
+            <EditMass plateId={plateId} update={setLocalList} selected={selected} visible={editMass} close={closeEditMass}/>
             <h3 className="ExMass__head panel-label">Список дополнительных масс</h3>
             <div className="ExMass__body">
                 <div className="ExMass__body_list">
-                    <div onClick={openEditMass} className="ExMass__body_item panel">
-                        <div  className="ExMass__body_item_mass ExMass__body_item_val">Масса: 100 г</div>
-                        <div className="ExMass__body_item_prices">
-                            <div className="ExMass__body_item_prices_main ExMass__body_item_val">Цена: 300 ₽</div>
-                            <div className="ExMass__body_item_prices_discount ExMass__body_item_val">Цена со скидкой: 300 ₽</div>
-                        </div>
-                    </div>
-                    <div onClick={openEditMass} className="ExMass__body_item panel">
-                        <div  className="ExMass__body_item_mass ExMass__body_item_val">Масса: 100 г</div>
-                        <div className="ExMass__body_item_prices">
-                            <div className="ExMass__body_item_prices_main ExMass__body_item_val">Цена: 300 ₽</div>
-                            
-                        </div>
-                    </div>
+                    {
+                        localList && localList.length > 0 ? (
+                            localList.map((item, index) => (
+                                <div onClick={() => openEditMass({...item})} className="ExMass__body_item panel" key={index}>
+                                    <div  className="ExMass__body_item_mass ExMass__body_item_val">Масса: {item.Mass} г</div>
+                                    <div className="ExMass__body_item_prices">
+                                        <div className="ExMass__body_item_prices_main ExMass__body_item_val">Цена: {item.Price} ₽</div>
+                                        <div className="ExMass__body_item_prices_discount ExMass__body_item_val">Цена со скидкой: {item.SalePrice} ₽</div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : null
+                    }
+                    
+                    
                 </div>
                 <div className="ExMass__add">
                     <Pl onClick={openAddMass} text={'Добавить массу'} style={{backgroundColor: '#fff'}}/>
