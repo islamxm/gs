@@ -701,7 +701,7 @@ const OrgsCreatePage = () => {
                                                         pm.map((item, index) => (
                                                             
                                                             <PayMethods
-                                                                selected={pm[index]}
+                                                                selected={item}
                                                                 list={paymethods}
                                                                 onCashbackChange={editPay}
                                                                 onChange={addPay}

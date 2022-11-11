@@ -4,10 +4,22 @@ import { useSelector } from 'react-redux';
 import catService from '../../services/catService';
 import { useEffect, useState, useRef } from 'react';
 import SidebarItem from './components/SidebarItem/SidebarItem';
-import {FiCodesandbox} from 'react-icons/fi';
+import {FiCodesandbox, FiHome} from 'react-icons/fi';
 import {BeatLoader} from 'react-spinners';
 import {AiOutlineRollback} from 'react-icons/ai';
 import {motion} from 'framer-motion';
+import {VscListOrdered} from 'react-icons/vsc';
+import CatalogIcon from '../../icons/CatalogIcon/CatalogIcon';
+import {CgTag} from 'react-icons/cg';
+import StatIcon from '../../icons/StatIcon/StatIcon';
+import OrderIcon from '../../icons/OrderIcon/OrderIcon';
+import {FiUsers, FiSettings} from 'react-icons/fi';
+import SettingsIcon from '../../icons/SettingsIcon/SettingsIcon';
+import StatisticIcon from '../../icons/StatisticIcon/StatisticIcon';
+import BasketIcon from '../../icons/BasketIcon/BasketIcon';
+import IntegrIcon from '../../icons/IntegrIcon/IntegrIcon';
+import TrashIcon from '../../icons/TrashIcon/TrashIcon';
+import {BsBag} from 'react-icons/bs';
 const cs = new catService();
 
 const Sidebar = ({updateCat}) => {
@@ -62,7 +74,7 @@ const Sidebar = ({updateCat}) => {
                     labelHide={isHide}
                     name={'Организации'}
                     link={'/organizations'}
-                    icon={<FiCodesandbox/>}
+                    icon={<FiHome/>}
                 />
                 <SidebarItem
                     labelHide={isHide}
@@ -70,7 +82,7 @@ const Sidebar = ({updateCat}) => {
                     name={'Каталог'}
                     link={'/catalog'}
                     isSubmenu={true}
-                    icon={<FiCodesandbox/>}
+                    icon={<CatalogIcon size={22}/>}
                 >   
                     {
                         catLoad ? (
@@ -98,29 +110,30 @@ const Sidebar = ({updateCat}) => {
                     labelHide={isHide}
                     name={'Сториз'}
                     link={'/stories'}
-                    icon={<FiCodesandbox/>}
+                    icon={<CgTag style={{transform: 'rotate(-45deg)'}}/>}
                     />
                 <SidebarItem
                     labelHide={isHide}
                     name={'Аналитика'}
                     isSubmenu={true}
                     toggleSidebar={setIsHide}
-                    icon={<FiCodesandbox/>}
+                    icon={<StatIcon size={22}/>}
                     >
-                        <SidebarItem labelHide={isHide} name={'Клиенты'} link={'/clients'} icon={<FiCodesandbox/>}/>
-                        <SidebarItem labelHide={isHide} name={'Заказы'} link={'/orders'} icon={<FiCodesandbox/>}/>
-                        <SidebarItem labelHide={isHide} name={'Статистика'} link={'/statistic'} icon={<FiCodesandbox/>}/>
+                        <SidebarItem labelHide={isHide} name={'Клиенты'} link={'/clients'} icon={<FiUsers/>}/>
+                        <SidebarItem labelHide={isHide} name={'Заказы'} link={'/orders'} icon={<OrderIcon size={22}/>}/>
+                        <SidebarItem labelHide={isHide} name={'Статистика'} link={'/statistic'} icon={<StatisticIcon size={22}/>}/>
                 </SidebarItem>
                 <SidebarItem
                     labelHide={isHide}
                     name={'Настройки'}
                     toggleSidebar={setIsHide}
                     isSubmenu={true}
-                    icon={<FiCodesandbox/>}
+                    icon={<SettingsIcon size={22}/>}
                     >
-                        <SidebarItem labelHide={isHide} name={'Корзина'} link={'/basket'} icon={<FiCodesandbox/>}/>
-                        <SidebarItem labelHide={isHide} name={'Интеграции'} link={'/integr'} icon={<FiCodesandbox/>}/>
-                        <SidebarItem labelHide={isHide} name={'Удаленные объекты'} link={'/trash'} icon={<FiCodesandbox/>}/>
+                        <SidebarItem labelHide={isHide} name={'Корзина'} link={'/basket'} icon={<BsBag/>}/>
+                        <SidebarItem labelHide={isHide} name={'Интеграции'} link={'/integr'} icon={<IntegrIcon size={22}/>}/>
+                        <SidebarItem labelHide={isHide} name={'Все настройки'} link={'/allsettings'} icon={<FiSettings/>}/>
+                        <SidebarItem labelHide={isHide} name={'Удаленные объекты'} link={'/trash'} icon={<TrashIcon size={22}/>}/>
                 </SidebarItem>
             </div>
         </motion.div>

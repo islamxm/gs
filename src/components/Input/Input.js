@@ -1,4 +1,5 @@
 import './Input.scss';
+import {motion} from 'framer-motion';
 
 const Input = ({
     style,
@@ -29,7 +30,8 @@ const Input = ({
                 className="Input__el" />
             {
                 error && showErrorText ? (
-                    <div className="Input__error">
+                    <div  
+                        className="Input__error">
                         {error}
                     </div>
                 ) : null

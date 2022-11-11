@@ -7,6 +7,15 @@
             color: var(--violet) !important;
             &_icon {
                 transform: scale(1.2);
+
+                .icon-gs {
+                    svg {
+                        path {
+                            stroke: var(--violet) !important;
+                            // fill: var(--violet) !important;
+                        }
+                    }
+                }
             }
         }
         
@@ -56,6 +65,15 @@
                 justify-content: center;
                 margin-right: 15px;
                 transition: all .3s ease;
+
+                .icon-gs {
+                    svg {
+                        path {
+                            // fill: rgba(0, 0, 0, 0.5) !important;
+                            stroke: rgba(0, 0, 0, 0.5) !important;
+                        }
+                    }
+                }
             }
 
             &_name {
