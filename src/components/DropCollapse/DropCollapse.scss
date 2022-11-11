@@ -19,6 +19,7 @@
             color: rgba(123, 153, 255, 0.6);    
             width: 100%;
             padding-right: 10px;
+            width: 100%;
         }
 
         &_value {
@@ -38,6 +39,7 @@
                 align-items: center;
                 justify-content: center;
                 margin-left: 10px;
+                transition: all .3s ease;
             }
         }
     }
@@ -91,6 +93,18 @@
     }
 
 
+}
+
+.DropCollapse.active {
+    .DropCollapse__head {
+
+        &_value {
+
+            &_icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
 }
 
 .DropCollapse.afterIcon {

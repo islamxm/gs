@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const currentLocSuccess = (e, setCurrentLoc) => {
-    console.log(e.coords)
     setCurrentLoc({lat: e.coords.latitude, lng: e.coords.longitude})
 }
 

@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import './OrgItem.scss';
 import { useNavigate, useParams } from 'react-router-dom';
+import {Col} from 'antd';
+import { Draggable } from 'react-beautiful-dnd';
+
 
 const OrgItem = ({
     Address,
@@ -30,21 +33,25 @@ const OrgItem = ({
     TimetableDescription,
     Timezone,
     TueTime,
-    WedTime
+    WedTime,
+    colSpan,
+    index
 }) => {
     const nav = useNavigate()
     const {brandId} = useParams()
     
 
     return (
-        <div className="OrgItem" onClick={() => nav(`/organizations/${brandId}/${ID}`)}>
-            <div className="OrgItem__img">
-                <img src={ThumbnailPicture} alt="" />
-            </div>
-            <div className="OrgItem__name">
-                {Name}
-            </div>
-        </div>
+        <div className="OrgItem draggable" onClick={() => nav(`/organizations/${brandId}/${ID}`)}>
+                    <div className="OrgItem__img">
+                        <img src={ThumbnailPicture} alt="" />
+                    </div>
+                    <div className="OrgItem__name">
+                        {Name}
+                    </div>
+                </div>
+        
+        
     )
 }
 

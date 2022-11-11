@@ -2,79 +2,130 @@ import './Sidebar.scss';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import catService from '../../services/catService';
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState, useRef } from 'react';
+import SidebarItem from './components/SidebarItem/SidebarItem';
+import {FiCodesandbox} from 'react-icons/fi';
+import {BeatLoader} from 'react-spinners';
+import {AiOutlineRollback} from 'react-icons/ai';
+import {motion} from 'framer-motion';
 const cs = new catService();
 
-const Sidebar = () => {
+const Sidebar = ({updateCat}) => {
     const {token} = useSelector(state => state)
-    const location = useLocation();
-
-
     const [cats, setCats] = useState([])
+    const [catLoad, setCatLoad] = useState(false)
 
+
+    const [isHide, setIsHide] = useState(false)
 
     useEffect(() => {
+        setCatLoad(true)
         if(token) {
             cs.getCats(token, {OrganisationID: 0}).then(res => {
                 setCats(res)
+            }).finally(_ => {
+                setCatLoad(false)
             })
+            
         }
     }, [token])
 
 
+
+
+
+    const toggleSidebar = () => {
+        setIsHide(!isHide)
+    }
+
     return (
-        <div className="Sidebar">
-            
-            <div className="Sidebar__head">МЕНЮ</div>
-            <div className="Sidebar__list">
-                <div className={"Sidebar__item" + (location.pathname.includes('/organizations') ? ' active ' : '')}>
-                    <div className="Sidebar__item_head">
-                        <Link to={'/organizations'}>Организации</Link>
-                    </div>
+        <>
+            <div className={"Sidebar-pl" + (isHide ? ' hide ' : '')}></div>
+            <motion.div 
+            initial={{translateX: '-100%'}}
+            animate={{translateX: 0}}
+            transition={{duration: 0.5}}
+            exit={{translateX: '-100%'}}
+
+            className={"Sidebar gs-scroll" + (isHide ? ' hide ' : '')}>
+            <div className="Sidebar__head">
+                <div className="Sidebar__head_label">
+                МЕНЮ
                 </div>
-                <div className={"Sidebar__item"}>
-                    <div className="Sidebar__item_head">
-                        <Link to={'/catalog'} className={"Sidebar__item_head_nl" + (location.pathname == '/catalog' ? ' active ' : '')}>Каталог</Link>
-                    </div>
-                    <div className="Sidebar__item_submenu">
-                        {
-                            cats && cats?.length > 0 ? (
-                                cats.map((item, index) => (
-                                    <Link key={index} to={`/catalog/${item.ID}`} className={'Sidebar__item_submenu_item' + (location.pathname.match(`/catalog/${item.ID}`) ? ' active ' : '')}>{item.Name}</Link>
-                                ))
-                            ) : null
-                        }
-                    </div>
-                </div>
-                <div className={"Sidebar__item" + (location.pathname.includes('/stories') ? ' active ' : '')}>
-                    <div className="Sidebar__item_head">
-                        <Link to={'/stories'}>Сториз</Link>
-                    </div>
-                </div>
-                <div className={"Sidebar__item"}>
-                    <div className="Sidebar__item_head">
-                        <a className='Sidebar__item_head_nl'>Аналитика</a>
-                    </div>
-                    <div className="Sidebar__item_submenu">
-                        <Link to={'/clients'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/clients') ? ' active ' : '')}>Клиенты</Link>
-                        <Link to={'/orders'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/orders') ? ' active ' : '')}>Заказы</Link>
-                        <Link to={'/statistic'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/statistic') ? ' active ' : '')}>Статистика</Link>
-                    </div>
-                </div>
-                <div className={"Sidebar__item"}>
-                    <div className="Sidebar__item_head">
-                        <a className='Sidebar__item_head_nl'>Настройки</a>
-                    </div>
-                    <div className="Sidebar__item_submenu">
-                        <Link to={'/basket'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/basket') ? ' active ' : '')}>Корзина</Link>
-                        <Link to={'/integr'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/integr') ? ' active ' : '')}>Интеграции</Link>
-                        <Link to={'/settings'} className={'Sidebar__item_submenu_item' + (location.pathname.includes('/settings') ? ' active ' : '')}>Все настройки</Link>
-                        
-                    </div>
+                
+                <div className="Sidebar__head_icon" onClick={toggleSidebar}>
+                    <AiOutlineRollback/>
                 </div>
             </div>
-        </div>
+            <div className="Sidebar__list">
+                <SidebarItem
+                    labelHide={isHide}
+                    name={'Организации'}
+                    link={'/organizations'}
+                    icon={<FiCodesandbox/>}
+                />
+                <SidebarItem
+                    labelHide={isHide}
+                    toggleSidebar={setIsHide}
+                    name={'Каталог'}
+                    link={'/catalog'}
+                    isSubmenu={true}
+                    icon={<FiCodesandbox/>}
+                >   
+                    {
+                        catLoad ? (
+                            <div className="SidebarItem__load">
+                                <BeatLoader color='var(--violet)'/>
+                            </div>
+                            
+                        ) : (
+                            cats && cats.length > 0 ? (
+                                cats.map((item, index) => (
+                                    <SidebarItem
+                                        key={index}
+                                        labelHide={isHide}
+                                        icon={<FiCodesandbox/>}
+                                        name={item.Name}
+                                        link={`/catalog/${item.ID}`}
+                                        />
+                                ))
+                            ) : null
+                        )
+                    }
+
+                </SidebarItem>
+                <SidebarItem
+                    labelHide={isHide}
+                    name={'Сториз'}
+                    link={'/stories'}
+                    icon={<FiCodesandbox/>}
+                    />
+                <SidebarItem
+                    labelHide={isHide}
+                    name={'Аналитика'}
+                    isSubmenu={true}
+                    toggleSidebar={setIsHide}
+                    icon={<FiCodesandbox/>}
+                    >
+                        <SidebarItem labelHide={isHide} name={'Клиенты'} link={'/clients'} icon={<FiCodesandbox/>}/>
+                        <SidebarItem labelHide={isHide} name={'Заказы'} link={'/orders'} icon={<FiCodesandbox/>}/>
+                        <SidebarItem labelHide={isHide} name={'Статистика'} link={'/statistic'} icon={<FiCodesandbox/>}/>
+                </SidebarItem>
+                <SidebarItem
+                    labelHide={isHide}
+                    name={'Настройки'}
+                    toggleSidebar={setIsHide}
+                    isSubmenu={true}
+                    icon={<FiCodesandbox/>}
+                    >
+                        <SidebarItem labelHide={isHide} name={'Корзина'} link={'/basket'} icon={<FiCodesandbox/>}/>
+                        <SidebarItem labelHide={isHide} name={'Интеграции'} link={'/integr'} icon={<FiCodesandbox/>}/>
+                        <SidebarItem labelHide={isHide} name={'Удаленные объекты'} link={'/trash'} icon={<FiCodesandbox/>}/>
+                </SidebarItem>
+            </div>
+        </motion.div>
+        </>
+        
     )
 }
 

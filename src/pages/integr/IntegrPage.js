@@ -9,14 +9,18 @@ import IntegrTgBot from './components/IntegrTgBot/IntegrTgBot';
 import Button from '../../components/Button/Button';
 import { BsTrash } from 'react-icons/bs';
 import IntegrIlko from './components/IntegrIlko/IntegrIlko';
+import {motion} from 'framer-motion';
 
 const IntegrPage = () => {
     return (
-        <div className="IntegrPage page">
-            <HeaderProfile/>
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="IntegrPage page">
             <div className="pageBody">
-                <Sidebar/>
-                <div className="spc"></div>
                 <div className="IntegrPage__body pageBody-content">
                     <Row gutter={[30, 0]}>
                         <Col span={12}>
@@ -49,7 +53,7 @@ const IntegrPage = () => {
                     </Row>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 export default IntegrPage;

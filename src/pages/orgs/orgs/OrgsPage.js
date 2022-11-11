@@ -15,12 +15,18 @@ import { useSelector } from 'react-redux';
 import EditBrand from '../modals/editBrand/EditBrand';
 import { useParams } from 'react-router-dom';
 import Loader from '../../../components/Loader/Loader';
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
+import { Row,Col } from 'antd';
+import authService from '../../../services/dataService';
+import { handleDragStart, handleDragOver, handleDrop, sortItems, handleDragEnd, handleDragLeave } from '../../../funcs/dragSort';
+import {motion} from 'framer-motion';
 
 
+
+
+
+const as = new authService();
 const os = new orgService();
-
-
-
 
 const OrgsPage = () => {
     const {brandId} = useParams()
@@ -32,18 +38,18 @@ const OrgsPage = () => {
     const [selected, setSelected] = useState({})
     const [addBrandModal, setAddBrandModal] = useState(false)
     const [editBrandModal, setEditBrandModal] = useState(false)
-
+    const [currentItem, setCurrentItem] = useState(null)
     
 
     useEffect(() => {
-        console.log(token)
+        
         if(token && brandId) {
             
             setLoadList(true)
             os.getOrgs(token, {BrandID: brandId})
                 .then(res => {
+                    console.log(res.map(item => item.ID).join(','))
                     setList(res)
-                    console.log(res)
                 })
                 .finally(_ => setLoadList(false))
         }
@@ -51,30 +57,13 @@ const OrgsPage = () => {
             setLoadList(true)
             os.getBrands(token)
                 .then(res => {
-                    console.log(res)
                     setList(res)
                 })
                 .finally(_ => setLoadList(false))
         }
     }, [location, token, brandId])
 
-
-
-    const updateList = () => {
-        setLoadList(true)
-        if(brandId) {
-            os.getOrgs(token, {BrandID: brandId})
-            .then(res => setList(res))
-            .finally(_ => setLoadList(false))
-        } 
-        if(!brandId) {
-            os.getBrands(token)
-                .then(res => setList(res))
-                .finally(_ => setLoadList(false))
-        }
-        
-    }
-
+    
 
     const openAddBrand = () => setAddBrandModal(true)
     const closeAddBrand = () => setAddBrandModal(false)
@@ -90,39 +79,82 @@ const OrgsPage = () => {
     }
     const closeEditBrand = () => setEditBrandModal(false)
 
+
     
 
+
+    const submitOrder = (e, item, type) => {
+        handleDrop(e, item, setList, currentItem, list);
+    }
+
+    useEffect(() => {
+        if(brandId && token && list && list.length > 0) {
+            as.orderSort(token, 'organisations', list.map(item => item.ID).join(',')).then(res => {
+                console.log(res)
+            })
+        }
+        if(!brandId && token && list && list.length > 0) {
+            as.orderSort(token, 'brands', list.map(item => item.ID).join(',')).then(res => {
+                console.log(res)
+            })
+        }
+    }, [list, brandId, token])
+
+    
 
 
     if(location.pathname != '/organizations' && location.pathname.includes('/organizations/')) {
         return (
-            <div className="OrgsPage page">
-            <HeaderProfile/>
-            
+            <motion.div 
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{duration: 0.5}}
+                exit={{opacity: 0}}
+
+                className="OrgsPage page">
             {/* <AddBrand visible={visible} close={hideModal}/> */}
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
+               
+                    {/* <div className="spc"></div> */}
                     <div className="OrgsPage__body pageBody-content">
                         {
                             loadList ? (
                                 <Loader/>
                             ) : (
-                                <div className="OrgsPage__body_list">
-                                    {
-                                        list && list.length > 0? (
-                                            list.map((item, index) => (
-                                                <div className="OrgsPage__body_item" key={index}>
-                                                    <OrgItem {...item}/>
-                                                </div>
-                                            ))
-                                        ) : null
-                                    }
-                                    <div className="OrgsPage__body_item">
-                                        <Pl onClick={() => nav(`/organizations/${brandId}/create`)} style={{backgroundColor: '#fff', minHeight: 223}} text={'Добавить ресторан'}/>
-                                    </div>
-                                </div>
+                                <motion.div
+                                    initial={{opacity: 0}}
+                                    animate={{opacity: 1}}
+                                    transition={{duration: 0.5}}
+                                    exit={{opacity: 0}}
+                                    >
+                                    <Row gutter={[20,20]}>
+                                        {
+                                            list && list.length > 0 ? (
+                                                list.sort(sortItems).map((item, index) => (
+                                                    <Col 
+                                                        key={index}
+                                                        style={{transition: 'all .3s ease'}}
+                                                        span={8}
+                                                        onDragLeave={e => handleDragLeave(e)}
+                                                        onDragEnd={(e) => handleDragEnd(e)}
+                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                                        onDragOver={e => handleDragOver(e)}
+                                                        onDrop={e => submitOrder(e, item)}
+                                                        draggable={true}
+                                                        >
+                                                        <OrgItem {...item} index={index}/>
+                                                    </Col>
+                                                ))
+                                            ): null
+                                        }
+                                        <Col span={8}>
+                                            <Pl onClick={() => nav(`/organizations/${brandId}/create`)} style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} text={'Добавить ресторан'}/>
+                                        </Col>
+                                    </Row>
+                                </motion.div>
+                                
+                                
                             )
                         }
                         
@@ -130,49 +162,72 @@ const OrgsPage = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     
         )
     }
 
-    if(location.pathname == '/organizations') {
+    if(location.pathname == '/organizations' || location.pathname == '/') {
         return (
-            <div className="OrgsPage page">
-            <HeaderProfile/>
-            
+            <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="OrgsPage page">
+
             <EditBrand updateList={setList} visible={editBrandModal} close={closeEditBrand} selected={selected}/>
             <AddBrand updateList={setList} visible={addBrandModal} close={closeAddBrand}/>
             <main className="Main">
                 
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
+           
+                    {/* <div className="spc"></div> */}
                     <div className="OrgsPage__body pageBody-content">
                         {
                             loadList ? (
                                 <Loader/>
                             ) : (
-                                <div className="OrgsPage__body_list">
-                                    {
-                                        list && list.length > 0? (
-                                            list.map((item, index) => (
-                                                <div className="OrgsPage__body_item" key={index}>
-                                                    <BrandItem 
-                                                        Disabled={item.Disabled}
-                                                        ID={item.ID}
-                                                        ItemOrder={item.ItemOrder}
-                                                        LogoUrl={item.LogoUrl}
-                                                        MarkerID={item.MarkerID}
-                                                        editModal={openEditBrand}
-                                                        />
-                                                </div>
-                                            ))
-                                        ) : null
-                                    }
-                                    <div className="OrgsPage__body_item">
+                                <motion.div
+                                    initial={{opacity: 0}}
+                                    animate={{opacity: 1}}
+                                    transition={{duration: 0.5}}
+                                    exit={{opacity: 0}}
+                                    >
+                                    <Row gutter={[20,20]}>
+                                        {
+                                            list && list.length > 0 ? (
+                                                list.sort(sortItems).map((item, index) => (
+                                                    <Col 
+                                                        key={index}
+                                                        style={{transition: 'all .3s ease'}}
+                                                        span={8}
+                                                        onDragLeave={e => handleDragLeave(e)}
+                                                        onDragEnd={(e) => handleDragEnd(e)}
+                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                                        onDragOver={e => handleDragOver(e)}
+                                                        onDrop={e => submitOrder(e, item)}
+                                                        draggable={true}>
+                                                        <BrandItem 
+                                                            Disabled={item.Disabled}
+                                                            ID={item.ID}
+                                                            ItemOrder={item.ItemOrder}
+                                                            LogoUrl={item.LogoUrl}
+                                                            MarkerID={item.MarkerID}
+                                                            editModal={openEditBrand}
+                                                            />
+                                                    </Col>
+                                                ))
+                                            ) : null
+                                        }
+                                        <Col span={8}>
                                         <Pl onClick={openAddBrand} style={{backgroundColor: '#fff', height: 223}} text={'Добавить бренд'}/>
-                                    </div>
-                                </div>
+                                        </Col>
+                                    </Row>
+                                </motion.div>
+                                
+                                
                             )
                         }
                         
@@ -181,7 +236,7 @@ const OrgsPage = () => {
                 </div>
                 
             </main>
-        </div>
+        </motion.div>
     
         )
     }

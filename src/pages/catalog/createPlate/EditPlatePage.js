@@ -27,7 +27,7 @@ import weektimes from './components/weektimes';
 import TimeSelect from '../../orgs/orgsCreate/components/timeSelect/TimeSelect';
 import timeTransform from './components/timeTransform';
 import RecList from './components/RecList/RecList';
-
+import {motion} from 'framer-motion';
 const picListTransform = (index, list, func) => {
     const pr = list;
     const rm = pr.splice(index, 1)
@@ -315,13 +315,18 @@ const EditPlatePage = () => {
     }
 
     return (
-        <div className="CreatePlatePage page">
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+            className="CreatePlatePage page">
             {/* <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
             <EditAlrgn visible={editAllergen} close={closeEditAllergen}/> */}
             <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
+                    {/* <Sidebar/> */}
                     <div className="spc"></div>
                     <div className="CreatePlatePage__body pageBody-content">
                         <Row gutter={[25, 25]} justify={'space-between'}>
@@ -560,7 +565,7 @@ const EditPlatePage = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     )
 }
 

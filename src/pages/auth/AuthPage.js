@@ -9,7 +9,8 @@ import { useDispatch } from 'react-redux';
 import { tokenUpdate } from '../../store/actions';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/dataService';
-
+import {motion} from 'framer-motion';
+import pageEnterAnimProps from '../../funcs/pageEnterAnimProps';
 const LOCAL_STORAGE = window.localStorage;
 const as = new authService();
 
@@ -26,8 +27,9 @@ const AuthPage = () => {
 
 
     return (
-        <div className="AuthPage page">  
-            <Header/>
+        <motion.div 
+            {...pageEnterAnimProps}
+            className="AuthPage page">  
             <main className="Main">
                 <div className="AuthPage__in">
                     <div className="AuthPage__body">
@@ -94,7 +96,7 @@ const AuthPage = () => {
                 </div>
                 
             </main>
-        </div>
+        </motion.div>
     )
 }
 

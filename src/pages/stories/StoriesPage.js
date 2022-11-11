@@ -7,6 +7,8 @@ import Settings from "./components/Settings/Settings";
 import AddStorie from "./modals/addStorie/AddStorie";
 import SelectCat from "./modals/selectCat/SelectCat";
 import { useState } from "react";
+import {motion} from 'framer-motion';
+
 
 const StoriesPage = () => {
     const [addStorie, setAddStorie] = useState(false);
@@ -30,14 +32,17 @@ const StoriesPage = () => {
     }
 
     return (
-        <div className="StoriesPage page">
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="StoriesPage page">
             <SelectCat visible={selectCat} close={closeSelectCat}/>
             <AddStorie visible={addStorie} selectCat={openSelectCat} close={closeAddStorie}/>
-            <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
                     <div className="StoriesPage__body pageBody-content">
                         <Row gutter={[40, 0]}>
                             <Col span={14}>
@@ -67,7 +72,7 @@ const StoriesPage = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     )
 }
 

@@ -128,9 +128,6 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
             HiddenInOrganisations: orgsList.map(item => `/${item.ID}`).join('/') + '/',
             AllowedDeliveryTypes
         }
-
-        console.log(data)
-        setLoad(false)
         cs.addCat(token, data).then(res => {
             console.log(res)
             updateList(res)

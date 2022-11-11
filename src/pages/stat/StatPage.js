@@ -1,22 +1,26 @@
 import HeaderProfile from "../../components/HeaderProfile/HeaderProfile";
-import Sidebar from "../../components/Sidebar/Sidebar";
-
+import {motion} from 'framer-motion';
 
 
 
 const StatPage = () => {
     return (
-        <div className="StatPage">
-            <HeaderProfile/>
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="StatPage">
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
+                    
                     <div className="StatPage__body pageBody-content">
                         
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     )
 }
 

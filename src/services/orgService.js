@@ -1,4 +1,6 @@
 import endpoints from "./endpoints";
+import checkAuth from "./checkAuth";
+
 const headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
@@ -20,7 +22,7 @@ class orgService {
                 // mode: 'no-cors'
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -36,7 +38,7 @@ class orgService {
                 body,
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -52,7 +54,7 @@ class orgService {
                 body,
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -69,7 +71,7 @@ class orgService {
                 body: JSON.stringify(body),
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -88,13 +90,14 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
     }
 
     addOrg = async (token, body) => {
+        console.log(endpoints.addOrg)
         try {
             let res = await fetch(endpoints.addOrg, {
                 method: 'POST',
@@ -105,7 +108,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -113,7 +116,7 @@ class orgService {
 
     editOrg = async (token, body) => {
         try {
-            let res = await fetch(endpoints.editOrg, {
+            let res = await fetch(endpoints.updateOrg, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -122,7 +125,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -140,7 +143,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -158,7 +161,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -176,7 +179,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -194,7 +197,24 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    deletePol = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.deletePol, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    ...headers
+                },
+                body: JSON.stringify(body)
+            })
+
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -212,7 +232,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -227,10 +247,9 @@ class orgService {
                     ...headers
                 },
                 body: JSON.stringify(body),
-                
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -248,7 +267,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -266,7 +285,7 @@ class orgService {
                 
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }

@@ -17,7 +17,7 @@ import { useState } from 'react';
 import BasketTable from './modals/BasketTable/BasketTable';
 import BasketTableAdd from './modals/BasketTableAdd/BasketTableAdd';
 import BasketTableEdit from './modals/BasketTableEdit/BasketTableEdit';
-
+import {motion } from 'framer-motion';
 
 
 
@@ -52,7 +52,13 @@ const BasketPage = () => {
 
 
     return (
-        <div className="BasketPage page">
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="BasketPage page">
 
 
 
@@ -61,8 +67,6 @@ const BasketPage = () => {
             <BasketTableAdd visible={tableAdd} close={closeTableAdd}/>
             <BasketTableEdit visible={tableEdit} close={closeTableEdit}/>
             <div className="pageBody">
-                <Sidebar/>
-                <div className="spc"></div>
                 <div className="BasketPage__body pageBody-content">
                     <Row gutter={[30, 0]}>
                         <Col span={12}>
@@ -139,7 +143,7 @@ const BasketPage = () => {
                     </Row>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

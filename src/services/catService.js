@@ -1,4 +1,5 @@
 import endpoints from "./endpoints";
+import checkAuth from "./checkAuth";
 
 const headers = {
     'Content-type': 'application/json',
@@ -9,7 +10,7 @@ const headers = {
 
 class catService {
     getCats = async (token, body) => {
-        console.log(endpoints.getCats)
+
         try {
             let res = await fetch(endpoints.getCats, {
                 method: 'POST',
@@ -21,7 +22,7 @@ class catService {
                 // mode: 'cors'
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -38,7 +39,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -55,7 +56,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -72,7 +73,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -89,7 +90,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -104,7 +105,7 @@ class catService {
                     'Authorization': `Bearer ${token}`,
                 },
             })
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -120,7 +121,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -137,7 +138,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -154,7 +155,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -169,7 +170,7 @@ class catService {
                     'Authorization': `Bearer ${token}`,
                 },
             })
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -186,7 +187,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -202,7 +203,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -219,7 +220,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -236,7 +237,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -253,7 +254,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -270,7 +271,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -287,7 +288,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -304,7 +305,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -321,7 +322,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -338,7 +339,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -355,7 +356,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -372,7 +373,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -389,7 +390,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -406,7 +407,7 @@ class catService {
                 },
             })
 
-            return await res.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }

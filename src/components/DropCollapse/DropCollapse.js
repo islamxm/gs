@@ -19,7 +19,11 @@ const DropCollapse = ({
     checkbox,
     styles,
     del,
-    index,    
+    index,  
+    onChange,
+    checkboxValue,
+    textAlign,
+    id 
 }) => {
     const [listActive, setListActive] = useState(false);
     const selectList = useRef(null);
@@ -31,6 +35,7 @@ const DropCollapse = ({
     }
     
     const handleSelectItem = (value, index, ID) => {
+        
         selectItem(value, index, ID)
     }
 
@@ -46,6 +51,9 @@ const DropCollapse = ({
         
     }, [listActive, selectList])
     
+    const closeList = () => {
+        setListActive(false)
+    }
 
 
     return (
@@ -53,7 +61,7 @@ const DropCollapse = ({
             <div style={styles} className={"DropCollapse" + (listActive ? ' active ' : '')}>
                 <div onClick={handleList} className={"DropCollapse__head"}>
                     {
-                        label ? (
+                        label && !value ? (
                             <div className="DropCollapse__head_label">{label}</div>
                         ) : null
                     }
@@ -61,7 +69,11 @@ const DropCollapse = ({
                         {beforeIcon ? (
                             <div className="DropCollapse__head_value_icon"><BsChevronCompactDown/></div>
                         ): null}
-                        <span className="DropCollapse__head_value_el">{value}</span>
+                        {
+                            value ? (
+                                <span style={{textAlign: textAlign}} className="DropCollapse__head_value_el">{value}</span>
+                            ) : null
+                        }
                         {afterIcon ? (
                             <div className="DropCollapse__head_value_icon"><BsChevronCompactDown/></div>
                         ) : null}
@@ -75,11 +87,17 @@ const DropCollapse = ({
                                 list.map((item, i) => {
                                     if(value == item.value) {
                                         return (
-                                            <div onClick={() => handleSelectItem(item.value, index, item.ID)} className="DropCollapse__item active" key={i}>{item.value}</div>
+                                            <div onClick={() => {
+                                                handleSelectItem(item.value, index, item.ID)
+                                                closeList()
+                                            }} className="DropCollapse__item active" key={i}>{item.value}</div>
                                         )
                                     } else {
                                         return (
-                                            <div onClick={() => handleSelectItem(item.value, index, item.ID)} className="DropCollapse__item" key={i}>{item.value}</div>
+                                            <div onClick={() => {
+                                                handleSelectItem(item.value, index, item.ID)
+                                                closeList()
+                                            }} className="DropCollapse__item" key={i}>{item.value}</div>
                                         )
                                     }
                                     
@@ -90,7 +108,7 @@ const DropCollapse = ({
                     {
                         del ? (
                             <div className="DropCollapse__list_ex">
-                                <Button onClick={() => del(index)} styles={{width: '100%'}} before={<BsTrash/>} variant={'danger'} text={'Удалить способ оплаты'}/>
+                                <Button onClick={() => del(index, id)} styles={{width: '100%'}} before={<BsTrash/>} variant={'danger'} text={'Удалить способ оплаты'}/>
                             </div>
                         ) : null
                     }

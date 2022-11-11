@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
+import {motion} from 'framer-motion';
 
 const cs = new catService()
 
@@ -37,13 +38,16 @@ const CatalogPage = () => {
 
 
     return (
-        <div className="CatalogPage page">
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="CatalogPage page">
             <CreateCategory setSelectedCat={setSelectedCat} editItem={selectedCat} updateList={setCats} visible={createCategory} close={() => setCreateCategory(false)}/>
-            <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
                     <div className="CatalogPage__body pageBody-content">
                         {
                             load ? (
@@ -71,7 +75,7 @@ const CatalogPage = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     )
 }
 

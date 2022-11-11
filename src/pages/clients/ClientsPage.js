@@ -11,7 +11,7 @@ import Push from './modals/push/Push';
 import Email from './modals/email/Email';
 import User from './modals/user/User'; 
 import Discount from './modals/discount/Discount';
-
+import {motion} from 'framer-motion';
 import { useDoubleTap } from 'use-double-tap';
 
 const mock = [
@@ -123,7 +123,13 @@ const ClientsPage = () => {
 
 
     return (
-        <div className="ClientsPage page">
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="ClientsPage page">
             <Push  visible={push} close={closePush}/>
             <Email visible={email} close={closeEmail}/>
             <User 
@@ -135,11 +141,8 @@ const ClientsPage = () => {
                 addDiscount={openDiscount}
                 />
             <Discount visible={discount} close={closeDiscount}/>
-            <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
                     <div className="ClientsPage__body pageBody-content">
                         <div className="ClientsPage__body_top">
                             <div className="ClientsPage__body_top_search">
@@ -190,7 +193,7 @@ const ClientsPage = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     )
 }
 

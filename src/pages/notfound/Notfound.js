@@ -3,21 +3,48 @@ import { useNavigate } from 'react-router-dom';
 import elon from '../../assets/img/elon.png';
 import Button from '../../components/Button/Button';
 import {BsChevronLeft} from 'react-icons/bs';
+import HeaderProfile from '../../components/HeaderProfile/HeaderProfile';
+import {motion} from 'framer-motion';
+import elonSmile from '../../assets/img/elon-smile.png';
+import { useState, useEffect } from 'react';
+
 
 const Notfound = () => {
     const nav = useNavigate();
-    
+    const [img, setImg] = useState(null)
+
+    useEffect(() => {
+        setImg(elon)
+    }, []) 
 
     return (
-        <div className="Notfound">
-            <div className="Notfound__icon">
-                <img src={elon} alt="" />
-            </div>
-            <div className="Notfound__text">Такой страницы либо нет либо в разработке</div>
-            <div className="Notfound__action">
-                <Button onClick={() => nav(-1)} text={'Вернуться назад'} before={<BsChevronLeft/>} justify={'center'} styles={{ paddingTop: 20, paddingBottom: 20}}/>
-            </div>
-        </div>
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="Notfound">
+            <main className="Main">
+                <div className="pageBody">
+                    <div className="pageBody-content Notfound">
+                        <div
+                            onMouseOver={e => {
+                                setImg(elonSmile)
+                            }} 
+                            onMouseLeave={e => {
+                                setImg(elon)
+                            }}
+                            className="Notfound__icon"
+                            >
+                            <img src={img} alt="" />
+                        </div>
+                        <div className="Notfound__text">Такой страницы либо нет либо в разработке</div>
+                    </div>
+                </div>
+            </main>
+            
+        </motion.div>
     )
 }
 

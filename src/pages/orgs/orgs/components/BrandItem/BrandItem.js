@@ -18,12 +18,11 @@ const BrandItem = ({
     const nav = useNavigate()
     
 
-
     return (
-        <div className="BrandItem">
-            <Link to={`/organizations/${ID}`} className="BrandItem__img">
-                <img src={LogoUrl} alt="" />
-            </Link>
+        <div className="BrandItem draggable">
+             <Link to={`/organizations/${ID}`} className="BrandItem__img">
+                    <img src={LogoUrl} alt="" />
+                </Link>
             <div className="BrandItem__action">
                 <Button
                     onClick={() => editModal(ID, ItemOrder, LogoUrl, MarkerID)}

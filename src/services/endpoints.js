@@ -1,7 +1,9 @@
-const BASE_DOMAIN = 'https://soultri.site/NewAdminPanel';
+export const BASE_DOMAIN = 'https://soultri.site/NewAdminPanel';
 
 
 const endpoints = {
+    //порядок
+
     // авторизация
     auth: `${BASE_DOMAIN}/auth/authorization`,
 
@@ -12,16 +14,16 @@ const endpoints = {
     deleteBrand: `${BASE_DOMAIN}/organisation/deleteBrand`,
     getOrgs: `${BASE_DOMAIN}/organisation/getOrganisations`,
     addOrg: `${BASE_DOMAIN}/organisation/addOrganisation`,
-    updateOrg: `${BASE_DOMAIN}/organisation/updateOrganisations`,
-    deleteOrg: `${BASE_DOMAIN}/organisation/deleteOrganisations`,
+    updateOrg: `${BASE_DOMAIN}/organisation/updateOrganisation`,
+    deleteOrg: `${BASE_DOMAIN}/organisation/deleteOrganisation`,
     getPols: `${BASE_DOMAIN}/organisation/polygons`,
     addPol: `${BASE_DOMAIN}/organisation/addPolygon`,
     editPol: `${BASE_DOMAIN}/organisation/editPolygon`,
     deletePol: `${BASE_DOMAIN}/organisation/deletePolygon`,
     getPay: `${BASE_DOMAIN}/organisation/payments`,
     addPay: `${BASE_DOMAIN}/organisation/addPayments`,
-    editPay: `${BASE_DOMAIN}/organisation/editPayments`,
-    deletePay: `${BASE_DOMAIN}/organisation/deletePayments`,
+    editPay: `${BASE_DOMAIN}/organisation/editPayment`,
+    deletePay: `${BASE_DOMAIN}/organisation/deletePayment`,
 
     //каталог
     getCats: `${BASE_DOMAIN}/catalog/categoryes`,
@@ -52,6 +54,10 @@ const endpoints = {
     addPriceMass: `${BASE_DOMAIN}/catalog/addPrice`,
     editPriceMass: `${BASE_DOMAIN}/catalog/editPrice`,
     deletePriceMass: `${BASE_DOMAIN}/catalog/deletePrice`,
+
+
+
+
 
 
 }

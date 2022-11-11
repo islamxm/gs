@@ -34,13 +34,15 @@ body {
 }
 #root {
     // height: 100%;
+    display: flex;
+
 
 }
 .page {
     display: flex;
     flex-direction: column;
     height: 100%;
-
+    width: 100%;
     .Header {
 
     }
@@ -81,3 +83,26 @@ body {
 .row-custom {
     margin-bottom: 20px;
 }
+.def-label {
+    font-size: 16px;
+    line-height: 19px;
+    color: #989898;
+}
+
+.draggable {
+    border: 2px dashed transparent;
+    transition: all .3s ease;
+}
+
+.draggable.dragStart {
+    opacity: 0;
+    
+}
+
+.draggable.dragOver {
+    border-color: var(--light_violet);
+    opacity: .5;
+    // opacity: .5;
+    // transform: translate(10px, -10px);
+}
+

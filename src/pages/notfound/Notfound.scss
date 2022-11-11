@@ -1,10 +1,11 @@
 .Notfound {
-    height: 100%;
+    height: calc(100vh - 80px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
+    width: 100%;
+    
     &__icon {
         width: 400px;
         height: 400px;

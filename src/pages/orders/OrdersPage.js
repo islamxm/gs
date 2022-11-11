@@ -6,7 +6,7 @@ import useContent from '../../hooks/useContent';
 import { useEffect } from 'react';
 import OrderInfo from './modals/OrderInfo/OrderInfo';
 import useModal from '../../hooks/useModal';
-
+import {motion} from 'framer-motion';
 const statusConst = {
     new: 'NEW',
     notpay: 'NOTPAY',
@@ -102,13 +102,16 @@ const OrdersPage = () => {
 
     
     return (
-        <div className="OrdersPage page">
+        <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="OrdersPage page">
             <OrderInfo visible={visible} close={hideModal}/>
-            <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
                     <div className="OrdersPage__body pageBody-content">
                         <div className="OrdersPage__body_table">
                             {
@@ -149,7 +152,7 @@ const OrdersPage = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </motion.div>
     )
 }
 

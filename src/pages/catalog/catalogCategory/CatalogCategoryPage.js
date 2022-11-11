@@ -11,7 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
-
+import {motion} from 'framer-motion';
 
 
 
@@ -46,13 +46,16 @@ const CatalogCategoryPage = () => {
     }, [token, categoryId])
     
     return (
-        <div className="CatalogCategoryPage page">
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.5}}
+            exit={{opacity: 0}}
+
+            className="CatalogCategoryPage page">
             <CreateSubcategory visible={createSubcategory} close={() => setCreateSubcategory(false)}/>
-            <HeaderProfile/>
             <main className="Main">
                 <div className="pageBody">
-                    <Sidebar/>
-                    <div className="spc"></div>
                     <div className="CatalogCategoryPage__body pageBody-content">
                         {
                             load ? (
@@ -97,7 +100,7 @@ const CatalogCategoryPage = () => {
                 </div>
                 
             </main>
-        </div>
+        </motion.div>
     )
 }
 

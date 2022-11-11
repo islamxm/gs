@@ -37,6 +37,13 @@
         }
     }
 
+    &__label.after {
+        .Checkbox__label_icon {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+    }
+
     &__label {
         display: flex;
         cursor: pointer;
