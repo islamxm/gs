@@ -279,7 +279,7 @@ const OrgsPage = () => {
            
                     {/* <div className="spc"></div> */}
                     <div className="OrgsPage__body pageBody-content">
-                        3 part
+                        
                         {
                             loadList ? (
                                 <Loader/>
