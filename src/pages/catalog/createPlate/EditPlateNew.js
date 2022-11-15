@@ -50,7 +50,7 @@ const os = new orgService();
 
 const EditPlateNew = () => {
     const {token} = useSelector(state => state)
-    const {categoryId, subcatrgoryId, plateId} = useParams()
+    const {categoryId, subcategoryId, plateId} = useParams()
     const [createdId, setCreatedId] = useState(null)
     const [saveLoad, setSaveLoad] = useState(false)
     const [delLoad, setDelLoad] = useState(false) 
@@ -176,7 +176,7 @@ const EditPlateNew = () => {
                 setAlList(res)
             })
         }
-    }, [plateId, token, categoryId, orgs, subcatrgoryId])
+    }, [plateId, token, categoryId, orgs, subcategoryId])
 
     const openAddAllergen = () => {
         setAddAllergen(true)
@@ -305,11 +305,13 @@ const EditPlateNew = () => {
                 
             }) 
         }
+        console.log(subcategoryId)
+        console.log(categoryId)
         data.append('ID', ID)
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
         data.append('ItemOrder', ItemOrder)
-        data.append('ParentID', subcatrgoryId ? subcatrgoryId : 0)
+        data.append('ParentID', subcategoryId ? subcategoryId : 0)
         data.append('CategoryID', categoryId)
         data.append('IsSubCategory', IsSubCategory)
         data.append('MaxCount', MaxCount)

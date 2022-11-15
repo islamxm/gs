@@ -30,7 +30,7 @@ const CatalogCategoryPage = () => {
     const [currentItem, setCurrentItem] = useState(null)
 
 
-
+    
     const toCreatePlate = () => {
         
         // if(subcategoryId) {
@@ -38,21 +38,18 @@ const CatalogCategoryPage = () => {
         // } else {
         //     nav(`/catalog/${categoryId}/createPlate`)
         // }
-        
         let data = new FormData()
-        console.log(subcategoryId)
         data.append('ParentID', subcategoryId ? subcategoryId : 0)
         data.append('CategoryID', categoryId)
-        data.append('IsSubCategory', '0')
+
         cs.addProd(token, data).then(res => {
+            
             if(subcategoryId) {
                 nav(`/catalog/${categoryId}/${subcategoryId}/editPlate/${res}/now`)
             } else {
                 nav(`/catalog/${categoryId}/editPlate/${res}/now`)
             }
         })
-
-        
     }
 
     const toEditPlate = (id) => {
