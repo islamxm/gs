@@ -386,7 +386,7 @@ const EditPlateNew = () => {
             if(LOCAL_STORAGE.getItem('gs-creating-plate')) {
                 console.log('coxранено')
             } else {
-                cs.delProd(token, {ID: plateId}).then(res => {
+                cs.delProd(token, {ID: plateId, Delete: 'hard'}).then(res => {
                     console.log(res)
                 }).finally(_ => {
                     window.location.reload()
