@@ -27,6 +27,7 @@ import OrgsNewPage from "../pages/orgs/orgsCreate/OrgsNewPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateBrands } from "../store/actions";
+import EditPlateNew from "../pages/catalog/createPlate/EditPlateNew";
 const App = () => {
     const loc = useLocation()
     const {token, settings} = useSelector(state => state)
@@ -63,7 +64,9 @@ const App = () => {
                 <Route path="/catalog/:categoryId/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/>
                 <Route path="/catalog/:categoryId/:subcategoryId/createPlate" element={<CheckAuth><CreatePlatePage/></CheckAuth>}/>
                 <Route path="/catalog/:categoryId/editPlate/:plateId" element={<CheckAuth><EditPlatePage/></CheckAuth>}/>
+                <Route path="/catalog/:categoryId/editPlate/:plateId/now" element={<CheckAuth><EditPlateNew/></CheckAuth>}/>
                 <Route path="/catalog/:categoryId/:subcategoryId/editPlate/:plateId" element={<CheckAuth><EditPlatePage/></CheckAuth>}/>
+                <Route path="/catalog/:categoryId/:subcategoryId/editPlate/:plateId/now" element={<CheckAuth><EditPlateNew/></CheckAuth>}/>
                 <Route path="/catalog/:categoryId" element={<CheckAuth><CatalogCategoryPage/></CheckAuth>}/>
                 <Route path="/catalog/:categoryId/:subcategoryId" element={<CheckAuth><CatalogCategoryPage/></CheckAuth>}/>
                 <Route path="/organizations/:brandId" element={<CheckAuth><OrgsPage/></CheckAuth>}/>

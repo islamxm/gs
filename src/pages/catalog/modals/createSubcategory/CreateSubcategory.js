@@ -54,7 +54,6 @@ const CreateSubcategory = ({visible, close, update, data}) => {
         body.append('IsSubCategory', '1')
         body.append('ParentID', subcategoryId ? subcategoryId : 0)
         body.append('CategoryID', categoryId)
-
         if(!data) {
             cs.addProd(token, body).then(res => {
                 console.log(res)
@@ -75,7 +74,6 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                 closeHandle()
             })
         }
-        
     }
 
     const onDelete = () => {

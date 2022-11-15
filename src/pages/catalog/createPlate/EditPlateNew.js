@@ -48,7 +48,7 @@ const delTypes = {
 const cs = new catService();
 const os = new orgService();
 
-const EditPlatePage = () => {
+const EditPlateNew = () => {
     const {token} = useSelector(state => state)
     const {categoryId, subcatrgoryId, plateId} = useParams()
     const [createdId, setCreatedId] = useState(null)
@@ -351,7 +351,9 @@ const EditPlatePage = () => {
         }
 
         cs.editProd(token, data).then(res => {
-            console.log(res)
+            if(res) {
+                nav(-1, {replace: true})
+            }
         }).finally(_ => setSaveLoad(false))
     }
 
@@ -368,6 +370,29 @@ const EditPlatePage = () => {
             setDelLoad(false)
         })
     }
+
+    useEffect(() => {
+        if(Picture?.length == 0 || !Name) {
+            LOCAL_STORAGE.removeItem('gs-creating-plate')
+        } else {
+            LOCAL_STORAGE.setItem('gs-creating-plate', '1')
+        }
+    }, [Picture, Name])
+
+    useEffect(() => {
+        return () => {
+            if(LOCAL_STORAGE.getItem('gs-creating-plate')) {
+                console.log('coxранено')
+            } else {
+                cs.delProd(token, {ID: plateId}).then(res => {
+                    console.log(res)
+                }).finally(_ => {
+                    window.location.reload()
+                    LOCAL_STORAGE.removeItem('gs-creating-plate')
+                })
+            }
+        }
+    }, [])
 
 
 
@@ -658,4 +683,4 @@ const EditPlatePage = () => {
     )
 }
 
-export default EditPlatePage;
+export default EditPlateNew;
