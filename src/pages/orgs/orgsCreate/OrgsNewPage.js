@@ -561,7 +561,7 @@ const OrgsNewPage = () => {
             if(LOCAL_STORAGE.getItem('gs-creating-org')) {
                 console.log('сохранено')
             } else {
-                os.deleteOrg(token, {ID: orgId}).then(res => {
+                os.deleteOrg(token, {ID: orgId, Delete: 'hard'}).then(res => {
                     console.log(res)
                 }).finally(_ => {
                     window.location.reload()
