@@ -80,6 +80,7 @@ class catService {
     }
 
     getProds = async (token, body) => {
+        
         try {
             let res = await fetch(endpoints.getProds, {
                 method: 'POST',
@@ -97,6 +98,7 @@ class catService {
     }
 
     addProd = async (token, body) => {
+     
         try {
             let res = await fetch(endpoints.addProd, {
                 method: 'POST',
@@ -407,6 +409,38 @@ class catService {
                 },
             })
 
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    addPlateImg = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.addPlateImg, {
+                method: 'POST',
+                body,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    deletePlateImg = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.deletePlateImg, {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             return await checkAuth(res)
         } catch(err) {
             console.log(err)

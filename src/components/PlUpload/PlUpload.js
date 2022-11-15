@@ -1,7 +1,17 @@
 import './PlUpload.scss';
 import '../Pl/Pl.scss';
 
-const PlUpload = ({style, text, onClick, prev, shadow, onChange, id, accept, multiple}) => {
+const PlUpload = ({
+    style, 
+    text, 
+    onClick, 
+    prev, 
+    shadow, 
+    onChange, 
+    id, 
+    accept, 
+    multiple
+}) => {
     return (
         <div className={"PlUpload Pl" + (shadow ? ' shadow ' : '') + (prev ? ' nopadding ' : '')} style={style}>
             {

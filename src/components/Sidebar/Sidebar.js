@@ -1,6 +1,6 @@
 import './Sidebar.scss';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import catService from '../../services/catService';
 import { useEffect, useState, useRef } from 'react';
 import SidebarItem from './components/SidebarItem/SidebarItem';
@@ -20,35 +20,42 @@ import BasketIcon from '../../icons/BasketIcon/BasketIcon';
 import IntegrIcon from '../../icons/IntegrIcon/IntegrIcon';
 import TrashIcon from '../../icons/TrashIcon/TrashIcon';
 import {BsBag} from 'react-icons/bs';
+import {catalogUpdate, handleSidebarOpen} from '../../store/actions'
+
 const cs = new catService();
 
-const Sidebar = ({updateCat}) => {
-    const {token} = useSelector(state => state)
-    const [cats, setCats] = useState([])
+const Sidebar = () => {
+    const {token, catalog} = useSelector(state => state)
     const [catLoad, setCatLoad] = useState(false)
+    const [isHide, setIsHide] = useState(true)
+    const dispatch = useDispatch();
 
-
-    const [isHide, setIsHide] = useState(false)
 
     useEffect(() => {
         setCatLoad(true)
         if(token) {
             cs.getCats(token, {OrganisationID: 0}).then(res => {
-                setCats(res)
+                // setCats(res)
+                dispatch(catalogUpdate(res))
             }).finally(_ => {
                 setCatLoad(false)
             })
-            
         }
     }, [token])
-
-
 
 
 
     const toggleSidebar = () => {
         setIsHide(!isHide)
     }
+
+    useEffect(() => {
+        if(isHide) {
+            dispatch(handleSidebarOpen(false))
+        } else {
+            dispatch(handleSidebarOpen(true))
+        }
+    }, [isHide])
 
     return (
         <>
@@ -81,7 +88,7 @@ const Sidebar = ({updateCat}) => {
                     toggleSidebar={setIsHide}
                     name={'Каталог'}
                     link={'/catalog'}
-                    isSubmenu={true}
+                    isSubmenu={catalog?.length > 0 ? true : false}
                     icon={<CatalogIcon size={22}/>}
                 >   
                     {
@@ -91,8 +98,8 @@ const Sidebar = ({updateCat}) => {
                             </div>
                             
                         ) : (
-                            cats && cats.length > 0 ? (
-                                cats.map((item, index) => (
+                            catalog && catalog.length > 0 ? (
+                                catalog.map((item, index) => (
                                     <SidebarItem
                                         key={index}
                                         labelHide={isHide}

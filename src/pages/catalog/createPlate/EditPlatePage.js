@@ -28,6 +28,10 @@ import TimeSelect from '../../orgs/orgsCreate/components/timeSelect/TimeSelect';
 import timeTransform from './components/timeTransform';
 import RecList from './components/RecList/RecList';
 import {motion} from 'framer-motion';
+import Loader from '../../../components/Loader/Loader';
+
+const LOCAL_STORAGE = window.localStorage;
+
 const picListTransform = (index, list, func) => {
     const pr = list;
     const rm = pr.splice(index, 1)
@@ -46,10 +50,14 @@ const os = new orgService();
 
 const EditPlatePage = () => {
     const {token} = useSelector(state => state)
-    const {categoryId, plateId} = useParams()
+    const {categoryId, subcatrgoryId, plateId} = useParams()
     const [createdId, setCreatedId] = useState(null)
+    const [saveLoad, setSaveLoad] = useState(false)
+    const [delLoad, setDelLoad] = useState(false) 
+    const [pageLoad, setPageLoad] = useState(true)
     const nav = useNavigate();
 
+    const [ID, setID] = useState(null)
     const [IIkoID, setIIkoID] = useState('')
     const [CanOverwriteByIIko, setCanOverwriteByIIko] = useState(0)
     const [ItemOrder, setItemOrder] = useState(0)
@@ -88,11 +96,19 @@ const EditPlatePage = () => {
     const [addAllergen, setAddAllergen] = useState(false);
     const [editAllergen, setEditAllergen] = useState(false);
 
+    
+
     useEffect(() => {
         if(plateId && token && categoryId && orgs.length > 0) {
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 const thisPlate = res.find(item => item.ID == plateId);
-                console.log(thisPlate)
+                if(thisPlate?.Pictures?.length > 0 || thisPlate?.Name) {
+                    LOCAL_STORAGE.setItem('gs-creating-plate', '1')
+                } else {
+                    LOCAL_STORAGE.removeItem('gs-creating-plate')
+                }
+                setID(thisPlate.ID)
+                
                 setIIkoID(thisPlate.IIkoID)
                 setCanOverwriteByIIko(thisPlate.CanOverwriteByIIko)
                 setItemOrder(thisPlate.ItemOrder)
@@ -108,27 +124,26 @@ const EditPlatePage = () => {
                 setProteins(thisPlate.Proteins)
                 setCountAdditions(thisPlate.CountAdditions)
                 setAllowedDeliveryTypes([thisPlate.AllowedDeliveryTypes])
-                // setPicture(thisPlate.Picture)
+                setPicture(thisPlate.Pictures)
                 setPicPrevs(thisPlate.Pictures.map(item => item.Picture))
                 setMass(thisPlate.Prices[0]?.Mass)
                 setPrice(thisPlate.Prices[0]?.Price)
                 setSalePrice(thisPlate.Prices[0]?.SalePrice)
                 setIsHideInOrg(thisPlate.HiddenInOrganisations ? true : false)
                 setIsDynamicTimetable(thisPlate.IsDynamicTimetable)
-                if(thisPlate.HiddenInOrganisations) {
+                if(thisPlate.HiddenInOrganisations && thisPlate.HiddenInOrganisations != '/') {
                     let array = thisPlate.HiddenInOrganisations.split('//')
                     setOrgsList(array.map((item, index) => {
                         if(index == 0) {
-                            
                             return {
-                                ID: item.slice(1, 2),
-                                value: orgs.find(i => i.ID == item.slice(1,2))?.value
+                                ID: item.replace(/\//g,''),
+                                value: orgs.find(i => i.ID == item.replace(/\//g,''))?.value
                             }
                         }
                         if(index == array.length - 1) {
                             return {
                                 ID: item.slice(0, -1),
-                                value: orgs.find(i => i.ID == item.slice(0,-1))?.value
+                                value: orgs.find(i => i.ID == item.replace(/\//g,''))?.value
                             }
                         }
                         return {
@@ -149,7 +164,7 @@ const EditPlatePage = () => {
                     timeTransform(thisPlate.SunTime, 6),
                 ]);
                 
-            })
+            }).finally(_ => setPageLoad(false))
 
             cs.getPriceMass(token, {ItemID: plateId}).then(res => {
                 setMassList(res)
@@ -161,7 +176,7 @@ const EditPlatePage = () => {
                 setAlList(res)
             })
         }
-    }, [plateId, token, categoryId, orgs])
+    }, [plateId, token, categoryId, orgs, subcatrgoryId])
 
     const openAddAllergen = () => {
         setAddAllergen(true)
@@ -179,20 +194,45 @@ const EditPlatePage = () => {
         setEditAllergen(false)
     }
 
-    const deleteImage = (index) => {
-        const pr = Picture;
-        const rm = pr.splice(index, 1)
-        setPicture([...pr])
+    const deleteImage = (ID) => {
+        cs.deletePlateImg(token, {ID: ID}).then(res => {
+            console.log(res)
+            if(res.error == 0) {
+                message.success('Картинка удалена')
+                const rm = Picture;
+                const m = rm.splice(rm.findIndex(item => item.ID == ID), 1)
+                setPicture([...rm])
+
+            } else {
+                message.error('Произошла ошибка, повторите позже')
+            }
+        })
     }
 
     const uploadImages = (e) => {
-        if(e.target.files.length > 10 || Picture.length == 10) {
+        const pics = new FormData();
+        pics.append('ItemID', ID)
+        if(e.target.files.length + Picture.length > 10) {
             message.error('Можно загрузить не более 10 изображений')
         } else {
-            setPicture(state => [...state, ...e.target.files])
+            const uploadedPics = [...e.target.files];
+            uploadedPics.forEach((i, index) => {
+                if(index == 0) {
+                    pics.append('image', i)
+                } else {
+                    pics.append(`image_${index}`, i)
+                }
+            })
+            cs.addPlateImg(token, pics).then(res => {
+                if(!res?.error) {
+                    setPicture(res)
+                    message.success('Картинка добавлена')
+                } else {
+                    message.error('Произошла ошибка, повторите еще раз')
+                }
+            })
         }
     }
-
     
 
     //получаем список организаций
@@ -215,6 +255,11 @@ const EditPlatePage = () => {
     const addOrg = () => {
         setOrgsList(state => [...state, orgs[0]])
     }  
+    const delOrg = (index) => {
+        const pr = orgsList;
+        const m = pr.splice(index, 1)
+        setOrgsList([...pr])
+    }
     const selectOrg = (value, index, ID) => {
         let ur = orgsList;
         let p = ur.splice(index, 1, {value: value, ID})
@@ -240,6 +285,7 @@ const EditPlatePage = () => {
 
     //создаем блюдо
     const editPlate = () => {
+        LOCAL_STORAGE.setItem('gs-creating-plate', '1')
         const data = new FormData()
         let weekArray = []
         if(weekTimes.length > 0) {
@@ -259,10 +305,11 @@ const EditPlatePage = () => {
                 
             }) 
         }
+        data.append('ID', ID)
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
         data.append('ItemOrder', ItemOrder)
-        data.append('ParentID', 0)
+        data.append('ParentID', subcatrgoryId ? subcatrgoryId : 0)
         data.append('CategoryID', categoryId)
         data.append('IsSubCategory', IsSubCategory)
         data.append('MaxCount', MaxCount)
@@ -286,10 +333,12 @@ const EditPlatePage = () => {
         data.append('FriTime', weekArray[4])
         data.append('SatTime', weekArray[5])
         data.append('SunTime', weekArray[6])
+        // data.append('ThumbnailPicture', Picture[0])
         if(orgsList.length > 0) {
             data.append('HiddenInOrganisations', orgsList.map(item => `/${item.ID}`).join('/') + '/')
+            console.log(orgsList.map(item => `/${item.ID}`).join('/') + '/')
         } else {
-            data.append('HiddenInOrganisations', 3)
+            data.append('HiddenInOrganisations', '')
         }
         if(AllowedDeliveryTypes.length == 0) {
             data.append('AllowedDeliveryTypes', '3')
@@ -300,20 +349,67 @@ const EditPlatePage = () => {
                 data.append('AllowedDeliveryTypes', AllowedDeliveryTypes[0])
             }
         }
-        Picture.forEach(i => {
-            data.append('Picture', i)
-        })
+
+        cs.editProd(token, data).then(res => {
+            console.log(res)
+        }).finally(_ => setSaveLoad(false))
     }
 
     const deletePlate = () => {
+        setDelLoad(true)
         cs.delProd(token, {ID: plateId}).then(res => {
-            console.log(res)
+            if(res) {
+                message.success('Блюдо успешно удалено')
+                nav(-1, {replace: true})
+            } else {
+                message.error('Произошла ошибка')
+            }
         }).finally(_ => {
-            message.success('Блюдо успешно удалено')
-            nav(-1, {replace: true})
+            setDelLoad(false)
         })
     }
 
+    useEffect(() => {
+        if(Picture?.length == 0 || !Name) {
+            LOCAL_STORAGE.removeItem('gs-creating-plate')
+        } else {
+            LOCAL_STORAGE.setItem('gs-creating-plate', '1')
+        }
+    }, [Picture, Name])
+
+    useEffect(() => {
+        return () => {
+            if(LOCAL_STORAGE.getItem('gs-creating-plate')) {
+                console.log('coxранено')
+            } else {
+                cs.delProd(token, {ID: plateId}).then(res => {
+                    console.log(res)
+                }).finally(_ => {
+                    window.location.reload()
+                    LOCAL_STORAGE.removeItem('gs-creating-plate')
+                })
+            }
+        }
+    }, [])
+
+
+
+
+
+    if(pageLoad) {
+        return (
+            <div className="page">
+                <main className="Main">
+                    <div className="pageBody">
+                        <Loader/>
+                    </div>
+                </main>
+            </div>
+        )
+    }
+
+
+    
     return (
         <motion.div 
             initial={{opacity: 0}}
@@ -323,34 +419,47 @@ const EditPlatePage = () => {
             className="CreatePlatePage page">
             {/* <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
             <EditAlrgn visible={editAllergen} close={closeEditAllergen}/> */}
-            <HeaderProfile/>
+            {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
-                    {/* <Sidebar/> */}
-                    <div className="spc"></div>
                     <div className="CreatePlatePage__body pageBody-content">
+                        
                         <Row gutter={[25, 25]} justify={'space-between'}>
                             <Col span={12}>
                                 <Row className="row-custom">
                                     <div className="panel" style={{display: 'flex', overflowX:'auto'}}>
                                         {
-                                            picPrevs && picPrevs.length > 0 ? (
-                                                picPrevs.map((item, index) => (
+                                            Picture && Picture.length > 0 ? (
+                                                Picture.map((item, index) => (
                                                     <PicItem
                                                         key={index}
-                                                        image={item}
-                                                        remove={() => deleteImage(index)}
+                                                        image={item.Picture}
+                                                        remove={() => deleteImage(item.ID)}
                                                         />
                                                 ))
                                             ) : null
                                         }
                                         {
                                             Picture?.length < 10 ? (
-                                                <PlUpload multiple={true} id={'editPlatePics'} onChange={(e) => uploadImages(e)} style={{width: 200, height: 200, flex: '0 0 auto', backgroundColor: '#F8F8F8'}} text={'Добавить картинку'}/>
+                                                <PlUpload accept={'.png, .jpg, .jpeg, .webp'} multiple={true} id={'editPlatePics'} onChange={(e) => uploadImages(e)} style={{width: 200, height: 200, flex: '0 0 auto', backgroundColor: '#F8F8F8'}} text={'Добавить картинку'}/>
                                             ) : null
                                         }
                                         
                                     </div>
+                                </Row>
+                                <Row className="row-custom">
+                                    <Checkbox
+                                        id={'editOverwriteIiko'}
+                                        text={'Разрешить iiko перезаписывать блюдо'}
+                                        checked={CanOverwriteByIIko == '1'}
+                                        onChange={e => {
+                                            if(e.target.checked) {
+                                                setCanOverwriteByIIko('1')
+                                            } else {
+                                                setCanOverwriteByIIko('0')
+                                            }
+                                        }}
+                                        />
                                 </Row>
                                 <Row className="row-custom">
                                     <Input
@@ -485,6 +594,7 @@ const EditPlatePage = () => {
                                                             key={index}
                                                             selectItem={selectOrg} 
                                                             afterIcon 
+                                                            del={delOrg}
                                                             index={index}
                                                             value={item.value} 
                                                             list={orgs}
@@ -526,17 +636,19 @@ const EditPlatePage = () => {
 
                                 <Row className="row-custom">
                                     <Button
-                                        disabled={!Name || !IIkoID}
+                                        disabled={!Name}
                                         onClick={editPlate} 
                                         text={'Сохранить'} 
                                         justify={'flex-start'} 
                                         before={<BsTrash/>} 
+                                        load={saveLoad}
                                         styles={{width: '100%'}}/>
                                 </Row>
                                 <Row className="row-custom">
                                     <Button
                                         onClick={deletePlate}
                                         variant={'danger'}
+                                        load={delLoad}
                                         text={'Удалить блюдо'} 
                                         justify={'flex-start'} 
                                         before={<BsTrash/>} 

@@ -11,7 +11,7 @@ class orgService {
 
     //БРЕНДЫ
     getBrands = async (token) => {
-        console.log(endpoints.getBrands)
+   
         try {
             let res = await fetch(endpoints.getBrands, {
                 method: 'GET',
@@ -97,18 +97,22 @@ class orgService {
     }
 
     addOrg = async (token, body) => {
-        console.log(endpoints.addOrg)
         try {
             let res = await fetch(endpoints.addOrg, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
+                    'Accept': '*/*',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'Connection': 'keep-alive',
+                    
                 },
                 body,
                 
             })
 
-            return await checkAuth(res)
+            return await res.json()
+            // return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }

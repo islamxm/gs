@@ -6,7 +6,7 @@ import {BsTrash} from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import TimePicker from 'react-time-picker';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
-
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 const EditTime = ({
     editIndex, 
     visible, 
@@ -149,9 +149,9 @@ const EditTime = ({
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <div className={"Modal__form_time" + (disabled ? ' disabled ' : '')}>
-                        <TimePicker disabled={disabled}  hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"} minTime={'08:00:00'} maxTime={'23:00:00'}   disableClock format='HH:mm' onChange={setStartVal} value={startVal} />
+                        <TimePicker disabled={disabled}  hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"}   disableClock format='HH:mm' onChange={setStartVal} value={startVal} />
                         <span className='Modal__form_time_space'>-</span>
-                        <TimePicker disabled={disabled} hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"} minTime={'08:00:00'} maxTime={'23:00:00'}  disableClock format='HH:mm' onChange={setEndVal} value={endVal} />
+                        <TimePicker disabled={disabled} hourPlaceholder='00' minutePlaceholder='00' className={"Modal__form_time_item"}  disableClock format='HH:mm' onChange={setEndVal} value={endVal} />
                     </div>
                 </div>
                
@@ -173,7 +173,11 @@ const EditTime = ({
                     )
                 }
                 <div className="Modal__form_action" style={{marginTop: 50}}>
-                    <Button onClick={handleSave} text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'} styles={{paddingTop: 20, paddingBottom: 20}}/>
+                    <Button 
+                        onClick={handleSave} 
+                        text={'Сохранить'} 
+                        before={<SaveIcon size={16} color={'#fff'}/>} 
+                        justify={'flex-start'}/>
                 </div>
             </div>
         </Modal>

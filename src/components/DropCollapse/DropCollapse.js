@@ -23,6 +23,7 @@ const DropCollapse = ({
     onChange,
     checkboxValue,
     textAlign,
+    delText,
     id 
 }) => {
     const [listActive, setListActive] = useState(false);
@@ -108,7 +109,7 @@ const DropCollapse = ({
                     {
                         del ? (
                             <div className="DropCollapse__list_ex">
-                                <Button onClick={() => del(index, id)} styles={{width: '100%'}} before={<BsTrash/>} variant={'danger'} text={'Удалить способ оплаты'}/>
+                                <Button onClick={() => del(index, id)} styles={{width: '100%'}} before={<BsTrash/>} variant={'danger'} text={'Удалить'}/>
                             </div>
                         ) : null
                     }

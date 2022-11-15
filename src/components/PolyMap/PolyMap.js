@@ -42,7 +42,14 @@ const PolyMap = ({setSelected, readOnly, polyCoords}) => {
 
     useEffect(() => {
         if (!draw && ref.current && !map && !poly && !polyCoords && window?.google?.maps) {
-            setMap(new window.google.maps.Map(ref.current, {center: {lat: 24.886, lng: -70.268 }, zoom: 9, panControl:false, zoomControl: false, scaleControl: false} ));   
+            setMap(new window.google.maps.Map(
+                ref.current, 
+                {
+                    center: {lat: 24.886, lng: -70.268 }, 
+                    zoom: 13, 
+                    disableDefaultUI:true,
+                } 
+            ));   
             const triangleCoords = [
                 { lat: 25.774, lng: -80.19 },
                 { lat: 18.466, lng: -66.118 },
@@ -51,7 +58,9 @@ const PolyMap = ({setSelected, readOnly, polyCoords}) => {
             setPoly(new window.google.maps.Polygon({
                 path: triangleCoords,
                 editable: true,
-                draggable: true
+                draggable: true,
+                strokeColor : '#FD3F3E',
+                fillColor: '#F09797'
             }))
 
 
@@ -62,14 +71,23 @@ const PolyMap = ({setSelected, readOnly, polyCoords}) => {
             
         }
         if(!draw && ref.current && !map && !poly && polyCoords && window?.google?.maps) {
-            setMap(new window.google.maps.Map(ref.current, {center: {
-                lat: polyCoords[0].lat, 
-                lng: polyCoords[0].lng
-            }, zoom: 9, panControl:false, zoomControl: false, scaleControl: false} ));   
+            setMap(new window.google.maps.Map(
+                ref.current, 
+                {
+                    center: {
+                        lat: polyCoords[0].lat, 
+                        lng: polyCoords[0].lng
+                    }, 
+                    zoom: 13, 
+                    disableDefaultUI:true
+                } 
+            ));   
             setPoly(new window.google.maps.Polygon({
                 path: polyCoords,
                 editable: true,
-                draggable: true
+                draggable: true,
+                strokeColor : '#FD3F3E',
+                fillColor: '#F09797'
             }))
             // setDraw(new window.google.maps.drawing.DrawingManager({
             //     drawingMode: window.google.maps.drawing.OverlayType.POLYGON,
@@ -84,7 +102,7 @@ const PolyMap = ({setSelected, readOnly, polyCoords}) => {
             map.setOptions({center: { 
                 lat: poly.getPath().getArray()[0].lat(), 
                 lng: poly.getPath().getArray()[0].lng()
-            }, zoom: 9})
+            }, zoom: 13})
             poly.setMap(map)
             // draw.setMap(map)
             if(setSelected) {

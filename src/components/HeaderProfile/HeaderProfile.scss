@@ -17,10 +17,15 @@
         padding: 0 20px;
     }
 
+    &__logo.hide {
+        width: 70px;
+    }
+
     &__logo {
         width: 335px;
         height: 50px;
         flex: 0 0 auto;
+        transition: all .3s ease;
         
         img {
             
@@ -42,7 +47,11 @@
             color: #000;
             display: flex;
             align-items: center;
+            color: var(--violet);
+            font-size: 22px;
+            line-height: 22px;
 
+            
             &_icon {
                 line-height: 22px;
                 display: flex;

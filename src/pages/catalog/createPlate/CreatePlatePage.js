@@ -26,7 +26,9 @@ import weektimes from './components/weektimes';
 import TimeSelect from '../../orgs/orgsCreate/components/timeSelect/TimeSelect';
 import RecList from './components/RecList/RecList';
 import {motion} from 'framer-motion';
-
+import pageEnterAnimProps from '../../../funcs/pageEnterAnimProps';
+import SaveIcon from '../../../icons/SaveIcon/SaveIcon';
+import { useNavigate } from 'react-router-dom';
 
 const picListTransform = (index, list, func) => {
     const pr = list;
@@ -45,10 +47,12 @@ const cs = new catService();
 const os = new orgService();
 
 const CreatePlatePage = () => {
+    const nav = useNavigate()
     const {token} = useSelector(state => state)
-    const {categoryId} = useParams()
+    const {categoryId, subcategoryId} = useParams()
     const [createdId, setCreatedId] = useState(null)
-    const [saveLoad, setSaveLoad] = useState(true)
+    const [saveLoad, setSaveLoad] = useState(false)
+    const [delLoad, setDelLoad] = useState(false)
 
     const [IIkoID, setIIkoID] = useState('')
     const [CanOverwriteByIIko, setCanOverwriteByIIko] = useState(0)
@@ -82,6 +86,7 @@ const CreatePlatePage = () => {
     const [editAllergen, setEditAllergen] = useState(false);
 
 
+
     const openAddAllergen = () => {
         setAddAllergen(true)
     }
@@ -108,7 +113,6 @@ const CreatePlatePage = () => {
     }
 
     const uploadImages = (e) => {
-        
         if(e.target.files.length > 10 || Picture.length == 10) {
             message.error('Можно загрузить не более 10 изображений')
         } else {
@@ -140,6 +144,7 @@ const CreatePlatePage = () => {
     const addOrg = () => {
         setOrgsList(state => [...state, orgs[0]])
     }  
+
     const selectOrg = (value, index, ID) => {
         let ur = orgsList;
         let p = ur.splice(index, 1, {value: value, ID})
@@ -188,9 +193,9 @@ const CreatePlatePage = () => {
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
         data.append('ItemOrder', ItemOrder)
-        data.append('ParentID', 0)
+        data.append('ParentID', subcategoryId ? subcategoryId : 0)
         data.append('CategoryID', categoryId)
-        data.append('IsSubCategory', IsSubCategory)
+        data.append('IsSubCategory', '0')
         data.append('MaxCount', MaxCount)
         data.append('Name', Name)
         data.append('IsHit', IsHit)
@@ -225,14 +230,18 @@ const CreatePlatePage = () => {
                 data.append('AllowedDeliveryTypes', AllowedDeliveryTypes[0])
             }
         }
-        Picture.forEach(i => {
-            data.append('Picture', i)
+        Picture.forEach((i, index) => {
+            if(index == 0) {
+                data.append(`Picture`, i)
+            } else {
+                data.append(`Picture_${index}`, i)
+            }
         })
 
         setSaveLoad(true)
         cs.addProd(token, data).then(res => {
             if(res) {
-                message.success('Блюдо создано')
+                message.success('Блюдо создано, добавьте дополнительные свойства')
                 setCreatedId(res)
             } else {
                 message.error('Произошла ошибка, повторите еще раз')
@@ -243,13 +252,25 @@ const CreatePlatePage = () => {
         
     }
 
+    //удаляем блюдо
+    const deletePlate = () => {
+        setDelLoad(true)
+        cs.delProd(token, {ID: createdId, Delete: 'hard'}).then(res => {
+            if(res) {
+                nav(-1, {replace: true})
+                message.success('Блюдо удалено')
+            } else {
+                message.error('Произошла ошибка')
+            }
+        }).finally(_ => {
+            setDelLoad(false)
+        })
+    }
+
+
     return (
         <motion.div 
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            transition={{duration: 0.5}}
-            exit={{opacity: 0}}
-
+            {...pageEnterAnimProps}
             className="CreatePlatePage page">
             <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
             <EditAlrgn visible={editAllergen} close={closeEditAllergen}/>
@@ -450,15 +471,29 @@ const CreatePlatePage = () => {
                                 <Row className='row-custom'>
                                     <TimeSelect plate={true} save={saveTime} list={weekTimes}/>
                                 </Row>
-
+                                
                                 <Row className="row-custom">
-                                    <Button
-                                        disabled={!Name || !IIkoID || Picture.length == 0}
-                                        onClick={createPlate} 
-                                        text={'Сохранить'} 
-                                        justify={'flex-start'} 
-                                        before={<BsTrash/>} 
-                                        styles={{width: '100%'}}/>
+                                    {
+                                        createdId ? (
+                                            <Button
+                                            text={'Удалить блюдо'} 
+                                            justify={'flex-start'} 
+                                            variant={'danger'}
+                                            onClick={deletePlate}
+                                            before={<BsTrash/>} 
+                                            load={delLoad}
+                                            styles={{width: '100%'}}/>
+                                        ) : (
+                                            <Button
+                                                disabled={!Name || !IIkoID}
+                                                onClick={createPlate} 
+                                                text={'Сохранить'} 
+                                                load={saveLoad}
+                                                justify={'flex-start'} 
+                                                before={<SaveIcon size={16} color={'#fff'}/>} 
+                                                styles={{width: '100%'}}/>
+                                        )
+                                    }
                                 </Row>
                             </Col>
                             {

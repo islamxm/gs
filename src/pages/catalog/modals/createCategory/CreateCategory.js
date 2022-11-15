@@ -7,20 +7,17 @@ import DropCollapse from '../../../../components/DropCollapse/DropCollapse';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
 import {BsTrash} from 'react-icons/bs';
 import Pl from '../../../../components/Pl/Pl';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import catService from '../../../../services/catService';
 import orgService from '../../../../services/orgService';
-// orgsMock = [
-//     {
-//         value: 'Ресторан 1'
-//     },
-    
-// ]
+import { catalogUpdate } from '../../../../store/actions';
+
 const os = new orgService()
 const cs = new catService()
 
 const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) => {
     const {token} = useSelector(state => state)
+    const dispatch = useDispatch();
     const [Name, setName] = useState('')
     const [ID, setID] = useState('')
     const [IIkoID, setIIkoID] = useState('')
@@ -56,25 +53,25 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
         }
     }, [token])
 
+
     useEffect(() => {
         if(editItem && orgs?.length > 0) {
             setName(editItem.Name)
             setIIkoID(editItem.IIkoID)
-            setIsHideInOrg(editItem.HiddenInOrganisations ? true : false)
-            if(editItem.HiddenInOrganisations) {
+            setIsHideInOrg(editItem.HiddenInOrganisations && editItem.HiddenInOrganisations != '/' ? true : false)
+            if(editItem.HiddenInOrganisations && editItem.HiddenInOrganisations != '/') {
                 let array = editItem.HiddenInOrganisations.split('//')
                 setOrgsList(array.map((item, index) => {
-                    if(index == 0) {
-                        
+                    if(index == 0) { 
                         return {
-                            ID: item.slice(1, 2),
-                            value: orgs.find(i => i.ID == item.slice(1,2))?.value
+                            ID: item.replace(/\//g,''),
+                            value: orgs.find(i => i.ID == item.replace(/\//g,''))?.value
                         }
                     }
                     if(index == array.length - 1) {
                         return {
-                            ID: item.slice(0, -1),
-                            value: orgs.find(i => i.ID == item.slice(0,-1))?.value
+                            ID: item.replace(/\//g,''),
+                            value: orgs.find(i => i.ID == item.replace(/\//g,''))?.value
                         }
                     }
                     return {
@@ -114,22 +111,22 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
         }
     }
 
-
+  
 
 
     const createCat = () => {
         setLoad(true)
+        console.log(orgsList)
         const data = {
             // OrganisationID: '',
             IIkoID,
             CanOverwriteByIIko,
-            ItemOrder,
             Name,
-            HiddenInOrganisations: orgsList.map(item => `/${item.ID}`).join('/') + '/',
+            HiddenInOrganisations: orgsList.length > 0 ? orgsList.map(item => `/${item.ID}`).join('/') + '/' : '',
             AllowedDeliveryTypes
         }
         cs.addCat(token, data).then(res => {
-            console.log(res)
+            dispatch(catalogUpdate(res))
             updateList(res)
         }).finally(_ => {
             setLoad(false)
@@ -141,6 +138,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
         setDelLoad(true)
         cs.delCat(token, {ID}).then(res => {
             updateList(res)
+            dispatch(catalogUpdate(res))
         }).finally(_ => {
             setDelLoad(false)
             handleClose()
@@ -149,6 +147,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
 
     const editCat = () => {
         setLoad(true)
+        console.log(orgsList)
         const data = {
             ID,
             IIkoID,
@@ -169,7 +168,15 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
 
     return (
         <Modal className='Modal' open={visible} width={700} onCancel={handleClose}>
-            <h2 className="Modal__head">Добавить категорию</h2>
+            <h2 className="Modal__head">
+                {
+                    editItem ? (
+                        'Редактировать категорию'
+                    ) : (
+                        'Добавить категорию'
+                    )
+                }
+            </h2>
             <form className="Modal__form">
                 <div className="Modal__form_row">
                     <Input
@@ -184,8 +191,32 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                         placeholder={'ID в iIko'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Checkbox checked={isHideInOrg} onChange={(e) => switchHiddenOrg(e)} id={'HiddenInOrganisations'} text={'Скрыть в организациях'}/>
+                    <Checkbox checked={isHideInOrg} onChange={(e) => {
+                        setIsHideInOrg(e.target.checked)
+                        if(!e.target.checked) {
+                            setOrgsList([])
+                        }
+                    }} id={'HiddenInOrganisations'} text={'Скрыть в организациях'}/>
                 </div>
+                {
+                    editItem ? (
+                        <div className="Modal__form_row">
+                            <Checkbox
+                                checked={CanOverwriteByIIko == '1'}
+                                onChange={e => {
+                                    if(e.target.checked) {
+                                        setCanOverwriteByIIko('1')
+                                    } else {
+                                        setCanOverwriteByIIko('0')
+                                    }
+                                }}
+                                id={'CanOverwriteByIIko'}
+                                text={'Разрешить iiko перезаписывать категорию'}
+                                />
+                        </div>
+                    ) : null
+                }
+                
                 {
                     isHideInOrg ? (
                         <>

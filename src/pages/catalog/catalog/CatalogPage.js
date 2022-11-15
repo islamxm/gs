@@ -10,7 +10,19 @@ import { useEffect, useState } from 'react';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
 import {motion} from 'framer-motion';
+import {
+    handleDragEnd, 
+    handleDragLeave, 
+    handleDragOver, 
+    handleDragStart, 
+    handleDrop, 
+    sortItems
+} from '../../../funcs/dragSort';
+import authService from '../../../services/dataService';
 
+
+
+const as = new authService()
 const cs = new catService()
 
 
@@ -21,6 +33,7 @@ const CatalogPage = () => {
     const [cats, setCats] = useState([])
     const [load, setLoad] = useState(false)
     const [selectedCat, setSelectedCat] = useState(null)
+    const [currentItem, setCurrentItem] = useState(null)
 
     useEffect(() => {
         if(token) {
@@ -36,6 +49,17 @@ const CatalogPage = () => {
         setCreateCategory(true)
     }
 
+    const submitOrder = (e, item) => {
+        handleDrop(e, item, setCats, currentItem, cats);
+    }
+
+    useEffect(() => {
+        if(token && cats && cats.length > 0) {
+            as.orderSort(token, 'categories', cats.map(item => item.ID).join(',')).then(res => {
+                console.log(res)
+            })
+        }
+    }, [token, cats])
 
     return (
         <motion.div 
@@ -43,7 +67,6 @@ const CatalogPage = () => {
             animate={{opacity: 1}}
             transition={{duration: 0.5}}
             exit={{opacity: 0}}
-
             className="CatalogPage page">
             <CreateCategory setSelectedCat={setSelectedCat} editItem={selectedCat} updateList={setCats} visible={createCategory} close={() => setCreateCategory(false)}/>
             <main className="Main">
@@ -56,8 +79,17 @@ const CatalogPage = () => {
                                 <div className="CatalogPage__body_list">
                                     <Row gutter={[30,30]}>
                                         {
-                                            cats.map((item, index) => (
-                                                <Col span={6} key={index}>
+                                            cats.sort(sortItems).map((item, index) => (
+                                                <Col
+                                                    onDragLeave={e => handleDragLeave(e)}
+                                                    onDragEnd={(e) => handleDragEnd(e)}
+                                                    onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                                    onDragOver={e => handleDragOver(e)}
+                                                    onDrop={e => submitOrder(e, item)}
+                                                    draggable={true}
+                                                    span={4} 
+                                                    key={index}
+                                                    style={{transition: 'all .3s ease'}}>
                                                     <CatItem
                                                         {...item}
                                                         Link={`/catalog/${item.ID}`}
@@ -65,7 +97,7 @@ const CatalogPage = () => {
                                                 </Col>
                                             ))
                                         }
-                                        <Col span={6}>
+                                        <Col span={4} style={{height: 250}}>
                                             <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
                                         </Col>
                                     </Row>

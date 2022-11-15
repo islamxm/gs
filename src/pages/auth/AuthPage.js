@@ -6,7 +6,7 @@ import {Formik, Form} from 'formik';
 import { useEffect, useState } from 'react';
 import {message} from 'antd';
 import { useDispatch } from 'react-redux';
-import { tokenUpdate } from '../../store/actions';
+import { settingsUpdate, tokenUpdate, userUpdate } from '../../store/actions';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/dataService';
 import {motion} from 'framer-motion';
@@ -49,6 +49,12 @@ const AuthPage = () => {
                                         LOCAL_STORAGE.setItem('gs-token', res.user.Token)
                                         dispatch(tokenUpdate(res.user.Token))
                                         nav('/organizations', {replace: true})
+
+                                        LOCAL_STORAGE.setItem('gs-user-settings', JSON.stringify(res.settings))
+                                        dispatch(settingsUpdate(res.settings))
+
+                                        LOCAL_STORAGE.setItem('gs-user-data', JSON.stringify(res.user))
+                                        dispatch(userUpdate(res.user))
                                     }   
                                 }).finally(_ => {
                                     setSubmitting(false)

@@ -11,23 +11,50 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
-import {motion} from 'framer-motion';
+import {motion, AnimatePresence} from 'framer-motion';
+import pageEnterAnimProps from '../../../funcs/pageEnterAnimProps';
+import {handleDragEnd, handleDragLeave, handleDragOver, handleDragStart, handleDrop, sortItems} from '../../../funcs/dragSort'
+import authService from '../../../services/dataService';
 
-
-
-
+const as = new authService();
 const cs = new catService();
 
 const CatalogCategoryPage = () => {
     const {token} = useSelector(state => state)
-    const {categoryId} = useParams()
+    const {categoryId, subcategoryId} = useParams()
     const nav = useNavigate();
     const [createSubcategory, setCreateSubcategory] = useState(false);
+    const [selectedSubcat, setSelectedSubcat] = useState(null)
     const [list, setList] = useState([])
     const [load, setLoad] = useState(false)
+    const [currentItem, setCurrentItem] = useState(null)
 
+    useEffect(() => {
+        cs.getProds(token).then(res => {
+            console.log(res)    
+        })
+    }, [list])
     const toCreatePlate = () => {
-        nav(`/catalog/${categoryId}/createPlate`)
+        
+        // if(subcategoryId) {
+        //      nav(`/catalog/${categoryId}/${subcategoryId}/createPlate`)
+        // } else {
+        //     nav(`/catalog/${categoryId}/createPlate`)
+        // }
+        
+        let data = new FormData()
+        data.append('ParentID', subcategoryId ? subcategoryId : 0)
+        data.append('CategoryID', categoryId)
+        data.append('IsSubCategory', '0')
+        cs.addProd(token, data).then(res => {
+            if(subcategoryId) {
+                nav(`/catalog/${categoryId}/${subcategoryId}/editPlate/${res}`)
+            } else {
+                nav(`/catalog/${categoryId}/editPlate/${res}`)
+            }
+        })
+
+        
     }
 
     const toEditPlate = (id) => {
@@ -36,47 +63,120 @@ const CatalogCategoryPage = () => {
 
 
     useEffect(() => {
-        if(token && categoryId) {
+        if(token && categoryId && !subcategoryId) {
             setLoad(true)
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
-                setList(res)
-                console.log(res)
+                setList(res.filter(item => item.ParentID == '0'))
+                console.log(res.filter(item => item.ParentID == '0'))
             }).finally(_ => setLoad(false))
         }
-    }, [token, categoryId])
+        if(token && categoryId && subcategoryId) {
+            setLoad(true)
+            cs.getProds(token, {CategoryID: categoryId}).then(res => {
+                setList(res.filter(item => item.ParentID == subcategoryId))
+                console.log(res.filter(item => item.ParentID == subcategoryId))
+            }).finally(_ => {
+                setLoad(false)
+            })
+        }
+    }, [token, categoryId, subcategoryId])
+
+    const updateList = () => {
+        if(!subcategoryId) {
+            setLoad(true)
+            cs.getProds(token, {CategoryID: categoryId}).then(res => {
+                setList(res.filter(item => item.ParentID == '0'))
+            }).finally(_ => setLoad(false))
+        }
+        if(subcategoryId) {
+            setLoad(true)
+            cs.getProds(token, {CategoryID: categoryId}).then(res => {
+                setList(res.filter(item => item.ParentID == subcategoryId))
+            }).finally(_ => {
+                setLoad(false)
+            })
+        }
+    }
+
+    const editSubcat = ({...item}) => {
+        setSelectedSubcat(item)
+        setCreateSubcategory(true)
+    }
+
+    const closeSubcategoryModal = () => {
+        setCreateSubcategory(false)
+        setSelectedSubcat(null)
+    }
     
+    const submitOrder = (e, item) => {
+        handleDrop(e, item, setList, currentItem, list);
+    }
+    
+    useEffect(() => {
+        if(token && list && list.length > 0) {
+            as.orderSort(token, 'products', list.map(item => item.ID).join(',')).then(res => {
+            })
+        }
+    }, [list, token])
+
     return (
         <motion.div
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            transition={{duration: 0.5}}
-            exit={{opacity: 0}}
-
+            {...pageEnterAnimProps}
+            
             className="CatalogCategoryPage page">
-            <CreateSubcategory visible={createSubcategory} close={() => setCreateSubcategory(false)}/>
-            <main className="Main">
+
+                <CreateSubcategory
+                data={selectedSubcat} 
+                visible={createSubcategory} 
+                close={closeSubcategoryModal} 
+                update={updateList}/>
+                <main className="Main">
                 <div className="pageBody">
                     <div className="CatalogCategoryPage__body pageBody-content">
                         {
                             load ? (
                                 <Loader/>
                             ) : (
-                                <div className="CatalogCategoryPage__body_list">
+                                <motion.div
+                                   
+                                    {...pageEnterAnimProps}
+                                    >
                                     <Row gutter={[30, 30]}>
                                         {
-                                            list.map((item, index) => {
-                                                if(item.IsSubCategory != '0') {
+                                            list.sort(sortItems).map((item, index) => {
+                                                if(item.IsSubCategory == '1') {
                                                     return (
-                                                        <Col span={6}>
+                                                        <Col
+                                                            onDragLeave={e => handleDragLeave(e)}
+                                                            onDragEnd={(e) => handleDragEnd(e)}
+                                                            onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                                            onDragOver={e => handleDragOver(e)}
+                                                            onDrop={e => submitOrder(e, item)}
+                                                            draggable={true}
+                                                            key={index}
+                                                            span={4}
+                                                            style={{transition: 'all .3s ease'}}
+                                                            >
                                                             <CatItem 
+                                                                Link={`/catalog/${categoryId}/${item.ID}`}
                                                                 {...item}
-                                                                
+                                                                selectEdit={editSubcat}
                                                                 />
                                                         </Col>
                                                     )
                                                 } else {
                                                     return (
-                                                        <Col span={6}>
+                                                        <Col 
+                                                        style={{transition: 'all .3s ease'}}
+                                                        onDragLeave={e => handleDragLeave(e)}
+                                                        onDragEnd={(e) => handleDragEnd(e)}
+                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                                        onDragOver={e => handleDragOver(e)}
+                                                        onDrop={e => submitOrder(e, item)}
+                                                        draggable={true}
+                                                            span={4}
+                                                            key={index}
+                                                            >
                                                             <CatCard editPlate={toEditPlate} {...item}/>
                                                         </Col>
                                                     )
@@ -84,14 +184,17 @@ const CatalogCategoryPage = () => {
                                             })
                                             
                                         }
-                                        <Col className='CatalogCategoryPage__body_list_add' span={6}>
-                                            <Pl onClick={toCreatePlate} style={{height: '48%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
-                                            <Pl onClick={() => setCreateSubcategory(true)} style={{height: '48%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
+                                        <Col className='CatalogCategoryPage__body_list_add' span={4} style={{height: 250}}>
+                                            <Pl onClick={toCreatePlate} style={{height: 120, backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
+                                            <Pl onClick={() => setCreateSubcategory(true)} style={{height: 120, backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
                                         </Col>
                                         
                                         
+                                        
                                     </Row>
-                                </div>
+                                </motion.div>
+                                
+                                
                             )
                         }
                         

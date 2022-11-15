@@ -5,27 +5,71 @@ import { Dropdown } from 'antd';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import {useLocation} from 'react-router-dom';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const HeaderProfile = () => {
+    const {sidebarOpen} = useSelector(state => state)
     const loc = useLocation()
 
     useEffect(() => {
-        console.log(loc)
-    }, [loc])
+        console.log(sidebarOpen)
+    }, [sidebarOpen])
+
+    const updateHead = (path) => {
+        if(path.includes('organizations')) {
+            return 'Организации'
+        }
+        if(path.includes('catalog')) {
+            return 'Каталог'
+        }
+        if(path.includes('stories')) {
+            return 'Сториз'
+        }
+        if(path.includes('clients')) {
+            return 'Клиенты'
+        }
+        if(path.includes('orders')) {
+            return 'Заказы'
+        }
+        if(path.includes('statistic')) {
+            return 'Статистика'
+        }
+        if(path.includes('basket')) {
+            return 'Корзина'
+        }
+        if(path.includes('integr')) {
+            return 'Интеграции'
+        }
+        if(path.includes('allsettings')) {
+            return 'Все настройки'
+        }
+        if(path.includes('trash')) {
+            return 'Удаленные обьекты'
+        }
+    }
+
 
     return (
         <header className="HeaderProfile">
             <div className="HeaderProfile__in">
-                <div className="HeaderProfile__logo">
+                <div className={"HeaderProfile__logo" + (!sidebarOpen ? ' hide ' : '')}>
                     <img src={logo} alt="Logo" />
                 </div>
-                <div className="HeaderProfile__main" style={{justifyContent: 'flex-end'}}>
-                    {/* <div className="HeaderProfile__main_nav">
-                        <span className="HeaderProfile__main_nav_icon">
+                <div className="HeaderProfile__main">
+                    {/* breadcrumbs */}
+                    <div className="HeaderProfile__main_nav">
+                        <Link to={-1} className={"HeaderProfile__main_nav_icon"}>
                             <BsChevronCompactLeft/>
-                        </span>
-                        <span className="HeaderProfile__main_nav_text">Раздел</span>
-                    </div> */}
+                        </Link>
+                        <div className="HeaderProfile__main_nav_head">
+                            {
+                                updateHead(loc?.pathname)
+                            }
+                        </div>
+                    </div>
+
                     <Dropdown
                         placement='bottom'
                         trigger={['click']}

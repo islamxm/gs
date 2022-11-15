@@ -21,7 +21,7 @@ const CatItem = ({
 
 
     return (
-        <div className="CatItem">
+        <div className="CatItem draggable">
             <div className="CatItem__main" onClick={() => nav(Link)}>
                 <div className="CatItem__main_name">
                     {Name}

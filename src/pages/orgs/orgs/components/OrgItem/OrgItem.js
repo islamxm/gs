@@ -42,7 +42,13 @@ const OrgItem = ({
     
 
     return (
-        <div className="OrgItem draggable" onClick={() => nav(`/organizations/${brandId}/${ID}`)}>
+        <div className="OrgItem draggable" onClick={() => {
+            if(brandId) {
+                nav(`/organizations/${brandId}/${ID}`)
+            } else {
+                nav(`/organizations/nobrand/${ID}`)
+            }
+        }}>
                     <div className="OrgItem__img">
                         <img src={ThumbnailPicture} alt="" />
                     </div>

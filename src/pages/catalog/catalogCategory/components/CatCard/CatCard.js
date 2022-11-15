@@ -28,7 +28,7 @@ const CatCard = ({
     editPlate
 }) => {
     return (
-        <div className="CatCard" onClick={() => editPlate(ID)}>
+        <div className="CatCard draggable" onClick={() => editPlate(ID)}>
             <div className="CatCard__img">
                 <img src={ThumbnailPicture} alt="" />
             </div>

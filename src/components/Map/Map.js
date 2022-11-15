@@ -23,11 +23,25 @@ const Map = ({setSelected, coords, readOnly}) => {
 
     useEffect(() => {
         if (ref.current && !map && !point && !coords && currentLoc) {
-            setMap(new window.google.maps.Map(ref.current, {center: {...currentLoc}, zoom: 8} ));   
+            setMap(new window.google.maps.Map(
+                ref.current, 
+                {
+                    center: {...currentLoc}, 
+                    zoom: 13,
+                    disableDefaultUI:true
+                } 
+            ));   
             setPoint(new window.google.maps.Marker())
         }
         if(ref.current && !map && !point && coords) {
-            setMap(new window.google.maps.Map(ref.current, {center: {...coords}, zoom: 8} ));   
+            setMap(new window.google.maps.Map(
+                ref.current, 
+                {
+                    center: {...coords}, 
+                    zoom: 13,
+                    disableDefaultUI:true
+                } 
+            ));   
             setPoint(new window.google.maps.Marker({position: {...coords}}))
         }
 
@@ -36,7 +50,7 @@ const Map = ({setSelected, coords, readOnly}) => {
     useEffect(() => {
         if(map) {
             point.setOptions({position: {...coords},map})
-            map.setOptions({center: {...coords}, zoom: 8})
+            map.setOptions({center: {...coords}, zoom: 13})
             if(setSelected) {
                 map.addListener('click', (e) => {
                     setSelected([e.latLng.lat(), e.latLng.lng()])

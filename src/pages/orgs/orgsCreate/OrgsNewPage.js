@@ -49,7 +49,7 @@ const pmValueFind = (value) => {
 const LOCAL_STORAGE = window.localStorage;
 
 
-const OrgsCreatePage = () => {
+const OrgsNewPage = () => {
     const {token, settings} = useSelector(state => state)
     const {brandId, orgId} = useParams();
     const loc = useLocation()
@@ -556,20 +556,20 @@ const OrgsCreatePage = () => {
         }
     }, [ThumbnailPrev, Name])
 
-    // useEffect(() => {
-    //     return () => {
-    //         if(LOCAL_STORAGE.getItem('gs-creating-org')) {
-    //             console.log('сохранено')
-    //         } else {
-    //             os.deleteOrg(token, {ID: orgId}).then(res => {
-    //                 console.log(res)
-    //             }).finally(_ => {
-    //                 window.location.reload()
-    //                 LOCAL_STORAGE.removeItem('gs-creating-org')
-    //             })
-    //         }
-    //     }
-    // }, [])
+    useEffect(() => {
+        return () => {
+            if(LOCAL_STORAGE.getItem('gs-creating-org')) {
+                console.log('сохранено')
+            } else {
+                os.deleteOrg(token, {ID: orgId}).then(res => {
+                    console.log(res)
+                }).finally(_ => {
+                    window.location.reload()
+                    LOCAL_STORAGE.removeItem('gs-creating-org')
+                })
+            }
+        }
+    }, [])
 
 
 
@@ -948,4 +948,4 @@ const OrgsCreatePage = () => {
     )
 }
 
-export default OrgsCreatePage;
+export default OrgsNewPage;

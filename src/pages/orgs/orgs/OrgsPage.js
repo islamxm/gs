@@ -1,21 +1,15 @@
 import './OrgsPage.scss';
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import HeaderProfile from '../../../components/HeaderProfile/HeaderProfile';
 import BrandItem from './components/BrandItem/BrandItem';
 import OrgItem from './components/OrgItem/OrgItem';
 import Pl from '../../../components/Pl/Pl';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import brandImg from '../../../assets/img/org-brand.png';
-import orgImg from '../../../assets/img/org.png';
-import useModal from '../../../hooks/useModal';
 import AddBrand from '../modals/addBrand/AddBrand';
 import orgService from '../../../services/orgService';
 import { useSelector } from 'react-redux';
 import EditBrand from '../modals/editBrand/EditBrand';
 import { useParams } from 'react-router-dom';
 import Loader from '../../../components/Loader/Loader';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 import { Row,Col } from 'antd';
 import authService from '../../../services/dataService';
 import { handleDragStart, handleDragOver, handleDrop, sortItems, handleDragEnd, handleDragLeave } from '../../../funcs/dragSort';
@@ -30,7 +24,7 @@ const os = new orgService();
 
 const OrgsPage = () => {
     const {brandId} = useParams()
-    const {token} = useSelector(state => state)
+    const {token, settings, user} = useSelector(state => state)
     const nav = useNavigate();
     const location = useLocation();
     const [list, setList] = useState([])
@@ -42,18 +36,20 @@ const OrgsPage = () => {
     
 
     useEffect(() => {
+        console.log(list)
+    }, [list])
+    useEffect(() => {
         
-        if(token && brandId) {
-            
+        if(token && brandId && settings?.IsHaveBrands == '1') {
             setLoadList(true)
             os.getOrgs(token, {BrandID: brandId})
                 .then(res => {
-                    console.log(res.map(item => item.ID).join(','))
                     setList(res)
+                    console.log('бренд есть isHaveBrands = 1')
                 })
                 .finally(_ => setLoadList(false))
         }
-        if(token && !brandId) {
+        if(token && !brandId && settings?.IsHaveBrands == '1') {
             setLoadList(true)
             os.getBrands(token)
                 .then(res => {
@@ -61,7 +57,18 @@ const OrgsPage = () => {
                 })
                 .finally(_ => setLoadList(false))
         }
-    }, [location, token, brandId])
+        if(token && !brandId && settings.IsHaveBrands == '0') {
+            setLoadList(true)
+            os.getOrgs(token)
+            .then(res => {
+                setList(res)
+                
+                console.log('бренд нет isHaveBrands = 1')
+            })
+            .finally(_ => setLoadList(false))
+
+        }
+    }, [location, token, brandId, settings])
 
     
 
@@ -79,7 +86,6 @@ const OrgsPage = () => {
     }
     const closeEditBrand = () => setEditBrandModal(false)
 
-
     
 
 
@@ -90,18 +96,37 @@ const OrgsPage = () => {
     useEffect(() => {
         if(brandId && token && list && list.length > 0) {
             as.orderSort(token, 'organisations', list.map(item => item.ID).join(',')).then(res => {
-                console.log(res)
+               
             })
         }
         if(!brandId && token && list && list.length > 0) {
             as.orderSort(token, 'brands', list.map(item => item.ID).join(',')).then(res => {
-                console.log(res)
+              
             })
         }
     }, [list, brandId, token])
 
     
-
+    const createOrg = () => {
+        if(brandId) {
+            const data = new FormData()
+            data.append('OrganisationBrand', brandId)
+            os.addOrg(token, data).then(res => {
+                console.log(res)
+                nav(`/organizations/${brandId}/${res}/now`)
+            })
+        } else {
+            const data = new FormData()
+            data.append('OrganisationBrand', 0)
+            os.addOrg(token).then(res => {
+                console.log(res)
+                nav(`/organizations/nobrand/${res}/now`)
+                
+            })
+        }
+        
+        
+    }
 
     if(location.pathname != '/organizations' && location.pathname.includes('/organizations/')) {
         return (
@@ -167,7 +192,76 @@ const OrgsPage = () => {
         )
     }
 
-    if(location.pathname == '/organizations' || location.pathname == '/') {
+    if(settings?.IsHaveBrands == '0' && (location.pathname == '/' || location.pathname.includes('/organizations'))) {
+        return (
+            <motion.div 
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{duration: 0.5}}
+                exit={{opacity: 0}}
+
+                className="OrgsPage page">
+           
+            <main className="Main">
+                <div className="pageBody">
+                    <div className="OrgsPage__body pageBody-content">
+                        
+                        {
+                            loadList ? (
+                                <Loader/>
+                            ) : (
+                                <motion.div
+                                    initial={{opacity: 0}}
+                                    animate={{opacity: 1}}
+                                    transition={{duration: 0.5}}
+                                    exit={{opacity: 0}}
+                                    >
+                                    <Row gutter={[20,20]}>
+                                        {
+                                            list && list.length > 0 ? (
+                                                list.sort(sortItems).map((item, index) => (
+                                                    <Col 
+                                                        key={index}
+                                                        style={{transition: 'all .3s ease'}}
+                                                        span={8}
+                                                        onDragLeave={e => handleDragLeave(e)}
+                                                        onDragEnd={(e) => handleDragEnd(e)}
+                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                                        onDragOver={e => handleDragOver(e)}
+                                                        onDrop={e => submitOrder(e, item)}
+                                                        draggable={true}
+                                                        >
+                                                        <OrgItem {...item} index={index}/>
+                                                    </Col>
+                                                ))
+                                            ): null
+                                        }
+                                        <Col span={8}>
+                                            <Pl 
+                                                onClick={createOrg}
+                                                
+                                                style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
+                                                text={'Добавить ресторан'}
+                                                
+                                                />
+                                        </Col>
+                                    </Row>
+                                </motion.div>
+                                
+                                
+                            )
+                        }
+                        
+                        
+                    </div>
+                </div>
+            </main>
+        </motion.div>
+    
+        )
+    }
+
+    if(location.pathname == '/organizations' || (location.pathname == '/' && settings?.IsHaveBrands == '1')) {
         return (
             <motion.div
             initial={{opacity: 0}}
@@ -185,6 +279,7 @@ const OrgsPage = () => {
            
                     {/* <div className="spc"></div> */}
                     <div className="OrgsPage__body pageBody-content">
+                        3 part
                         {
                             loadList ? (
                                 <Loader/>

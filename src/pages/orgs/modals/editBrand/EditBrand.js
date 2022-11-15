@@ -27,8 +27,6 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
 
 
     useEffect(() => {
-        console.log(LogoUrl)
-        console.log(MarkerID)
         if(LogoUrl && MarkerID) {
             setPrevImg(LogoUrl)
             setMarkerId(MarkerID)
@@ -69,7 +67,6 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
 
         os.updateBrand(token, body).then(res => {
             updateList(res)
-            console.log(res)
         }).finally(_ => {
             setLoad(false)
             closeModal()
@@ -79,7 +76,6 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
     const deleteBrand = () => {
         setDeleteLoad(true)
         os.deleteBrand(token, {ID}).then(res => {
-            console.log(res)
             updateList(res)
         }).finally(_ => {
             setDeleteLoad(false)

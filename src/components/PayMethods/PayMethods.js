@@ -2,12 +2,11 @@ import './PayMethods.scss';
 import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import {BsChevronCompactDown} from 'react-icons/bs';
-import paymethods from '../../pages/orgs/orgsCreate/components/paymethods';
 import Button from '../Button/Button';
 import {BsTrash} from 'react-icons/bs';
 import Checkbox from '../Checkbox/Checkbox';
 
-console.log(paymethods)
+
 
 const PayMethods = ({
     list,

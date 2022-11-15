@@ -1,1 +1,6 @@
 export const tokenUpdate = (token) => ({type: 'TOKEN', token: token})
+export const settingsUpdate = (settings) => ({type: 'SETTINGS', settings})
+export const userUpdate = (user) => ({type: 'USER', user})
+export const catalogUpdate = (catalog) => ({type: 'CATALOG', catalog})
+export const handleSidebarOpen = (sidebarOpen) => ({type: 'SIDEBAR', sidebarOpen})
+export const updateBrands = (brands) => ({type:'BRANDS', brands})

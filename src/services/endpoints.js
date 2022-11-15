@@ -1,4 +1,4 @@
-export const BASE_DOMAIN = 'https://soultri.site/NewAdminPanel';
+export const BASE_DOMAIN = `${process.env.REACT_APP_HOST}/NewAdminPanel`;
 
 
 const endpoints = {
@@ -26,6 +26,9 @@ const endpoints = {
     deletePay: `${BASE_DOMAIN}/organisation/deletePayment`,
 
     //каталог
+    addPlateImg: `${BASE_DOMAIN}/catalog/addPlateImage`,
+    deletePlateImg: `${BASE_DOMAIN}/catalog/deleteImage`,
+
     getCats: `${BASE_DOMAIN}/catalog/categoryes`,
     addCat: `${BASE_DOMAIN}/catalog/addCategory`,
     editCat: `${BASE_DOMAIN}/catalog/editCategory`,

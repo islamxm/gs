@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import {BsChevronCompactDown} from 'react-icons/bs';
 import {FiCodesandbox} from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 
 const SidebarItem = ({
     link,
