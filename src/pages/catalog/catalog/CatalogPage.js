@@ -35,6 +35,11 @@ const CatalogPage = () => {
     const [selectedCat, setSelectedCat] = useState(null)
     const [currentItem, setCurrentItem] = useState(null)
 
+
+    useEffect(() => {
+        console.log(cats)
+    }, [cats])
+
     useEffect(() => {
         if(token) {
             setLoad(true)

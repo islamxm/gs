@@ -63,8 +63,7 @@ const OrgsNewPage = () => {
     const [weekTimes, setWeekTimes] = useState(weektimes)
 
     //VALUES
-    const [IIkoID, setIIkoID] = useState('')
-    const [IIkoIDTerminal, setIIkoIDTerminal] = useState('')
+    
     const [OrganisationBrand, setOrganisationBrand] = useState('')
     const [ItemOrder, setItemOrder] = useState(0)
     const [Name, setName] = useState('')
@@ -95,7 +94,17 @@ const OrgsNewPage = () => {
     const [HaveReservation, setHaveReservation] = useState('0')
     const [NotifyWhenNewReservation, setNotifyWhenNewReservation] = useState('0')
 
+
+    //переключать в зависимости от настроек юзера
+    const [IIkoID, setIIkoID] = useState('')
+    const [IIkoIDTerminal, setIIkoIDTerminal] = useState('')
+    const [RKeeperLogin, setRKeeperLogin] = useState('')
+    const [RKeeperIP, setRKeeperIP] = useState('') 
+    const [RKeeperPort, setRKeeperPort] = useState('')
+    const [PrimehillToken,setPrimehillToken] = useState('')
     
+
+
     const [polList, setPolList] = useState([])
 
     //MODALS
@@ -109,6 +118,12 @@ const OrgsNewPage = () => {
     const [delivery, setDelivery] = useState(false)
 
     const [saved, setSaved] = useState(true)
+
+
+    useEffect(() => {
+        console.log(settings)
+    }, [settings])
+
 
     //получение данных при редактировании
     useEffect(() => {
@@ -167,6 +182,15 @@ const OrgsNewPage = () => {
                     timeTransform(thisOrg.SatTime, 5),
                     timeTransform(thisOrg.SunTime, 6),
                 ]);
+
+                // const [RKeeperLogin, setRKeeperLogin] = useState('')
+                // const [RKeeperIP, setRKeeperIP] = useState('') 
+                // const [RKeeperPort, setRKeeperPort] = useState('')
+                // const [PrimehillToken,setPrimehillToken] = useState('')
+                setRKeeperLogin(thisOrg?.RKeeperLogin)
+                setRKeeperIP(thisOrg?.RKeeperIP)
+                setRKeeperPort(thisOrg?.RKeeperPort)
+                setPrimehillToken(thisOrg?.PrimehillToken)
 
             })
             os.getPols(token, {OrganisationID: orgId}).then(res => {
@@ -255,6 +279,10 @@ const OrgsNewPage = () => {
                     timeTransform(thisOrg.SatTime, 5),
                     timeTransform(thisOrg.SunTime, 6),
                 ]);
+                setRKeeperLogin(thisOrg?.RKeeperLogin)
+                setRKeeperIP(thisOrg?.RKeeperIP)
+                setRKeeperPort(thisOrg?.RKeeperPort)
+                setPrimehillToken(thisOrg?.PrimehillToken)
 
             })
             os.getPols(token, {OrganisationID: orgId}).then(res => {
@@ -434,6 +462,11 @@ const OrgsNewPage = () => {
         data.append('NotifyWhenNewReservation', NotifyWhenNewReservation);
 
 
+        data.append('RKeeperLogin', RKeeperLogin)
+        data.append('RKeeperIP', RKeeperIP)
+        data.append('RKeeperPort', RKeeperPort)
+        data.append('PrimehillToken', PrimehillToken)
+
         for(var pair of data.entries()) {
             console.log(pair[0]+ ', '+ pair[1]);
          }
@@ -559,10 +592,10 @@ const OrgsNewPage = () => {
     useEffect(() => {
         return () => {
             if(LOCAL_STORAGE.getItem('gs-creating-org')) {
-                console.log('сохранено')
+                
             } else {
                 os.deleteOrg(token, {ID: orgId, Delete: 'hard'}).then(res => {
-                    console.log(res)
+                    // console.log(res)
                 }).finally(_ => {
                     window.location.reload()
                     LOCAL_STORAGE.removeItem('gs-creating-org')
@@ -627,13 +660,46 @@ const OrgsNewPage = () => {
                                 </Row>  
                                 <Row className='row-custom'>
                                     <Input value={Email} onChange={(e) => setEmail(e.target.value)} placeholder={'Email'}/>
-                                </Row> 
-                                <Row className='row-custom'>
-                                    <Input value={IIkoIDTerminal} onChange={(e) => setIIkoIDTerminal(e.target.value)} placeholder={'ID кассовой станции'}/>
-                                </Row>  
-                                <Row className='row-custom'>
-                                    <Input value={IIkoID} onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
-                                </Row>  
+                                </Row>
+
+                                {
+                                    settings?.IsHaveIIko == '1' ? (
+                                        <>
+                                            <Row className='row-custom'>
+                                                <Input value={IIkoIDTerminal} onChange={(e) => setIIkoIDTerminal(e.target.value)} placeholder={'ID кассовой станции'}/>
+                                            </Row>  
+                                            <Row className='row-custom'>
+                                                <Input value={IIkoID} onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
+                                            </Row> 
+                                        </>
+                                        
+                                    ) : null 
+                                } 
+
+                                {
+                                    settings?.IsHaveRKeeper == '1' ? (
+                                        <>
+                                            <Row className='row-custom'>
+                                                <Input value={RKeeperLogin} onChange={(e) => setRKeeperLogin(e.target.value)} placeholder={'Логин RKeeper'}/>
+                                            </Row>  
+                                            <Row className='row-custom'>
+                                                <Input value={RKeeperIP} onChange={(e) => setRKeeperIP(e.target.value)} placeholder={'IP RKeeper'}/>
+                                            </Row> 
+                                            <Row className='row-custom'>
+                                                <Input value={RKeeperPort} onChange={(e) => setRKeeperPort(e.target.value)} placeholder={'Порт RKeeper'}/>
+                                            </Row> 
+                                            
+                                        </>
+                                    ) : null
+                                }
+                                {
+                                    settings?.IsHavePrimehill == '1' ? (
+                                        <Row className='row-custom'>
+                                            <Input value={PrimehillToken} onChange={(e) => setPrimehillToken(e.target.value)} placeholder={'Токен PrimeHill'}/>
+                                        </Row> 
+                                    ) : null
+                                }
+                                 
                                 <Row className='row-custom'>
                                     <Input value={MinPriceForLocalSale} onChange={(e) => setMinPriceForLocalSale(e.target.value)} placeholder={'Минимальная сумма заказа'}/>
                                 </Row>  

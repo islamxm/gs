@@ -36,16 +36,12 @@ const OrgsPage = () => {
     
 
     useEffect(() => {
-        console.log(list)
-    }, [list])
-    useEffect(() => {
         
         if(token && brandId && settings?.IsHaveBrands == '1') {
             setLoadList(true)
             os.getOrgs(token, {BrandID: brandId})
                 .then(res => {
                     setList(res)
-                    console.log('бренд есть isHaveBrands = 1')
                 })
                 .finally(_ => setLoadList(false))
         }
@@ -62,8 +58,6 @@ const OrgsPage = () => {
             os.getOrgs(token)
             .then(res => {
                 setList(res)
-                
-                console.log('бренд нет isHaveBrands = 1')
             })
             .finally(_ => setLoadList(false))
 

@@ -10,19 +10,30 @@ import { useSelector } from 'react-redux';
 
 
 const HeaderProfile = () => {
-    const {sidebarOpen} = useSelector(state => state)
+    const {sidebarOpen, settings, user} = useSelector(state => state)
     const loc = useLocation()
 
+
     useEffect(() => {
-        console.log(sidebarOpen)
-    }, [sidebarOpen])
+        console.log('settings', settings)
+        console.log('user', user)
+    }, [settings, user])
 
     const updateHead = (path) => {
+        if(path == ('/')) {
+            return (
+                <Link to={'/organizations'}>Организации</Link>
+            )
+        }
         if(path.includes('organizations')) {
-            return 'Организации'
+            return (
+                <Link to={'/organizations'}>Организации</Link>
+            )
         }
         if(path.includes('catalog')) {
-            return 'Каталог'
+            return (
+                <Link to={'/catalog'}>Каталог</Link>
+            )
         }
         if(path.includes('stories')) {
             return 'Сториз'
@@ -60,9 +71,9 @@ const HeaderProfile = () => {
                 <div className="HeaderProfile__main">
                     {/* breadcrumbs */}
                     <div className="HeaderProfile__main_nav">
-                        <Link to={-1} className={"HeaderProfile__main_nav_icon"}>
+                        {/* <Link to={-1} className={"HeaderProfile__main_nav_icon"}>
                             <BsChevronCompactLeft/>
-                        </Link>
+                        </Link> */}
                         <div className="HeaderProfile__main_nav_head">
                             {
                                 updateHead(loc?.pathname)
@@ -76,7 +87,7 @@ const HeaderProfile = () => {
                         overlay={<ProfileMenu/>}
                     >
                         <div className="HeaderProfile__main_user">
-                            <span className="HeaderProfile__main_user_name">Alex</span>
+                            <span className="HeaderProfile__main_user_name">{user?.Name}</span>
                             <span className="HeaderProfile__main_user_icon">
                                 <BsChevronCompactDown/>
                             </span>

@@ -65,6 +65,14 @@
             &_text {
 
             }
+
+            &_head {
+                a {
+                    &:hover {
+                        color: var(--light_violet);
+                    }
+                }
+            }
         }
 
         &_user {
