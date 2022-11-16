@@ -29,6 +29,7 @@ import timeTransform from './components/timeTransform';
 import RecList from './components/RecList/RecList';
 import {motion} from 'framer-motion';
 import Loader from '../../../components/Loader/Loader';
+import checkNumValue from '../../../funcs/checkNumValue';
 
 const LOCAL_STORAGE = window.localStorage;
 
@@ -49,7 +50,7 @@ const cs = new catService();
 const os = new orgService();
 
 const EditPlateNew = () => {
-    const {token} = useSelector(state => state)
+    const {token, settings} = useSelector(state => state)
     const {categoryId, subcategoryId, plateId} = useParams()
     const [createdId, setCreatedId] = useState(null)
     const [saveLoad, setSaveLoad] = useState(false)
@@ -107,31 +108,30 @@ const EditPlateNew = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-plate')
                 }
-                setID(thisPlate.ID)
-                
-                setIIkoID(thisPlate.IIkoID)
-                setCanOverwriteByIIko(thisPlate.CanOverwriteByIIko)
-                setItemOrder(thisPlate.ItemOrder)
-                setParentID(thisPlate.ParentID)
-                setIsSubCategory(thisPlate.IsSubCategory)
-                setMaxCount(thisPlate.MaxCount)
-                setName(thisPlate.Name)
-                setIsHit(thisPlate.IsHit)
-                setComposition(thisPlate.Composition)
-                setCalories(thisPlate.Calories)
-                setCarbohydrates(thisPlate.Carbohydrates)
-                setFats(thisPlate.Fats)
-                setProteins(thisPlate.Proteins)
-                setCountAdditions(thisPlate.CountAdditions)
-                setAllowedDeliveryTypes([thisPlate.AllowedDeliveryTypes])
-                setPicture(thisPlate.Pictures)
-                setPicPrevs(thisPlate.Pictures.map(item => item.Picture))
-                setMass(thisPlate.Prices[0]?.Mass)
-                setPrice(thisPlate.Prices[0]?.Price)
-                setSalePrice(thisPlate.Prices[0]?.SalePrice)
-                setIsHideInOrg(thisPlate.HiddenInOrganisations ? true : false)
-                setIsDynamicTimetable(thisPlate.IsDynamicTimetable)
-                if(thisPlate.HiddenInOrganisations && thisPlate.HiddenInOrganisations != '/') {
+                setID(thisPlate?.ID)
+                setIIkoID(thisPlate?.IIkoID)
+                setCanOverwriteByIIko(thisPlate?.CanOverwriteByIIko)
+                setItemOrder(thisPlate?.ItemOrder)
+                setParentID(thisPlate?.ParentID)
+                setIsSubCategory(thisPlate?.IsSubCategory)
+                setMaxCount(thisPlate?.MaxCount != '0' ? thisPlate?.MaxCount : '')
+                setName(thisPlate?.Name)
+                setIsHit(thisPlate?.IsHit)
+                setComposition(thisPlate?.Composition != '0' ? thisPlate?.Composition : '')
+                setCalories(thisPlate?.Calories != '0' ? thisPlate?.Calories : '')
+                setCarbohydrates(thisPlate?.Carbohydrates != '0' ? thisPlate?.Carbohydrates : '')
+                setFats(thisPlate?.Fats != '0' ? thisPlate?.Fats : '') 
+                setProteins(thisPlate?.Proteins != '0' ? thisPlate?.Proteins : '')
+                setCountAdditions(thisPlate?.CountAdditions != '0' ? thisPlate?.CountAdditions : '')
+                setAllowedDeliveryTypes([thisPlate?.AllowedDeliveryTypes])
+                setPicture(thisPlate?.Pictures)
+                setPicPrevs(thisPlate?.Pictures.map(item => item.Picture))
+                setMass(thisPlate?.Prices[0]?.Mass != '0' ? thisPlate?.Prices[0]?.Mass : '')
+                setPrice(thisPlate?.Prices[0]?.Price != '0' ? thisPlate?.Prices[0]?.Price : '')
+                setSalePrice(thisPlate?.Prices[0]?.SalePrice != '0' ? thisPlate?.Prices[0]?.SalePrice : '')
+                setIsHideInOrg(thisPlate?.HiddenInOrganisations ? true : false)
+                setIsDynamicTimetable(thisPlate?.IsDynamicTimetable)
+                if(thisPlate?.HiddenInOrganisations && thisPlate?.HiddenInOrganisations != '/') {
                     let array = thisPlate.HiddenInOrganisations.split('//')
                     setOrgsList(array.map((item, index) => {
                         if(index == 0) {
@@ -155,13 +155,13 @@ const EditPlateNew = () => {
                     setOrgsList([])
                 }
                 setWeekTimes([
-                    timeTransform(thisPlate.MonTime, 0), 
-                    timeTransform(thisPlate.TueTime, 1), 
-                    timeTransform(thisPlate.WedTime, 2),
-                    timeTransform(thisPlate.ThuTime, 3),
-                    timeTransform(thisPlate.FriTime, 4),
-                    timeTransform(thisPlate.SatTime, 5),
-                    timeTransform(thisPlate.SunTime, 6),
+                    timeTransform(thisPlate?.MonTime, 0), 
+                    timeTransform(thisPlate?.TueTime, 1), 
+                    timeTransform(thisPlate?.WedTime, 2),
+                    timeTransform(thisPlate?.ThuTime, 3),
+                    timeTransform(thisPlate?.FriTime, 4),
+                    timeTransform(thisPlate?.SatTime, 5),
+                    timeTransform(thisPlate?.SunTime, 6),
                 ]);
                 
             }).finally(_ => setPageLoad(false))
@@ -274,9 +274,6 @@ const EditPlateNew = () => {
         }
     }
     const saveTime = (index, value) => {
-        console.log(value)
-        console.log(index)
-
         let ur = weekTimes;
         let rm = ur.splice(index, 1, value)
         setWeekTimes([...ur]);
@@ -305,8 +302,6 @@ const EditPlateNew = () => {
                 
             }) 
         }
-        console.log(subcategoryId)
-        console.log(categoryId)
         data.append('ID', ID)
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
@@ -314,19 +309,29 @@ const EditPlateNew = () => {
         data.append('ParentID', subcategoryId ? subcategoryId : 0)
         data.append('CategoryID', categoryId)
         data.append('IsSubCategory', IsSubCategory)
-        data.append('MaxCount', MaxCount)
+        //data.append('MaxCount', MaxCount)
+        checkNumValue(data, 'MaxCount', MaxCount)
         data.append('Name', Name)
         data.append('IsHit', IsHit)
         data.append('IsNew', IsNew)
-        data.append('Composition', Composition)
-        data.append('Calories', Calories)
-        data.append('Carbohydrates', Carbohydrates)
-        data.append('Fats', Fats)
-        data.append('Proteins', Proteins)
-        data.append('CountAdditions', CountAdditions)
-        data.append('Price', Price)
-        data.append('SalePrice', SalePrice)
-        data.append('Mass', Mass)
+        // data.append('Composition', Composition)
+        checkNumValue(data, 'Composition', Composition)
+        // data.append('Calories', Calories)
+        checkNumValue(data, 'Calories', Calories)
+        //data.append('Carbohydrates', Carbohydrates)
+        checkNumValue(data, 'Carbohydrates', Carbohydrates)
+        // data.append('Fats', Fats)
+        checkNumValue(data, 'Fats', Fats)
+        // data.append('Proteins', Proteins)
+        checkNumValue(data, 'Proteins', Proteins)
+        // data.append('CountAdditions', CountAdditions)
+        checkNumValue(data, 'CountAdditions', CountAdditions)
+        // data.append('Price', Price)
+        checkNumValue(data, 'Price', Price)
+        // data.append('SalePrice', SalePrice)
+        checkNumValue(data, 'SalePrice', SalePrice)
+        // data.append('Mass', Mass)
+        checkNumValue(data, 'Mass', Mass)
         data.append('IsDynamicTimetable', IsDynamicTimetable)
         data.append('MonTime', weekArray[0])
         data.append('TueTime', weekArray[1])
@@ -335,10 +340,10 @@ const EditPlateNew = () => {
         data.append('FriTime', weekArray[4])
         data.append('SatTime', weekArray[5])
         data.append('SunTime', weekArray[6])
-        // data.append('ThumbnailPicture', Picture[0])
+        
         if(orgsList.length > 0) {
             data.append('HiddenInOrganisations', orgsList.map(item => `/${item.ID}`).join('/') + '/')
-            console.log(orgsList.map(item => `/${item.ID}`).join('/') + '/')
+          
         } else {
             data.append('HiddenInOrganisations', '')
         }
@@ -451,32 +456,42 @@ const EditPlateNew = () => {
                                         
                                     </div>
                                 </Row>
-                                <Row className="row-custom">
-                                    <Checkbox
-                                        id={'editOverwriteIiko'}
-                                        text={'Разрешить iiko перезаписывать блюдо'}
-                                        checked={CanOverwriteByIIko == '1'}
-                                        onChange={e => {
-                                            if(e.target.checked) {
-                                                setCanOverwriteByIIko('1')
-                                            } else {
-                                                setCanOverwriteByIIko('0')
-                                            }
-                                        }}
-                                        />
-                                </Row>
+                                {
+                                    settings?.IsHaveIIko == '1' ? (
+                                        <Row className="row-custom">
+                                            <Checkbox
+                                                id={'editOverwriteIiko'}
+                                                text={'Разрешить iiko перезаписывать блюдо'}
+                                                checked={CanOverwriteByIIko == '1'}
+                                                onChange={e => {
+                                                    if(e.target.checked) {
+                                                        setCanOverwriteByIIko('1')
+                                                    } else {
+                                                        setCanOverwriteByIIko('0')
+                                                    }
+                                                }}
+                                                />
+                                        </Row>
+                                    ) : null
+                                }
+                                
                                 <Row className="row-custom">
                                     <Input
                                         value={Name}
                                         onChange={(e) => setName(e.target.value)}  
                                         placeholder={'Название блюда'}/>
                                 </Row>
-                                <Row className="row-custom">
-                                    <Input 
-                                        value={IIkoID}
-                                        onChange={(e) => setIIkoID(e.target.value)}
-                                        placeholder={'ID в iIko'}/>
-                                </Row>
+                                {
+                                    settings?.IsHaveIIko == '1' ? (
+                                        <Row className="row-custom">
+                                            <Input 
+                                                value={IIkoID}
+                                                onChange={(e) => setIIkoID(e.target.value)}
+                                                placeholder={'ID в iIko'}/>
+                                        </Row>
+                                    ) : null
+                                }
+                                
                                 <Row className="row-custom">
                                     <Checkbox 
                                         checked={IsNew} 
@@ -493,14 +508,14 @@ const EditPlateNew = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Checkbox 
-                                        checked={IsHit}
+                                        checked={IsHit == '1'}
                                         id={'IsHit'} 
                                         text={'Тэг: Хит'}
                                         onChange={(e) => {
                                             if(e.target.checked) {
-                                                setIsHit(1)
+                                                setIsHit('1')
                                             } else {
-                                                setIsHit(0)
+                                                setIsHit('0')
                                             }
                                         }}
                                         />
@@ -623,12 +638,12 @@ const EditPlateNew = () => {
                                 }
                                 <Row className='row-custom'>
                                     <Checkbox
-                                        checked={IsDynamicTimetable} 
+                                        checked={IsDynamicTimetable == '1'} 
                                         onChange={(e) => {
                                             if(e.target.checked) {
-                                                setIsDynamicTimetable(1)
+                                                setIsDynamicTimetable('1')
                                             } else {
-                                                setIsDynamicTimetable(0)
+                                                setIsDynamicTimetable('0')
                                             }
                                         }}
                                         text={'Динамическое расписание'} 

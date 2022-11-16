@@ -121,8 +121,8 @@ const OrgsPage = () => {
         
         
     }
-
-    if(location.pathname != '/organizations' && location.pathname.includes('/organizations/')) {
+    // location.pathname != '/organizations' && 
+    if(location.pathname.includes('/organizations/') && settings?.IsHaveBrands == '1') {
         return (
             <motion.div 
                 initial={{opacity: 0}}
@@ -131,12 +131,14 @@ const OrgsPage = () => {
                 exit={{opacity: 0}}
 
                 className="OrgsPage page">
+                    
             {/* <AddBrand visible={visible} close={hideModal}/> */}
             <main className="Main">
                 <div className="pageBody">
-               
+                
                     {/* <div className="spc"></div> */}
                     <div className="OrgsPage__body pageBody-content">
+                        
                         {
                             loadList ? (
                                 <Loader/>
@@ -168,7 +170,9 @@ const OrgsPage = () => {
                                             ): null
                                         }
                                         <Col span={8}>
-                                            <Pl onClick={() => nav(`/organizations/${brandId}/create`)} style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} text={'Добавить ресторан'}/>
+                                            <Pl onClick={createOrg} 
+                                            style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
+                                            text={'Добавить ресторан'}/>
                                         </Col>
                                     </Row>
                                 </motion.div>
@@ -195,9 +199,10 @@ const OrgsPage = () => {
                 exit={{opacity: 0}}
 
                 className="OrgsPage page">
-           
+
             <main className="Main">
                 <div className="pageBody">
+                    
                     <div className="OrgsPage__body pageBody-content">
                         
                         {
@@ -233,7 +238,6 @@ const OrgsPage = () => {
                                         <Col span={8}>
                                             <Pl 
                                                 onClick={createOrg}
-                                                
                                                 style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
                                                 text={'Добавить ресторан'}
                                                 
@@ -264,14 +268,15 @@ const OrgsPage = () => {
             exit={{opacity: 0}}
 
             className="OrgsPage page">
-
+                
             <EditBrand updateList={setList} visible={editBrandModal} close={closeEditBrand} selected={selected}/>
             <AddBrand updateList={setList} visible={addBrandModal} close={closeAddBrand}/>
             <main className="Main">
                 
                 <div className="pageBody">
-           
+                    
                     {/* <div className="spc"></div> */}
+                    
                     <div className="OrgsPage__body pageBody-content">
                         
                         {

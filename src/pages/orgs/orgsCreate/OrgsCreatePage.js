@@ -31,6 +31,8 @@ import PolygonModal from '../modals/PolygonModal/PolygonModal';
 import MapPolygon from '../../../components/MapPolygon/MapPolygon';
 import LocationModal from '../modals/LocationModal/LocationModa';
 import MapMarker from '../../../components/MapMarker/MapMarker';
+import checkEmptyValue from '../../../funcs/checkEmptyValue';
+import checkNumValue from '../../../funcs/checkNumValue';
 const os = new orgService();
 const pmValueFind = (value) => {
     switch(value) {
@@ -115,7 +117,6 @@ const OrgsCreatePage = () => {
     const [pm, setPm] = useState([]);
     const [delivery, setDelivery] = useState(false)
 
-    const [saved, setSaved] = useState(true)
 
     //получение данных при редактировании
     useEffect(() => {
@@ -127,58 +128,57 @@ const OrgsCreatePage = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-org')
                 }
-                setIIkoID(thisOrg.IIkoID)
-                setIIkoIDTerminal(thisOrg.IIkoIDTerminal)
-                setOrganisationBrand(thisOrg.OrganisationBrand)
-                setItemOrder(thisOrg.ItemOrder)
-                setName(thisOrg.Name)
-                setDescription(thisOrg.Description)
-                setThumbnailPrev(thisOrg.ThumbnailPicture)
-                setAddress(thisOrg.Address)
-                setPhone(thisOrg.Phone)
-                setMinPriceForLocalSale(thisOrg.MinPriceForLocalSale)
-                setLocalOrderSale(thisOrg.LocalOrderSale)
-                setIsHaveDelivery(thisOrg.IsHaveDelivery)
-                setIsHaveLocalOrder(thisOrg.IsHaveLocalOrder)
-                setTimetableDescription(thisOrg.TimetableDescription)
-                setLattitude(thisOrg.Lattitude)
-                setLongitude(thisOrg.Longitude)
                 
-                if(thisOrg.Lattitude != "undefined" && thisOrg.Longitude != "undefined") {
+                setIIkoID(thisOrg?.IIkoID)
+                setIIkoIDTerminal(thisOrg?.IIkoIDTerminal)
+                setOrganisationBrand(thisOrg?.OrganisationBrand)
+                setItemOrder(thisOrg?.ItemOrder)
+                setName(thisOrg?.Name)
+                setDescription(thisOrg?.Description)
+                setThumbnailPrev(thisOrg?.ThumbnailPicture)
+                setAddress(thisOrg?.Address)
+                setPhone(thisOrg?.Phone)
+                setMinPriceForLocalSale(thisOrg?.MinPriceForLocalSale != '0' ? thisOrg.MinPriceForLocalSale : '')
+                setLocalOrderSale(thisOrg?.LocalOrderSale != '0' ? thisOrg.LocalOrderSale : '')
+                setIsHaveDelivery(thisOrg?.IsHaveDelivery)
+                setIsHaveLocalOrder(thisOrg?.IsHaveLocalOrder)
+                setTimetableDescription(thisOrg?.TimetableDescription)
+                setLattitude(thisOrg?.Lattitude)
+                setLongitude(thisOrg?.Longitude)
+                console.log(thisOrg?.Lattitude)
+                console.log(thisOrg?.Longitude)
+                
+                if(thisOrg.Lattitude && thisOrg.Longitude) {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
                 } else {
-                    
+                    setCoords({lat: 55.7522200,lng: 37.6155600})
                 }
                 
-                setBotToken(thisOrg.BotToken)
-                setEmail(thisOrg.Email)
-                setIsNeedToNotify(thisOrg.IsNeedToNotify)
-                setNotifyWhenNewOrder(thisOrg.NotifyWhenNewOrder)
-                setNotifyWhenIIkoErrors(thisOrg.NotifyWhenIIkoErrors)
-                setNotifyWhenOrderChanges(thisOrg.NotifyWhenOrderChanges)
-                setTimezone(thisOrg.Timezone)
-                setCountTimeStepsPreorder(thisOrg.CountTimeStepsPreorder)
-                setDisabled(thisOrg.Disabled)
+                setBotToken(thisOrg?.BotToken)
+                setEmail(thisOrg?.Email)
+                setIsNeedToNotify(thisOrg?.IsNeedToNotify)
+                setNotifyWhenNewOrder(thisOrg?.NotifyWhenNewOrder)
+                setNotifyWhenIIkoErrors(thisOrg?.NotifyWhenIIkoErrors)
+                setNotifyWhenOrderChanges(thisOrg?.NotifyWhenOrderChanges)
+                setTimezone(thisOrg?.Timezone)
+                setCountTimeStepsPreorder(thisOrg?.CountTimeStepsPreorder != '0' ? thisOrg.CountTimeStepsPreorder : '')
+                setDisabled(thisOrg?.Disabled)
                 setTimeStep(thisOrg?.TimeStep)
                 setHavePreorder(thisOrg?.HavePreorder)
-                setCountTimeStepsReservation(thisOrg?.CountTimeStepsReservation)
-                setTimeStepReservation(thisOrg?.TimeStepReservation)
+                setCountTimeStepsReservation(thisOrg?.CountTimeStepsReservation != '0' ? thisOrg.CountTimeStepsReservation : '')
+                setTimeStepReservation(thisOrg?.TimeStepReservation != '0' ? thisOrg.TimeStepReservation : '')
                 setHaveReservation(thisOrg?.HaveReservation)
                 setNotifyWhenNewReservation(thisOrg?.NotifyWhenNewReservation)
                 setWeekTimes([
-                    timeTransform(thisOrg.MonTime, 0), 
-                    timeTransform(thisOrg.TueTime, 1), 
-                    timeTransform(thisOrg.WedTime, 2),
-                    timeTransform(thisOrg.ThuTime, 3),
-                    timeTransform(thisOrg.FriTime, 4),
-                    timeTransform(thisOrg.SatTime, 5),
-                    timeTransform(thisOrg.SunTime, 6),
+                    timeTransform(thisOrg?.MonTime, 0), 
+                    timeTransform(thisOrg?.TueTime, 1), 
+                    timeTransform(thisOrg?.WedTime, 2),
+                    timeTransform(thisOrg?.ThuTime, 3),
+                    timeTransform(thisOrg?.FriTime, 4),
+                    timeTransform(thisOrg?.SatTime, 5),
+                    timeTransform(thisOrg?.SunTime, 6),
                 ]);
 
-                // const [RKeeperLogin, setRKeeperLogin] = useState('')
-                // const [RKeeperIP, setRKeeperIP] = useState('') 
-                // const [RKeeperPort, setRKeeperPort] = useState('')
-                // const [PrimehillToken,setPrimehillToken] = useState('')
                 setRKeeperLogin(thisOrg?.RKeeperLogin)
                 setRKeeperIP(thisOrg?.RKeeperIP)
                 setRKeeperPort(thisOrg?.RKeeperPort)
@@ -223,53 +223,55 @@ const OrgsCreatePage = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-org')
                 }
+                console.log(thisOrg)
                
-                setIIkoID(thisOrg.IIkoID)
-                setIIkoIDTerminal(thisOrg.IIkoIDTerminal)
-                setOrganisationBrand(thisOrg.OrganisationBrand)
-                setItemOrder(thisOrg.ItemOrder)
-                setName(thisOrg.Name)
-                setDescription(thisOrg.Description)
-                setThumbnailPrev(thisOrg.ThumbnailPicture)
-                setAddress(thisOrg.Address)
-                setPhone(thisOrg.Phone)
-                setMinPriceForLocalSale(thisOrg.MinPriceForLocalSale)
-                setLocalOrderSale(thisOrg.LocalOrderSale)
-                setIsHaveDelivery(thisOrg.IsHaveDelivery)
-                setIsHaveLocalOrder(thisOrg.IsHaveLocalOrder)
-                setTimetableDescription(thisOrg.TimetableDescription)
-                setLattitude(thisOrg.Lattitude)
-                setLongitude(thisOrg.Longitude)
-              
+                setIIkoID(thisOrg?.IIkoID)
+                setIIkoIDTerminal(thisOrg?.IIkoIDTerminal)
+                setOrganisationBrand(thisOrg?.OrganisationBrand)
+                setItemOrder(thisOrg?.ItemOrder)
+                setName(thisOrg?.Name)
+                setDescription(thisOrg?.Description)
+                setThumbnailPrev(thisOrg?.ThumbnailPicture)
+                setAddress(thisOrg?.Address)
+                setPhone(thisOrg?.Phone)
+                setMinPriceForLocalSale(thisOrg?.MinPriceForLocalSale != '0' ? thisOrg.MinPriceForLocalSale : '')
+                setLocalOrderSale(thisOrg?.LocalOrderSale != '0' ? thisOrg.LocalOrderSale : '')
+                setIsHaveDelivery(thisOrg?.IsHaveDelivery)
+                setIsHaveLocalOrder(thisOrg?.IsHaveLocalOrder)
+                setTimetableDescription(thisOrg?.TimetableDescription)
+                setLattitude(thisOrg?.Lattitude)
+                setLongitude(thisOrg?.Longitude)
+                console.log(thisOrg?.Lattitude)
+                console.log(thisOrg?.Longitude)
                 if(thisOrg.Lattitude && thisOrg.Longitude) {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
                 } else {
                     setCoords({lat: 55.7522200,lng: 37.6155600})
                 }
                 
-                setBotToken(thisOrg.BotToken)
-                setEmail(thisOrg.Email)
-                setIsNeedToNotify(thisOrg.IsNeedToNotify)
-                setNotifyWhenNewOrder(thisOrg.NotifyWhenNewOrder)
-                setNotifyWhenIIkoErrors(thisOrg.NotifyWhenIIkoErrors)
-                setNotifyWhenOrderChanges(thisOrg.NotifyWhenOrderChanges)
-                setTimezone(thisOrg.Timezone)
-                setCountTimeStepsPreorder(thisOrg.CountTimeStepsPreorder)
-                setDisabled(thisOrg.Disabled)
+                setBotToken(thisOrg?.BotToken)
+                setEmail(thisOrg?.Email)
+                setIsNeedToNotify(thisOrg?.IsNeedToNotify)
+                setNotifyWhenNewOrder(thisOrg?.NotifyWhenNewOrder)
+                setNotifyWhenIIkoErrors(thisOrg?.NotifyWhenIIkoErrors)
+                setNotifyWhenOrderChanges(thisOrg?.NotifyWhenOrderChanges)
+                setTimezone(thisOrg?.Timezone)
+                setCountTimeStepsPreorder(thisOrg?.CountTimeStepsPreorder != '0' ? thisOrg.CountTimeStepsPreorder : '')
+                setDisabled(thisOrg?.Disabled)
                 setTimeStep(thisOrg?.TimeStep)
                 setHavePreorder(thisOrg?.HavePreorder)
-                setCountTimeStepsReservation(thisOrg?.CountTimeStepsReservation)
-                setTimeStepReservation(thisOrg?.TimeStepReservation)
+                setCountTimeStepsReservation(thisOrg?.CountTimeStepsReservation != '0' ? thisOrg.CountTimeStepsReservation : '')
+                setTimeStepReservation(thisOrg?.TimeStepReservation != '0' ? thisOrg.TimeStepReservation : '')
                 setHaveReservation(thisOrg?.HaveReservation)
                 setNotifyWhenNewReservation(thisOrg?.NotifyWhenNewReservation)
                 setWeekTimes([
-                    timeTransform(thisOrg.MonTime, 0), 
-                    timeTransform(thisOrg.TueTime, 1), 
-                    timeTransform(thisOrg.WedTime, 2),
-                    timeTransform(thisOrg.ThuTime, 3),
-                    timeTransform(thisOrg.FriTime, 4),
-                    timeTransform(thisOrg.SatTime, 5),
-                    timeTransform(thisOrg.SunTime, 6),
+                    timeTransform(thisOrg?.MonTime, 0), 
+                    timeTransform(thisOrg?.TueTime, 1), 
+                    timeTransform(thisOrg?.WedTime, 2),
+                    timeTransform(thisOrg?.ThuTime, 3),
+                    timeTransform(thisOrg?.FriTime, 4),
+                    timeTransform(thisOrg?.SatTime, 5),
+                    timeTransform(thisOrg?.SunTime, 6),
                 ]);
                 setRKeeperLogin(thisOrg?.RKeeperLogin)
                 setRKeeperIP(thisOrg?.RKeeperIP)
@@ -398,7 +400,6 @@ const OrgsCreatePage = () => {
 
     //сохранение изменений
     const orgSubmit = () => {
-        LOCAL_STORAGE.setItem('gs-creating-org', '1')
         let weekArray = []
         if(weekTimes.length > 0) {
             weekArray = weekTimes.map(item => {
@@ -411,7 +412,42 @@ const OrgsCreatePage = () => {
             }) 
         }
         const data = new FormData()
-        console.log('BRAND', brandId)
+        // checkEmptyValue(data, 'IIkoID', IIkoID)
+        // checkEmptyValue(data, 'IIkoIDTerminal', IIkoIDTerminal)
+        // checkEmptyValue(data, 'OrganisationBrand', brandId != 'nobrand' && brandId ? brandId : 0)
+        // checkEmptyValue(data, 'ItemOrder', ItemOrder)
+        // checkEmptyValue(data, 'Name', Name)
+        // checkEmptyValue(data, 'Description', Description)
+        // checkEmptyValue(data, 'HaveReservation', HaveReservation)
+        // checkEmptyValue(data, 'CountTimeStepsReservation', CountTimeStepsReservation)
+        // checkEmptyValue(data, 'TimeStepReservation', TimeStepReservation)
+        // checkEmptyValue(data, 'HavePreorder', HavePreorder)
+        // checkEmptyValue(data, 'Address', Address)
+        // checkEmptyValue(data, 'Phone', Phone)
+        // checkEmptyValue(data, 'Email', Email)
+        // checkEmptyValue(data, 'MinPriceForLocalSale', MinPriceForLocalSale)
+        // checkEmptyValue(data, 'LocalOrderSale', LocalOrderSale)
+        // checkEmptyValue(data, 'IsHaveDelivery', IsHaveDelivery)
+        // checkEmptyValue(data, 'IsHaveLocalOrder', IsHaveLocalOrder)
+        // checkEmptyValue(data, 'TimetableDescription', TimetableDescription)
+        // checkEmptyValue(data, 'TimetableDescription', TimetableDescription)
+        // checkEmptyValue(data, 'Timezone', Timezone)
+        // checkEmptyValue(data, 'Timezone', Timezone)
+        // checkEmptyValue(data, 'CountTimeStepsPreorder', CountTimeStepsPreorder)
+        // checkEmptyValue(data, 'TimeStep', TimeStep)
+        // checkEmptyValue(data, 'Disabled', Disabled)
+        // checkEmptyValue(data, 'IsNeedToNotify', IsNeedToNotify)
+        // checkEmptyValue(data, 'BotToken', BotToken)
+        // checkEmptyValue(data, 'NotifyWhenIIkoErrors', NotifyWhenIIkoErrors)
+        // checkEmptyValue(data, 'NotifyWhenNewOrder', NotifyWhenNewOrder)
+        // checkEmptyValue(data, 'NotifyWhenOrderChanges', NotifyWhenOrderChanges)
+        // checkEmptyValue(data, 'NotifyWhenNewReservation', NotifyWhenNewReservation)
+        // checkEmptyValue(data, 'RKeeperLogin', RKeeperLogin)
+        // checkEmptyValue(data, 'RKeeperIP', RKeeperIP)
+        // checkEmptyValue(data, 'RKeeperPort', RKeeperPort)
+        // checkEmptyValue(data, 'PrimehillToken', PrimehillToken)
+
+
         data.append('IIkoID', IIkoID)
         data.append('IIkoIDTerminal', IIkoIDTerminal)
         data.append('OrganisationBrand', brandId != 'nobrand' && brandId ? brandId : 0)
@@ -421,17 +457,23 @@ const OrgsCreatePage = () => {
         if(ThumbnailPicture) {
             data.append('ThumbnailPicture', ThumbnailPicture)
         }
-        data.append('HaveReservation', HaveReservation)
-        data.append('CountTimeStepsReservation', CountTimeStepsReservation)
-        data.append('TimeStepReservation', TimeStepReservation)
+        checkNumValue(data, 'HaveReservation', HaveReservation)
+        // data.append('HaveReservation', HaveReservation)
+        checkNumValue(data, 'CountTimeStepsReservation', CountTimeStepsReservation)
+        // data.append('CountTimeStepsReservation', CountTimeStepsReservation)
+        // data.append('TimeStepReservation', TimeStepReservation)
+        checkNumValue(data, 'TimeStepReservation', TimeStepReservation)
         data.append('HavePreorder', HavePreorder)
         data.append('Address', Address)
         data.append('Phone', Phone)
         data.append('Email', Email)
-        data.append('MinPriceForLocalSale', MinPriceForLocalSale)
-        data.append('LocalOrderSale', LocalOrderSale)
-        data.append('Lattitude', Lattitude)
-        data.append('Longitude', Longitude)
+        
+        // data.append('MinPriceForLocalSale', MinPriceForLocalSale)
+        checkNumValue(data, 'MinPriceForLocalSale', MinPriceForLocalSale);
+        // data.append('LocalOrderSale', LocalOrderSale)
+        checkNumValue(data, 'LocalOrderSale', LocalOrderSale)
+        data.append('Lattitude', coords?.lat)
+        data.append('Longitude', coords?.lng)
         data.append('IsHaveDelivery', IsHaveDelivery)
         data.append('IsHaveLocalOrder', IsHaveLocalOrder)
         data.append('TimetableDescription', TimetableDescription)
@@ -443,8 +485,10 @@ const OrgsCreatePage = () => {
         data.append('SatTime', weekArray[5])
         data.append('SunTime', weekArray[6])
         data.append('Timezone', Timezone)
-        data.append('CountTimeStepsPreorder', CountTimeStepsPreorder)
-        data.append('TimeStep', TimeStep)
+        // data.append('CountTimeStepsPreorder', CountTimeStepsPreorder)
+        checkNumValue(data, 'CountTimeStepsPreorder', CountTimeStepsPreorder)
+        // data.append('TimeStep', TimeStep)
+        checkNumValue(data, 'TimeStep', TimeStep)
         data.append('Disabled', Disabled)
         data.append('IsNeedToNotify', IsNeedToNotify)
         data.append('BotToken', BotToken)
@@ -458,6 +502,9 @@ const OrgsCreatePage = () => {
         data.append('RKeeperPort', RKeeperPort)
         data.append('PrimehillToken', PrimehillToken)
 
+        for(var pair of data.entries()) {
+            console.log(pair[0]+ ': '+ pair[1]);
+        }  
 
         setSaveLoad(true) 
         if(!orgId) {
@@ -475,7 +522,6 @@ const OrgsCreatePage = () => {
         if(orgId) {
             data.append('ID', orgId)    
             os.editOrg(token, data).then(res => {
-                console.log(res)
                 if(res?.error) {
                     message.error(res.message)
                 } else {
@@ -726,7 +772,14 @@ const OrgsCreatePage = () => {
                                 </Row>
                                 <Row className='row-custom'>
                                     <Checkbox 
-                                        
+                                        checked={IsNeedToNotify == '1'}
+                                        onChange={e => {
+                                            if(e.target.checked) {
+                                                setIsNeedToNotify('1')
+                                            } else {
+                                                setIsNeedToNotify('0')
+                                            }
+                                        }}
                                         id={'3'} 
                                         text={'Уведомления в телеграм-боте и на E-Mail'}/>
                                 </Row>  
@@ -767,20 +820,29 @@ const OrgsCreatePage = () => {
                                         text={'Уведомлять о новых бронях'}
                                         />
                                 </Row>
-                                <Row className='row-custom'>
-                                    <Checkbox 
-                                        checked={NotifyWhenIIkoErrors == '1'} 
-                                        onChange={(e) => {
-                                            if(e.target.checked) {
-                                                setNotifyWhenIIkoErrors('1')
-                                            } else {
-                                                setNotifyWhenIIkoErrors('0')
-                                            }
-                                        }} 
-                                        id={'NotifyWhenIIkoErrors'} 
-                                        text={'Уведомлять об ошибках iIko'}
-                                        />
-                                </Row>  
+                                {
+                                    settings?.IsHaveIIko == '1' || settings?.IsHaveIIko == '1' ? (
+                                        <Row className='row-custom'>
+                                            <Checkbox 
+                                                checked={NotifyWhenIIkoErrors == '1'} 
+                                                onChange={(e) => {
+                                                    if(e.target.checked) {
+                                                        setNotifyWhenIIkoErrors('1')
+                                                    } else {
+                                                        setNotifyWhenIIkoErrors('0')
+                                                    }
+                                                }} 
+                                                id={'NotifyWhenIIkoErrors'} 
+                                                text={
+                                                    settings?.IsHaveIIko == '1' ? 
+                                                    'Уведомлять об ошибках Iiko' : 
+                                                    'Уведомлять об ошибках RKeeper'
+                                                }
+                                                />
+                                        </Row> 
+                                    ) : null
+                                }
+                                 
                                 <Row className='row-custom'>
                                     <Checkbox 
                                         checked={NotifyWhenOrderChanges == '1'} 
