@@ -1,5 +1,7 @@
 import './Input.scss';
 import {motion} from 'framer-motion';
+import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const Input = ({
     style,
@@ -16,17 +18,38 @@ const Input = ({
     name,
     showErrorText
 }) => {
+    const [validFocus, setValidFocus] = useState(false)
+    const inpRef = useRef()
+    const handleChange = (e) => {
+        onChange(e)
+    }
+
+    useEffect(() => {
+        if(value) {
+            setValidFocus(true)
+        } else {
+            setValidFocus(false) 
+        }
+    }, [value])
+
+    const focusInp = () => {
+        console.log(inpRef.current.focus())
+    }
+
     return (
         <div onClick={onClick} className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
+            <div onClick={focusInp} className={"Input__label" + (validFocus ? ' valid ' : '')}>{placeholder}</div>
             <input 
+                ref={inpRef}
                 disabled={disabled}
                 type={type} 
                 value={value} 
                 name={name}
-                onChange={onChange} 
+                onChange={(e) => handleChange(e)} 
                 onBlur={onBlur} 
                 readOnly={readOnly}
-                placeholder={placeholder}
+                // onFocus={onFocus}
+                // placeholder={placeholder}
                 className="Input__el" />
             {
                 error && showErrorText ? (

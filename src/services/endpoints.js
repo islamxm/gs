@@ -63,6 +63,7 @@ const endpoints = {
     //integration settings
     getIntSettings: `${BASE_DOMAIN}/catalog/integrationSettings`,
     editIntSettings: `${BASE_DOMAIN}/catalog/editIntegrationSettings`,
+    startIntegr: `${BASE_DOMAIN}/integration/startIntegration`,
 
 
 

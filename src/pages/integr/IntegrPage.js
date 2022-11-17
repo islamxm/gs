@@ -35,6 +35,7 @@ const is = new intService()
 const IntegrPage = () => {
     const {token} = useSelector(state => state)
     const [saveLoad, setSaveLoad] = useState(false)
+    const [intLoad, setIntLoad] = useState(false)
     const [pageLoad, setPageLoad] = useState(true)
     const [AuthBotToken, setAuthBotToken] = useState('')
     const [AutoSaveOrganisations, setAutoSaveOrganisations] = useState('')
@@ -102,6 +103,18 @@ const IntegrPage = () => {
             message.success('Настройки сохранены')
         })
     }
+
+    const startInt = () => {
+        setIntLoad(true)
+        is.startInt(token).then(res => {
+            if(res?.error == '1') {
+                message.error(res?.message)
+            } else {
+                message.success(res?.message)
+            }
+        }).finally(_ => setIntLoad(false))
+    }
+    
 
     if(pageLoad) {
         return (
@@ -258,7 +271,8 @@ const IntegrPage = () => {
                                     </Col>
                                     <Col span={24}>
                                         <Button 
-                                            disabled={true}
+                                            load={intLoad}
+                                            onClick={startInt}
                                             text={'Синхронизировать все данные с iIko'}
                                             styles={{width: '100%'}}
                                             />
@@ -271,48 +285,6 @@ const IntegrPage = () => {
 
         </motion.div>
     )
-    // return (
-    //     <motion.div 
-    //         initial={{opacity: 0}}
-    //         animate={{opacity: 1}}
-    //         transition={{duration: 0.5}}
-    //         exit={{opacity: 0}}
 
-    //         className="IntegrPage page">
-    //         <div className="pageBody">
-    //             <div className="IntegrPage__body pageBody-content">
-    //                 <Row gutter={[30, 0]}>
-    //                     <Col span={12}>
-                            
-    //                         <Row className='row-custom'>
-    //                             <IntegrPaySystem/>
-    //                         </Row>
-    //                         <Row className="row-custom">
-    //                             <IntegrPhToken/>
-    //                         </Row>
-    //                         <Row className="row-custom">
-    //                             <IntegrSms/>
-    //                         </Row>
-    //                         <Row className="row-custom">
-    //                             <IntegrTgBot/>
-    //                         </Row>
-    //                         <Row className="row-custom">
-    //                             <Button 
-    //                                 text={'Сохранить'}
-    //                                 before={<BsTrash/>}
-    //                                 styles={{width: '100%', marginTop: 30}}
-    //                                 />
-    //                         </Row>
-    //                     </Col>
-    //                     <Col span={12}>
-    //                         <Row className="row-custom">
-    //                             <IntegrIlko/>
-    //                         </Row>
-    //                     </Col>
-    //                 </Row>
-    //             </div>
-    //         </div>
-    //     </motion.div>
-    // )
 }
 export default IntegrPage;
