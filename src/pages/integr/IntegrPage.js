@@ -33,7 +33,7 @@ const is = new intService()
 // ]
 
 const IntegrPage = () => {
-    const {token} = useSelector(state => state)
+    const {token, settings} = useSelector(state => state)
     const [saveLoad, setSaveLoad] = useState(false)
     const [intLoad, setIntLoad] = useState(false)
     const [pageLoad, setPageLoad] = useState(true)
@@ -46,15 +46,17 @@ const IntegrPage = () => {
     // const [PaymentSystemType, setPaymentSystemType] = useState('')
     const [SMSruToken, setSMSruToken] = useState('')
     const [iikoCloudApi, setiikoCloudApi] = useState('')
-    const [rKeeperApi, setrKeeperApi] = useState('')
 
 
+    const [iikoTargetGroup, setiikoTargetGroup] = useState('')
+    const [iikoTargetID, setiikoTargetID] = useState('')
 
     useEffect(() => {
         if(token) {
             // setPageLoad(true)
             is.getIntSettings(token).then(res => {
                 if(res) {
+                    console.log(res)
                     setAuthBotToken(res.AuthBotToken)
                     setAutoSaveOrganisations(res.AutoSaveOrganisations)
                     setAutoSavePlates(res.AutoSavePlates)
@@ -64,7 +66,8 @@ const IntegrPage = () => {
                     // setPaymentSystemType(res.PaymentSystemType)
                     setSMSruToken(res.SMSruToken)
                     setiikoCloudApi(res.iikoCloudApi)
-                    setrKeeperApi(res.rKeeperApi)
+                    setiikoTargetGroup(res.iikoTargetGroup)
+                    setiikoTargetID(res.iikoTargetID)
                 }
             }).finally(_ => {
                 setPageLoad(false)
@@ -83,11 +86,12 @@ const IntegrPage = () => {
             CanCreateNewPlates,
             PaymentSystemToken,
             SMSruToken,
-            iikoCloudApi
+            iikoCloudApi,
+            iikoTargetID,
+            iikoTargetGroup
         }
 
         is.editIntSettings(token, body).then(res => {
-            console.log(res)
             setAuthBotToken(res.AuthBotToken)
             setAutoSaveOrganisations(res.AutoSaveOrganisations)
             setAutoSavePlates(res.AutoSavePlates)
@@ -97,7 +101,9 @@ const IntegrPage = () => {
             // setPaymentSystemType(res.PaymentSystemType)
             setSMSruToken(res.SMSruToken)
             setiikoCloudApi(res.iikoCloudApi)
-            setrKeeperApi(res.rKeeperApi)
+     
+            setiikoTargetID(res.iikoTargetID)
+            setiikoTargetGroup(res.iikoTargetGroup)
         }).finally(_ => {
             setSaveLoad(false)
             message.success('Настройки сохранены')
@@ -209,6 +215,27 @@ const IntegrPage = () => {
                                             </Col>
                                         </Row>
                                     </Col>
+                                    {
+                                        settings?.IsHaveIIko == '1' ? (
+                                            <>
+                                            <Col span={24}>
+                                                <Input
+                                                    placeholder={'ID точки продаж для выгрузки'}
+                                                    value={iikoTargetID}
+                                                    onChange={e => setiikoTargetID(e.target.value)}
+                                                    />
+                                            </Col>
+                                            <Col span={24}>
+                                                <Input
+                                                    placeholder={'ID группы для выгрузки'}
+                                                    value={iikoTargetGroup}
+                                                    onChange={e => setiikoTargetGroup(e.target.value)}
+                                                    />
+                                            </Col>
+                                            </>
+                                        ) : null
+                                    }
+                                    
                                     <Col span={24}>
                                         <Row gutter={[0, 10]}>
                                             <Col span={24}>
