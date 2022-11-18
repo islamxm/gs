@@ -36,9 +36,7 @@ const CatalogPage = () => {
     const [currentItem, setCurrentItem] = useState(null)
 
 
-    useEffect(() => {
-        console.log(cats)
-    }, [cats])
+
 
     useEffect(() => {
         if(token) {
@@ -61,7 +59,7 @@ const CatalogPage = () => {
     useEffect(() => {
         if(token && cats && cats.length > 0) {
             as.orderSort(token, 'categories', cats.map(item => item.ID).join(',')).then(res => {
-                console.log(res)
+                
             })
         }
     }, [token, cats])

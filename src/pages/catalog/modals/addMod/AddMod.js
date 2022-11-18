@@ -116,7 +116,7 @@ const AddMod = ({visible, close, plateId, update}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Checkbox
-                        checked={IsRequired == '1' ? true : false}
+                        checked={IsRequired == '1'}
                         onChange={(e) => {
                             if(e.target.checked) {
                                 setIsRequired('1')

@@ -145,8 +145,7 @@ const OrgsCreatePage = () => {
                 setTimetableDescription(thisOrg?.TimetableDescription)
                 setLattitude(thisOrg?.Lattitude)
                 setLongitude(thisOrg?.Longitude)
-                console.log(thisOrg?.Lattitude)
-                console.log(thisOrg?.Longitude)
+               
                 
                 if(thisOrg.Lattitude && thisOrg.Longitude) {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
@@ -223,7 +222,7 @@ const OrgsCreatePage = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-org')
                 }
-                console.log(thisOrg)
+           
                
                 setIIkoID(thisOrg?.IIkoID)
                 setIIkoIDTerminal(thisOrg?.IIkoIDTerminal)
@@ -241,8 +240,7 @@ const OrgsCreatePage = () => {
                 setTimetableDescription(thisOrg?.TimetableDescription)
                 setLattitude(thisOrg?.Lattitude)
                 setLongitude(thisOrg?.Longitude)
-                console.log(thisOrg?.Lattitude)
-                console.log(thisOrg?.Longitude)
+                
                 if(thisOrg.Lattitude && thisOrg.Longitude) {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
                 } else {
@@ -323,7 +321,7 @@ const OrgsCreatePage = () => {
                 }
             ]
         }).then(res => {
-            console.log(res)
+           
             setPm(res.map(item => {
                 return {
                     ...item,
@@ -375,8 +373,7 @@ const OrgsCreatePage = () => {
 
     //сохранить время
     const saveTime = (index, value) => {
-        console.log(value)
-        console.log(index)
+       
 
         let ur = weekTimes;
         let rm = ur.splice(index, 1, value)
@@ -502,9 +499,9 @@ const OrgsCreatePage = () => {
         data.append('RKeeperPort', RKeeperPort)
         data.append('PrimehillToken', PrimehillToken)
 
-        for(var pair of data.entries()) {
-            console.log(pair[0]+ ': '+ pair[1]);
-        }  
+        // for(var pair of data.entries()) {
+        //     console.log(pair[0]+ ': '+ pair[1]);
+        // }  
 
         setSaveLoad(true) 
         if(!orgId) {
@@ -539,7 +536,7 @@ const OrgsCreatePage = () => {
     const deleteOrg = () => {
         setDelLoad(true)
         os.deleteOrg(token, {ID: orgId}).then(res => {
-            console.log(res)
+            
             if(res?.error) {
                 message.error(res.message)
             } else {
@@ -623,20 +620,7 @@ const OrgsCreatePage = () => {
         }
     }, [ThumbnailPrev, Name])
 
-    // useEffect(() => {
-    //     return () => {
-    //         if(LOCAL_STORAGE.getItem('gs-creating-org')) {
-    //             console.log('сохранено')
-    //         } else {
-    //             os.deleteOrg(token, {ID: orgId}).then(res => {
-    //                 console.log(res)
-    //             }).finally(_ => {
-    //                 window.location.reload()
-    //                 LOCAL_STORAGE.removeItem('gs-creating-org')
-    //             })
-    //         }
-    //     }
-    // }, [])
+
 
 
 
@@ -959,6 +943,7 @@ const OrgsCreatePage = () => {
                                                         pm.map((item, index) => (
                                                             
                                                             <PayMethods
+                                                                key={index}
                                                                 selected={item}
                                                                 list={paymethods}
                                                                 onCashbackChange={editPay}

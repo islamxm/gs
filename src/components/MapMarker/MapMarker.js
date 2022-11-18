@@ -39,7 +39,7 @@ const MapMarker = ({coords, setSelected, readOnly, id}) => {
 
     const markerOnLoad = (marker) => {
         if(marker) {
-            marker.setPosition(marker)
+            marker.setPosition(marker.position)
         }
     }
 
@@ -53,6 +53,11 @@ const MapMarker = ({coords, setSelected, readOnly, id}) => {
         setSelected(selectedPos)
         setMarker(selectedPos)
     }
+
+
+    useEffect(() => {
+        console.log(coords)
+    }, [coords])
 
     return isLoaded ? (
         <div className="MapMarker" style={{pointerEvents: readOnly ? 'none' : 'all'}}>
@@ -73,7 +78,8 @@ const MapMarker = ({coords, setSelected, readOnly, id}) => {
                             <Marker 
                                 onLoad={markerOnLoad}
                                 onUnmount={markerUnmount}
-                                position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
+                                position={{lat: Number(marker?.lat), lng: Number(marker?.lng)}}
+                                
                                 />
                         ) : null
                     }

@@ -108,8 +108,8 @@ const EditPlatePage = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-plate')
                 }
+                console.log(thisPlate)
                 setID(thisPlate?.ID)
-                
                 setIIkoID(thisPlate?.IIkoID)
                 setCanOverwriteByIIko(thisPlate.CanOverwriteByIIko)
                 setItemOrder(thisPlate?.ItemOrder)
@@ -482,7 +482,7 @@ const EditPlatePage = () => {
                                 
                                 <Row className="row-custom">
                                     <Checkbox 
-                                        checked={IsNew} 
+                                        checked={IsNew == '1'} 
                                         id={'IsNew'} 
                                         text={'Тэг: Новое'}
                                         onChange={(e) => {
@@ -496,7 +496,7 @@ const EditPlatePage = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Checkbox 
-                                        checked={IsHit}
+                                        checked={IsHit == '1'}
                                         id={'IsHit'} 
                                         text={'Тэг: Хит'}
                                         onChange={(e) => {
@@ -626,7 +626,7 @@ const EditPlatePage = () => {
                                 }
                                 <Row className='row-custom'>
                                     <Checkbox
-                                        checked={IsDynamicTimetable} 
+                                        checked={IsDynamicTimetable == '1'} 
                                         onChange={(e) => {
                                             if(e.target.checked) {
                                                 setIsDynamicTimetable(1)

@@ -36,7 +36,6 @@ const CreateSubcategory = ({visible, close, update, data}) => {
 
     useEffect(() => {
         if(data) {
-            console.log(data)
             setName(data?.Name)
             setIIkoID(data?.IIkoID)
             setCanOverwriteByIIko(data?.CanOverwriteByIIko)
@@ -56,7 +55,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
         body.append('CategoryID', categoryId)
         if(!data) {
             cs.addProd(token, body).then(res => {
-                console.log(res)
+                
             }).finally(_ => {
                 update()
                 setSaveLoad(false)
@@ -67,7 +66,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
             body.append('CanOverwriteByIIko', CanOverwriteByIIko)
 
             cs.editProd(token, body).then(res => {
-                console.log(res)
+
             }).finally(_ => {
                 update()
                 setSaveLoad(false)
@@ -82,7 +81,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
             ID: ID,
             Delete: 'hard'
         }).then(res => {
-            console.log(res)
+
         }).finally(_ => {
             update()
             setDelLoad(false)

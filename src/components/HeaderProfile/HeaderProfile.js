@@ -14,11 +14,6 @@ const HeaderProfile = () => {
     const loc = useLocation()
 
 
-    useEffect(() => {
-        console.log('settings', settings)
-        console.log('user', user)
-    }, [settings, user])
-
     const updateHead = (path) => {
         if(path == ('/')) {
             return (

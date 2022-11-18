@@ -62,14 +62,12 @@ const CatalogCategoryPage = () => {
             setLoad(true)
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 setList(res.filter(item => item.ParentID == '0'))
-                console.log(res.filter(item => item.ParentID == '0'))
             }).finally(_ => setLoad(false))
         }
         if(token && categoryId && subcategoryId) {
             setLoad(true)
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 setList(res.filter(item => item.ParentID == subcategoryId))
-                console.log(res.filter(item => item.ParentID == subcategoryId))
             }).finally(_ => {
                 setLoad(false)
             })
