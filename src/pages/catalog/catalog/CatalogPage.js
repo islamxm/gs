@@ -43,6 +43,7 @@ const CatalogPage = () => {
             setLoad(true)
             cs.getCats(token, {OrganisationID: 0}).then(res => {
                 setCats(res);
+                console.log(res.map(item => item.ItemOrder))
             }).finally(_ => setLoad(false))
         }
     }, [token])
@@ -57,12 +58,17 @@ const CatalogPage = () => {
     }
 
     useEffect(() => {
+        console.log(cats.map(item => item.ItemOrder))
         if(token && cats && cats.length > 0) {
             as.orderSort(token, 'categories', cats.map(item => item.ID).join(',')).then(res => {
-                
+                console.log(res.map(item => item.ItemOrder))
+                // setCats(res)
+                console.log(res.map(item => item.ItemOrder))
             })
         }
     }, [token, cats])
+
+    
 
     return (
         <motion.div 

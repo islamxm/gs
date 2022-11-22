@@ -40,7 +40,7 @@ export const handleDragEnd = (e) => {
 }
 
 export const sortItems = (a, b) => {
-    if(a.ItemOrder > b.ItemOrder) {
+    if(Number(a.ItemOrder) > Number(b.ItemOrder)) {
         return 1
     } else {
         return -1

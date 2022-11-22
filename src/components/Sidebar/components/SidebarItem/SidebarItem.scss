@@ -1,5 +1,12 @@
 .SidebarItem {
 
+    &__main.active + .SidebarItem__submenu {
+        .SidebarItem__main_label {
+            &_name {
+                // white-space: normal !important;
+            }
+        }
+    }
     &__main.active {
         background-color: #F6F8FF;
 
@@ -17,7 +24,12 @@
                     }
                 }
             }
+
+            &_name {
+               
+            }
         }
+
         
         &:after {
             width: 4px;
@@ -77,7 +89,8 @@
             }
 
             &_name {
-                transition: all .3s ease;
+                // transition: all .3s ease;
+                white-space: nowrap;
             }
 
         }

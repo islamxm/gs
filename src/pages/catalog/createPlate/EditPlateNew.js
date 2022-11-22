@@ -97,11 +97,15 @@ const EditPlateNew = () => {
     const [addAllergen, setAddAllergen] = useState(false);
     const [editAllergen, setEditAllergen] = useState(false);
 
+
     
 
     useEffect(() => {
-        if(plateId && token && categoryId && orgs.length > 0) {
+        
+        if(plateId && token && categoryId) {
+            console.log(categoryId)
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
+                console.log(res)
                 const thisPlate = res.find(item => item.ID == plateId);
                 if(thisPlate?.Pictures?.length > 0 || thisPlate?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-plate', '1')
@@ -239,6 +243,7 @@ const EditPlateNew = () => {
     useEffect(() => {
         if(token) {
             os.getOrgs(token).then(res => {
+                console.log(res)
                 setOrgs(res.map(item => {
                     return {
                         value: item.Name,
@@ -596,12 +601,17 @@ const EditPlateNew = () => {
                                         onChange={(e) => setCountAdditions(e.target.value)} 
                                         placeholder={'Количество дополнений'}/>
                                 </Row>
-                                <Row className="row-custom">
-                                    <Checkbox
-                                        checked={isHideInOrg} onChange={(e) => switchHiddenOrg(e)}  
-                                        id={'ttt'} 
-                                        text={'Скрыть в организациях'}/>
-                                </Row>
+                                {
+                                    orgs && orgs.length > 0 ?(
+                                        <Row className="row-custom">
+                                            <Checkbox
+                                                checked={isHideInOrg} onChange={(e) => switchHiddenOrg(e)}  
+                                                id={'ttt'} 
+                                                text={'Скрыть в организациях'}/>
+                                        </Row>
+                                    ) : null
+                                }
+                                
                                 {
                                     isHideInOrg ? (
                                         <>

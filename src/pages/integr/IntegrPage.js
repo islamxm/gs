@@ -113,6 +113,7 @@ const IntegrPage = () => {
     const startInt = () => {
         setIntLoad(true)
         is.startInt(token).then(res => {
+            console.log(res)
             if(res?.error == '1') {
                 message.error(res?.message)
             } else {
