@@ -46,7 +46,7 @@ const SidebarItem = ({
 
     return (
         <div className={"SidebarItem"}>
-            <div className={"SidebarItem__main" + (loc?.pathname.includes(link) || (children && children.length > 0 && children?.find(item => item?.props?.link == loc?.pathname)?.props?.link == loc?.pathname && !isOpen) ? ' active ' : '')}>
+            <div className={"SidebarItem__main" + ((loc?.pathname.includes(link) && children?.length > 0) || (children && children.length > 0 && children?.find(item => item?.props?.link == loc?.pathname)?.props?.link == loc?.pathname && !isOpen) || (loc?.pathname == link && !children) ? ' active ' : '')}>
                 {
                     link ? (
                         <NavLink onClick={isSubmenu ? toggleSubmenu : null}  to={link} className="SidebarItem__main_label">

@@ -44,6 +44,8 @@ const CatalogPage = () => {
             cs.getCats(token, {OrganisationID: 0}).then(res => {
                 setCats(res);
                 console.log(res.map(item => item.ItemOrder))
+                console.log(res.map(item => item.Name))
+                console.log(res.map(item => item.ID))
             }).finally(_ => setLoad(false))
         }
     }, [token])

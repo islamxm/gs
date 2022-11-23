@@ -22,6 +22,15 @@ import Loader from '../../components/Loader/Loader';
 import { catalogUpdate } from '../../store/actions';
 import catService from '../../services/catService';
 
+const paymentTypes = [
+    {
+        value: 'Stripe'
+    },
+    {
+        value: 'Русский стандарт'
+    }
+]
+
 
 const is = new intService()
 const cs = new catService()
@@ -38,7 +47,7 @@ const IntegrPage = () => {
     const [CanCreateNewOrganisations, setCanCreateNewOrganisations] = useState('')
     const [CanCreateNewPlates, setCanCreateNewPlates] = useState('')
     const [PaymentSystemToken, setPaymentSystemToken] = useState('')
-    // const [PaymentSystemType, setPaymentSystemType] = useState('')
+    const [PaymentSystemType, setPaymentSystemType] = useState('Stripe')
     const [SMSruToken, setSMSruToken] = useState('')
     const [iikoCloudApi, setiikoCloudApi] = useState('')
 
@@ -48,7 +57,7 @@ const IntegrPage = () => {
 
     useEffect(() => {
         if(token) {
-            // setPageLoad(true)
+            setPageLoad(true)
             is.getIntSettings(token).then(res => {
                 if(res) {
                     console.log(res)
@@ -58,7 +67,11 @@ const IntegrPage = () => {
                     setCanCreateNewOrganisations(res.CanCreateNewOrganisations)
                     setCanCreateNewPlates(res.CanCreateNewPlates)
                     setPaymentSystemToken(res.PaymentSystemToken)
-                    // setPaymentSystemType(res.PaymentSystemType)
+                    if(res.PaymentSystemType == 'Rus_Standart') {
+                        setPaymentSystemType('Русский стандарт')
+                    } else {
+                        setPaymentSystemType(res.PaymentSystemType)
+                    }
                     setSMSruToken(res.SMSruToken)
                     setiikoCloudApi(res.iikoCloudApi)
                     setiikoTargetGroup(res.iikoTargetGroup)
@@ -83,7 +96,8 @@ const IntegrPage = () => {
             SMSruToken,
             iikoCloudApi,
             iikoTargetID,
-            iikoTargetGroup
+            iikoTargetGroup,
+            PaymentSystemType: PaymentSystemType == 'Русский стандарт' ? 'Rus_Standart' : PaymentSystemType
         }
 
         is.editIntSettings(token, body).then(res => {
@@ -93,7 +107,12 @@ const IntegrPage = () => {
             setCanCreateNewOrganisations(res.CanCreateNewOrganisations)
             setCanCreateNewPlates(res.CanCreateNewPlates)
             setPaymentSystemToken(res.PaymentSystemToken)
-            // setPaymentSystemType(res.PaymentSystemType)
+            if(res.PaymentSystemType == 'Rus_Standart') {
+                setPaymentSystemType('Русский стандарт')
+            } else {
+                setPaymentSystemType(res.PaymentSystemType)
+            }
+            
             setSMSruToken(res.SMSruToken)
             setiikoCloudApi(res.iikoCloudApi)
      
@@ -121,6 +140,10 @@ const IntegrPage = () => {
     }
     
 
+    const selectPm = (item) => {
+        setPaymentSystemType(item)
+    }
+
     if(pageLoad) {
         return (
             <div className="page">
@@ -146,9 +169,15 @@ const IntegrPage = () => {
                                             <Col span={24}>
                                                 <div className="def-label">Платежная система</div>
                                             </Col>
-                                            {/* <Col span={24}>
-                                                <DropCollapse styles={{margin: 0}} value={PaymentSystemType} afterIcon/>
-                                            </Col> */}
+                                            <Col span={24}>
+                                                <DropCollapse 
+                                                    styles={{margin: 0}} 
+                                                    value={PaymentSystemType} 
+                                                    afterIcon
+                                                    list={paymentTypes}
+                                                    selectItem={selectPm}
+                                                    />
+                                            </Col>
                                             <Col span={24}>
                                                 <Input 
                                                     placeholder={'API key'}
