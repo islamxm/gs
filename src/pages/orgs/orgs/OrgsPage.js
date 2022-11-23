@@ -42,6 +42,7 @@ const OrgsPage = () => {
             os.getOrgs(token, {BrandID: brandId})
                 .then(res => {
                     setList(res)
+                    console.log(res)
                 })
                 .finally(_ => setLoadList(false))
         }
@@ -50,6 +51,7 @@ const OrgsPage = () => {
             os.getBrands(token)
                 .then(res => {
                     setList(res)
+                    console.log(res)
                 })
                 .finally(_ => setLoadList(false))
         }
@@ -58,6 +60,7 @@ const OrgsPage = () => {
             os.getOrgs(token)
             .then(res => {
                 setList(res)
+                console.log(res.map(item => item.ItemOrder))
             })
             .finally(_ => setLoadList(false))
 
@@ -118,8 +121,6 @@ const OrgsPage = () => {
                 
             })
         }
-        
-        
     }
     // location.pathname != '/organizations' && 
     if(location.pathname.includes('/organizations/') && settings?.IsHaveBrands == '1') {

@@ -16,23 +16,18 @@ import Input from '../../components/Input/Input';
 import DropCollapse from '../../components/DropCollapse/DropCollapse';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import intService from '../../services/intService';
 import Loader from '../../components/Loader/Loader';
+import { catalogUpdate } from '../../store/actions';
+import catService from '../../services/catService';
+
 
 const is = new intService()
-
-
-// const pmList = [
-//     {
-//         value: 'Stripe',
-//     },
-//     {
-//         value: ''
-//     }
-// ]
+const cs = new catService()
 
 const IntegrPage = () => {
+    const dispatch = useDispatch()
     const {token, settings} = useSelector(state => state)
     const [saveLoad, setSaveLoad] = useState(false)
     const [intLoad, setIntLoad] = useState(false)
@@ -118,6 +113,9 @@ const IntegrPage = () => {
                 message.error(res?.message)
             } else {
                 message.success(res?.message)
+                cs.getCats(token).then(res => {
+                    dispatch(catalogUpdate(res))
+                })
             }
         }).finally(_ => setIntLoad(false))
     }

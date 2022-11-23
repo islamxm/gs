@@ -55,15 +55,19 @@ const ExMass = ({plateId}) => {
                 <div className="ExMass__body_list">
                     {
                         localList && localList.length > 0 ? (
-                            localList.map((item, index) => (
-                                <div onClick={() => openEditMass({...item})} className="ExMass__body_item panel" key={index}>
-                                    <div  className="ExMass__body_item_mass ExMass__body_item_val">Масса: {item.Mass} г</div>
-                                    <div className="ExMass__body_item_prices">
-                                        <div className="ExMass__body_item_prices_main ExMass__body_item_val">Цена: {item.Price} ₽</div>
-                                        <div className="ExMass__body_item_prices_discount ExMass__body_item_val">Цена со скидкой: {item.SalePrice} ₽</div>
-                                    </div>
-                                </div>
-                            ))
+                            localList.map((item, index) => {
+                                if(index != 0) {
+                                    return (
+                                        <div onClick={() => openEditMass({...item})} className="ExMass__body_item panel" key={index}>
+                                            <div  className="ExMass__body_item_mass ExMass__body_item_val">Масса: {item.Mass} г</div>
+                                            <div className="ExMass__body_item_prices">
+                                                <div className="ExMass__body_item_prices_main ExMass__body_item_val">Цена: {item.Price} ₽</div>
+                                                <div className="ExMass__body_item_prices_discount ExMass__body_item_val">Цена со скидкой: {item.SalePrice} ₽</div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            })
                         ) : null
                     }
                     

@@ -348,6 +348,7 @@ class catService {
     }
 
     getPriceMass = async (token, body) => {
+        console.log(endpoints.getPriceMass)
         try {
             let res = await fetch(endpoints.getPriceMass, {
                 method: 'POST',

@@ -58,13 +58,9 @@ const CatalogPage = () => {
     }
 
     useEffect(() => {
-        console.log(cats.map(item => item.ItemOrder))
+       
         if(token && cats && cats.length > 0) {
-            as.orderSort(token, 'categories', cats.map(item => item.ID).join(',')).then(res => {
-                console.log(res.map(item => item.ItemOrder))
-                // setCats(res)
-                console.log(res.map(item => item.ItemOrder))
-            })
+            as.orderSort(token, 'categories', cats.map(item => item.ID).join(','))
         }
     }, [token, cats])
 

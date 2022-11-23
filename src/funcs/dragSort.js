@@ -18,13 +18,13 @@ export const handleDrop = (e, item, updateList, currentItem, list) => {
     e.currentTarget.querySelector('.draggable').classList.remove('dragStart')
     e.currentTarget.querySelector('.draggable').classList.remove('dragOver')
     updateList(state => state.map(i => {
-        if(i.ID == item.ID) {
+        if(Number(i.ID) == Number(item.ID)) {
             return {
                 ...i,
                 ItemOrder: currentItem.ItemOrder
             }
         }
-        if(i.ID == currentItem.ID) {
+        if(Number(i.ID) == Number(currentItem.ID)) {
             return {
                 ...i,
                 ItemOrder: item.ItemOrder

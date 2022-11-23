@@ -169,6 +169,7 @@ const EditPlatePage = () => {
 
             cs.getPriceMass(token, {ItemID: plateId}).then(res => {
                 setMassList(res)
+                console.log(res)
             })
             cs.getMods(token, {ID: plateId}).then(res => {
                 setModList(res)

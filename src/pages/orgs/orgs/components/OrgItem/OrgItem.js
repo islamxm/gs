@@ -3,7 +3,7 @@ import './OrgItem.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import {Col} from 'antd';
 import { Draggable } from 'react-beautiful-dnd';
-
+import pl from '../../../../../assets/img/pl-org.png';
 
 const OrgItem = ({
     Address,
@@ -50,7 +50,7 @@ const OrgItem = ({
             }
         }}>
                     <div className="OrgItem__img">
-                        <img src={ThumbnailPicture} alt="" />
+                        <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt="" />
                     </div>
                     <div className="OrgItem__name">
                         {Name}

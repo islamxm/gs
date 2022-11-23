@@ -13,15 +13,17 @@ const BrandItem = ({
     MarkerID,
     editModal
 }) => {
-
-
     const nav = useNavigate()
-    
+
 
     return (
         <div className="BrandItem draggable">
              <Link to={`/organizations/${ID}`} className="BrandItem__img">
-                    <img src={LogoUrl} alt="" />
+                {
+                    LogoUrl ? (
+                        <img src={LogoUrl} alt=""/>
+                    ) : null
+                }
                 </Link>
             <div className="BrandItem__action">
                 <Button

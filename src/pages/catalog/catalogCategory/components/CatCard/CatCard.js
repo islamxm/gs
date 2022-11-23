@@ -1,5 +1,6 @@
 import './CatCard.scss';
-import img from '../../../../../assets/img/org.png';
+
+import pl from '../../../../../assets/img/pl-plate.png'
 
 const CatCard = ({
     AllowedDeliveryTypes,
@@ -30,7 +31,7 @@ const CatCard = ({
     return (
         <div className="CatCard draggable" onClick={() => editPlate(ID)}>
             <div className="CatCard__img">
-                <img src={ThumbnailPicture} alt="" />
+                <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt="" />
             </div>
             <div className="CatCard__body">
                 <div className="CatCard__body_name">
