@@ -198,13 +198,11 @@ const EditPlatePage = () => {
 
     const deleteImage = (ID) => {
         cs.deletePlateImg(token, {ID: ID}).then(res => {
-            console.log(res)
             if(res.error == 0) {
                 message.success('Картинка удалена')
                 const rm = Picture;
                 const m = rm.splice(rm.findIndex(item => item.ID == ID), 1)
                 setPicture([...rm])
-
             } else {
                 message.error('Произошла ошибка, повторите позже')
             }

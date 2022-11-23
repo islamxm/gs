@@ -845,8 +845,7 @@ const OrgsCreatePage = () => {
                                     <Button 
                                         styles={{width: '100%'}} 
                                         onClick={orgSubmit} 
-                                        
-                                        disabled={!Name || !ThumbnailPrev} 
+                                        disabled={!Name} 
                                         load={saveLoad}
                                         before={<SaveIcon size={16} color={'#fff'}/>} 
                                         text={'Сохранить'} 

@@ -60,6 +60,7 @@ const OrgsPage = () => {
             os.getOrgs(token)
             .then(res => {
                 setList(res)
+                console.log(res)
                 console.log(res.map(item => item.ItemOrder))
             })
             .finally(_ => setLoadList(false))
