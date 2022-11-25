@@ -647,6 +647,7 @@ const OrgsCreatePage = () => {
                 visible={selectPolyModal}
                 close={closeSelectPoly}
                 />
+            {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
                     <div className="OrgsCreatePage__body pageBody-content">

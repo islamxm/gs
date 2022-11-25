@@ -14,6 +14,7 @@ import { Row,Col } from 'antd';
 import authService from '../../../services/dataService';
 import { handleDragStart, handleDragOver, handleDrop, sortItems, handleDragEnd, handleDragLeave } from '../../../funcs/dragSort';
 import {motion} from 'framer-motion';
+import HeaderProfile from '../../../components/HeaderProfile/HeaderProfile';
 
 
 
@@ -135,6 +136,8 @@ const OrgsPage = () => {
                 className="OrgsPage page">
                     
             {/* <AddBrand visible={visible} close={hideModal}/> */}
+            {/* Header */}
+            {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
                 
@@ -201,7 +204,9 @@ const OrgsPage = () => {
                 exit={{opacity: 0}}
 
                 className="OrgsPage page">
-
+                
+                {/* Header */}
+            {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
                     
@@ -273,6 +278,10 @@ const OrgsPage = () => {
                 
             <EditBrand updateList={setList} visible={editBrandModal} close={closeEditBrand} selected={selected}/>
             <AddBrand updateList={setList} visible={addBrandModal} close={closeAddBrand}/>
+
+
+            {/* Header */}
+            {/* <HeaderProfile/> */}
             <main className="Main">
                 
                 <div className="pageBody">

@@ -7,7 +7,7 @@ import {useLocation} from 'react-router-dom';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import Bc from '../Bc/Bc';
 
 const HeaderProfile = () => {
     const {sidebarOpen, settings, user} = useSelector(state => state)
@@ -66,15 +66,14 @@ const HeaderProfile = () => {
                 <div className="HeaderProfile__main">
                     {/* breadcrumbs */}
                     <div className="HeaderProfile__main_nav">
-                        {/* <Link to={-1} className={"HeaderProfile__main_nav_icon"}>
-                            <BsChevronCompactLeft/>
-                        </Link> */}
                         <div className="HeaderProfile__main_nav_head">
                             {
                                 updateHead(loc?.pathname)
                             }
                         </div>
                     </div>
+                    <Bc />
+
 
                     <Dropdown
                         placement='bottom'

@@ -127,7 +127,7 @@ const EditPlateNew = () => {
                 setFats(thisPlate?.Fats != '0' ? thisPlate?.Fats : '') 
                 setProteins(thisPlate?.Proteins != '0' ? thisPlate?.Proteins : '')
                 setCountAdditions(thisPlate?.CountAdditions != '0' ? thisPlate?.CountAdditions : '')
-                setAllowedDeliveryTypes([thisPlate?.AllowedDeliveryTypes])
+                setAllowedDeliveryTypes([thisPlate?.AllowedDeliveryTypes.toString()])
                 setPicture(thisPlate?.Pictures)
                 setPicPrevs(thisPlate?.Pictures.map(item => item.Picture))
                 setMass(thisPlate?.Prices[0]?.Mass != '0' ? thisPlate?.Prices[0]?.Mass : '')
@@ -352,15 +352,16 @@ const EditPlateNew = () => {
         } else {
             data.append('HiddenInOrganisations', '')
         }
-        if(AllowedDeliveryTypes.length == 0) {
-            data.append('AllowedDeliveryTypes', '3')
-        } else {
-            if(AllowedDeliveryTypes.length == 2) {
-                data.append('AllowedDeliveryTypes', '2')
-            } else {
-                data.append('AllowedDeliveryTypes', AllowedDeliveryTypes[0])
-            }
-        }
+        // if(AllowedDeliveryTypes.length == 0) {
+        //     data.append('AllowedDeliveryTypes', '3')
+        // } else {
+        //     if(AllowedDeliveryTypes.length == 2) {
+        //         data.append('AllowedDeliveryTypes', '2')
+        //     } else {
+        //         data.append('AllowedDeliveryTypes', AllowedDeliveryTypes[0])
+        //     }
+        // }
+        data.append('AllowedDeliveryTypes', AllowedDeliveryTypes.join(''))
 
         cs.editProd(token, data).then(res => {
             if(res) {
@@ -570,12 +571,22 @@ const EditPlateNew = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Checkbox 
-                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyDelivery.toString())}
+                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyDelivery.toString()|| item == '2') }
                                         onChange={(e) => {
                                             if(e.target.checked) {
-                                                setAllowedDeliveryTypes(state => [...state, '0'])
+                                                if(AllowedDeliveryTypes.find(item => item == delTypes.onlyLocal.toString())) {
+                                                    setAllowedDeliveryTypes(['2'])
+                                                } else{
+                                                    setAllowedDeliveryTypes(['0'])
+                                                }
+                                                // setAllowedDeliveryTypes(state => [...state, '0'].filter(item => item == '3'))
                                             } else {
-                                                setAllowedDeliveryTypes(state => state.filter(item => item != '0'))
+                                                if(AllowedDeliveryTypes.find(item => item == delTypes.onlyLocal.toString())) {
+                                                    setAllowedDeliveryTypes(['1'])
+                                                } else{
+                                                    setAllowedDeliveryTypes(['3'])
+                                                }
+                                                // setAllowedDeliveryTypes(state => state.filter(item => item != '0'))
                                             }
                                         }}
                                         id={'deliveryTrue'} 
@@ -584,12 +595,22 @@ const EditPlateNew = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Checkbox
-                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyLocal.toString())} 
+                                        checked={AllowedDeliveryTypes.find(item => item == delTypes.onlyLocal.toString() || item == '2') } 
                                         onChange={(e) => {
                                             if(e.target.checked) {
-                                                setAllowedDeliveryTypes(state => [...state, '1'])
+                                                if(AllowedDeliveryTypes.find(item => item == delTypes.onlyDelivery.toString())) {
+                                                    setAllowedDeliveryTypes(['2'])
+                                                } else {
+                                                    setAllowedDeliveryTypes(['1'])
+                                                }
+                                                // setAllowedDeliveryTypes(state => [...state, '1'])
                                             } else {
-                                                setAllowedDeliveryTypes(state => state.filter(item => item != '1'))
+                                                if(AllowedDeliveryTypes.find(item => item == delTypes.onlyDelivery.toString())) {
+                                                    setAllowedDeliveryTypes(['0'])
+                                                } else {
+                                                    setAllowedDeliveryTypes(['3'])
+                                                }
+                                                //setAllowedDeliveryTypes(state => state.filter(item => item != '1'))
                                             }
                                         }}
                                         id={'onlyLocal'} 
@@ -659,9 +680,14 @@ const EditPlateNew = () => {
                                         text={'Динамическое расписание'} 
                                         id={'dynamicTimetable'}/>
                                 </Row>
-                                <Row className='row-custom'>
-                                    <TimeSelect plate={true} save={saveTime} list={weekTimes}/>
-                                </Row>
+                                {
+                                    IsDynamicTimetable == '1' ? (
+                                        <Row className='row-custom'>
+                                            <TimeSelect plate={true} save={saveTime} list={weekTimes}/>
+                                        </Row>
+                                    ) : null
+                                }
+                                
 
                                 <Row className="row-custom">
                                     <Button
