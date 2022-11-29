@@ -1,7 +1,6 @@
 import './MapPolygonPic.scss';
 import { useEffect, useState } from 'react';
-const converter = require('hex2dec');
-const Color = require('color');
+
 
 
 const MapPolygonPic = ({polygonCoords, color, name }) => {
