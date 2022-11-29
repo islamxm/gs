@@ -103,6 +103,7 @@ const OrgsNewPage = () => {
     const [RKeeperIP, setRKeeperIP] = useState('') 
     const [RKeeperPort, setRKeeperPort] = useState('')
     const [PrimehillToken,setPrimehillToken] = useState('')
+    const [CanOverwrite, setCanOverwrite] = useState('0')
     
 
 
@@ -153,6 +154,7 @@ const OrgsNewPage = () => {
                 setTimetableDescription(thisOrg?.TimetableDescription)
                 setLattitude(thisOrg?.Lattitude)
                 setLongitude(thisOrg?.Longitude)
+                setCanOverwrite(thisOrg?.CanOverwrite)
                 if(thisOrg?.Lattitude != undefined && thisOrg?.Longitude != undefined && thisOrg?.Lattitude != '' && !thisOrg?.Lattitude != '') {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
                 } else {
@@ -244,6 +246,7 @@ const OrgsNewPage = () => {
                 setTimetableDescription(thisOrg?.TimetableDescription)
                 setLattitude(thisOrg?.Lattitude)
                 setLongitude(thisOrg?.Longitude)
+                setCanOverwrite(thisOrg?.CanOverwrite)
                 if(thisOrg?.Lattitude && thisOrg?.Longitude) {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
                 } else {
@@ -471,7 +474,7 @@ const OrgsNewPage = () => {
         data.append('RKeeperIP', RKeeperIP)
         data.append('RKeeperPort', RKeeperPort)
         data.append('PrimehillToken', PrimehillToken)
-
+        data.append('CanOverwrite', CanOverwrite)
         for(var pair of data.entries()) {
             console.log(pair[0]+ ': '+ pair[1]);
         }
@@ -651,12 +654,22 @@ const OrgsNewPage = () => {
                                         />
                                     </div>
                                 </Row>
-                                {/* <Row className='row-custom'>
+                                <Row className="row-custom">
                                     <Col span={24}>
-                                        <div className="def-label">ID в системе</div>
-                                        <div className="def-value">{orgId}</div>
+                                        <Checkbox
+                                            id={'CanOverwrite'}
+                                            text={'Разрешить iiko перезаписывать организацию'}
+                                            checked={CanOverwrite == '1'}
+                                            onChange={e => {
+                                                if(e.target.checked) {
+                                                    setCanOverwrite('1')
+                                                } else {
+                                                    setCanOverwrite('0')
+                                                }
+                                            }}
+                                            />
                                     </Col>
-                                </Row> */}
+                                </Row>
                                 <Row className='row-custom'>
                                     <Input value={Name} onChange={(e) => setName(e.target.value)} placeholder={'Название организации'}/>
                                 </Row>

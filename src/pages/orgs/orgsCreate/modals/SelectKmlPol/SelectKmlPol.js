@@ -22,13 +22,6 @@ const SelectKmlPol = ({visible, close, list, updatePolList}) => {
     const [indx, setIndx] = useState(0)
 
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
-
-    useEffect(() => {
-        console.log(selected)
-    }, [selected])
 
     const closeHandle = () => {
         setSelected([])
@@ -70,7 +63,8 @@ const SelectKmlPol = ({visible, close, list, updatePolList}) => {
                 MinPrice: '',
                 DeliveryTime: '',
                 Name: '',
-                Color: item.properties.fill
+                Color: item.properties.fill,
+                IsOnlyForOnlinePayment: '0'
             }
         })
 

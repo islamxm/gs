@@ -12,6 +12,7 @@ import PolyPrice from '../polyPrice/PolyPrice';
 import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 import MapPolygon from '../../../../components/MapPolygon/MapPolygon';
 import SelectColor from './SelectColor/SelectColor';
+import Checkbox from '../../../../components/Checkbox/Checkbox';
 
 const os = new orgService()
 
@@ -30,16 +31,17 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
     const [polyPriceModal, setPolyPriceModal] = useState(false)
     const [editPrice, setEditPrice] = useState(null)
     const [Color, setColor] = useState('')
+    const [IsOnlyForOnlinePayment, setIsOnlyForOnlinePayment] = useState('0')
 
     useEffect(() => {
         if(data) {
-            console.log(data)
             setMinPrice(data?.MinPrice)
             setDelivery(data?.Delivery)
             setDeliveryTime(data?.DeliveryTime)
             setCoords(data?.Coordinates)
             setColor(data?.Color)
             setName(data?.Name)
+            setIsOnlyForOnlinePayment(data?.IsOnlyForOnlinePayment)
         } else {
             setCoords(null)
             setColor('#000000')
@@ -64,6 +66,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
         setDelivery([])
         setCoords(null)
         setName('')
+        setIsOnlyForOnlinePayment('0')
         close();
     }
 
@@ -78,7 +81,6 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
 
     const onSave = () => {    
         if(!data) {
-            console.log('no data')
             if(selected) {
                 const data = {
                     OrganisationID: orgId,
@@ -90,10 +92,10 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     DeliveryTime,
                     Delivery,
                     Name,
-                    Color
+                    Color,
+                    IsOnlyForOnlinePayment
                 }
                 os.addPol(token, data).then(res => {
-                    console.log(res)
                     setPolList(res.map(item => {
                         return {
                             ...item,
@@ -155,7 +157,8 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     DeliveryTime,
                     Delivery,
                     Name,
-                    Color
+                    Color,
+                    IsOnlyForOnlinePayment
                 }).then(res => {
                     setPolList(res.map(item => {
                         return {
@@ -184,7 +187,8 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     }).join(' '),
                     Delivery,
                     Name,
-                    Color
+                    Color,
+                    IsOnlyForOnlinePayment
                 }).then(res => {
                     setPolList(res.map(item => {
                         return {
@@ -252,7 +256,14 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             <Col span={24}>
                                 <div className="def-label">Выберите цвет полигона</div>
                                 <SelectColor color={Color} setColor={setColor}/>
-                                
+                            </Col>
+                            <Col span={24}>
+                                <Checkbox
+                                    id={'IsOnlyForOnlinePayment'}
+                                    text={'Только для онлайн оплаты'}
+                                    checked={IsOnlyForOnlinePayment == '1'}
+                                    onChange={e => e.target.checked ? setIsOnlyForOnlinePayment('1') : setIsOnlyForOnlinePayment('0')}
+                                    />
                             </Col>
                             <Col span={24}>
                                 <Input
