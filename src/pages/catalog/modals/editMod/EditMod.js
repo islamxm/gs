@@ -14,6 +14,7 @@ import AddModItem from '../addModItem/AddModItem';
 import DropCollapse from '../../../../components/DropCollapse/DropCollapse';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
 import catService from '../../../../services/catService';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 
 
 const cs = new catService()
@@ -188,7 +189,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                                             <div className="AddMod__body_item_action">
                                                 <Button
                                                     onClick={() => removeMod(index)} 
-                                                    before={<BsTrash/>} 
+                                                    before={<BsTrash size={20}/>} 
                                                     variant={'danger'} 
                                                     text={'Удалить модификатор'} 
                                                     justify={'flex-start'} 
@@ -216,7 +217,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                         load={saveLoad}
                         onClick={onSave}
                         type={'button'}  
-                        before={<BsTrash/>} 
+                        before={<SaveIcon color={'#fff'} size={20}/>} 
                         justify={'flex-start'} 
                         text={'Сохранить'}/>
                     <Button 
@@ -225,7 +226,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                         onClick={onDelete}
                         variant={'danger'}
                         type={'button'}  
-                        before={<BsTrash/>} 
+                        before={<BsTrash size={20}/>} 
                         justify={'flex-start'} 
                         text={'Удалить группу'}/>
                 </div>

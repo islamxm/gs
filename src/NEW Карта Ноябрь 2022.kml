@@ -1,0 +1,1500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>NEW Карта Ноябрь 2022</name>
+	<description>Без Заводской</description>
+	<ExtendedData>
+		<Data name="creator">
+			<value>Yandex Map Constructor</value>
+		</Data>
+	</ExtendedData>
+	<StyleMap id="__managed_style_02A50391801609C0471B0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1E66E0367A1609C0471B</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0F67811F9C1609C0471C</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:1bad0366_strokeColor:1bad03e6_strokeWidth:2">
+		<LineStyle>
+			<color>e603ad1b</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>6603ad1b</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:1bad0366_strokeColor:1bad03e6_strokeWidth:21">
+		<LineStyle>
+			<color>e603ad1b</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>6603ad1b</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:1bad0366_strokeColor:1bad03e6_strokeWidth:20">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:1bad0366_strokeColor:1bad03e6_strokeWidth:2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:1bad0366_strokeColor:1bad03e6_strokeWidth:21</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:82cdff80_strokeColor:82cdffe6_strokeWidth:2">
+		<LineStyle>
+			<color>e6ffcd82</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ffcd82</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:82cdff80_strokeColor:82cdffe6_strokeWidth:20">
+		<LineStyle>
+			<color>e6ffcd82</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ffcd82</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:82cdff80_strokeColor:82cdffe6_strokeWidth:21">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:82cdff80_strokeColor:82cdffe6_strokeWidth:20</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:82cdff80_strokeColor:82cdffe6_strokeWidth:2</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:b51eff66_strokeColor:b51effe6_strokeWidth:2">
+		<LineStyle>
+			<color>e6ff1eb5</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>66ff1eb5</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:b51eff66_strokeColor:b51effe6_strokeWidth:21">
+		<LineStyle>
+			<color>e6ff1eb5</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>66ff1eb5</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:b51eff66_strokeColor:b51effe6_strokeWidth:20">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:b51eff66_strokeColor:b51effe6_strokeWidth:21</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:b51eff66_strokeColor:b51effe6_strokeWidth:2</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:21">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:22">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:222</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:233</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:23">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:24">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:239</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:221</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:25">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:20</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:249</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:26">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:27">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:28">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:29">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:235</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:226</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:210">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:21</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:229</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:211">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:212">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:213">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:228</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:237</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:214">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:219</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:26</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:215">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:244</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:251</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:216">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:241</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:231</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:217">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:218">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:258</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:28</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:219">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:220">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:221">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:222">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:223">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:230</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:234</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:224">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:225">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:226">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:227">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:240</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:211</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:228">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:229">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:230">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:231">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:232">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:233">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:234">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:235">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:236">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:237">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:238">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:246</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:236</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:239">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:240">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:241">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:242">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:257</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:245</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:243">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:244">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:245">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:246">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:247">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:27</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:212</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:248">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:261</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:2</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:249">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:250">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:251">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:252">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:253">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:261">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:254">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:232</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:250</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:255">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:225</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:23</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:256">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:220</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:253</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:2">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:257">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:258">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:259">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:243</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:252</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:20">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:260">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:224</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:217</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:f371d166_strokeColor:f371d1e6_strokeWidth:21">
+		<LineStyle>
+			<color>e6d171f3</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>66d171f3</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:f371d166_strokeColor:f371d1e6_strokeWidth:2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:f371d166_strokeColor:f371d1e6_strokeWidth:20</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:f371d166_strokeColor:f371d1e6_strokeWidth:21</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:f371d166_strokeColor:f371d1e6_strokeWidth:20">
+		<LineStyle>
+			<color>e6d171f3</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>66d171f3</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ff931e4d_strokeColor:ff931ee6_strokeWidth:21">
+		<LineStyle>
+			<color>e61e93ff</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>4d1e93ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="fillColor:ff931e4d_strokeColor:ff931ee6_strokeWidth:20">
+		<LineStyle>
+			<color>e61e93ff</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>4d1e93ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ff931e4d_strokeColor:ff931ee6_strokeWidth:2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ff931e4d_strokeColor:ff931ee6_strokeWidth:21</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ff931e4d_strokeColor:ff931ee6_strokeWidth:20</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ffd21e66_strokeColor:ffd21ee6_strokeWidth:2">
+		<LineStyle>
+			<color>e61ed2ff</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>661ed2ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="fillColor:ffd21e66_strokeColor:ffd21ee6_strokeWidth:21">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#fillColor:ffd21e66_strokeColor:ffd21ee6_strokeWidth:2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#fillColor:ffd21e66_strokeColor:ffd21ee6_strokeWidth:20</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="fillColor:ffd21e66_strokeColor:ffd21ee6_strokeWidth:20">
+		<LineStyle>
+			<color>e61ed2ff</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>661ed2ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="id16693716705021503060">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<Style id="id1669371670502150306">
+		<LineStyle>
+			<color>e64345ed</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>664345ed</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="id16693716705021503061">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#id16693716705021503060</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#id1669371670502150306</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="id1669371864277181850">
+		<LineStyle>
+			<color>e679470e</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>6679470e</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="id166937186427718185">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#id1669371864277181850</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#id1669371864277181851</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="id1669371864277181851">
+		<LineStyle>
+			<color>e679470e</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>6679470e</color>
+		</PolyStyle>
+	</Style>
+	<Folder>
+		<name>ПЫШМА@1500@ONLINE</name>
+		<Placemark>
+			<name>ПЫШМА@1500@ONLINE</name>
+			<styleUrl>#id16693716705021503061</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.51994799222449,57.00823242228007,0 60.53659914578895,57.00696799632842,0 60.54120990545788,57.00516080004454,0 60.54215404303109,56.99663609089349,0 60.52949401648081,56.99783060508266,0 60.52949401648076,56.99373162128491,0 60.52009555609261,56.99476226557323,0 60.51962348730597,57.00204622979846,0 60.51889392645382,57.00677652653668,0 60.51994799222449,57.00823242228007,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:213</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.65586097485956,56.97464761180195,0 60.6588348458096,56.97218784316203,0 60.65928942364714,56.97017435942,0 60.65590704489845,56.97008502506863,0 60.65360548320191,56.97253144348849,0 60.65003232807042,56.9723616284618,0 60.64546093846175,56.97089696575659,0 60.64421458258425,56.9729364857142,0 60.64404292120731,56.9753738742926,0 60.64369959845341,56.97640502894402,0 60.64704699530402,56.97729554853016,0 60.6455020429114,56.97874845563449,0 60.64764781012333,56.98099800598477,0 60.65974993719852,56.97715494159578,0 60.66747469916142,56.98095114174428,0 60.66532893194948,56.98423149556755,0 60.66735706737799,56.98619647500455,0 60.67233524730963,56.98849242836676,0 60.68292784487643,56.98779183916819,0 60.68224119936863,56.985683276058,0 60.68309950625337,56.98376203638519,0 60.67400145327485,56.98465237934123,0 60.67314314639007,56.98230932566204,0 60.67202734743987,56.98235618818629,0 60.67142653262055,56.98085655803848,0 60.66816496645842,56.98066910000629,0 60.66061186587248,56.9767322624524,0 60.65586097485956,56.97464761180195,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:22</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.54990391549472,57.01285056174056,0 60.5527792435587,57.01412649251728,0 60.55601935204874,57.01468835635184,0 60.55741410073647,57.01479370487196,0 60.55842261132604,57.01486393705228,0 60.5580792885721,57.01525021166351,0 60.55488209542638,57.0150629275066,0 60.55410961923008,57.01549602068231,0 60.55595497903237,57.015975928827,0 60.55870156106351,57.01692402174729,0 60.55955986794839,57.01649094527686,0 60.5604932766855,57.01677771269278,0 60.56186570062655,57.0177844308905,0 60.56249870195413,57.01725187552725,0 60.56408656969085,57.01771420424796,0 60.56632889642721,57.01769664755138,0 60.56662930383694,57.01684221232934,0 60.56725157632837,57.0169241453284,0 60.56710137262352,57.01795414471169,0 60.56416167154322,57.01827016150707,0 60.56276692285543,57.01837549983965,0 60.56145800485618,57.01856276724661,0 60.55995596780782,57.01886707476332,0 60.55952681436546,57.01939375494091,0 60.55896891489041,57.01952249784506,0 60.55637253656391,57.02013109459833,0 60.55613650217059,57.02068116383445,0 60.55517090692523,57.02075138485097,0 60.55474175348292,57.02029494586352,0 60.55349720849993,57.02058753560532,0 60.55218829050067,57.02084501266582,0 60.55068625345235,57.02089182648449,0 60.54972602262502,57.02074260721602,0 60.54921640291217,57.02150917816663,0 60.54690896480649,57.02461021032398,0 60.54594336956113,57.0243527594358,0 60.54495631664362,57.02513680880705,0 60.54517089336487,57.02569850561673,0 60.54381906002131,57.0258740341222,0 60.5441838404474,57.0262016851059,0 60.54218827694031,57.02689208304366,0 60.54132997005549,57.02690378459268,0 60.54111539333431,57.0264942281768,0 60.53360520809258,57.02703250138767,0 60.53128777950369,57.02718462065174,0 60.52965699642266,57.02685697836687,0 60.5309015414056,57.02621338686554,0 60.53530036418999,57.02586233224011,0 60.53723691909879,57.025692654637,0 60.53895279585821,57.02560136069422,0 60.53904935538274,57.02472370338152,0 60.53972527205448,57.02465348989776,0 60.53896352469427,57.02382262022211,0 60.53845926939943,57.02351250210954,0 60.53895279585812,57.02283374397847,0 60.53918883025143,57.02226030068763,0 60.53944632231685,57.02196772416264,0 60.54105564772578,57.02152300341724,0 60.54124876677489,57.02094953983529,0 60.54199978529904,57.02080909842064,0 60.54206415831541,57.02058673175814,0 60.54047629057858,57.01961532489112,0 60.54028317152947,57.01939295105267,0 60.54341599165883,57.01752027631988,0 60.54990391549472,57.01285056174056,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:248</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.609805,57.00028,0 60.610743,57.00206899999999,0 60.61106899999999,57.00360199999999,0 60.606019,57.003636,0 60.601626,57.003607,0 60.595857,57.00562,0 60.592558,57.00443200000001,0 60.58717,57.002494,0 60.576904,56.99732999999999,0 60.58361399999999,56.993684,0 60.588936,56.99106399999999,0 60.60099499999999,56.98523699999999,0 60.60175,56.984874,0 60.602704,56.984885,0 60.60357199999999,56.985389,0 60.603124,56.986384,0 60.605849,56.986083,0 60.609916,56.98704499999999,0 60.61031,56.98717099999999,0 60.612604,56.987953,0 60.61353100000001,56.987956,0 60.61415,56.988614,0 60.61522300000001,56.988589,0 60.61560800000001,56.98971199999999,0 60.616052,56.99067099999999,0 60.615977,56.991218,0 60.616223,56.991517,0 60.61551099999999,56.99197899999999,0 60.614298,56.992227,0 60.613488,56.992676,0 60.612227,56.992996,0 60.61132199999999,56.993497,0 60.611677,56.99452600000001,0 60.611834,56.994963,0 60.611137,56.995711,0 60.612587,56.996964,0 60.61330199999999,56.997047,0 60.61383300000001,56.99729199999999,0 60.61306,56.998419,0 60.613079,56.998903,0 60.611694,56.99895099999999,0 60.612115,56.999865,0 60.610789,57.000348,0 60.610312,57.000382,0 60.609805,57.00028,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:254</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.460826,56.972949,0 60.46131549731442,56.97130598907584,0 60.46772372485349,56.9685294255873,0 60.4725627248535,56.96619816336087,0 60.47347257141112,56.96774201106275,0 60.47516520104978,56.96712949742189,0 60.47498906347656,56.96508315661261,0 60.48338670373533,56.96336802967455,0 60.48776894714352,56.96597781114392,0 60.48582860073817,56.96982085880643,0 60.48491278627178,56.97121949830638,0 60.48596925927732,56.9720032625627,0 60.4885821270142,56.97421752560006,0 60.49203577783201,56.97532729578229,0 60.49442876196289,56.97796191728381,0 60.486964,56.98046299999999,0 60.486642,56.98066,0 60.48656400000001,56.98072700000001,0 60.486494,56.98149900000001,0 60.484939,56.981703,0 60.48469300000001,56.98180900000001,0 60.48421500000001,56.98215,0 60.483654,56.982871,0 60.482584,56.983513,0 60.483427,56.983341,0 60.483723,56.983493,0 60.484279,56.983885,0 60.48449000000001,56.98482300000001,0 60.486034,56.984516,0 60.486631,56.984768,0 60.487144,56.985473,0 60.487197,56.98558700000001,0 60.487999,56.986134,0 60.48974500000001,56.98732800000001,0 60.490993,56.98716,0 60.495915,56.986421,0 60.497867,56.987546,0 60.501433,56.98804199999999,0 60.502114,56.988554,0 60.499947,56.98889,0 60.50069334424784,56.98970767615405,0 60.50350909533691,56.99207882364918,0 60.50123449218747,56.99409375167496,0 60.49761823291013,56.99576910942951,0 60.4955979260254,56.99814270201756,0 60.49458244982906,57.00027094685602,0 60.48843710058589,56.99810600982305,0 60.48738042333979,56.9982531436665,0 60.48826023815912,56.99917764240819,0 60.49017800537106,57.00068361078731,0 60.49104063500975,57.0040373571687,0 60.48830115881342,57.00728698691313,0 60.48142080957027,57.00999255301873,0 60.47673812170409,57.00888204605887,0 60.46750637036131,57.00651219768201,0 60.4673079470825,57.00132579345598,0 60.46579874603272,57.00186023684446,0 60.46545200000001,56.999113,0 60.464753,56.99914299999999,0 60.46444700000001,56.99922600000001,0 60.46414399999999,56.999217,0 60.46411,56.99724499999999,0 60.463272,56.996776,0 60.46324,56.99614299999999,0 60.463098,56.99536400000001,0 60.461953,56.99386400000001,0 60.461844,56.99282199999999,0 60.46178200000001,56.991438,0 60.460021,56.991513,0 60.459678,56.99198,0 60.459163,56.99234200000001,0 60.458891,56.992899,0 60.45630899999999,56.99318000000001,0 60.455166,56.991466,0 60.454393,56.98976999999999,0 60.453219,56.988464,0 60.453357,56.986921,0 60.451408,56.98385900000001,0 60.450606,56.983195,0 60.450282,56.98278699999999,0 60.450459,56.98180900000001,0 60.451965,56.98209500000001,0 60.452987,56.98282900000001,0 60.454162,56.981944,0 60.455618,56.981192,0 60.46063,56.979894,0 60.460734,56.976064,0 60.460826,56.972949,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА, ПРОСПЕКТ УСПЕНСКИЙ 48/1</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>https://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.559287,56.977864,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>ПЫШМА@2000@ONLINE</name>
+		<Placemark>
+			<name>ПЫШМА@2000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:24</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.44252574742805,56.96689315853359,0 60.4390066892005,56.9675026199535,0 60.43909251988897,56.96914342786835,0 60.4390066892005,56.97134668436127,0 60.43737590611946,56.97233107582453,0 60.4342663737831,56.97357645691307,0 60.42885904040907,56.97596693290595,0 60.42559747424699,56.97568570843149,0 60.4261982890663,56.97418580855937,0 60.42559747424699,56.97296709525763,0 60.42422418323137,56.97137333283676,0 60.41701440539931,56.97071705782188,0 60.41538362231827,56.96720110113581,0 60.41941766467666,56.96307528714647,0 60.4342663737831,56.96185620886386,0 60.43489434503926,56.95570738829657,0 60.4315469481887,56.95251831215916,0 60.43626763605494,56.94975109766535,0 60.44124581598638,56.95219000930535,0 60.44716813349124,56.95289351174557,0 60.44862725519534,56.95073606199674,0 60.4656217315137,56.95209620796429,0 60.46403180693114,56.9569182643888,0 60.44252574742805,56.96689315853359,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@2000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:227</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.60818611189507,57.02758729684419,0 60.60286460920952,57.02730646383208,0 60.60320793196342,57.02234472934728,0 60.60003219648981,57.02225110532427,0 60.59986053511286,57.01944227455802,0 60.60423790022514,57.01761642030907,0 60.60466705366751,57.01536909150304,0 60.59977470442438,57.01471359491469,0 60.59737144514703,57.01522862892497,0 60.59496818586967,57.013543036439,0 60.58732925459525,57.01120180850961,0 60.58741508528368,57.00946920456806,0 60.59342323347706,57.00520759069578,0 60.59968887373586,57.00679989939162,0 60.61119018599173,57.00544175803093,0 60.61179100081105,57.01017162133482,0 60.61342178389209,57.01007796653541,0 60.61445175215382,57.01054623816484,0 60.61565338179249,57.01031210309001,0 60.61513839766165,57.00862628686799,0 60.61685501143117,57.00806433107995,0 60.62243400618213,57.01129546046027,0 60.61960159346241,57.01255973872409,0 60.61831413313526,57.01199784260055,0 60.61522422835013,57.01218514225543,0 60.6138509373345,57.01101450387522,0 60.61187683149951,57.01078037175989,0 60.61179100081105,57.01405808671814,0 60.60964523359911,57.01443266424661,0 60.60792861982959,57.01696096348574,0 60.60784278914107,57.02234472932456,0 60.60818611189507,57.02758729684419,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@2000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:247</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.5944482014927,57.04633977968914,0 60.59653764231527,57.04690846429898,0 60.5983260051759,57.04749504820036,0 60.59917023046337,57.04672499501641,0 60.60231780274241,57.0478981593668,0 60.6030869261774,57.04942614098775,0 60.60256858928531,57.05043952236488,0 60.59646790488094,57.05031454139032,0 60.59508120282027,57.04889513709855,0 60.58645521862838,57.04611171863018,0 60.58697020275922,57.04344505409397,0 60.58941637738084,57.0429070195358,0 60.58926617367589,57.04173735216833,0 60.59473788006633,57.04236897713849,0 60.59587513668863,57.0432228233739,0 60.5944482014927,57.04633977968914,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА, ПРОСПЕКТ УСПЕНСКИЙ 48/1</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>https://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.559287,56.977864,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>ПЫШМА@3000@ONLINE</name>
+		<Placemark>
+			<name>ПЫШМА@3000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:242</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.6775807467039,57.06528413398458,0 60.66934100061017,57.05948573001638,0 60.67002764611795,57.05490247706054,0 60.66848269372537,57.05144127697989,0 60.6648778048094,57.04872821805133,0 60.66316119103983,57.04208506135173,0 60.66968432336401,57.0341304174649,0 60.67655077844217,57.04133646186858,0 60.68376055627419,57.0435822148598,0 60.69011202722145,57.04807331193705,0 60.70504656701635,57.05050576188889,0 60.70830813317849,57.05518310070136,0 60.70401659875467,57.05929866957899,0 60.69320193200659,57.06322673988346,0 60.6775807467039,57.06528413398458,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@3000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:260</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.3837001586981,56.9696104508029,0 60.37909686864373,56.96661186520332,0 60.36999881566521,56.96464275266042,0 60.35609424413204,56.96764326340706,0 60.34579456151483,56.97045602189146,0 60.34871280492303,56.97448727055094,0 60.34939945043087,56.98170492369449,0 60.36381900609494,56.98086137438442,0 60.36244571507932,56.9841417361477,0 60.35626590550898,56.98985824455272,0 60.35832584203239,56.99229452124673,0 60.36502063573356,56.99098269984424,0 60.36845386327264,56.98807778725784,0 60.37789523900506,56.98432917662726,0 60.3795260220861,56.98306393499616,0 60.38089931310173,56.97950228235292,0 60.38162887395377,56.97809627267699,0 60.38660705388542,56.97666677485976,0 60.39016902745718,56.97469819590579,0 60.38765971858897,56.972679106242,0 60.3837001586981,56.9696104508029,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@3000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:214</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.61848579451232,57.0430298321964,0 60.61711250349669,57.03807020510229,0 60.62346397444391,57.04059689064807,0 60.62329231306698,57.04274911633578,0 60.61848579451232,57.0430298321964,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА@3000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:259</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.58954512341361,57.05467181628403,0 60.59070383770803,57.05474197282954,0 60.5892876313482,57.05780534570821,0 60.59006010754446,57.06079831989744,0 60.59229170544486,57.06486650570668,0 60.59048926098687,57.06729785130983,0 60.58800017102105,57.06739136140882,0 60.58757101757864,57.06556787181076,0 60.58396612866265,57.06369753263018,0 60.58388029797418,57.05986304148682,0 60.58954512341361,57.05467181628403,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА, ПРОСПЕКТ УСПЕНСКИЙ 48/1</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>https://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.559287,56.977864,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>ПЫШМА@700</name>
+		<Placemark>
+			<name>ПЫШМА@700</name>
+			<styleUrl>#fillColor:ff931e4d_strokeColor:ff931ee6_strokeWidth:2</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.60241300000001,56.98445,0 60.58255399999999,56.993422,0 60.569126,56.988195,0 60.559207,56.988129,0 60.55819199999999,56.99022899999999,0 60.549183,56.989843,0 60.54802639154051,56.99304059145234,0 60.54565856613154,56.99302716675032,0 60.545694,56.992311,0 60.543018,56.985827,0 60.52733899999999,56.99193500000001,0 60.520902,56.993818,0 60.511999,56.98694,0 60.50799,56.987686,0 60.504496,56.98817399999999,0 60.502213,56.988536,0 60.501512,56.988018,0 60.52027400000001,56.985452,0 60.525553,56.984665,0 60.524417,56.984248,0 60.523023,56.98385900000001,0 60.520943,56.982823,0 60.52102899999999,56.981403,0 60.522624,56.97958700000001,0 60.533342,56.978168,0 60.528212,56.969402,0 60.53367099999999,56.96809499999999,0 60.538959,56.969695,0 60.546959,56.962392,0 60.574256,56.965779,0 60.58620500000001,56.958109,0 60.58849299999999,56.957727,0 60.58691400000001,56.95578,0 60.586164,56.953876,0 60.585839,56.953143,0 60.57821984915157,56.95185564258729,0 60.57453407465358,56.95108822993193,0 60.57290576412578,56.95039965025847,0 60.57243493161577,56.94653744119294,0 60.57494609739196,56.94638873034857,0 60.57937741575376,56.945868745749,0 60.57974771513239,56.9499944758223,0 60.57891638487239,56.95144645561612,0 60.58519191534424,56.95239739908423,0 60.59858635449217,56.9467634634219,0 60.609467,56.941785,0 60.607508,56.939178,0 60.611138,56.93824499999999,0 60.61478900000001,56.936725,0 60.617174,56.935944,0 60.61940899999999,56.936032,0 60.620875,56.93701,0 60.625023,56.93576,0 60.628256,56.933799,0 60.62885899999999,56.934088,0 60.62965400000001,56.93534,0 60.62638200000001,56.93759099999999,0 60.62597000000001,56.93948700000001,0 60.62965400000001,56.940177,0 60.63132100000001,56.94115,0 60.632623,56.94014,0 60.633185,56.93923099999999,0 60.634433,56.938392,0 60.636072,56.93882500000001,0 60.635248,56.942353,0 60.632695,56.945163,0 60.631185,56.947351,0 60.63046899999999,56.94907,0 60.627886,56.954189,0 60.626098,56.959308,0 60.626154,56.96580500000001,0 60.624057,56.970173,0 60.620545,56.97425999999999,0 60.61134,56.981318,0 60.611082,56.981645,0 60.61106100000001,56.981984,0 60.610945,56.983286,0 60.610579,56.985259,0 60.610463,56.98616,0 60.610429,56.9865,0 60.610386,56.98687200000001,0 60.61012700000001,56.987057,0 60.60611900000001,56.986002,0 60.603186,56.98634200000001,0 60.60361,56.985393,0 60.60241300000001,56.98445,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>ПЫШМА, ПРОСПЕКТ УСПЕНСКИЙ 48/1</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>https://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.559287,56.977864,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="1B0726CE2812B6EF8A36">
+		<name>АКАДЕМИЧЕСКИЙ@1500ONLINE</name>
+		<Placemark>
+			<name>АКАДЕМИЧЕСКИЙ@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:255</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.46396600000001,56.798852,0 60.46474,56.79849600000001,0 60.466506,56.798009,0 60.467677,56.79763,0 60.469667,56.797735,0 60.473478,56.798073,0 60.476543,56.798745,0 60.480199,56.798604,0 60.48110499999999,56.799343,0 60.48172900000001,56.799613,0 60.48158,56.80009200000001,0 60.482224,56.800252,0 60.48409162963866,56.80097005264002,0 60.48335772222893,56.80162848254545,0 60.48191571163935,56.8021927211066,0 60.4814750343933,56.80250303479592,0 60.48131969842528,56.8029940726091,0 60.4793162037048,56.80393552799115,0 60.47805142593383,56.8046659780223,0 60.47710046997112,56.80522485778337,0 60.47796241269116,56.80608278738661,0 60.47860796077231,56.80607621078828,0 60.48112032632787,56.80570472334632,0 60.48125687461548,56.80658029851267,0 60.48217163385993,56.80650603807312,0 60.48242149046915,56.8073223052824,0 60.48279484997002,56.80819537338966,0 60.48310585338947,56.80886142290132,0 60.48070024068568,56.81038616450264,0 60.4832564520957,56.81167814284925,0 60.48636916841284,56.81313618729316,0 60.48794685319741,56.81494790225501,0 60.48858765910649,56.8158125381178,0 60.49084672464327,56.81576235529318,0 60.49132712577835,56.81747891857104,0 60.49167652393824,56.81788726483195,0 60.49331034472232,56.81911519209403,0 60.49300072732802,56.81970560665188,0 60.49288346955707,56.82032439787556,0 60.49608272182371,56.82090838346906,0 60.49814905232555,56.82125038037272,0 60.49889752137179,56.82143950781477,0 60.49944290663125,56.8216629722979,0 60.4945332179577,56.82328976265573,0 60.49149446500026,56.82273113925199,0 60.49133927659033,56.82043721292283,0 60.48122064155635,56.82059327435629,0 60.47430409008783,56.82010525909762,0 60.46893096174615,56.81948070771078,0 60.46544610855103,56.81826777981946,0 60.46010718524172,56.8158888784451,0 60.45735137953608,56.81568662850492,0 60.45343685953605,56.81574327899405,0 60.44835440156728,56.81444437208373,0 60.44585171954342,56.81409115831185,0 60.44629270632934,56.81298363459724,0 60.44231341265867,56.81211146586411,0 60.44312500262451,56.81116442761504,0 60.444237,56.809417,0 60.44261199999999,56.808589,0 60.441411,56.807798,0 60.44111199999999,56.807879,0 60.439998,56.807977,0 60.439607,56.807109,0 60.43933499999999,56.80637,0 60.43983999999999,56.804991,0 60.44204599999999,56.80302900000001,0 60.44316999999999,56.802242,0 60.442576,56.801723,0 60.442691,56.799812,0 60.442558,56.798179,0 60.444475,56.797148,0 60.44533199999999,56.796701,0 60.44625800000001,56.796233,0 60.448061,56.796418,0 60.449737,56.797269,0 60.45351600000001,56.799233,0 60.45499,56.800044,0 60.455537,56.800341,0 60.456749,56.80029600000001,0 60.459201,56.799277,0 60.460598,56.79849299999999,0 60.461931,56.797832,0 60.46396600000001,56.798852,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>АКАДЕМИЧЕСКИЙ@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:210</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.526889,56.75735999999999,0 60.471597,56.784153,0 60.463957,56.787451,0 60.462817,56.785054,0 60.467311,56.774235,0 60.46659200000001,56.770913,0 60.473889,56.767806,0 60.48255799999999,56.76498100000001,0 60.497059,56.758914,0 60.507034,56.755338,0 60.529308,56.749683,0 60.53485782275387,56.74680374024059,0 60.53972100000001,56.742415,0 60.54067848675533,56.74071434058552,0 60.54290474869976,56.7383217067787,0 60.5447521326208,56.73662442685503,0 60.55166352716196,56.73771027552518,0 60.55758989290455,56.73563647397769,0 60.562662,56.736442,0 60.56182,56.741382,0 60.526889,56.75735999999999,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>КРАСНОЛЕСЬЯ, 133</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.51957780000001,56.7929909,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="1B0726CE2812B6EF8A36">
+		<name>АКАДЕМИЧЕСКИЙ@700</name>
+		<Placemark>
+			<name>АКАДЕМИЧЕСКИЙ@700</name>
+			<styleUrl>#fillColor:82cdff80_strokeColor:82cdffe6_strokeWidth:21</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.48140571772152,56.80652840737674,0 60.48138028465574,56.80634635675621,0 60.48127459814758,56.80574143306634,0 60.48123248372953,56.8054183674831,0 60.48113672513121,56.80526598644896,0 60.48061814933621,56.80491660042761,0 60.48018183564371,56.8047566207828,0 60.47867263834522,56.80555602368398,0 60.47801373027185,56.80523825674536,0 60.47918945316469,56.80453202153779,0 60.48024596609591,56.80401337865099,0 60.4817363254311,56.803197823814,0 60.48240504181403,56.80268206512423,0 60.48317031772155,56.80224282042998,0 60.48370293769676,56.80200780770585,0 60.48403170978698,56.80174924828744,0 60.4843341,56.80134470000001,0 60.4853191,56.8010937,0 60.4829891,56.80038570000001,0 60.4823811,56.8001067,0 60.4817392,56.7999487,0 60.4818582,56.7994467,0 60.48098481931152,56.79899284469113,0 60.48024018465572,56.79854487069053,0 60.47657487724609,56.79866343613072,0 60.47328789259036,56.7979488906756,0 60.46997692698361,56.79764711749321,0 60.46773638465573,56.79752634378187,0 60.46702830026243,56.79743105324807,0 60.46649187724609,56.79705318508514,0 60.46649011481931,56.79637932242626,0 60.46550101710136,56.79578838533592,0 60.46457849717371,56.79526959593602,0 60.46326973914791,56.79449175220631,0 60.46276572354125,56.79402422902177,0 60.46250847116391,56.79360968837845,0 60.46211246931146,56.79189235443136,0 60.46386295609734,56.79185025131885,0 60.46359642170407,56.79065410620961,0 60.46322951429439,56.79003737949182,0 60.46289479339298,56.78961495449401,0 60.46422817131804,56.78930149352755,0 60.46248237329402,56.78815187875443,0 60.4717833,56.7841217,0 60.5622968,56.74132769999999,0 60.5642728,56.7420797,0 60.5682978,56.74358569999999,0 60.5720949,56.74501169999999,0 60.5733928,56.7455707,0 60.5743338,56.7461667,0 60.5750108,56.7467467,0 60.5764428,56.7485317,0 60.5772018,56.7495387,0 60.5777679,56.7501337,0 60.5782858,56.7505137,0 60.5787818,56.75083070000001,0 60.5790908,56.7510257,0 60.5799409,56.7514337,0 60.5806008,56.7517487,0 60.5818599,56.7523267,0 60.5832088,56.75290470000001,0 60.58487079999999,56.75350370000001,0 60.5851048,56.7536767,0 60.5854738,56.7540917,0 60.5857018,56.7544827,0 60.58517852883604,56.75467183106747,0 60.58453724047547,56.75467236228719,0 60.58346086745908,56.75484940521795,0 60.58317834232783,56.75633455227392,0 60.5828698,56.7578637,0 60.5825238,56.76024770000001,0 60.58358779999999,56.7624617,0 60.5841248,56.76343669999999,0 60.58423379999999,56.7642157,0 60.5849688,56.7644937,0 60.5856218,56.7646657,0 60.58572789999999,56.7647207,0 60.58524280000001,56.7653987,0 60.58539879999999,56.7656007,0 60.5856668,56.76588169999999,0 60.58608580000001,56.7667407,0 60.5853208,56.7678427,0 60.58505188598325,56.76792647501836,0 60.58358134232787,56.76769210054723,0 60.57809473068846,56.76682383454843,0 60.57748052698367,56.76691740167171,0 60.57485688465572,56.7666961857859,0 60.5746218,56.76748070000001,0 60.5738069,56.7674987,0 60.57335779999999,56.7689907,0 60.5720079,56.7688167,0 60.5726458,56.7704347,0 60.5733288,56.77227669999999,0 60.5737549,56.7732367,0 60.5738669,56.7735417,0 60.5739239,56.7735787,0 60.5741508,56.7740677,0 60.5742448,56.7742787,0 60.5742618,56.7744087,0 60.5743518,56.7745857,0 60.5741978,56.7749127,0 60.5733368,56.77501370000001,0 60.5715199,56.7752347,0 60.56869380000001,56.7755617,0 60.5687498,56.7779947,0 60.5703168,56.7836167,0 60.57204479999999,56.7870777,0 60.5734289,56.79130670000001,0 60.5619459,56.7956257,0 60.557733,56.7971537,0 60.54010890000001,56.8029087,0 60.5392,56.8029447,0 60.5380939,56.8031617,0 60.537544,56.8034937,0 60.52608201410266,56.80900018003315,0 60.51747867672118,56.81277185328699,0 60.5143741,56.8143403,0 60.5088234,56.8175766,0 60.5047082,56.819676,0 60.50228555767211,56.82063184416293,0 60.49984145767211,56.82154059835062,0 60.4959223,56.8208362,0 60.49301899999999,56.820282,0 60.49310894047544,56.81963916970151,0 60.493392,56.819114,0 60.491615,56.817714,0 60.49139550851772,56.81748387324191,0 60.490493,56.813757,0 60.4886768,56.8136567,0 60.48618767724606,56.81295199999258,0 60.48535438888545,56.81254988554004,0 60.48289031744382,56.81142982989005,0 60.48089049195021,56.81038153958226,0 60.48317940740964,56.80887577039537,0 60.48268294973752,56.80783620595838,0 60.48219722090145,56.80644347997204,0 60.48140571772152,56.80652840737674,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>КРАСНОЛЕСЬЯ, 133</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.51957780000001,56.7929909,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>УРАЛМАШ@1500ONLINE</name>
+		<Placemark>
+			<name>УРАЛМАШ@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:218</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.426975,56.899839,0 60.41519,56.892036,0 60.39120799999999,56.88509599999999,0 60.356607,56.873589,0 60.34522599999999,56.868966,0 60.388064,56.87028400000001,0 60.392407,56.871019,0 60.39413,56.870959,0 60.399643,56.873035,0 60.40230400000001,56.874813,0 60.403413,56.87589299999999,0 60.404569,56.877568,0 60.405643,56.878804,0 60.407036,56.878346,0 60.40821900000001,56.87807800000001,0 60.41034,56.878708,0 60.414919,56.879321,0 60.415621,56.880546,0 60.413714,56.881579,0 60.41743199999999,56.882522,0 60.421936,56.882786,0 60.433238,56.886082,0 60.44412100000001,56.88629700000001,0 60.462069,56.883084,0 60.463426,56.884307,0 60.46448000000001,56.885333,0 60.468698,56.889241,0 60.472972,56.891369,0 60.47591100000001,56.89371899999999,0 60.47885000000001,56.895952,0 60.485461,56.8983,0 60.499449,56.903098,0 60.51343900000001,56.90549,0 60.509413,56.912776,0 60.499787,56.91494400000001,0 60.502357,56.92198199999999,0 60.502765,56.923281,0 60.499919,56.924132,0 60.494133,56.92513599999999,0 60.489914,56.925511,0 60.483715,56.926138,0 60.480305,56.926648,0 60.474796,56.926904,0 60.470612,56.92495,0 60.461182,56.92047,0 60.456503,56.917983,0 60.44498,56.91189199999999,0 60.436377,56.907262,0 60.426975,56.899839,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>УРАЛМАШ@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:25</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.68981780286895,56.88255457794963,0 60.68943156477079,56.88184974319739,0 60.68878783460722,56.88180275373941,0 60.68741454359161,56.88041653804591,0 60.6865133213626,56.87816089032314,0 60.68213595625026,56.87813739327351,0 60.68076266523464,56.87745597238349,0 60.68050517316922,56.87672754315836,0 60.67906750913718,56.87376668412444,0 60.67535533186057,56.87406043066471,0 60.67484034772974,56.8716281395348,0 60.67664279218768,56.87155763596604,0 60.67923917051413,56.87001827494072,0 60.67471160169696,56.86813805301469,0 60.67447556730363,56.8673741857472,0 60.67496909376231,56.86698637020836,0 60.67724360700693,56.86763272718411,0 60.68033351179212,56.86548207781996,0 60.68157805677501,56.86577588970102,0 60.68505625839217,56.86366547670222,0 60.68754534835794,56.8637712544046,0 60.68915467376688,56.86442942002633,0 60.69097857589701,56.86438240858184,0 60.68846802825909,56.8675437960629,0 60.68845928227222,56.86812765853189,0 60.68795502697743,56.86907953300673,0 60.68681777035508,56.86977285834568,0 60.68793356930528,56.87162949657999,0 60.68770826374801,56.87241090207006,0 60.69070160900863,56.8740265381461,0 60.69232166325363,56.87507225794684,0 60.69575047999947,56.87832422303654,0 60.69365817491056,56.87900487692845,0 60.69363671723845,56.88107251235595,0 60.69565373841765,56.88140144376837,0 60.69994527284147,56.88221201234349,0 60.70256310884004,56.8827288874367,0 60.70545989457612,56.88279936984791,0 60.70857125703336,56.88257617508043,0 60.71138221208097,56.88236472617867,0 60.71251946870328,56.88224725404012,0 60.7159097808981,56.88124872596654,0 60.71693974915983,56.88046163201472,0 60.71760493699551,56.87960403309419,0 60.71838789773034,56.87847775001316,0 60.71939433620512,56.87741712004275,0 60.72023118541776,56.87662994508289,0 60.72342837856347,56.87305807646853,0 60.72514499233299,56.87355157871072,0 60.72385753200583,56.87512604214602,0 60.72475875423488,56.87561951698284,0 60.72557414577539,56.8763479678847,0 60.72608912990624,56.87731138106048,0 60.72463000820214,56.87902666476761,0 60.72495407044968,56.88152184349998,0 60.72531069155571,56.88350436850217,0 60.72741354342338,56.8839507455536,0 60.7339366757476,56.87826491142708,0 60.73406542178033,56.87650259647756,0 60.73316419955129,56.87488119305245,0 60.73229706422719,56.87252766857655,0 60.73989308015735,56.87168163746723,0 60.74221050874623,56.87464266226335,0 60.7434121383849,56.88068148300193,0 60.74643816391077,56.889546446164,0 60.74768270889366,56.89243558635183,0 60.75394834915247,56.89431458153745,0 60.75311088584689,56.90070022565494,0 60.75152301811005,56.90337717035768,0 60.74761772178435,56.90302495179773,0 60.74731731437472,56.90102898362633,0 60.73246860526824,56.89541621682137,0 60.73451269963869,56.89305246863746,0 60.73837508062009,56.89009290783095,0 60.74228037694564,56.89082107553362,0 60.74434031346911,56.88943519565971,0 60.74608770986703,56.88982467780608,0 60.74341482580848,56.88288473052577,0 60.74224397879823,56.88118327294212,0 60.73006532901155,56.88909486621243,0 60.71867595910482,56.88668433607621,0 60.71505426650526,56.88798538787923,0 60.7092714238692,56.88404880896002,0 60.70617203918965,56.88432265793264,0 60.70401679208334,56.88485492678758,0 60.70095417840056,56.88463972138266,0 60.69899173942618,56.88560818429599,0 60.69607870761388,56.88494322150743,0 60.69058929564951,56.88282297287686,0 60.68427451290642,56.88462474135103,0 60.68413953973366,56.88445305696569,0 60.68981780286895,56.88255457794963,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>УРАЛМАШ@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:215</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.66415,56.94960200000001,0 60.665813,56.949793,0 60.668931,56.94822000000001,0 60.67406099999999,56.945979,0 60.67685,56.946037,0 60.682318,56.945478,0 60.683933,56.94541000000001,0 60.689593,56.94297499999999,0 60.693902,56.94513800000001,0 60.68793400000001,56.947394,0 60.689507,56.948536,0 60.685529,56.94999,0 60.68495600000001,56.951342,0 60.686095,56.952691,0 60.687003,56.953197,0 60.688383,56.954747,0 60.69044,56.957353,0 60.68946099999999,56.957828,0 60.68711800000001,56.95838,0 60.687614,56.959125,0 60.682164,56.963662,0 60.673927,56.965139,0 60.670758,56.964406,0 60.669775,56.963911,0 60.666367,56.964822,0 60.66259500000001,56.96552699999999,0 60.661594,56.96437900000001,0 60.65131,56.963437,0 60.651854,56.962816,0 60.653463,56.962124,0 60.655197,56.961146,0 60.655036,56.960738,0 60.65327299999999,56.960224,0 60.652717,56.95980800000001,0 60.649523,56.96062100000001,0 60.647952,56.96081600000001,0 60.645099,56.96037100000001,0 60.647966,56.954672,0 60.63070900000001,56.948913,0 60.631604,56.947128,0 60.63353799999999,56.944603,0 60.637103,56.943486,0 60.656544,56.943073,0 60.66323200000001,56.949828,0 60.66415,56.94960200000001,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0F8A4986DF12B75609F7">
+			<name>ИЛЬИЧА, 47</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.60431959999999,56.89564450000001,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>УРАЛМАШ@5000ONLINE</name>
+		<Placemark>
+			<name>УРАЛМАШ@5000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:238</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.79661998715153,56.93679511725942,0 60.78134212460274,56.93670127703476,0 60.76512012448062,56.93327594660639,0 60.76108608212223,56.92525099100774,0 60.75979862179498,56.92027558697145,0 60.76683673824995,56.91342158154704,0 60.76228771176086,56.90778720628582,0 60.75911197628734,56.90224590477052,0 60.75919780697582,56.90050820799557,0 60.7652059551691,56.89623406790803,0 60.7714715954279,56.89783105682758,0 60.78297290768367,56.8964689235188,0 60.78717861141901,56.89726742149867,0 60.79224262203935,56.89862952557439,0 60.80657634701473,56.89764317932805,0 60.81128715506686,56.89128269880157,0 60.82317964532809,56.89042313413709,0 60.83129558529645,56.90816285785635,0 60.82520160641413,56.9136563286505,0 60.82391414608698,56.9182570728095,0 60.83052310909962,56.92004088165459,0 60.83206806149251,56.92464083577133,0 60.81241283383061,56.92421841472868,0 60.79661998715153,56.93679511725942,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0F8A4986DF12B75609F7">
+			<name>ИЛЬИЧА, 47</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.60431959999999,56.89564450000001,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="14DA476A6A12B6EF8A35">
+		<name>УРАЛМАШ@700</name>
+		<Placemark>
+			<name>УРАЛМАШ@700</name>
+			<styleUrl>#fillColor:b51eff66_strokeColor:b51effe6_strokeWidth:20</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.51897077072474,56.87448231507521,0 60.5212620477757,56.87624947685264,0 60.52383462149707,56.87817279509999,0 60.52636008892262,56.88001924722213,0 60.52838308868129,56.8815897417711,0 60.53055575791034,56.8831964051645,0 60.53235310506758,56.88441152159541,0 60.53444267944877,56.88575686593258,0 60.53685539323698,56.88733009198147,0 60.53777743597541,56.88773580082459,0 60.53677410472199,56.88849096385965,0 60.5374399399747,56.88873217325759,0 60.53586312478247,56.89034438116277,0 60.53344117096911,56.89171633491005,0 60.53496742882571,56.89271243426187,0 60.54098110329137,56.890547192436,0 60.54554150603369,56.88882699927715,0 60.54280630025556,56.88748258705666,0 60.54353845077578,56.88501766312126,0 60.54461651371793,56.88416362820384,0 60.54586623803708,56.88330957369907,0 60.54721925396726,56.88246254006394,0 60.54877433862305,56.88144303043435,0 60.55017984655763,56.88152995160236,0 60.55278698413081,56.87976073228175,0 60.55341895767211,56.87878773731005,0 60.554523,56.877521,0 60.554289,56.877305,0 60.553831,56.876999,0 60.553344,56.87661900000001,0 60.553771,56.875961,0 60.555158,56.875206,0 60.556822,56.874159,0 60.562793,56.870326,0 60.56448899999999,56.869186,0 60.565513,56.86907999999999,0 60.565721,56.869197,0 60.566611,56.86849300000001,0 60.56700000000001,56.868473,0 60.567625,56.86888799999999,0 60.572019,56.868195,0 60.586582,56.870522,0 60.59554499999999,56.872097,0 60.596041,56.871056,0 60.596601,56.86997899999999,0 60.602093,56.870219,0 60.60229999999999,56.868895,0 60.60162200000001,56.86722,0 60.60156,56.866173,0 60.602203,56.86516900000001,0 60.603705,56.863198,0 60.607744,56.862621,0 60.61174,56.862821,0 60.611915,56.862643,0 60.612269,56.861332,0 60.61266800000001,56.861489,0 60.61259099999999,56.861953,0 60.61382200000001,56.86326300000001,0 60.615839,56.865634,0 60.616045,56.865805,0 60.616207,56.86590199999999,0 60.61664900000001,56.86585600000001,0 60.619247,56.865883,0 60.621238,56.865958,0 60.624435,56.866917,0 60.624532,56.86722,0 60.626234,56.86758100000001,0 60.631447,56.870082,0 60.63299,56.87140800000001,0 60.633386,56.871609,0 60.63433999999999,56.871764,0 60.634671,56.872137,0 60.634982,56.872446,0 60.635356,56.872337,0 60.635931,56.87270099999999,0 60.63681600000001,56.873359,0 60.637594,56.873964,0 60.640368,56.873333,0 60.64459999999999,56.872527,0 60.64687499999999,56.872146,0 60.65086099999999,56.872607,0 60.652947,56.87243000000001,0 60.654572,56.872088,0 60.657177,56.871113,0 60.66211,56.868915,0 60.663324,56.869327,0 60.665739,56.870593,0 60.665382,56.870815,0 60.66448699999999,56.871391,0 60.664893,56.871694,0 60.665299,56.872043,0 60.66614700000001,56.872774,0 60.667678,56.87409399999999,0 60.668434,56.874787,0 60.669151,56.875421,0 60.670725,56.876752,0 60.67110999999999,56.877039,0 60.673781,56.879346,0 60.67720700000001,56.882571,0 60.681487,56.881789,0 60.68389000000001,56.884446,0 60.68618899999999,56.887357,0 60.687067,56.888812,0 60.68716200000001,56.890565,0 60.682806,56.895165,0 60.681991,56.89867499999999,0 60.681014,56.898806,0 60.680811,56.898638,0 60.672947,56.896419,0 60.669282,56.89544,0 60.66597299999999,56.89449699999999,0 60.66285000000001,56.893764,0 60.660576,56.89308499999999,0 60.660501,56.906637,0 60.66284,56.908658,0 60.666616,56.91053800000001,0 60.655812,56.915072,0 60.651821,56.915055,0 60.651119,56.914888,0 60.649461,56.913654,0 60.644657,56.91789,0 60.638934,56.91620000000001,0 60.636416,56.91625200000001,0 60.61731100000001,56.914379,0 60.61600300000001,56.915618,0 60.620498,56.926502,0 60.622678,56.931203,0 60.62146,56.933421,0 60.619889,56.93449300000001,0 60.61706100000001,56.93556400000001,0 60.613188,56.936738,0 60.607241,56.938712,0 60.607126,56.937925,0 60.606453,56.937742,0 60.606798,56.936628,0 60.60725,56.936365,0 60.60827499999999,56.93583799999999,0 60.609179,56.935604,0 60.609977,56.934805,0 60.611763,56.933958,0 60.61232699999999,56.933684,0 60.61233300000001,56.932518,0 60.606945,56.932127,0 60.605629,56.93187999999999,0 60.606723,56.92927299999999,0 60.60597,56.92907300000001,0 60.60643,56.927917,0 60.607076,56.926259,0 60.60754,56.92529300000001,0 60.607671,56.924869,0 60.602081,56.924242,0 60.600975,56.924616,0 60.598172,56.92186400000001,0 60.59540500000001,56.922329,0 60.595293,56.91874900000001,0 60.59533099999999,56.915196,0 60.59359,56.914443,0 60.591956,56.913915,0 60.588439,56.914011,0 60.586292,56.91517200000001,0 60.584541,56.91732799999999,0 60.579419,56.919327,0 60.574066,56.923711,0 60.571912,56.921712,0 60.56462100000001,56.92417,0 60.558295,56.904775,0 60.554721,56.895117,0 60.54724000000001,56.88872000000001,0 60.53496597607424,56.89310881883034,0 60.53565161584823,56.8942672845659,0 60.53376334070173,56.89464307269497,0 60.53170340417831,56.89454912601852,0 60.53239004968611,56.89285804528062,0 60.530284783126,56.89108856644015,0 60.52809851526224,56.88952263299573,0 60.52706854700046,56.88953437791839,0 60.52440779565769,56.89065012973784,0 60.52440779565774,56.89066187432334,0 60.52045958398782,56.89238828698443,0 60.52140372156107,56.89299897160335,0 60.5182279860874,56.89469004593676,0 60.50865786432225,56.89992719131297,0 60.50668375848728,56.89894087947101,0 60.50364530088378,56.89742376619574,0 60.50258004105961,56.89590389296814,0 60.50361000932134,56.89219294463097,0 60.49913160104102,56.89228263850368,0 60.49631554599479,56.89300240222085,0 60.49603163255691,56.89329520225795,0 60.49480854524608,56.89314253325817,0 60.49487291826245,56.89290765665078,0 60.49171864046095,56.89269626643657,0 60.49139735122163,56.89380667845622,0 60.4908823670908,56.89375970409176,0 60.49053904433686,56.8939358576452,0 60.48974511046844,56.89387713988421,0 60.48877951522308,56.89370685785337,0 60.48857566733791,56.89355419054251,0 60.48857566733791,56.8932605977996,0 60.48870441337066,56.89249137382809,0 60.4877388181253,56.8924091657456,0 60.484809845881,56.89221538881765,0 60.48547503371668,56.89515129447253,0 60.48598440898839,56.89631706836153,0 60.4793539883036,56.8958473537403,0 60.47862442745155,56.89473175774899,0 60.47896775020544,56.89390971824661,0 60.48195036663,56.89393320533406,0 60.48446091426793,56.89379228254947,0 60.48422487987466,56.89315812338045,0 60.48291596187536,56.89304068531126,0 60.48318375524881,56.89208344153725,0 60.48000068404648,56.89187419705693,0 60.47595284680551,56.89155687533272,0 60.47415040234753,56.89143943221006,0 60.47365569832516,56.89121899410794,0 60.47309779885006,56.89110154991894,0 60.47221803429317,56.89060828027022,0 60.47236823799801,56.88957474172553,0 60.46895646813108,56.8893398425987,0 60.46798367215832,56.88644805172954,0 60.47169927479563,56.88582615550651,0 60.47236446263132,56.88563821739594,0 60.47532562138376,56.88539154718574,0 60.47998193623363,56.88537980094448,0 60.48273554974504,56.88476501296071,0 60.48352948361341,56.88447722412373,0 60.48431268864572,56.88394275326535,0 60.48510662251413,56.88326143862741,0 60.48579326802196,56.88226293774242,0 60.48753133946359,56.88153460256265,0 60.48694125348033,56.88109994413374,0 60.48749915295543,56.88087673918459,0 60.48771372967664,56.88101771088711,0 60.48761717015206,56.88149348644211,0 60.48910847836436,56.8809296036281,0 60.48746696644722,56.87998977996296,0 60.49048176937994,56.8786857353482,0 60.49338928395207,56.87832740878125,0 60.49466777580233,56.87800994721216,0 60.496051795654,56.87736964471011,0 60.497135408096,56.87689969091289,0 60.49950648086514,56.87589514477379,0 60.5011694504544,56.87536055069589,0 60.50179172294582,56.87483769850693,0 60.50518203514064,56.87364509807601,0 60.50594914691882,56.87332784817461,0 60.50733853118851,56.87277559191195,0 60.50789643066367,56.87246420977018,0 60.50848651664683,56.87249946068701,0 60.50993490951488,56.87185906342197,0 60.51079321639966,56.87151829708556,0 60.51099706428476,56.87111289858223,0 60.51189828651376,56.87071924654439,0 60.51288533943122,56.87023745779081,0 60.51335740821785,56.8706134885714,0 60.51240254180854,56.87140079072189,0 60.51370157111505,56.87239216144334,0 60.51509095538476,56.87339386454939,0 60.51576150763842,56.87311186287088,0 60.51649106849052,56.87287392230793,0 60.51806820739129,56.87386092514061,0 60.51897077072474,56.87448231507521,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0F8A4986DF12B75609F7">
+			<name>ИЛЬИЧА, 47</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.60431959999999,56.89564450000001,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="001FFFB9D012B6EF8A36">
+		<name>АМУНДСЕНА@700</name>
+		<styleUrl>#__managed_style_02A50391801609C0471B0</styleUrl>
+		<Placemark>
+			<name>АМУНДСЕНА@700</name>
+			<styleUrl>#id166937186427718185</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.52869458552615,56.8273390499635,0 60.52676484366791,56.82735733594811,0 60.52475497610467,56.82723740418055,0 60.51343650533091,56.82671134952347,0 60.51336107593529,56.82480661530699,0 60.51889584516898,56.8249996770576,0 60.52236936770625,56.82592699142254,0 60.52314167724602,56.82585204536331,0 60.524059,56.82509100000001,0 60.52372255288692,56.82379420561678,0 60.52325920038603,56.82210744962757,0 60.52247398280335,56.82092658356541,0 60.52209583862302,56.82028602073348,0 60.52192154232787,56.81947482531947,0 60.522605,56.81816000000001,0 60.52263599999999,56.816403,0 60.521851,56.816481,0 60.519695,56.813592,0 60.518083,56.813153,0 60.526904,56.808871,0 60.53751999999999,56.803744,0 60.538148,56.80336399999999,0 60.53944299999999,56.803187,0 60.539944,56.803198,0 60.5416,56.80284999999999,0 60.560107,56.796413,0 60.579956,56.789071,0 60.58212,56.788673,0 60.584048,56.788613,0 60.587959,56.78886399999999,0 60.58899,56.788975,0 60.593387,56.789402,0 60.59481699999999,56.78960900000001,0 60.59635300000001,56.78982100000001,0 60.599391,56.790278,0 60.601136,56.790541,0 60.602293,56.790712,0 60.604454,56.79093799999999,0 60.605123,56.79096,0 60.605142,56.79118799999999,0 60.605297,56.791695,0 60.605541,56.792124,0 60.605779,56.792415,0 60.606853,56.79326,0 60.607735,56.793976,0 60.609193,56.795084,0 60.610104,56.795787,0 60.610364,56.79604,0 60.61077300000001,56.796586,0 60.610934,56.797006,0 60.611236,56.79784,0 60.61138199999999,56.79853399999999,0 60.611595,56.799302,0 60.611815,56.799801,0 60.612587,56.801477,0 60.612004,56.803094,0 60.61141000000001,56.804733,0 60.610254,56.80788900000001,0 60.60936599999999,56.810424,0 60.60887700000001,56.811805,0 60.60839299999999,56.81320700000001,0 60.60793,56.814425,0 60.607683,56.815029,0 60.607439,56.81565200000001,0 60.6061738,56.81874909999999,0 60.60608420000001,56.8191285,0 60.60580179999999,56.8198751,0 60.60532049999999,56.8213742,0 60.6045076,56.8235286,0 60.6039189,56.8253217,0 60.6035601,56.8263826,0 60.6030296,56.8270677,0 60.585815,56.82521,0 60.581027,56.824769,0 60.57219,56.825018,0 60.567171,56.825181,0 60.5615838981476,56.82533270857174,0 60.5580834351653,56.82563060221861,0 60.55269953979484,56.82566492373779,0 60.53940300202326,56.82667126717173,0 60.53065549074089,56.82715994423591,0 60.52869458552615,56.8273390499635,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="011E9104EB16093E1EB6">
+			<name>АМУНДСЕНА, 63</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.5825561,56.7971713,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="2369D4037812B6EF8A36">
+		<name>МИРА@700</name>
+		<Placemark>
+			<name>МИРА@700</name>
+			<styleUrl>#fillColor:f371d166_strokeColor:f371d1e6_strokeWidth:2</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.612342,56.857149,0 60.6119219,56.85706019999999,0 60.6081284,56.8566991,0 60.6027471,56.85610329999999,0 60.6009917,56.85589820000001,0 60.5988652,56.8543978,0 60.59719990000001,56.8532846,0 60.59538449999999,56.85208910000001,0 60.5930916,56.8503921,0 60.5901168,56.8482175,0 60.59658329999999,56.8464183,0 60.59998849999999,56.84375379999999,0 60.6009061,56.8438821,0 60.6026007,56.8447118,0 60.604467,56.8437106,0 60.6046046,56.84253439999999,0 60.6047078,56.84089710000001,0 60.6051503,56.83955699999999,0 60.6053876,56.8390712,0 60.60355660026243,56.83879894252838,0 60.6016183121643,56.83852668308374,0 60.60177662380372,56.83819330833236,0 60.59896316928102,56.83780088624504,0 60.59944090049434,56.83641230494683,0 60.59973620895381,56.83540001426975,0 60.60015178724974,56.83427012680104,0 60.60002865389095,56.83381592170232,0 60.6001630125976,56.83323820300934,0 60.60035113193403,56.83281972485942,0 60.60059289545072,56.83217186365152,0 60.60103048876342,56.83076549314753,0 60.60175946125483,56.8290106235654,0 60.60275815619313,56.82722106429988,0 60.60364881627192,56.82645876569563,0 60.60418800866924,56.82454074768903,0 60.60485594709925,56.82276382329943,0 60.61245245443111,56.82347917024988,0 60.6181044982558,56.82410825867438,0 60.62137432480586,56.82451578934317,0 60.62357002911374,56.82472398474478,0 60.6250938989502,56.82486059056072,0 60.6262332,56.8249181,0 60.6269034,56.824972,0 60.6274813,56.8250578,0 60.6284116,56.8251483,0 60.6295399,56.82525330000001,0 60.63080519999999,56.82538229999999,0 60.6322319,56.8255852,0 60.6337444,56.8257412,0 60.63521160000001,56.8259246,0 60.63553589999999,56.82591860000001,0 60.6357744,56.82598309999999,0 60.6361413,56.8259781,0 60.6364439,56.82602,0 60.637002,56.82608379999999,0 60.637517,56.8260935,0 60.6378107,56.8261016,0 60.63808639999999,56.82615940000001,0 60.63889200000001,56.826178,0 60.63922399999999,56.826097,0 60.640668,56.82597000000001,0 60.641473,56.825881,0 60.642793,56.825711,0 60.64329600000001,56.8256,0 60.643986,56.82548599999999,0 60.64512799999999,56.825229,0 60.64578800000001,56.825075,0 60.646964,56.824895,0 60.647904,56.824648,0 60.64962499999999,56.824305,0 60.650469,56.82414,0 60.651586,56.82391,0 60.65295999999999,56.823584,0 60.653942,56.823262,0 60.65483400000001,56.823035,0 60.6561,56.82261,0 60.658031,56.82206900000001,0 60.658738,56.82197600000001,0 60.659037,56.821895,0 60.662062,56.820729,0 60.668818,56.818181,0 60.67158300000001,56.817445,0 60.673684,56.81736900000001,0 60.67863500000001,56.816573,0 60.68124699999999,56.816037,0 60.68386199999999,56.81495099999999,0 60.68488,56.814348,0 60.68622,56.813757,0 60.686472,56.813829,0 60.686471,56.813973,0 60.686459,56.814083,0 60.687132,56.814781,0 60.687603,56.81544600000001,0 60.68754,56.816007,0 60.688326,56.816018,0 60.68846,56.816438,0 60.68772499999999,56.81825299999999,0 60.691419,56.820228,0 60.693352,56.820257,0 60.69456499999999,56.820011,0 60.697317,56.821405,0 60.70529000000001,56.821213,0 60.713263,56.821398,0 60.714172,56.823279,0 60.714994,56.82519499999999,0 60.71033535565539,56.82719022626508,0 60.70603192764805,56.83084643318092,0 60.70255179647259,56.83415837194732,0 60.70149641789308,56.83534187547811,0 60.70131205135723,56.83619237280064,0 60.70147736015477,56.83713512218317,0 60.7030191362576,56.83668909407766,0 60.70233090260491,56.83587798964243,0 60.70338153446631,56.83534304871878,0 60.70474369960971,56.83532257894463,0 60.70585393562372,56.83481833515869,0 60.70593420337616,56.83586668290995,0 60.70460988820285,56.83760123965841,0 60.70298511610552,56.83805937254347,0 60.70056015077688,56.83828227850741,0 60.70122509023332,56.83972831037211,0 60.70245919146004,56.83996130009222,0 60.70254048586083,56.84117993479063,0 60.70203831945095,56.84371115993481,0 60.70910565488296,56.84355226907456,0 60.715648449707,56.84535114241587,0 60.70397839154052,56.84481469980229,0 60.70531346298215,56.8462646476944,0 60.70924256486514,56.84727179995401,0 60.70974799410245,56.84676415491344,0 60.71115942301558,56.84712176712928,0 60.7107684074707,56.84844353592079,0 60.7098292659302,56.84831599544656,0 60.70786015612796,56.84804735855672,0 60.70456566668702,56.84785106494778,0 60.70391047091672,56.84817800410459,0 60.70269737567134,56.84808165441068,0 60.70125437301633,56.84759024916756,0 60.69909748816289,56.84751624598425,0 60.69597500806413,56.84772443868923,0 60.69299161402881,56.84701203626084,0 60.68796896353133,56.84840919520702,0 60.68620787919602,56.84991211884088,0 60.68247268902574,56.85270822497672,0 60.68366809777819,56.85636785732866,0 60.67507258715818,56.85898451197205,0 60.67916757666013,56.86308897253344,0 60.672938,56.866784,0 60.673859,56.86834699999999,0 60.674391,56.869867,0 60.67468699999999,56.874015,0 60.677151,56.878938,0 60.680052,56.881983,0 60.677316,56.882475,0 60.676175,56.881421,0 60.672978,56.87839100000001,0 60.668048,56.874162,0 60.664975,56.87146499999999,0 60.66605300000001,56.870729,0 60.66584399999999,56.87057999999999,0 60.664107,56.869624,0 60.66224600000001,56.868734,0 60.65451000000001,56.87193199999999,0 60.652054,56.87244100000001,0 60.649879,56.87239400000001,0 60.64685600000001,56.872082,0 60.64041700000001,56.873241,0 60.637578,56.87388799999999,0 60.636732,56.873244,0 60.635591,56.872417,0 60.635382,56.87230799999999,0 60.634995,56.87239400000001,0 60.634566,56.871976,0 60.634375,56.87171499999999,0 60.633416,56.87158599999999,0 60.633059,56.871381,0 60.632175,56.870634,0 60.631827,56.870275,0 60.631077,56.869868,0 60.62910400000001,56.868818,0 60.627312,56.868038,0 60.625878,56.86724499999999,0 60.624623,56.866963,0 60.623723,56.86666900000001,0 60.621258,56.865858,0 60.618208,56.865802,0 60.61622000000001,56.865846,0 60.613402,56.86260600000001,0 60.612741,56.86202299999999,0 60.61304200000001,56.861354,0 60.61257,56.861168,0 60.612588,56.860968,0 60.61341300000001,56.859753,0 60.613384,56.85898999999999,0 60.61313800000001,56.857902,0 60.612342,56.857149,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="09F507DEF312B76579A1">
+			<name>МИРА, 23</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.6523097,56.8408159,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="37AED4A14512B6EF8A36">
+		<name>БОТАНИКА@4000@ONLINE</name>
+		<Placemark>
+			<name>БОТАНИКА@4000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:256</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.86720483058406,56.79583274918737,0 60.86342828029114,56.79149948637202,0 60.86239831202941,56.78405640539786,0 60.86068169825984,56.77623486209002,0 60.89982049220517,56.76784608709628,0 60.90737359279112,56.77576363250309,0 60.91595666163879,56.7851870954923,0 60.90737359279112,56.79112265715181,0 60.86720483058406,56.79583274918737,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>БОТАНИКА@4000@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:223</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.72850243800585,56.73299839687982,0 60.7111646389336,56.72941276106497,0 60.71906106227345,56.71742669691376,0 60.73296563380667,56.70836381893409,0 60.73214348091955,56.70942179016089,0 60.73540504708163,56.69941259808486,0 60.75188453926916,56.69450145101012,0 60.78656013741367,56.69459590221361,0 60.81110771431799,56.69705154998684,0 60.82981880440587,56.69941259808486,0 60.82707222237462,56.7069669527333,0 60.8231240107047,56.71300934020596,0 60.79668815865393,56.7184844122438,0 60.7772904230582,56.72480806840719,0 60.73815162911283,56.73311214403729,0 60.73386009468901,56.73490482772674,0 60.72850243800585,56.73299839687982,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0DD97EA7E816094FC745">
+			<name>РОДОНИТОВАЯ, 18Б</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.62361000000001,56.792083,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="37AED4A14512B6EF8A36">
+		<name>БОТАНИКА@1500@ONLINE</name>
+		<Placemark>
+			<name>БОТАНИКА@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:29</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.782744,56.783133,0 60.778789,56.783662,0 60.774766,56.785039,0 60.77061399999999,56.786075,0 60.763383,56.786138,0 60.75664500000001,56.786838,0 60.752863,56.786219,0 60.74914499999999,56.785269,0 60.743475,56.78382,0 60.74145299999999,56.783842,0 60.73835999999999,56.784434,0 60.736317,56.78503499999999,0 60.733625,56.785891,0 60.732725,56.78628,0 60.73137699999999,56.787,0 60.730546,56.787481,0 60.729758,56.788504,0 60.72861,56.79045499999999,0 60.72738300000001,56.791496,0 60.726307,56.79231800000001,0 60.72589700000001,56.79275200000001,0 60.725408,56.793609,0 60.72553700000001,56.794065,0 60.726222,56.794869,0 60.726307,56.797482,0 60.72710799999999,56.799835,0 60.725749,56.80187999999999,0 60.72421800000001,56.803678,0 60.72298099999999,56.805209,0 60.72150700000001,56.806456,0 60.71995,56.80779500000001,0 60.717749,56.808852,0 60.714118,56.80974000000001,0 60.70736399999999,56.810872,0 60.70515799999999,56.811347,0 60.700206,56.812106,0 60.695541,56.812653,0 60.69254900000001,56.812682,0 60.69120499999999,56.81255299999999,0 60.689689,56.812753,0 60.68592799999999,56.81371800000001,0 60.68802500000001,56.799948,0 60.68869,56.791482,0 60.687315,56.789446,0 60.687463,56.788305,0 60.68802500000001,56.785478,0 60.68804899999999,56.785139,0 60.67905300000001,56.787176,0 60.68317900000001,56.781987,0 60.681107,56.780105,0 60.688057,56.776328,0 60.686893,56.773086,0 60.672634,56.757013,0 60.646995,56.763095,0 60.644667,56.7636,0 60.637049,56.765692,0 60.63547200000001,56.766399,0 60.633857,56.767073,0 60.63378000000001,56.767314,0 60.633113,56.76768899999999,0 60.632089,56.76823100000001,0 60.632011,56.768284,0 60.630381,56.767724,0 60.629459,56.76724,0 60.62914799999999,56.76751,0 60.628618,56.76751400000001,0 60.62857099999999,56.767358,0 60.62854,56.76721200000001,0 60.628291,56.76721999999999,0 60.622866,56.767257,0 60.616549,56.767977,0 60.615826,56.768126,0 60.61551,56.767574,0 60.61373400000001,56.763435,0 60.612948,56.75870599999999,0 60.612527,56.75793800000001,0 60.61134599999999,56.75636299999999,0 60.611566,56.750875,0 60.611296,56.750343,0 60.610408,56.747975,0 60.60871800000001,56.748156,0 60.60711100000001,56.746334,0 60.60545,56.74411899999999,0 60.60437699999999,56.74300400000001,0 60.602198,56.741566,0 60.600963,56.740473,0 60.604119,56.739783,0 60.605832,56.739473,0 60.61050599999999,56.737441,0 60.612801,56.73728999999999,0 60.612865,56.737765,0 60.613958,56.737301,0 60.614998,56.736591,0 60.619254,56.739214,0 60.626804,56.74585600000001,0 60.636955,56.740752,0 60.639952,56.740334,0 60.640979,56.742201,0 60.643458,56.743621,0 60.649665,56.743235,0 60.656842,56.742689,0 60.658036,56.74392,0 60.662023,56.745027,0 60.663864,56.744862,0 60.664368,56.745577,0 60.66586,56.745973,0 60.66935999999999,56.746752,0 60.67100299999999,56.74694,0 60.67264599999999,56.746988,0 60.673617,56.74584500000001,0 60.66493500000001,56.74258099999999,0 60.665189,56.742107,0 60.668115,56.74176800000001,0 60.67089,56.742184,0 60.671788,56.74161,0 60.67399500000001,56.741483,0 60.675229,56.741596,0 60.67703,56.740965,0 60.678722,56.7418,0 60.68044499999999,56.742843,0 60.682301,56.742756,0 60.68434100000001,56.742401,0 60.68722300000001,56.743238,0 60.690878,56.743142,0 60.691859,56.742668,0 60.69378,56.741601,0 60.695384,56.740957,0 60.697557,56.74055400000001,0 60.698759,56.740972,0 60.700176,56.739502,0 60.70180899999999,56.73759199999999,0 60.704217,56.736614,0 60.705599,56.736071,0 60.708225,56.732945,0 60.71658,56.730866,0 60.72175899999999,56.73225399999999,0 60.72516499999999,56.73415799999999,0 60.737585,56.741285,0 60.748551,56.747793,0 60.75288,56.750096,0 60.7591,56.747018,0 60.768797,56.74704199999999,0 60.77564700000001,56.748223,0 60.786249,56.74938600000001,0 60.802006,56.749153,0 60.81354400000001,56.749241,0 60.82056999999999,56.74870099999999,0 60.827833,56.752274,0 60.829259,56.75311299999999,0 60.82962000000001,56.75534700000001,0 60.824553,56.758911,0 60.826145,56.759733,0 60.824521,56.76065899999999,0 60.824852,56.761074,0 60.826793,56.760087,0 60.827575,56.760449,0 60.828209,56.760181,0 60.829119,56.76065899999999,0 60.82954300000001,56.760868,0 60.829601,56.761337,0 60.829128,56.761581,0 60.828234,56.76207500000001,0 60.82729799999999,56.76249800000001,0 60.828492,56.763285,0 60.826094,56.764681,0 60.82528199999999,56.765771,0 60.82426499999999,56.767538,0 60.823591,56.769493,0 60.82274099999999,56.769565,0 60.822246,56.770015,0 60.820109,56.770488,0 60.81984300000001,56.77144199999999,0 60.81919,56.772348,0 60.818169,56.77400799999999,0 60.813837,56.773611,0 60.809334,56.773402,0 60.80661000000001,56.773721,0 60.802749,56.776114,0 60.798706,56.77814799999999,0 60.795386,56.779235,0 60.793739,56.780134,0 60.791334,56.78002099999999,0 60.78734099999999,56.780144,0 60.78528,56.782229,0 60.78420699999999,56.782877,0 60.782744,56.783133,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>БОТАНИКА@1500@ONLINE</name>
+			<styleUrl>#fillColor:ed454366_strokeColor:ed4543e6_strokeWidth:216</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.76385689208577,56.80445065779689,0 60.74954903368111,56.80541176480683,0 60.74602997545356,56.80352828247826,0 60.74422753099557,56.8008912475979,0 60.7505790019428,56.79806564640647,0 60.74319756273384,56.7847824567374,0 60.75263893846626,56.78694954058371,0 60.75821793321717,56.78751484612187,0 60.76311028246035,56.78694954057632,0 60.76808846239205,56.78676110349981,0 60.77409661058538,56.78666688460147,0 60.77787316087836,56.78497090380074,0 60.78422463182563,56.78355752765854,0 60.78628456834908,56.78242678825124,0 60.78611290697209,56.78351041418495,0 60.78305709973368,56.78530901980376,0 60.78606117383035,56.7886537667536,0 60.77902305737529,56.79279895305373,0 60.77653396740946,56.79651980804541,0 60.77610481396704,56.79953389980597,0 60.77627647534399,56.80160594677543,0 60.76385689208577,56.80445065779689,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0DD97EA7E816094FC745">
+			<name>РОДОНИТОВАЯ, 18Б</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.62361000000001,56.792083,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="37AED4A14512B6EF8A36">
+		<name>БОТАНИКА@700</name>
+		<Placemark>
+			<name>БОТАНИКА@700</name>
+			<styleUrl>#fillColor:1bad0366_strokeColor:1bad03e6_strokeWidth:20</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.64461200000001,56.76360999999999,0 60.65846799999999,56.76049199999999,0 60.67241799999999,56.757223,0 60.68496876521646,56.77228503691441,0 60.687682,56.776275,0 60.681337,56.779581,0 60.680719,56.780053,0 60.682847,56.78189,0 60.6787664761962,56.78734657206581,0 60.682714,56.78637000000001,0 60.68788200000001,56.785231,0 60.687002,56.789451,0 60.688406,56.791522,0 60.685646,56.813843,0 60.68455,56.814293,0 60.683521,56.814915,0 60.68309900000001,56.815123,0 60.682518,56.815373,0 60.681624,56.815697,0 60.68062,56.816032,0 60.67968699999999,56.81623,0 60.678766,56.81639400000001,0 60.676897,56.816695,0 60.676611,56.816741,0 60.6763,56.81679,0 60.675878,56.816856,0 60.675312,56.81695,0 60.674005,56.817167,0 60.67363999999999,56.81722600000001,0 60.673183,56.817273,0 60.672811,56.817283,0 60.672558,56.817291,0 60.672235,56.81729199999999,0 60.67180499999999,56.81730499999999,0 60.671468,56.817323,0 60.671091,56.81737399999999,0 60.67065700000001,56.817453,0 60.670463,56.817494,0 60.67022600000001,56.817565,0 60.669844,56.81768699999999,0 60.669449,56.817812,0 60.668861,56.817988,0 60.668505,56.818105,0 60.667844,56.81835000000001,0 60.664721,56.81953900000001,0 60.658624,56.821909,0 60.657789,56.822004,0 60.655104,56.822701,0 60.65416100000001,56.82295400000001,0 60.653436,56.823293,0 60.64860599999999,56.824337,0 60.642256,56.82571,0 60.640712,56.825888,0 60.638161,56.82610999999999,0 60.6378107,56.8261016,0 60.637002,56.82608379999999,0 60.63521160000001,56.8259246,0 60.6326366,56.8256226,0 60.6303572,56.8253195,0 60.6269034,56.824972,0 60.6203136,56.8242966,0 60.617994,56.82398069999999,0 60.6090026,56.8230605,0 60.6049313,56.8226781,0 60.60598580000001,56.8198317,0 60.60650340000001,56.8184526,0 60.6069026,56.817314,0 60.6071164,56.8166997,0 60.6072813,56.8163204,0 60.6074593,56.81584219999999,0 60.607511,56.815637,0 60.607622,56.81543199999999,0 60.60797299999999,56.81453599999999,0 60.60831,56.813588,0 60.60844299999999,56.81319100000001,0 60.608583,56.812848,0 60.608889,56.811917,0 60.609214,56.811075,0 60.609407,56.810544,0 60.60951200000001,56.810224,0 60.610106,56.808506,0 60.610482,56.80751800000001,0 60.610776,56.806785,0 60.61114100000001,56.80570399999999,0 60.61131,56.80515800000001,0 60.611868,56.803694,0 60.612377,56.80231,0 60.61282,56.800984,0 60.61297,56.800009,0 60.612648,56.799962,0 60.611961,56.799774,0 60.611661,56.79901000000001,0 60.610889,56.796449,0 60.61013499999999,56.795719,0 60.60693,56.79322899999999,0 60.605546,56.79197200000001,0 60.605084,56.79077,0 60.60136700000001,56.790415,0 60.598851,56.790009,0 60.59321799999999,56.789201,0 60.59210600000001,56.789086,0 60.59134999999999,56.789014,0 60.587891,56.788675,0 60.584914,56.78840900000001,0 60.58372,56.788407,0 60.58255599999999,56.78844700000001,0 60.58175200000001,56.78853699999999,0 60.579732,56.788904,0 60.578067,56.78952099999999,0 60.576814,56.789986,0 60.575945,56.790359,0 60.573424,56.79133700000001,0 60.573338,56.790303,0 60.573402,56.78894,0 60.57343599999999,56.787327,0 60.573457,56.786938,0 60.57347,56.786669,0 60.57348900000001,56.786339,0 60.573503,56.7861,0 60.573518,56.78584000000001,0 60.57354599999999,56.78534799999999,0 60.573556,56.78514800000001,0 60.57356300000001,56.785052,0 60.573572,56.784864,0 60.57358,56.784679,0 60.57358500000001,56.784283,0 60.573604,56.784028,0 60.57361800000001,56.783852,0 60.57363400000001,56.783578,0 60.573657,56.783253,0 60.573722,56.782284,0 60.571248,56.776347,0 60.57435099999999,56.775046,0 60.57422,56.774554,0 60.574152,56.774345,0 60.573875,56.773735,0 60.57379,56.773658,0 60.573555,56.773094,0 60.572773,56.770983,0 60.57197,56.768982,0 60.57360599999999,56.769276,0 60.574662,56.767644,0 60.574891,56.766797,0 60.57740900000001,56.76703100000001,0 60.577971,56.76695,0 60.582459,56.767576,0 60.585126,56.76811000000001,0 60.585547,56.767851,0 60.58567525396727,56.76751043316979,0 60.586052,56.766865,0 60.58615844113919,56.76673437946349,0 60.58605030555722,56.76646235380744,0 60.58574820370483,56.7658947287168,0 60.5854055767212,56.76548107976556,0 60.585704,56.76487099999999,0 60.58574511904907,56.76469583355837,0 60.58493664418026,56.7644333424729,0 60.58426345767209,56.76418544905974,0 60.58408,56.763583,0 60.583994,56.763471,0 60.58243,56.76039299999999,0 60.582672,56.75939899999999,0 60.582777,56.758548,0 60.583047,56.75718,0 60.58349395337294,56.75484831888863,0 60.58401688988109,56.75476040355514,0 60.5845478730163,56.75467543488008,0 60.58518882672117,56.75467445176417,0 60.585465,56.754644,0 60.587314,56.757389,0 60.59278070080469,56.75694256630874,0 60.59264014629667,56.75649699645861,0 60.59361056614043,56.75640091911418,0 60.59375486560769,56.75687650406559,0 60.596392,56.756669,0 60.596156,56.75552,0 60.59716599999999,56.75545400000001,0 60.59913499999999,56.755263,0 60.59961,56.756394,0 60.605968,56.75581,0 60.605499,56.754209,0 60.60842100000001,56.754518,0 60.60706185449215,56.75375947658501,0 60.607076,56.75333100000001,0 60.60580778089109,56.75294148614904,0 60.60566528859308,56.75198214567389,0 60.60460011639402,56.75151789899378,0 60.60427437962343,56.75070616933296,0 60.6040237447052,56.75006536169026,0 60.60461381415558,56.74966009779308,0 60.6042382883606,56.748370631474,0 60.603827,56.747659,0 60.603257,56.746876,0 60.60258,56.747019,0 60.602293,56.74669599999999,0 60.60256,56.746476,0 60.603436,56.74567,0 60.603013,56.745049,0 60.602915,56.744411,0 60.602608,56.74395999999999,0 60.60246799999999,56.74339899999999,0 60.60278099999999,56.743058,0 60.603374,56.743165,0 60.60424,56.743101,0 60.60562,56.744744,0 60.606722,56.74605100000001,0 60.607744,56.74780100000001,0 60.608556,56.748187,0 60.61035520370481,56.74801178955419,0 60.61048934788512,56.74843300108953,0 60.61062349206544,56.74883652394492,0 60.61085439021301,56.74939315651995,0 60.611196,56.750443,0 60.61137200000001,56.750849,0 60.611208,56.751954,0 60.611271,56.753349,0 60.61118,56.754266,0 60.611112,56.755453,0 60.611077,56.75665200000001,0 60.61173099999999,56.757324,0 60.612745,56.758669,0 60.612933,56.760309,0 60.61311300000001,56.761838,0 60.61432449206544,56.76554699999264,0 60.615661,56.76814,0 60.6167,56.767972,0 60.622762,56.767273,0 60.62815,56.767242,0 60.62840299999999,56.767241,0 60.628463,56.76751,0 60.629119,56.767518,0 60.629347,56.767302,0 60.630356,56.767778,0 60.631908,56.76830199999999,0 60.633736,56.767338,0 60.63382599999999,56.767114,0 60.634174,56.76695,0 60.637022,56.765738,0 60.64461200000001,56.76360999999999,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="0DD97EA7E816094FC745">
+			<name>РОДОНИТОВАЯ, 18Б</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.62361000000001,56.792083,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="40CF8DBD3E12B6EF8A36">
+		<name>ОПАЛИХИНСКАЯ@700</name>
+		<Placemark>
+			<name>ОПАЛИХИНСКАЯ@700</name>
+			<styleUrl>#fillColor:ffd21e66_strokeColor:ffd21ee6_strokeWidth:21</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							60.5165464500732,56.87267770455648,0 60.514915868042,56.87319331989824,0 60.51245015368651,56.87139697674407,0 60.51368375683592,56.87042346122283,0 60.51234256628418,56.86943279141433,0 60.5116900371094,56.86921213268474,0 60.5149196085205,56.86739503675251,0 60.51437817462151,56.8659467354745,0 60.52179591673271,56.8628285906705,0 60.52430315814965,56.86182184728354,0 60.5232269683227,56.86115594096515,0 60.52495100470733,56.85867984788155,0 60.51849966801448,56.86035303263929,0 60.51709830688478,56.85937379071905,0 60.520539,56.858208,0 60.5257824,56.8564614,0 60.53178718413088,56.85374293187264,0 60.53793116826166,56.85008929806531,0 60.54407890000001,56.84455670000001,0 60.5447921,56.8442082,0 60.54662110000001,56.84461080000001,0 60.5513515,56.8421707,0 60.55287720793455,56.841294878685,0 60.55081961475828,56.84090085263428,0 60.55023195758051,56.84115959752237,0 60.54782449882801,56.84089507178894,0 60.54768105384523,56.84117040577316,0 60.54716062724759,56.8411758019436,0 60.54591336103127,56.84059048597152,0 60.54106120589897,56.84033445500205,0 60.53947283872932,56.83956198586593,0 60.52983809423141,56.83743510329466,0 60.52627158703166,56.83634195920142,0 60.52063250317592,56.83629609768367,0 60.52548799190305,56.83487153861945,0 60.51944171489506,56.83476126805193,0 60.51959431186471,56.83249476787806,0 60.51803982726849,56.83239662082725,0 60.51709092359344,56.83023015183659,0 60.51433957546034,56.82994580148969,0 60.5144448482449,56.82943793949534,0 60.51072093434422,56.82923106176119,0 60.50688487155895,56.82865705991986,0 60.50749884547635,56.82639361301445,0 60.51342774253025,56.82672069535334,0 60.52271245449749,56.82716836050344,0 60.52832265675551,56.82728423301341,0 60.56175699969172,56.82554186989712,0 60.56340489672835,56.82546188257508,0 60.56699688495003,56.82533179071068,0 60.56842809863484,56.82523083389682,0 60.57021658908319,56.82515895760096,0 60.57385905717769,56.82509538924664,0 60.57668596598167,56.82499733040149,0 60.5785338495304,56.82492477026036,0 60.58106726385314,56.82483503193426,0 60.6025161022347,56.82714047581691,0 60.60201621942756,56.82770217048595,0 60.60168799799742,56.82856972625299,0 60.60094572444857,56.83073414683439,0 60.60049645437692,56.83184271557914,0 60.59980076502678,56.83390555645315,0 60.59984182824189,56.83441351443998,0 60.59955226769513,56.8351791448569,0 60.59925668630742,56.83615592841612,0 60.59869984656531,56.8376319963046,0 60.59864110290015,56.83787276890163,0 60.60164007751202,56.83824291243345,0 60.6007981288146,56.84005393443226,0 60.60020549308889,56.84138514919931,0 60.59984812185428,56.84146287930194,0 60.59856807071862,56.84206980884021,0 60.59622586481298,56.84310528324754,0 60.59629394242504,56.84322900695887,0 60.59437533306821,56.84430074646972,0 60.59103959120263,56.84582891732077,0 60.58870653243414,56.84705570586244,0 60.58708939193539,56.84742644777146,0 60.58402399124958,56.84709428150404,0 60.58220313554678,56.84680914597058,0 60.58002054584519,56.84666217527725,0 60.57728005666851,56.84620206449461,0 60.57478328429391,56.84726575717803,0 60.57341998368745,56.84723884916783,0 60.57245938364667,56.84674330251524,0 60.57202199897052,56.84606045926265,0 60.56918543409025,56.84321397240824,0 60.56899986831692,56.84359461245039,0 60.57038766480649,56.84491381308486,0 60.57048800096892,56.8452687498677,0 60.5703743614878,56.84628867371801,0 60.57053332062372,56.84731724174232,0 60.57155795859065,56.84800527756508,0 60.57299029232784,56.84846990148388,0 60.57418126137693,56.84852905973593,0 60.57757167354121,56.8474519983244,0 60.58176527088619,56.85030114661417,0 60.58451652855836,56.85057344885489,0 60.58782334788511,56.84953386248822,0 60.58971396085204,56.84844721557984,0 60.6008608,56.85605989999999,0 60.60314460000001,56.85628850000001,0 60.6049993,56.85649359999999,0 60.60727120000001,56.85676019999999,0 60.6100259,56.8570678,0 60.6113379,56.8571891,0 60.6123923,56.85742770000001,0 60.6129748,56.8582529,0 60.6131924,56.8592071,0 60.6130936,56.8597467,0 60.6122009,56.86104889999999,0 60.6115873,56.8626795,0 60.6097562,56.8625894,0 60.60761029999999,56.8625313,0 60.603557,56.86318000000001,0 60.601952,56.865343,0 60.601412,56.866158,0 60.60145099999999,56.867019,0 60.602183,56.868928,0 60.602032,56.870175,0 60.59652100000001,56.86987200000001,0 60.595433,56.871991,0 60.59443199999999,56.871664,0 60.58211,56.869581,0 60.572545,56.86802,0 60.56992499999999,56.868178,0 60.568727,56.86842200000001,0 60.567758,56.868796,0 60.5668,56.86827299999999,0 60.565538,56.86904199999999,0 60.564885,56.869102,0 60.564352,56.869164,0 60.564055,56.869436,0 60.563677,56.869697,0 60.56330500000001,56.869956,0 60.56287400000001,56.870214,0 60.559938,56.87205,0 60.558861,56.872713,0 60.55783199999999,56.873401,0 60.55671,56.874158,0 60.555835,56.87468,0 60.554807,56.875309,0 60.554205,56.87564099999999,0 60.553944,56.875788,0 60.553645,56.875912,0 60.553387,56.87634899999999,0 60.553163,56.876765,0 60.55425799999999,56.87734700000001,0 60.5517359,56.87914239999999,0 60.54895599999999,56.880844,0 60.54660518518064,56.88252102294916,0 60.54509575659175,56.88345139134351,0 60.54332883593748,56.88461666692049,0 60.54221005285643,56.88522168813019,0 60.54074446499021,56.88592151572657,0 60.5397687142334,56.88667950830779,0 60.53876182111816,56.88682523793628,0 60.53731176196283,56.8871639874617,0 60.53321350268556,56.88469671321055,0 60.53034898150631,56.88282867955387,0 60.52782778308099,56.88077258948974,0 60.5243029032729,56.87835563924033,0 60.51819909008789,56.87382675000329,0 60.5165464500732,56.87267770455648,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark id="078A6C815916094AF3F2">
+			<name>ОПАЛИХИНСКАЯ,46</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.55618676266722,56.85434271920221,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="091CE06E7F12B6EF8A35">
+		<name>СОРТИРОВКА@700</name>
+		<Placemark id="0FF64E1E7C12B6F00C6D">
+			<name>ТЕХНИЧЕСКАЯ, 32</name>
+			<Style>
+				<IconStyle>
+					<color>ffff981e</color>
+					<Icon>
+						<href>http://api-maps.yandex.ru/i/0.4/micro/pmbls.png</href>
+					</Icon>
+					<hotSpot x="7" y="28" xunits="pixels" yunits="insetPixels"/>
+				</IconStyle>
+			</Style>
+			<Point>
+				<coordinates>60.53343420000001,56.8665572,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

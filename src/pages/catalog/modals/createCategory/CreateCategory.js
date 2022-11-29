@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import catService from '../../../../services/catService';
 import orgService from '../../../../services/orgService';
 import { catalogUpdate } from '../../../../store/actions';
-
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 const os = new orgService()
 const cs = new catService()
 
@@ -263,7 +263,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                                 load={load} 
                                 disabled={!Name}
                                 type={'button'} 
-                                before={<BsTrash/>} 
+                                before={<SaveIcon size={20} color={"#fff"}/>} 
                                 justify={'flex-start'} 
                                 text={'Сохранить'}
                                 />
@@ -272,7 +272,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                                 styles={{marginTop: 20}} 
                                 load={delLoad} 
                                 type={'button'} 
-                                before={<BsTrash/>} 
+                                before={<BsTrash size={20}/>} 
                                 justify={'flex-start'} 
                                 text={'Удалить'}
                                 variant={'danger'}
@@ -285,7 +285,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                                 load={load} 
                                 disabled={!Name}
                                 type={'button'} 
-                                before={<BsTrash/>} 
+                                before={<SaveIcon color={'#fff'} size={20}/>} 
                                 justify={'flex-start'} 
                                 text={'Создать'}
                                 />

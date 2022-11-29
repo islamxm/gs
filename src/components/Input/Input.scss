@@ -36,12 +36,15 @@
     }
 
     &__label.valid {
-        transform: translateY(-18px) translateX(15px) scale(0.95);
+        transform: translateY(-12px) translateX(15px);
+        // border: 0.5px solid red;
         width: auto;
         background-color: #fff;
         height: auto;
         padding: 5px 5px 5px 5px;
         border-radius: 10px;
+        font-size: 12px;
+        line-height: 12px;
     }
 
     &__label {

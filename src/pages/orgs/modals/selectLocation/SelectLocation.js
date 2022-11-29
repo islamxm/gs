@@ -46,7 +46,8 @@ const SelectLocation = ({visible, close, setLocation, coords}) => {
                 {
                     selected ? (
                        <div className="Modal__form_action" style={{marginTop: 30}}>
-                            <Button onClick={onSave} type={'button'}  text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'}/>
+                            <Button 
+                                onClick={onSave} type={'button'}  text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'}/>
                        </div> 
                     ) : null
                 }

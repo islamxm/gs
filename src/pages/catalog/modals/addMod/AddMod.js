@@ -12,6 +12,7 @@ import DropCollapse from '../../../../components/DropCollapse/DropCollapse';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
 import AddModItem from '../addModItem/AddModItem';
 import { useParams } from 'react-router-dom';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon'
 const cs = new catService();
 
 
@@ -148,7 +149,7 @@ const AddMod = ({visible, close, plateId, update}) => {
                                             <div className="AddMod__body_item_action">
                                                 <Button
                                                     onClick={() => removeMod(index)} 
-                                                    before={<BsTrash/>} 
+                                                    before={<BsTrash size={20}/>} 
                                                     variant={'danger'} 
                                                     text={'Удалить модификатор'} 
                                                     justify={'flex-start'} 
@@ -176,7 +177,7 @@ const AddMod = ({visible, close, plateId, update}) => {
                         onClick={onSave}
                         disabled={mods.length == 0}
                         type={'button'}  
-                        before={<BsTrash/>} 
+                        before={<SaveIcon color={'#fff'} size={20}/>} 
                         justify={'flex-start'} 
                         text={'Сохранить'}/>
                 </div>

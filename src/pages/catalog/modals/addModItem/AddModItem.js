@@ -11,6 +11,7 @@ import catService from '../../../../services/catService';
 import DropCollapse from '../../../../components/DropCollapse/DropCollapse';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
 import { useEffect } from 'react';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 
 const cs = new catService();
 
@@ -136,7 +137,7 @@ const AddModItem = ({visible, close, update, data}) => {
                         disabled={!Name || !Price} 
                         type={'button'} 
                         onClick={onSave}  
-                        before={<BsTrash/>} 
+                        before={<SaveIcon color={'#fff'} size={20}/>} 
                         justify={'flex-start'} 
                         text={'Сохранить'}/>
                 </div>

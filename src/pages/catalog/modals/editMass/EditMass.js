@@ -8,6 +8,7 @@ import {BsTrash} from 'react-icons/bs';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 import catService from '../../../../services/catService';
 
 
@@ -92,7 +93,7 @@ const EditMass = ({visible, close, selected, plateId, update}) => {
                         load={saveLoad}
                         onClick={onSave}
                         type={'button'}  
-                        before={<BsTrash/>} 
+                        before={<SaveIcon color={'#fff'} size={20}/>} 
                         justify={'flex-start'} 
                         text={'Сохранить'}/>
                     <Button 
@@ -100,7 +101,7 @@ const EditMass = ({visible, close, selected, plateId, update}) => {
                         styles={{marginTop: 15}} 
                         variant={'danger'} 
                         type={'button'}  
-                        before={<BsTrash/>} 
+                        before={<BsTrash size={20}/>} 
                         justify={'flex-start'} 
                         text={'Удалить'}/>
                 </div>

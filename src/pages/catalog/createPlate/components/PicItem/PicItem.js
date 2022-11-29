@@ -10,7 +10,13 @@ const PicItem = ({image, remove, style}) => {
                 <img src={image} alt="" />
             </div>
             <div className="PicItem__action">
-                <Button onClick={remove} styles={{width: '100%'}} variant={'danger'} before={<BsTrash/>} text={'Удалить'} justify={'center'}/>
+                <Button 
+                    onClick={remove} 
+                    styles={{width: '100%'}} 
+                    variant={'danger'} 
+                    before={<BsTrash size={20}/>} 
+                    text={'Удалить'} 
+                    justify={'center'}/>
             </div>
         </div>
     )

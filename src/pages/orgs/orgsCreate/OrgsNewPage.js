@@ -839,7 +839,7 @@ const OrgsNewPage = () => {
                                         
                                         disabled={!Name} 
                                         load={saveLoad}
-                                        before={<SaveIcon size={16} color={'#fff'}/>} 
+                                        before={<SaveIcon size={20} color={'#fff'}/>} 
                                         text={'Сохранить'} 
                                         type={'button'}
                                         justify={'flex-start'}/>
@@ -850,7 +850,7 @@ const OrgsNewPage = () => {
                                             onClick={deleteOrg} 
                                             disabled={false} 
                                             load={delLoad} 
-                                            before={<BsTrash/>} 
+                                            before={<BsTrash size={20}/>} 
                                             text={'Удалить'} 
                                             type={'button'}
                                             variant={'danger'}

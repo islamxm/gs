@@ -11,7 +11,7 @@
     border: 1px solid transparent;
     outline: none;
     position: relative;
-    
+    height: 150px;
     &::placeholder {
         color: var(--light_violet);
     }
@@ -26,13 +26,16 @@
     position: relative;
 
     &__label.valid {
-        transform: translateY(-13px) translateX(15px) scale(0.95) ;
+        transform: translateY(-12px) translateX(15px);
         width: auto;
         background-color: #fff;
         height: auto;
-        padding: 5px 5px 0 5px;
+        padding: 5px 5px 5px 5px;
         border-radius: 10px;
+        font-size: 12px;    
+        line-height: 12px;
     }
+
     &__label {
         z-index: 3;
         position: absolute;

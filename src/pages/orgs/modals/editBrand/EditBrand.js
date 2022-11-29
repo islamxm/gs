@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import orgService from '../../../../services/orgService';
 import {FiDownload} from 'react-icons/fi';
 import { MoonLoader } from 'react-spinners';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 
 const os = new orgService()
 
@@ -130,7 +131,7 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
                     <Button 
                         type={'button'} 
                         styles={{marginBottom: 20}} 
-                        before={<BsTrash/>} 
+                        before={<SaveIcon color={'#fff'} size={20}/>} 
                         justify={'flex-start'} 
                         text={'Сохранить'}
                         onClick={updateBrand}
@@ -140,7 +141,7 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
                     <Button 
                         onClick={deleteBrand}
                         type={'button'} 
-                        before={<BsTrash/>} 
+                        before={<BsTrash size={20}/>} 
                         justify={'flex-start'} 
                         text={'Удалить бренд'}
                         variant={'danger'}

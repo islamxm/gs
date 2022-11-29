@@ -180,7 +180,6 @@ class orgService {
                     ...headers
                 },
                 body: JSON.stringify(body),
-                
             })
 
             return await checkAuth(res)

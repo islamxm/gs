@@ -8,6 +8,7 @@ import {BsTrash} from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import orgService from '../../../../services/orgService';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 
 
 const os = new orgService()
@@ -83,7 +84,14 @@ const AddBrand  = ({visible, close, updateList}) => {
                     <Input value={markerID} onChange={handleMarker} placeholder={'Номер метки на карте'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button onClick={addBrand} load={load} disabled={!markerID || !image} type={'button'} before={<BsTrash/>} justify={'flex-start'} text={'Сохранить'}/>
+                    <Button 
+                        onClick={addBrand} 
+                        load={load} 
+                        disabled={!markerID || !image} 
+                        type={'button'} 
+                        before={<SaveIcon color={'#fff'} size={20}/>} 
+                        justify={'flex-start'} 
+                        text={'Сохранить'}/>
                 </div>
             </form>
         </Modal>

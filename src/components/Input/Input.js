@@ -38,7 +38,12 @@ const Input = ({
 
     return (
         <div onClick={onClick} className={"Input" + (error ? ' error ' : '') + (shadow ? ' shadow ' : '')} style={style}>
-            <div onClick={focusInp} className={"Input__label" + (validFocus ? ' valid ' : '')}>{placeholder}</div>
+            {
+                placeholder ? (
+                    <div onClick={focusInp} className={"Input__label" + (validFocus ? ' valid ' : '')}>{placeholder}</div>
+                ) : null
+            }
+            
             <input 
                 ref={inpRef}
                 disabled={disabled}
@@ -48,8 +53,6 @@ const Input = ({
                 onChange={(e) => handleChange(e)} 
                 onBlur={onBlur} 
                 readOnly={readOnly}
-                // onFocus={onFocus}
-                // placeholder={placeholder}
                 className="Input__el" />
             {
                 error && showErrorText ? (

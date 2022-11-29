@@ -176,7 +176,7 @@ const EditTime = ({
                     <Button 
                         onClick={handleSave} 
                         text={'Сохранить'} 
-                        before={<SaveIcon size={16} color={'#fff'}/>} 
+                        before={<SaveIcon size={20} color={'#fff'}/>} 
                         justify={'flex-start'}/>
                 </div>
             </div>

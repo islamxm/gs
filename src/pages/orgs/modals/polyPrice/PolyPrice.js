@@ -6,7 +6,7 @@ import Pl from '../../../../components/Pl/Pl';
 import Button from '../../../../components/Button/Button';
 import {BsTrash} from 'react-icons/bs';
 import { useEffect, useRef, useState } from 'react';
-
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 import orgService from '../../../../services/orgService';
 import { useSelector } from 'react-redux';
 
@@ -95,7 +95,7 @@ const PolyPrice = ({
                             disabled={!DeliveryPrice || !MinPrice}
                             text={'Сохранить'}
                             type={'button'}
-                            before={<BsTrash/>}
+                            before={<SaveIcon color={'#fff'} size={20}/>}
                             />
                         
                     </Col>

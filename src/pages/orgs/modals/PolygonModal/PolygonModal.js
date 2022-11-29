@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import orgService from '../../../../services/orgService';
 import PolyPrice from '../polyPrice/PolyPrice';
-
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 import MapPolygon from '../../../../components/MapPolygon/MapPolygon';
-
+import SelectColor from './SelectColor/SelectColor';
 
 const os = new orgService()
 
@@ -20,6 +20,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
 
     const {token} = useSelector(state => state)
     const [selected, setSelected] = useState(null);
+    const [Name, setName] = useState('')
     const [MinPrice, setMinPrice] = useState('')
     const [DeliveryTime, setDeliveryTime] = useState('')
     const [Delivery, setDelivery] = useState([])
@@ -28,18 +29,22 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
     const [delLoad, setDelLoad] = useState(false)
     const [polyPriceModal, setPolyPriceModal] = useState(false)
     const [editPrice, setEditPrice] = useState(null)
+    const [Color, setColor] = useState('')
 
     useEffect(() => {
-        
         if(data) {
-            setMinPrice(data.MinPrice)
-            setDelivery(data.Delivery)
-            setDeliveryTime(data.DeliveryTime)
-            setCoords(data.Coordinates)
+            console.log(data)
+            setMinPrice(data?.MinPrice)
+            setDelivery(data?.Delivery)
+            setDeliveryTime(data?.DeliveryTime)
+            setCoords(data?.Coordinates)
+            setColor(data?.Color)
+            setName(data?.Name)
         } else {
             setCoords(null)
+            setColor('#000000')
         }
-    }, [data])
+    }, [data, visible])
     
     const closePriceModal = () => {
         setEditPrice(null)
@@ -58,6 +63,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
         setDeliveryTime('')
         setDelivery([])
         setCoords(null)
+        setName('')
         close();
     }
 
@@ -72,8 +78,9 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
 
     const onSave = () => {    
         if(!data) {
+            console.log('no data')
             if(selected) {
-                os.addPol(token, {
+                const data = {
                     OrganisationID: orgId,
                     Disabled: '0',
                     Coordinates: selected.map(item => {
@@ -82,7 +89,11 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     MinPrice,
                     DeliveryTime,
                     Delivery,
-                }).then(res => {
+                    Name,
+                    Color
+                }
+                os.addPol(token, data).then(res => {
+                    console.log(res)
                     setPolList(res.map(item => {
                         return {
                             ...item,
@@ -131,6 +142,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
             }
             
         } else {
+            
             if(selected) {
                 os.editPol(token, {
                     PolygonID: data.PolygonID,
@@ -141,7 +153,9 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     }).join(' '),
                     MinPrice,
                     DeliveryTime,
-                    Delivery
+                    Delivery,
+                    Name,
+                    Color
                 }).then(res => {
                     setPolList(res.map(item => {
                         return {
@@ -168,7 +182,9 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     Coordinates: data.Coordinates.map(item => {
                         return `${item.lat},${item.lng}`
                     }).join(' '),
-                    Delivery
+                    Delivery,
+                    Name,
+                    Color
                 }).then(res => {
                     setPolList(res.map(item => {
                         return {
@@ -204,7 +220,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             lng: Number(item.slice(item.indexOf(',') + 1, item.length))
                         }
                     }),
-                    Coordinats: null
+                    Coordinats: null,
                 }
             }))
         }).finally(_ => {
@@ -226,11 +242,24 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             <Col span={24}>
                                 <div className="Modal__form_map" style={{height: 290}}>  
                                     <MapPolygon
+                                        color={Color}
                                         id={'polygon-modal'}
                                         setSelected={setSelected} 
                                         polygonCoords={coords} 
                                         center={{lat: 55.7522200,lng: 37.6155600}}/>
                                 </div>
+                            </Col>
+                            <Col span={24}>
+                                <div className="def-label">Выберите цвет полигона</div>
+                                <SelectColor color={Color} setColor={setColor}/>
+                                
+                            </Col>
+                            <Col span={24}>
+                                <Input
+                                    placeholder={'Название'}
+                                    value={Name}
+                                    onChange={e => setName(e.target.value)}
+                                    />
                             </Col>
                             <Col span={24}>
                                 <Input 
@@ -250,18 +279,18 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                                 <Button
                                     styles={{width: '100%'}}
                                     text={'Сохранить'}
-                                    before={<BsTrash/>}
+                                    before={<SaveIcon color={'#fff'} size={20}/>}
                                     load={saveLoad}
                                     type={'button'}
-                                    disabled={!MinPrice || !DeliveryTime || Delivery?.length == 0 || !selected}
+                                    // disabled={!MinPrice || !DeliveryTime || Delivery?.length == 0 || !selected}
                                     onClick={onSave}
                                     />
                                 {
                                     data ? (
                                         <Button
                                         styles={{width: '100%', marginTop: 10}}
-                                        text={'Удплить'}
-                                        before={<BsTrash/>}
+                                        text={'Удалить'}
+                                        before={<BsTrash size={20}/>}
                                         variant={'danger'}
                                         load={delLoad}
                                         type={'button'}

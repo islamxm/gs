@@ -480,7 +480,7 @@ const CreatePlatePage = () => {
                                             justify={'flex-start'} 
                                             variant={'danger'}
                                             onClick={deletePlate}
-                                            before={<BsTrash/>} 
+                                            before={<BsTrash size={20}/>} 
                                             load={delLoad}
                                             styles={{width: '100%'}}/>
                                         ) : (
@@ -490,7 +490,7 @@ const CreatePlatePage = () => {
                                                 text={'Сохранить'} 
                                                 load={saveLoad}
                                                 justify={'flex-start'} 
-                                                before={<SaveIcon size={16} color={'#fff'}/>} 
+                                                before={<SaveIcon size={20} color={'#fff'}/>} 
                                                 styles={{width: '100%'}}/>
                                         )
                                     }

@@ -10,7 +10,7 @@ import {
 import Loader from '../Loader/Loader';
 import { useState, useRef, useEffect, useCallback } from "react";
 import {BsTrash} from 'react-icons/bs';
-
+import ppp from '../../NEW Карта Ноябрь 2022.kml';
 
 
 let libs = ['drawing']
@@ -20,6 +20,7 @@ const MapPolygon = ({
     setSelected,
     readOnly,
     id,
+    color,
 }) => {
     const {isLoaded} = useLoadScript({
         id: id,
@@ -33,33 +34,8 @@ const MapPolygon = ({
     const [initPoly, setInitPoly] = useState()
     const [lc, setLc] = useState(0)
 
-    // const onLoad = useCallback((map) => {
-    //     if(polygonCoords) {
-    //         window.google.maps.Polygon.prototype.getBoundingBox = function() {
-    //             var bounds = new window.google.maps.LatLngBounds();
-    //             this.getPath().forEach(function(element,index) {
-    //               bounds.extend(element)
-    //             });
-              
-    //             return(bounds);
-    //         };
-    //         const pol = new window.google.maps.Polygon({paths: polygonCoords})
-    //         map.setCenter(pol.getBoundingBox().getCenter())
-    //         map.fitBounds(pol.getBoundingBox())
-    //     } else {
-    //         console.log('no coords')
-    //         if(center) {
-    //             map.setCenter(center)
-    //         }
-    //     } 
-    //     if(polygonCoords) {
-    //         console.log('has coords')
-    //         console.log(polygonCoords)
-    //     } else {
-    //         console.log('no cors')
-    //     }
 
-    // }, [initPoly, center, polygonCoords])
+  
 
     const onLoad = (map) => {
         if(polygonCoords) {
@@ -68,19 +44,23 @@ const MapPolygon = ({
                 this.getPath().forEach(function(element,index) {
                   bounds.extend(element)
                 });
-              
+                
                 return(bounds);
             };
+         
+            
             const pol = new window.google.maps.Polygon({paths: polygonCoords})
             map.setCenter(pol.getBoundingBox().getCenter())
             map.fitBounds(pol.getBoundingBox())
+            
             setMap(map)
-        } else {
+        } 
+        if(!polygonCoords) {
             if(center) {
                 map.setCenter(center)
                 setMap(map)
             }
-        } 
+        }
     } 
 
     const onUnmount = useCallback((map) => {
@@ -117,6 +97,7 @@ const MapPolygon = ({
         map.setCenter(poly.getBoundingBox().getCenter())
             map.fitBounds(poly.getBoundingBox())
             setMap(map)
+        
     }
     
 
@@ -147,7 +128,8 @@ const MapPolygon = ({
            
             <GoogleMap
                 options={{
-                    disableDefaultUI: true
+                    disableDefaultUI: true,
+                    fullscreenControl: true
                 }}
                 ref={mapRef}
                 mapContainerStyle={{width: '100%', height: '100%'}}
@@ -158,28 +140,27 @@ const MapPolygon = ({
                 {
                     initPoly ? (
                         <Polygon 
-                            // onUnmount={poly => }
                             onUnmount={polyUnmount}
-                            onLoad={polyLoad}
-                            
+                            onLoad={polyLoad} 
                             ref={polyRef}
                             onMouseUp={changePoly}
-                            editable={true}
-                            draggable={true}
+                            editable={!readOnly ? true: false}
+                            draggable={!readOnly ? true : false}
                             options={{
-                                strokeColor : '#FD3F3E',
-                                fillColor: '#F09797'
+                                strokeColor : '#' + color?.slice(1, color.length),
+                                fillColor: '#' + color?.slice(1, color.length)
                             }}
                             path={initPoly}/>
                     ) : (
+                        
                         <DrawingManager
                         onPolygonComplete={getPolygon}
                         onOverlayComplete={clearDrawing}
                         drawingMode={'polygon'}
                         options={{    
                             polygonOptions: {
-                                strokeColor : '#FD3F3E',
-                                fillColor: '#F09797'
+                                strokeColor: '#' + color?.slice(1, color.length),
+                                fillColor: '#' + color?.slice(1, color.length)
                             },
                             drawingControlOptions: {
                                 position: 10.0,

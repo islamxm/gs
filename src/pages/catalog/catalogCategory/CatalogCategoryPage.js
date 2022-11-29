@@ -15,6 +15,7 @@ import {motion, AnimatePresence} from 'framer-motion';
 import pageEnterAnimProps from '../../../funcs/pageEnterAnimProps';
 import {handleDragEnd, handleDragLeave, handleDragOver, handleDragStart, handleDrop, sortItems} from '../../../funcs/dragSort'
 import authService from '../../../services/dataService';
+import SubCard from './components/SubCard/SubCard';
 
 const as = new authService();
 const cs = new catService();
@@ -107,6 +108,7 @@ const CatalogCategoryPage = () => {
     }
     
     useEffect(() => {
+        console.log(list)
         if(token && list && list.length > 0) {
             as.orderSort(token, 'products', list.map(item => item.ID).join(',')).then(res => {
             })
@@ -151,7 +153,7 @@ const CatalogCategoryPage = () => {
                                                             span={4}
                                                             style={{transition: 'all .3s ease'}}
                                                             >
-                                                            <CatItem 
+                                                            <SubCard
                                                                 Link={`/catalog/${categoryId}/${item.ID}`}
                                                                 {...item}
                                                                 selectEdit={editSubcat}
@@ -178,9 +180,9 @@ const CatalogCategoryPage = () => {
                                             })
                                             
                                         }
-                                        <Col className='CatalogCategoryPage__body_list_add' span={4} style={{height: 250}}>
-                                            <Pl onClick={toCreatePlate} style={{height: 120, backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
-                                            <Pl onClick={() => setCreateSubcategory(true)} style={{height: 120, backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
+                                        <Col className='CatalogCategoryPage__body_list_add' span={4} style={{minHeight: 250}}>
+                                            <Pl onClick={toCreatePlate} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
+                                            <Pl onClick={() => setCreateSubcategory(true)} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
                                         </Col>
                                         
                                         

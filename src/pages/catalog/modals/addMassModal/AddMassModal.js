@@ -75,7 +75,7 @@ const AddMassModal = ({visible, close, update, plateId}) => {
                         disabled={!Mass || !Price || !SalePrice}
                         load={load}
                         type={'button'}  
-                        before={<BsTrash/>} 
+                        before={<BsTrash size={20}/>} 
                         justify={'flex-start'} 
                         text={'Сохранить'}/>
                 </div>

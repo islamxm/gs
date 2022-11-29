@@ -12,6 +12,7 @@ import {Dropdown} from 'antd';
 import SearchResult from '../../createPlate/components/SearchResult/SearchResult';
 import SmCard from '../../../../components/SmCard/SmCard';
 import Loader from '../../../../components/Loader/Loader';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 const cs = new catService()
 
 const AddRec = ({visible, close, data, update, plateId}) => {
@@ -156,7 +157,7 @@ const AddRec = ({visible, close, data, update, plateId}) => {
                             disabled={!selectedItem}
                             onClick={onSave}
                             text={'Сохранить'}
-                            before={<BsTrash/>}/>
+                            before={<SaveIcon size={20} color={'#fff'}/>}/>
                         {
                             data ? (
                                 <Button
@@ -165,6 +166,7 @@ const AddRec = ({visible, close, data, update, plateId}) => {
                                     styles={{marginTop: 10}}
                                     variant={'danger'}
                                     text={'Удалить блюдо'}
+                                    before={<BsTrash size={20}/>}
                                     />
                             ) : null
                         }

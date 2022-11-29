@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Wrapper, Status} from "@googlemaps/react-wrapper";
 import Map from '../../../../components/Map/Map';
 import MapMarker from '../../../../components/MapMarker/MapMarker';
+import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 
 const LocationModal = ({visible, close, coords, setLocation}) => {
     const [selected, setSelected] = useState(null)
@@ -40,7 +41,12 @@ const LocationModal = ({visible, close, coords, setLocation}) => {
                 {
                     selected ? (
                        <div className="Modal__form_action" style={{marginTop: 30}}>
-                            <Button onClick={onSave} type={'button'}  text={'Сохранить'} before={<BsTrash/>} justify={'flex-start'}/>
+                            <Button 
+                                onClick={onSave} 
+                                type={'button'} 
+                                text={'Сохранить'} 
+                                before={<SaveIcon color={'#fff'} size={'20'}/>} 
+                                justify={'flex-start'}/>
                        </div> 
                     ) : null
                 }

@@ -33,6 +33,9 @@ import LocationModal from '../modals/LocationModal/LocationModa';
 import MapMarker from '../../../components/MapMarker/MapMarker';
 import checkEmptyValue from '../../../funcs/checkEmptyValue';
 import checkNumValue from '../../../funcs/checkNumValue';
+import UploadKml from './components/UploadKml/UploadKml';
+import MapPolygonPic from '../../../components/MapPolygonPic/MapPolygonPic';
+
 const os = new orgService();
 const pmValueFind = (value) => {
     switch(value) {
@@ -197,7 +200,7 @@ const OrgsCreatePage = () => {
                                     lng: Number(item.slice(item.indexOf(',') + 1, item.length))
                                 }
                             }),
-                            Coordinats: null
+                            Coordinats: null,
                         }
                     }))
                 } else {
@@ -290,7 +293,7 @@ const OrgsCreatePage = () => {
                                     lng: Number(item.slice(item.indexOf(',') + 1, item.length))
                                 }
                             }),
-                            Coordinats: null
+                            Coordinats: null,
                         }
                     }))
                 } else {
@@ -298,7 +301,6 @@ const OrgsCreatePage = () => {
                 }
             })
             os.getPay(token, {OrganisationID: orgId}).then(res => {
-                
                 setPm(res.map(item => {
                     return {
                         ...item,
@@ -309,6 +311,28 @@ const OrgsCreatePage = () => {
         }
     }, [orgId, brandId, token, settings, orgId])
 
+
+    const updatePolList = () => {
+        os.getPols(token, {OrganisationID: orgId}).then(res => {
+            if(res?.length > 0) {
+                setDelivery(true)
+                setPolList(res.map(item => {
+                    return {
+                        ...item,
+                        Coordinates: item.Coordinats.split(' ').map(item => {
+                            return {
+                                lat: Number(item.slice(0, item.indexOf(','))),
+                                lng: Number(item.slice(item.indexOf(',') + 1, item.length))
+                            }
+                        }),
+                        Coordinats: null,
+                    }
+                }))
+            } else {
+                setDelivery(false)
+            }
+        })
+    }
 
     const addPayMethods = () => {
         const cs = pm;
@@ -553,6 +577,8 @@ const OrgsCreatePage = () => {
         setEditPolygon(item)
         openSelectPoly()
     }
+
+    
 
     const addPay = (item, selected) => {
         if(item.PaymentType != selected.PaymentType && !pm.find(i => i.PaymentType == item.PaymentType)) {
@@ -848,7 +874,7 @@ const OrgsCreatePage = () => {
                                         onClick={orgSubmit} 
                                         disabled={!Name} 
                                         load={saveLoad}
-                                        before={<SaveIcon size={16} color={'#fff'}/>} 
+                                        before={<SaveIcon size={20} color={'#fff'}/>} 
                                         text={'Сохранить'} 
                                         type={'button'}
                                         justify={'flex-start'}/>
@@ -859,7 +885,7 @@ const OrgsCreatePage = () => {
                                             onClick={deleteOrg} 
                                             disabled={false} 
                                             load={delLoad} 
-                                            before={<BsTrash/>} 
+                                            before={<BsTrash size={20}/>} 
                                             text={'Удалить'} 
                                             type={'button'}
                                             variant={'danger'}
@@ -897,16 +923,54 @@ const OrgsCreatePage = () => {
                                 {
                                     createdId || orgId ? (
                                         <>
-                                            <Row className='row-custom'>
-                                                <Checkbox 
-                                                    onChange={(e) => 
-                                                    setDelivery(e.target.checked)} 
-                                                    checked={delivery} 
-                                                    id={'isDelivery'} 
-                                                    text={'Есть доставка'}/>
+                                            <Row gutter={[10, 10]} className='row-custom'>
+                                                <Col span={12}>
+                                                    <Checkbox 
+                                                        onChange={(e) => 
+                                                        setDelivery(e.target.checked)} 
+                                                        checked={delivery} 
+                                                        id={'isDelivery'} 
+                                                        text={'Есть доставка'}/>
+                                                </Col>
+                                                <Col span={12}>
+                                                    <UploadKml 
+                                                        openMap={openSelectPoly} 
+                                                        updatePolList={updatePolList}
+                                                        />
+                                                </Col>
+                                                
                                             </Row> 
                                             {
                                                 delivery ? (
+                                                    // <Row className='row-custom' gutter={[30, 30]}>
+                                                    //     {
+                                                    //         polList && polList.length > 0 ? (
+                                                    //             polList.map((item, index) => (
+                                                    //                 <Col span={12} key={index}>
+                                                    //                     <div onClick={() => {
+                                                    //                         editPolygonFunc({...item})
+                                                    //                     }} className="panel" style={{height: 275}}>
+                                                    //                         <MapPolygon 
+                                                    //                             // id={`polygon-item-${index}`}
+                                                    //                             id={'polygon-item'}
+                                                    //                             readOnly
+                                                    //                             polygonCoords={item?.Coordinates} 
+                                                    //                             color={item?.Color}
+                                                    //                             // center={item.Coordinates[0]}
+                                                    //                             />
+                                                    //                     </div>
+                                                    //                 </Col>
+                                                    //             ))
+                                                    //         ) : null
+                                                    //     }
+                                                    //     <Col span={12} >
+                                                    //         <div className="panel" style={{height: 275}}>
+                                                    //             <Pl 
+                                                    //                 onClick={openSelectPoly}
+                                                    //                 text={'Добавить полигон доставки'}/>
+                                                    //         </div>
+                                                    //     </Col>
+                                                    // </Row>  
                                                     <Row className='row-custom' gutter={[30, 30]}>
                                                         {
                                                             polList && polList.length > 0 ? (
@@ -915,12 +979,10 @@ const OrgsCreatePage = () => {
                                                                         <div onClick={() => {
                                                                             editPolygonFunc({...item})
                                                                         }} className="panel" style={{height: 275}}>
-                                                                            <MapPolygon 
-                                                                                // id={`polygon-item-${index}`}
-                                                                                id={'polygon-item'}
-                                                                                readOnly
-                                                                                polygonCoords={item?.Coordinates} 
-                                                                                // center={item.Coordinates[0]}
+                                                                            <MapPolygonPic
+                                                                                name={item?.Name}
+                                                                                polygonCoords={item?.Coordinates}
+                                                                                color={item?.Color}
                                                                                 />
                                                                         </div>
                                                                     </Col>

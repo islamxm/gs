@@ -83,7 +83,7 @@ const AddAlrgn = ({visible, close, data, update, plateId}) => {
                                 onClick={onDelete}
                                 load={delLoad} 
                                 variant={'danger'}
-                                before={<BsTrash/>} 
+                                before={<BsTrash size={20}/>} 
                                 text={'Удалить аллерген'} 
                                 justify={'flex-start'}/>
                         ) : null

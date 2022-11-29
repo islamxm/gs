@@ -22,9 +22,12 @@ const EditAlrgn = ({visible, close}) => {
                     <Input placeholder={'Название аллергена'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button before={<BsTrash/>} text={'Сохранить'} justify={'flex-start'}/>
                     <Button 
                         before={<BsTrash/>} 
+                        text={'Сохранить'} 
+                        justify={'flex-start'}/>
+                    <Button 
+                        before={<BsTrash size={20}/>} 
                         text={'Удалить аллерген'} 
                         justify={'flex-start'} 
                         variant={'danger'} 

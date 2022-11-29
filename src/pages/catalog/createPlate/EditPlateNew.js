@@ -30,6 +30,7 @@ import RecList from './components/RecList/RecList';
 import {motion} from 'framer-motion';
 import Loader from '../../../components/Loader/Loader';
 import checkNumValue from '../../../funcs/checkNumValue';
+import SaveIcon from '../../../icons/SaveIcon/SaveIcon';
 
 const LOCAL_STORAGE = window.localStorage;
 
@@ -695,7 +696,7 @@ const EditPlateNew = () => {
                                         onClick={editPlate} 
                                         text={'Сохранить'} 
                                         justify={'flex-start'} 
-                                        before={<BsTrash/>} 
+                                        before={<SaveIcon color={'#fff'} size={20}/>} 
                                         load={saveLoad}
                                         styles={{width: '100%'}}/>
                                 </Row>
@@ -706,7 +707,7 @@ const EditPlateNew = () => {
                                         load={delLoad}
                                         text={'Удалить блюдо'} 
                                         justify={'flex-start'} 
-                                        before={<BsTrash/>} 
+                                        before={<BsTrash size={20}/>} 
                                         styles={{width: '100%'}}/>
                                 </Row>
                             </Col>

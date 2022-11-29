@@ -220,7 +220,7 @@ const IntegrPage = () => {
                                             load={saveLoad}
                                             onClick={onSave}
                                             text={'Сохранить'}
-                                            before={<SaveIcon size={16} color={'#fff'}/>}
+                                            before={<SaveIcon size={20} color={'#fff'}/>}
                                             styles={{width: '100%'}}
                                             />
                                     </Col>

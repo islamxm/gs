@@ -39,6 +39,9 @@ const PolyMap = ({setSelected, readOnly, polyCoords}) => {
         navigator.geolocation.getCurrentPosition((pos) => currentLocSuccess(pos, setCurrentLoc), (err) => currentLocError(err, setCurrentLoc))
     }, [])
 
+    useEffect(() => {
+        console.log(polyCoords)
+    }, [polyCoords])
 
     useEffect(() => {
         if (!draw && ref.current && !map && !poly && !polyCoords && window?.google?.maps) {
