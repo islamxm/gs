@@ -692,6 +692,12 @@ const OrgsCreatePage = () => {
                                     </div>
                                 </Row>
                                 <Row className='row-custom'>
+                                    <Col span={24}>
+                                        <div className="def-label">ID в системе</div>
+                                        <div className="def-value">{orgId}</div>
+                                    </Col>
+                                </Row>
+                                <Row className='row-custom'>
                                     <Input value={Name} onChange={(e) => setName(e.target.value)} placeholder={'Название организации'}/>
                                 </Row>
                                 <Row className='row-custom'>

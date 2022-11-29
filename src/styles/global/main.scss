@@ -89,6 +89,12 @@ body {
     line-height: 19px;
     color: #989898;
 }
+.def-value {
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--violet);
+    font-weight: 600;
+}
 
 .draggable {
     border: 2px solid transparent;

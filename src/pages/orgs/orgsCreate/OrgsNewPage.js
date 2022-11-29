@@ -131,6 +131,7 @@ const OrgsNewPage = () => {
         if(orgId && brandId != 'nobrand' && token && settings.IsHaveBrands == '1') {
             os.getOrgs(token, {BrandID: brandId}).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
+                
                 if(thisOrg?.ThumbnailPicture || thisOrg?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-org', '1')
                 } else {
@@ -409,7 +410,6 @@ const OrgsNewPage = () => {
             }) 
         }
         const data = new FormData()
-        console.log('BRAND', brandId)
         data.append('IIkoID', IIkoID)
         data.append('IIkoIDTerminal', IIkoIDTerminal)
         data.append('OrganisationBrand', brandId != 'nobrand' && brandId ? brandId : 0)
@@ -651,6 +651,12 @@ const OrgsNewPage = () => {
                                         />
                                     </div>
                                 </Row>
+                                {/* <Row className='row-custom'>
+                                    <Col span={24}>
+                                        <div className="def-label">ID в системе</div>
+                                        <div className="def-value">{orgId}</div>
+                                    </Col>
+                                </Row> */}
                                 <Row className='row-custom'>
                                     <Input value={Name} onChange={(e) => setName(e.target.value)} placeholder={'Название организации'}/>
                                 </Row>

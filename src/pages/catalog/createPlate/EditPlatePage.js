@@ -449,6 +449,25 @@ const EditPlatePage = () => {
                                     </div>
                                 </Row>
                                 {
+                                    IIkoID && ID ? (
+                                        <Row className='row-custom' gutter={[20,20]}>
+                                            <Col span={12}>
+                                                <div className="def-label">ID в системе</div>
+                                                <div className="def-value">{ID}</div>
+                                            </Col>
+                                            {
+                                                settings?.IsHaveIIko == '1' ? (
+                                                    <Col span={12}>
+                                                        <div className="def-label">ID в iIko</div>
+                                                        <div className="def-value">{IIkoID}</div>
+                                                    </Col>
+                                                ) : null
+                                            }
+                                            
+                                        </Row>
+                                    ) : null
+                                }
+                                {
                                     settings?.IsHaveIIko == '1' ? (
                                         <Row className="row-custom">
                                             <Checkbox

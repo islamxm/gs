@@ -43,6 +43,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
 
     useEffect(() => {
         if(data) {
+            console.log(data)
             setName(data?.Name)
             setIIkoID(data?.IIkoID)
             setCanOverwriteByIIko(data?.CanOverwriteByIIko)
@@ -152,6 +153,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
             </h2>
             <div className="Modal__form">
                 <Row gutter={[0, 20]}>
+                    
                     <Col span={24}>
                         <div className="CreateSubcategory__upload">
                             {
@@ -172,6 +174,22 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                         </div>
                         
                     </Col>
+                    {
+                        data?.ID && data?.IIkoID ? (
+                            <Col span={24}>
+                                <Row gutter={[20, 20]}>
+                                    <Col span={12}>
+                                        <div className="def-label">ID в системе</div>
+                                        <div className="def-value">{data.ID}</div>
+                                    </Col>
+                                    <Col span={12}>
+                                        <div className="def-label">ID в iIko</div>
+                                        <div className="def-value">{data.IIkoID}</div>
+                                    </Col>
+                                </Row>
+                            </Col>    
+                        ) : null
+                    }
                     <Col span={24}>
                         <Input
                             value={Name}
