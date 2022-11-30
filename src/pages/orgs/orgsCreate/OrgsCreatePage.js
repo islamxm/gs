@@ -954,45 +954,21 @@ const OrgsCreatePage = () => {
                                                         id={'isDelivery'} 
                                                         text={'Есть доставка'}/>
                                                 </Col>
-                                                <Col span={12}>
-                                                    <UploadKml 
-                                                        openMap={openSelectPoly} 
-                                                        updatePolList={updatePolList}
-                                                        />
-                                                </Col>
+                                                {
+                                                    delivery ? (
+                                                        <Col span={12}>
+                                                            <UploadKml 
+                                                                openMap={openSelectPoly} 
+                                                                updatePolList={updatePolList}
+                                                                />
+                                                        </Col>
+                                                    ) : null
+                                                }
+                                                
                                                 
                                             </Row> 
                                             {
                                                 delivery ? (
-                                                    // <Row className='row-custom' gutter={[30, 30]}>
-                                                    //     {
-                                                    //         polList && polList.length > 0 ? (
-                                                    //             polList.map((item, index) => (
-                                                    //                 <Col span={12} key={index}>
-                                                    //                     <div onClick={() => {
-                                                    //                         editPolygonFunc({...item})
-                                                    //                     }} className="panel" style={{height: 275}}>
-                                                    //                         <MapPolygon 
-                                                    //                             // id={`polygon-item-${index}`}
-                                                    //                             id={'polygon-item'}
-                                                    //                             readOnly
-                                                    //                             polygonCoords={item?.Coordinates} 
-                                                    //                             color={item?.Color}
-                                                    //                             // center={item.Coordinates[0]}
-                                                    //                             />
-                                                    //                     </div>
-                                                    //                 </Col>
-                                                    //             ))
-                                                    //         ) : null
-                                                    //     }
-                                                    //     <Col span={12} >
-                                                    //         <div className="panel" style={{height: 275}}>
-                                                    //             <Pl 
-                                                    //                 onClick={openSelectPoly}
-                                                    //                 text={'Добавить полигон доставки'}/>
-                                                    //         </div>
-                                                    //     </Col>
-                                                    // </Row>  
                                                     <Row className='row-custom' gutter={[30, 30]}>
                                                         {
                                                             polList && polList.length > 0 ? (

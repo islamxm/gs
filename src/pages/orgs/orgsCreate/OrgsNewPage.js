@@ -32,6 +32,8 @@ import MapPolygon from '../../../components/MapPolygon/MapPolygon';
 import LocationModal from '../modals/LocationModal/LocationModa';
 import MapMarker from '../../../components/MapMarker/MapMarker';
 import checkNumValue from '../../../funcs/checkNumValue';
+import MapPolygonPic from '../../../components/MapPolygonPic/MapPolygonPic';
+import UploadKml from './components/UploadKml/UploadKml';
 const os = new orgService();
 const pmValueFind = (value) => {
     switch(value) {
@@ -475,10 +477,7 @@ const OrgsNewPage = () => {
         data.append('RKeeperPort', RKeeperPort)
         data.append('PrimehillToken', PrimehillToken)
         data.append('CanOverwrite', CanOverwrite)
-        for(var pair of data.entries()) {
-            console.log(pair[0]+ ': '+ pair[1]);
-        }
-
+        
         setSaveLoad(true) 
         if(!orgId) {
             os.addOrg(token, data).then(res => {
@@ -612,6 +611,27 @@ const OrgsNewPage = () => {
         }
     }, [])
 
+    const updatePolList = () => {
+        os.getPols(token, {OrganisationID: orgId}).then(res => {
+            if(res?.length > 0) {
+                setDelivery(true)
+                setPolList(res.map(item => {
+                    return {
+                        ...item,
+                        Coordinates: item.Coordinats.split(' ').map(item => {
+                            return {
+                                lat: Number(item.slice(0, item.indexOf(','))),
+                                lng: Number(item.slice(item.indexOf(',') + 1, item.length))
+                            }
+                        }),
+                        Coordinats: null,
+                    }
+                }))
+            } else {
+                setDelivery(false)
+            }
+        })
+    }
 
 
     return (
@@ -908,12 +928,25 @@ const OrgsNewPage = () => {
                                     createdId || orgId ? (
                                         <>
                                             <Row className='row-custom'>
+                                                <Col span={12}>
                                                 <Checkbox 
                                                     onChange={(e) => 
                                                     setDelivery(e.target.checked)} 
                                                     checked={delivery} 
                                                     id={'isDelivery'} 
                                                     text={'Есть доставка'}/>
+                                                </Col>     
+
+                                                {
+                                                    delivery ? (
+                                                        <Col span={12}>
+                                                            <UploadKml 
+                                                                openMap={openSelectPoly} 
+                                                                updatePolList={updatePolList}
+                                                                />
+                                                        </Col>
+                                                    ) : null
+                                                }
                                             </Row> 
                                             {
                                                 delivery ? (
@@ -925,12 +958,10 @@ const OrgsNewPage = () => {
                                                                         <div onClick={() => {
                                                                             editPolygonFunc({...item})
                                                                         }} className="panel" style={{height: 275}}>
-                                                                            <MapPolygon 
-                                                                                // id={`polygon-item-${index}`}
-                                                                                id={'polygon-item'}
-                                                                                readOnly
-                                                                                polygonCoords={item?.Coordinates} 
-                                                                                // center={item.Coordinates[0]}
+                                                                            <MapPolygonPic
+                                                                                name={item?.Name}
+                                                                                polygonCoords={item?.Coordinates}
+                                                                                color={item?.Color}
                                                                                 />
                                                                         </div>
                                                                     </Col>
