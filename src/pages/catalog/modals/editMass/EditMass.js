@@ -71,18 +71,21 @@ const EditMass = ({visible, close, selected, plateId, update}) => {
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <Input
+                        shadow={true}
                         value={localMass} 
                         onChange={(e) => setLocalMass(e.target.value)}
                         placeholder={'Масса'}/>
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        shadow={true}
                         value={localPrice} 
                         onChange={(e) => setLocalPrice(e.target.value)}
                         placeholder={'Цена'}/>
                 </div>
                 <div className="Modal__form_row">
                     <Input 
+                        shadow={true}
                         value={localDiscount}
                         onChange={(e) => setLocalDiscount(e.target.value)}
                         placeholder={'Цена со скидкой'}/>

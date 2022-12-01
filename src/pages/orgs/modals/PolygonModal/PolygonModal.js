@@ -267,6 +267,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             </Col>
                             <Col span={24}>
                                 <Input
+                                    shadow={true}
                                     placeholder={'Название'}
                                     value={Name}
                                     onChange={e => setName(e.target.value)}
@@ -293,7 +294,6 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                                     before={<SaveIcon color={'#fff'} size={20}/>}
                                     load={saveLoad}
                                     type={'button'}
-                                    // disabled={!MinPrice || !DeliveryTime || Delivery?.length == 0 || !selected}
                                     onClick={onSave}
                                     />
                                 {
@@ -354,6 +354,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             </Col>
                             <Col span={24}>
                                 <Pl 
+                                    shadow={true}
                                     onClick={openPriceModal}
                                     style={{backgroundColor: '#fff', width: '100%'}} 
                                     text={'Добавить цену'}/>

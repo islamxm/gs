@@ -25,7 +25,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
     const [delLoad, setDelLoad] = useState(false)
     const [orgs, setOrgs] = useState([])
     const [orgsList, setOrgsList] = useState([])
-    const [CanOverwriteByIIko, setCanOverwriteByIIko] = useState(0)
+    const [CanOverwriteByIIko, setCanOverwriteByIIko] = useState('0')
     const [ItemOrder, setItemOrder] = useState(0)
     const [AllowedDeliveryTypes, setAllowedDeliveryTypes] = useState(1)
     const [isHideInOrg, setIsHideInOrg] = useState(false)
@@ -86,7 +86,6 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
             setItemOrder(editItem.ItemOrder)
             setAllowedDeliveryTypes(editItem.AllowedDeliveryTypes)
             setID(editItem.ID)
-            console.log(editItem)
         }
     }, [editItem, orgs])
 
@@ -94,7 +93,13 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
 
     const addOrg = () => {
         setOrgsList(state => [...state, orgs[0]])
-    }   
+    }  
+    
+    const delOrg = (index) => {
+        const pr = orgsList;
+        const m = pr.splice(index, 1)
+        setOrgsList([...pr])
+    }
 
     const selectOrg = (value, index, ID) => {
         let ur = orgsList;
@@ -179,43 +184,43 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
             </h2>
             <form className="Modal__form">
                 <div className="Modal__form_row">
+                    <Checkbox
+                        shadow={true}
+                        checked={CanOverwriteByIIko == '1'}
+                        onChange={e => {
+                            if(e.target.checked) {
+                                setCanOverwriteByIIko('1')
+                            } else {
+                                setCanOverwriteByIIko('0')
+                            }
+                        }}
+                        id={'CanOverwriteByIIko'}
+                        text={'Разрешить iiko перезаписывать категорию'}
+                        />
+                </div>
+                <div className="Modal__form_row">
                     <Input
+                        shadow={true}
                         value={Name}
                         onChange={(e) => setName(e.target.value)} 
                         placeholder={'Название категории'}/>
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        shadow={true}
                         value={IIkoID}
                         onChange={(e) => setIIkoID(e.target.value)} 
                         placeholder={'ID в iIko'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Checkbox checked={isHideInOrg} onChange={(e) => {
+                    <Checkbox shadow={true} checked={isHideInOrg} onChange={(e) => {
                         setIsHideInOrg(e.target.checked)
                         if(!e.target.checked) {
                             setOrgsList([])
                         }
                     }} id={'HiddenInOrganisations'} text={'Скрыть в организациях'}/>
                 </div>
-                {
-                    editItem ? (
-                        <div className="Modal__form_row">
-                            <Checkbox
-                                checked={CanOverwriteByIIko == '1'}
-                                onChange={e => {
-                                    if(e.target.checked) {
-                                        setCanOverwriteByIIko('1')
-                                    } else {
-                                        setCanOverwriteByIIko('0')
-                                    }
-                                }}
-                                id={'CanOverwriteByIIko'}
-                                text={'Разрешить iiko перезаписывать категорию'}
-                                />
-                        </div>
-                    ) : null
-                }
+                
                 
                 {
                     isHideInOrg ? (
@@ -225,9 +230,11 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                                 orgsList && orgsList.length > 0 ? (
                                     orgsList.map((item, index) => (
                                         <DropCollapse 
+                                            shadow
                                             key={index}
                                             selectItem={selectOrg} 
                                             afterIcon 
+                                            del={delOrg}
                                             index={index}
                                             value={item.value} 
                                             list={orgs}
@@ -242,7 +249,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                                 null
                             ) : (
                                 <div className="Modal__form_row">
-                                    <Pl onClick={addOrg} text={'Добавить организацию'} style={{backgroundColor: '#fff'}}/>
+                                    <Pl shadow={true} onClick={addOrg} text={'Добавить организацию'} style={{backgroundColor: '#fff'}}/>
                                 </div>
                             )
                         }

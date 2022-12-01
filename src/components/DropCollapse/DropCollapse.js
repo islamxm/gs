@@ -24,7 +24,8 @@ const DropCollapse = ({
     checkboxValue,
     textAlign,
     delText,
-    id 
+    id ,
+    shadow
 }) => {
     const [listActive, setListActive] = useState(false);
     const selectList = useRef(null);
@@ -59,7 +60,7 @@ const DropCollapse = ({
 
     return (
         <>
-            <div style={styles} className={"DropCollapse" + (listActive ? ' active ' : '')}>
+            <div style={styles} className={"DropCollapse" + (listActive ? ' active ' : '') + (shadow ? ' shadow ' : '')}>
                 <div onClick={handleList} className={"DropCollapse__head"}>
                     {
                         label && !value ? (

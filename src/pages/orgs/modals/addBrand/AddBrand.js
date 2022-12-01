@@ -27,9 +27,7 @@ const AddBrand  = ({visible, close, updateList}) => {
         close();
     }
 
-    const handleMarker = (e) => {
-        setMarkerID(e.target.value)
-    } 
+     
 
     const addBrand = () => {
         const body = new FormData()
@@ -81,7 +79,11 @@ const AddBrand  = ({visible, close, updateList}) => {
                     </div>
                 </div>
                 <div className="Modal__form_row">
-                    <Input value={markerID} onChange={handleMarker} placeholder={'Номер метки на карте'}/>
+                    <Input 
+                        shadow={true} 
+                        value={markerID} 
+                        onChange={e => setMarkerID(e.target.value)} 
+                        placeholder={'ID бренда'}/>
                 </div>
                 <div className="Modal__form_action">
                     <Button 

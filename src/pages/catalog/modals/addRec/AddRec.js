@@ -121,6 +121,7 @@ const AddRec = ({visible, close, data, update, plateId}) => {
                         >
                         <div className="Modal__form_row">
                             <Input
+                                shadow={true}
                                 value={Search}
                                 onChange={e => setSearch(e.target.value)}
                                 placeholder={'Поиск блюда'}
@@ -135,6 +136,7 @@ const AddRec = ({visible, close, data, update, plateId}) => {
                                         <Row gutter={[10, 10]}>
                                             <Col span={14}>
                                                 <SmCard
+                                                shadow={true}
                                                 image={selectedItem?.ThumbnailPicture}
                                                 name={selectedItem?.Name}
                                                 price={selectedItem?.Prices[0]?.Price}

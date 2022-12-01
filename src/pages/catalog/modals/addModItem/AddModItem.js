@@ -73,24 +73,30 @@ const AddModItem = ({visible, close, update, data}) => {
         } else {
             update(state => {
                 let m = state;
-                if(state.find(item => item.ID == data.ID)) {
-                    let r = m.splice(state.findIndex(item => item.ID == data.ID), 1, {
-                        IIkoID,
-                        Name,
-                        Price
-                    })
+                const rm = m.splice(data.index, 1, {
+                    IIkoID,
+                    Name,
+                    Price
+                })
+                return [...m]
+                // if(state.find(item => item.ID == data.ID)) {
+                //     let r = m.splice(state.findIndex(item => item.ID == data.ID), 1, {
+                //         IIkoID,
+                //         Name,
+                //         Price
+                //     })
     
-                    return m;
-                } else {
-                    return [
-                        ...state,
-                        {
-                            IIkoID,
-                            Name,
-                            Price
-                        }
-                    ]
-                }
+                //     return m;
+                // } else {
+                //     return [
+                //         ...state,
+                //         {
+                //             IIkoID,
+                //             Name,
+                //             Price
+                //         }
+                //     ]
+                // }
                 
             })
             closeHandle()
@@ -99,7 +105,14 @@ const AddModItem = ({visible, close, update, data}) => {
     
     return (
         <Modal className='Modal' width={650} open={visible} onCancel={closeHandle}>
-            <h2 className="Modal__head">Добавить модификатор</h2>
+            {
+                data ? (
+                    <h2 className="Modal__head">Редактировать модификатор</h2>
+                ) : (
+                    <h2 className="Modal__head">Добавить модификатор</h2>
+                )
+            }
+            
             <div className="Modal__form">
                 <div className="AddMod">
                     <div className="AddMod__body">

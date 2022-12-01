@@ -164,6 +164,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                                 ) : null
                             }
                             <PlUpload
+                            shadow={true}
                             id={'uploadSubCatImg'}
                             text={'Выбрать картинку'}
                             onChange={addImg}
@@ -192,12 +193,14 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                     }
                     <Col span={24}>
                         <Input
+                            shadow={true}
                             value={Name}
                             onChange={e => setName(e.target.value)} 
-                            placeholder={'Название категории'}/>
+                            placeholder={'Название подкатегории'}/>
                     </Col>
                     <Col span={24}>
                         <Input
+                            shadow={true}
                             value={IIkoID}
                             onChange={e => setIIkoID(e.target.value)} 
                             placeholder={'ID в iIko'}/>
@@ -206,10 +209,10 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                         data ? (
                             <Col span={24}>   
                                 <Checkbox
+                                    shadow={true}
                                     checked={CanOverwriteByIIko == '1' ? true : false}
                                     id={'overriteSubcategoryIiko'}
                                     text={'Разрешить iiko перезаписывать подкатегорию'}
-                                    shadow
                                     onChange={e => {
                                         if(e.target.checked) {
                                             setCanOverwriteByIIko('1')

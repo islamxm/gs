@@ -78,12 +78,14 @@ const PolyPrice = ({
                 <Row gutter={[0,10]}>
                     <Col span={24}>
                         <Input 
+                            shadow={true}
                             onChange={e => setMinPrice(e.target.value)}
                             value={MinPrice}
                             placeholder={'Сумма заказа от'}/>
                     </Col>
                     <Col span={24}>
                         <Input
+                            shadow={true}
                             value={DeliveryPrice}
                             onChange={e => setDeliveryPrice(e.target.value)} 
                             placeholder={'Цена доставки'}/>

@@ -13,7 +13,7 @@ const os = new orgService()
 
 
 
-const SelectKmlPol = ({visible, close, list, updatePolList}) => {
+const SelectKmlPol = ({visible, close, list, updatePolList, resetFile}) => {
     const {token} = useSelector(state => state)
     const {orgId} = useParams()
     const [selected, setSelected] = useState([])
@@ -25,6 +25,7 @@ const SelectKmlPol = ({visible, close, list, updatePolList}) => {
 
     const closeHandle = () => {
         setSelected([])
+        resetFile()
         close()
     }
 
@@ -102,6 +103,7 @@ const SelectKmlPol = ({visible, close, list, updatePolList}) => {
                                 list.map((item, index) => (
                                     <Col span={24} key={index}>
                                         <Checkbox
+                                            shadow={true}
                                             id={index + item.properties.name}
                                             checked={selected.find(i => i.id == item.id)}
                                             onChange={e => {
@@ -129,8 +131,9 @@ const SelectKmlPol = ({visible, close, list, updatePolList}) => {
                 </div>
                 <div className="SelectKmlPol__action">
                     <Row  gutter={[0, 20]}>
-                        <Col span={24}>
+                        <Col className='SelectKmlPol__action_all' span={24}>
                             <Checkbox
+                                shadow={true}
                                 id={'selectAll'}
                                 text={'Выбрать все'}
                                 onChange={e => {

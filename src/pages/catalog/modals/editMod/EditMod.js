@@ -144,6 +144,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <Input
+                        shadow={true}
                         value={Title}
                         onChange={(e) => setTitle(e.target.value)} 
                         placeholder={'Название группы'}/>
@@ -157,6 +158,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Checkbox
+                        shadow={true}
                         checked={IsRequired == '1' ? true : false}
                         onChange={(e) => {
                             if(e.target.checked) {
@@ -206,7 +208,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                         mods.length >= 1 && Type.value == '1' ? (
                             null
                         ) : (
-                            <Pl text={'Добавить модификатор'} onClick={addMod} style={{backgroundColor: '#fff', marginBottom: 40}}/>
+                            <Pl shadow={true} text={'Добавить модификатор'} onClick={addMod} style={{backgroundColor: '#fff', marginBottom: 40}}/>
                         )
                     }
 

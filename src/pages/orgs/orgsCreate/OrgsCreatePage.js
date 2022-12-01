@@ -141,7 +141,7 @@ const OrgsCreatePage = () => {
                 setThumbnailPrev(thisOrg?.ThumbnailPicture)
                 setAddress(thisOrg?.Address)
                 setPhone(thisOrg?.Phone)
-                setMinPriceForLocalSale(thisOrg?.MinPriceForLocalSale != '0' ? thisOrg.MinPriceForLocalSale : '')
+                setMinPriceForLocalSale(thisOrg?.MinPriceForLocalSale != '0' ? thisOrg?.MinPriceForLocalSale : '')
                 setLocalOrderSale(thisOrg?.LocalOrderSale != '0' ? thisOrg.LocalOrderSale : '')
                 setIsHaveDelivery(thisOrg?.IsHaveDelivery)
                 setIsHaveLocalOrder(thisOrg?.IsHaveLocalOrder)
@@ -236,7 +236,7 @@ const OrgsCreatePage = () => {
                 setThumbnailPrev(thisOrg?.ThumbnailPicture)
                 setAddress(thisOrg?.Address)
                 setPhone(thisOrg?.Phone)
-                setMinPriceForLocalSale(thisOrg?.MinPriceForLocalSale != '0' ? thisOrg.MinPriceForLocalSale : '')
+                setMinPriceForLocalSale(thisOrg?.MinPriceForLocalSale != '0' ? thisOrg?.MinPriceForLocalSale : '')
                 setLocalOrderSale(thisOrg?.LocalOrderSale != '0' ? thisOrg.LocalOrderSale : '')
                 setIsHaveDelivery(thisOrg?.IsHaveDelivery)
                 setIsHaveLocalOrder(thisOrg?.IsHaveLocalOrder)
@@ -581,26 +581,34 @@ const OrgsCreatePage = () => {
     
 
     const addPay = (item, selected) => {
+        console.log(selected)
+        console.log(item)
         if(item.PaymentType != selected.PaymentType && !pm.find(i => i.PaymentType == item.PaymentType)) {
-            os.addPay(token, {
-                OrganisationID: createdId ? createdId : orgId,
-                Payments: [
-                    {
-                        PaymentType: item.PaymentType,
-                        IsNeedToChangeCash: item.IsNeedToChangeCash
-                    }
-                ]
-            }).then(res => {
+            os.deletePay(token, {ID: selected.ID}).then(res => {
                 if(res) {
-                    message.success('Метод оплаты успешно добавлен')
+                    os.addPay(token, {
+                        OrganisationID: createdId ? createdId : orgId,
+                        Payments: [
+                            {
+                                PaymentType: item.PaymentType,
+                                IsNeedToChangeCash: item.IsNeedToChangeCash
+                            }
+                        ]
+                    }).then(r => {
+                        
+                        if(r) {
+                            message.success('Метод оплаты успешно добавлен')
+                        }
+                        setPm(r.map(item => {
+                            return {
+                                ...item,
+                                value: pmValueFind(item.PaymentType)
+                            }
+                        }))
+                    })
                 }
-                setPm(res.map(item => {
-                    return {
-                        ...item,
-                        value: pmValueFind(item.PaymentType)
-                    }
-                }))
             })
+            
         } else {
             message.info('Данный метод оплаты уже выбран')
         }
@@ -770,15 +778,15 @@ const OrgsCreatePage = () => {
                                 </Row> 
                                 <Row className='row-custom'>
                                     <Checkbox 
-                                        checked={IsHaveDelivery == '1'} 
+                                        checked={IsHaveLocalOrder == '1'} 
                                         onChange={(e) => {
                                             if(e.target.checked) {
-                                                setIsHaveDelivery('1')
+                                                setIsHaveLocalOrder('1')
                                             } else {
-                                                setIsHaveDelivery('0')
+                                                setIsHaveLocalOrder('0')
                                             }
                                         }} 
-                                        id={'IsHaveDelivery'} 
+                                        id={'IsHaveLocalOrder'} 
                                         text={'Можно заказать отсюда'}/>
                                 </Row>  
                                 <Row className='row-custom'>
@@ -815,65 +823,62 @@ const OrgsCreatePage = () => {
                                         }}
                                         id={'3'} 
                                         text={'Уведомления в телеграм-боте и на E-Mail'}/>
-                                </Row>  
-                                <Row className='row-custom'>
-                                    <Input value={BotToken} onChange={(e) => setBotToken(e.target.value)} placeholder={'API-key бота'}/>
                                 </Row> 
-                                {/* <Row className='row-custom'>
-                                    <Input
-                                        value={Email}
-                                        onChange={(e) => setEmail(e.target.value)} 
-                                        placeholder={'E-Mail'}/>
-                                </Row> */}
-                                <Row className='row-custom'>
-                                    <Checkbox 
-                                        checked={NotifyWhenNewOrder == '1'} 
-                                        onChange={(e) => {
-                                            if(e.target.checked) {
-                                                setNotifyWhenNewOrder('1')
-                                            } else {
-                                                setNotifyWhenNewOrder('0')
-                                            }
-                                        }} 
-                                        id={'NotifyWhenNewOrder'} 
-                                        text={'Уведомлять о новых заказах'}
-                                        />
-                                </Row> 
-                                <Row className='row-custom'>
-                                    <Checkbox
-                                        checked={NotifyWhenNewReservation == '1'}
-                                        onChange={e => {
-                                            if(e.target.checked) {
-                                                setNotifyWhenNewReservation('1')
-                                            } else {
-                                                setNotifyWhenNewReservation('0')
-                                            }
-                                        }}
-                                        id="NotifyWhenNewReservation"
-                                        text={'Уведомлять о новых бронях'}
-                                        />
-                                </Row>
                                 {
-                                    settings?.IsHaveIIko == '1' || settings?.IsHaveIIko == '1' ? (
-                                        <Row className='row-custom'>
-                                            <Checkbox 
-                                                checked={NotifyWhenIIkoErrors == '1'} 
-                                                onChange={(e) => {
-                                                    if(e.target.checked) {
-                                                        setNotifyWhenIIkoErrors('1')
-                                                    } else {
-                                                        setNotifyWhenIIkoErrors('0')
-                                                    }
-                                                }} 
-                                                id={'NotifyWhenIIkoErrors'} 
-                                                text={
-                                                    settings?.IsHaveIIko == '1' ? 
-                                                    'Уведомлять об ошибках Iiko' : 
-                                                    'Уведомлять об ошибках RKeeper'
-                                                }
-                                                />
-                                        </Row> 
-                                    ) : null
+                                    IsNeedToNotify ? (
+                                        <>
+                                            <Row className='row-custom'>
+                                                <Input value={BotToken} onChange={(e) => setBotToken(e.target.value)} placeholder={'API-key бота'}/>
+                                            </Row> 
+                                            <Row className='row-custom'>
+                                                <Checkbox 
+                                                    checked={NotifyWhenNewOrder == '1'} 
+                                                    onChange={(e) => {
+                                                        if(e.target.checked) {
+                                                            setNotifyWhenNewOrder('1')
+                                                        } else {
+                                                            setNotifyWhenNewOrder('0')
+                                                        }
+                                                    }} 
+                                                    id={'NotifyWhenNewOrder'} 
+                                                    text={'Уведомлять о новых заказах'}
+                                                    />
+                                            </Row> 
+                                            <Row className='row-custom'>
+                                                <Checkbox
+                                                    checked={NotifyWhenNewReservation == '1'}
+                                                    onChange={e => {
+                                                        if(e.target.checked) {
+                                                            setNotifyWhenNewReservation('1')
+                                                        } else {
+                                                            setNotifyWhenNewReservation('0')
+                                                        }
+                                                    }}
+                                                    id="NotifyWhenNewReservation"
+                                                    text={'Уведомлять о новых бронях'}
+                                                    />
+                                            </Row>
+                                            {
+                                                settings?.IsHaveIIko == '1' || settings?.IsHaveIIko == '1' ? (
+                                                    <Row className='row-custom'>
+                                                        <Checkbox 
+                                                            checked={NotifyWhenIIkoErrors == '1'} 
+                                                            onChange={(e) => {
+                                                                if(e.target.checked) {
+                                                                    setNotifyWhenIIkoErrors('1')
+                                                                } else {
+                                                                    setNotifyWhenIIkoErrors('0')
+                                                                }
+                                                            }} 
+                                                            id={'NotifyWhenIIkoErrors'} 
+                                                            text={
+                                                                settings?.IsHaveIIko == '1' ? 
+                                                                'Уведомлять об ошибках Iiko' : 
+                                                                'Уведомлять об ошибках RKeeper'
+                                                            }
+                                                            />
+                                                    </Row> 
+                                                ) : null
                                 }
                                  
                                 <Row className='row-custom'>
@@ -890,6 +895,10 @@ const OrgsCreatePage = () => {
                                         text={'Уведомлять об изменениях в заказах'}
                                         />
                                 </Row>  
+                                        </>
+                                    ) : null
+                                } 
+                                
                                 <Row className='row-custom'>
                                     <Button 
                                         styles={{width: '100%'}} 
@@ -948,14 +957,19 @@ const OrgsCreatePage = () => {
                                             <Row gutter={[10, 10]} className='row-custom'>
                                                 <Col span={12}>
                                                     <Checkbox 
-                                                        onChange={(e) => 
-                                                        setDelivery(e.target.checked)} 
-                                                        checked={delivery} 
-                                                        id={'isDelivery'} 
+                                                        onChange={e => {
+                                                            if(e.target.checked) {
+                                                                setIsHaveDelivery('1')
+                                                            } else {
+                                                                setIsHaveDelivery('0')
+                                                            }
+                                                        }} 
+                                                        checked={IsHaveDelivery == '1'} 
+                                                        id={'IsHaveDelivery'} 
                                                         text={'Есть доставка'}/>
                                                 </Col>
                                                 {
-                                                    delivery ? (
+                                                    IsHaveDelivery == '1' ? (
                                                         <Col span={12}>
                                                             <UploadKml 
                                                                 openMap={openSelectPoly} 
@@ -968,7 +982,7 @@ const OrgsCreatePage = () => {
                                                 
                                             </Row> 
                                             {
-                                                delivery ? (
+                                                IsHaveDelivery == '1' ? (
                                                     <Row className='row-custom' gutter={[30, 30]}>
                                                         {
                                                             polList && polList.length > 0 ? (
@@ -1014,7 +1028,7 @@ const OrgsCreatePage = () => {
                                                     ) : null
                                                 }
                                                 {
-                                                    pm?.length < 1 ? (
+                                                    pm?.length < 3 ? (
                                                         <div className="panel" style={{padding: 0}}>
                                                             <Pl onClick={addPayMethods} text={'Добавить способ оплаты'}/>
                                                         </div>

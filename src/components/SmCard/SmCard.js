@@ -2,9 +2,9 @@ import './SmCard.scss';
 import img from '../../assets/img/org.png';
 
 
-const SmCard = ({name, price, image, style}) => {
+const SmCard = ({name, price, image, style, shadow}) => {
     return (
-        <div className="SmCard" style={style}>
+        <div className={"SmCard" + (shadow ? ' shadow ' : '')} style={style}>
             <div className="SmCard__img">
                 <img src={image} alt="" />
             </div>

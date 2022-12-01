@@ -273,11 +273,11 @@ const EditPlateNew = () => {
     }
     const switchHiddenOrg = (e) => {
         setIsHideInOrg(e.target.checked)
-        if(!e.target.checked) {
-            setOrgsList([])
-        } else {
-            setOrgsList([orgs[0]])
-        }
+        // if(!e.target.checked) {
+        //     setOrgsList([])
+        // } else {
+        //     setOrgsList([orgs[0]])
+        // }
     }
     const saveTime = (index, value) => {
         let ur = weekTimes;

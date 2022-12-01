@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import SelectKmlPol from '../../modals/SelectKmlPol/SelectKmlPol';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 const os = new orgService();
 
 const UploadKml = ({getKml, updatePolList}) => {
@@ -14,6 +16,7 @@ const UploadKml = ({getKml, updatePolList}) => {
     const {orgId} = useParams()
     const [selectKmlPolModal, setSelectKmlPolModal] = useState(false)
     const [ll, setLl] = useState(null)
+    const file = useRef()
 
     const openSelectKmlPolModal = () => {
         setSelectKmlPolModal(true)
@@ -21,10 +24,15 @@ const UploadKml = ({getKml, updatePolList}) => {
     const closeSelectKmlPolModal = () => {
         setLl(null)
         setSelectKmlPolModal(false)
+        resetFile()
+        console.log('closed')
+    }
+
+    const resetFile = () => {
+        file.current.value = ''
     }
 
     const handleChange = (e) => {
-
         fetch(URL.createObjectURL(e.target.files[0]), {
             method: 'GET',
         }).then(res => res.text()).then(data => {
@@ -43,12 +51,13 @@ const UploadKml = ({getKml, updatePolList}) => {
     return (
         <div className="UploadKml">
             <SelectKmlPol
+                resetFile={resetFile}
                 updatePolList={updatePolList}
                 visible={selectKmlPolModal}
                 close={closeSelectKmlPolModal}
                 list={ll}
                 />
-            <input onChange={handleChange} type="file" accept='.kml' id='UploadKml'/>
+            <input ref={file} onChange={handleChange} type="file" accept='.kml' id='UploadKml'/>
             <label htmlFor="UploadKml" className="UploadKml__label">
                 <div className="UploadKml__label_text def-label">Загрузить KML-файл</div>
                 <div className="UploadKml__label_icon">

@@ -125,7 +125,10 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
                     </div>
                 </div>
                 <div className="Modal__form_row">
-                    <Input value={markerId} onChange={handleMarker} placeholder={'Номер метки на карте'}/>
+                    <Input 
+                        value={markerId} 
+                        onChange={handleMarker} 
+                        placeholder={'ID бренда'}/>
                 </div>
                 <div className="Modal__form_action">
                     <Button 

@@ -33,12 +33,15 @@ const AddMassModal = ({visible, close, update, plateId}) => {
 
     const onSave = () => {
         setLoad(true)
-        cs.addPriceMass(token, {
+        const body = {
             ItemID: plateId,
             Mass,
             Price,
             SalePrice
-        }).then(res => {
+        }
+        console.log(body)
+        cs.addPriceMass(token, body).then(res => {
+            console.log(res)
             update(res)
             message.success('Дополнительная масса добавлена')
         }).finally(_ => {
@@ -52,19 +55,22 @@ const AddMassModal = ({visible, close, update, plateId}) => {
             <h2 className="Modal__head">Добавить массу</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
-                    <Input 
+                    <Input
+                        shadow 
                         value={Mass}
                         onChange={e => setMass(e.target.value)}
                         placeholder={'Масса'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input 
+                    <Input
+                        shadow 
                         value={Price}
                         onChange={e => setPrice(e.target.value)}
                         placeholder={'Цена'}/>
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        shadow
                         value={SalePrice}
                         onChange={e => setSalePrice(e.target.value)}
                         placeholder={'Цена со скидкой'}/>
@@ -72,7 +78,7 @@ const AddMassModal = ({visible, close, update, plateId}) => {
                 <div className="Modal__form_action">
                     <Button
                         onClick={onSave}
-                        disabled={!Mass || !Price || !SalePrice}
+                        disabled={!Mass || !Price}
                         load={load}
                         type={'button'}  
                         before={<BsTrash size={20}/>} 
