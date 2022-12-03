@@ -37,7 +37,7 @@ const AddMassModal = ({visible, close, update, plateId}) => {
             ItemID: plateId,
             Mass,
             Price,
-            SalePrice
+            SalePrice: SalePrice ? SalePrice : 0
         }
         console.log(body)
         cs.addPriceMass(token, body).then(res => {

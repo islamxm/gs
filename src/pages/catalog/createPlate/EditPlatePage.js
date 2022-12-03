@@ -104,12 +104,13 @@ const EditPlatePage = () => {
         if(plateId && token && categoryId && orgs.length > 0) {
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 const thisPlate = res.find(item => item.ID == plateId);
+                console.log(thisPlate)
                 if(thisPlate?.Pictures?.length > 0 || thisPlate?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-plate', '1')
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-plate')
                 }
-                console.log(thisPlate)
+
                 setID(thisPlate?.ID)
                 setIIkoID(thisPlate?.IIkoID)
                 setCanOverwriteByIIko(thisPlate.CanOverwriteByIIko)
@@ -170,7 +171,6 @@ const EditPlatePage = () => {
 
             cs.getPriceMass(token, {ItemID: plateId}).then(res => {
                 setMassList(res)
-                console.log(res)
             })
             cs.getMods(token, {ID: plateId}).then(res => {
                 setModList(res)
@@ -285,7 +285,7 @@ const EditPlatePage = () => {
     }
 
 
-    //создаем блюдо
+    
     const editPlate = () => {
         LOCAL_STORAGE.setItem('gs-creating-plate', '1')
         const data = new FormData()
@@ -311,7 +311,7 @@ const EditPlatePage = () => {
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
         data.append('ItemOrder', ItemOrder)
-        data.append('ParentID', subcatrgoryId ? subcatrgoryId : 0)
+        data.append('ParentID', ParentID ? ParentID : 0)
         data.append('CategoryID', categoryId)
         data.append('IsSubCategory', IsSubCategory)
         // data.append('MaxCount', MaxCount)
@@ -347,6 +347,11 @@ const EditPlatePage = () => {
 
         //data.append('Mass', Mass)
         checkNumValue(data, 'Mass', Mass)
+        
+        console.log(data.get('Mass'))
+        console.log(data.get('Price'))
+        console.log(data.get('SalePrice'))
+        
 
         data.append('IsDynamicTimetable', IsDynamicTimetable)
         data.append('MonTime', weekArray[0])
@@ -364,7 +369,6 @@ const EditPlatePage = () => {
             data.append('HiddenInOrganisations', '')
         }
 
-        console.log(AllowedDeliveryTypes.join(''))
         // if(AllowedDeliveryTypes.length == 0) {
         //     data.append('AllowedDeliveryTypes', '3')
         // } else {
@@ -376,12 +380,15 @@ const EditPlatePage = () => {
         //     }
         // }
         data.append('AllowedDeliveryTypes', AllowedDeliveryTypes.join(''))
+       
         cs.editProd(token, data).then(res => {
             console.log(res)
         }).finally(_ => {
             setSaveLoad(false)
             message.success('Изменения сохранены')
         })
+
+        setSaveLoad(false)
     }
 
     const deletePlate = () => {
