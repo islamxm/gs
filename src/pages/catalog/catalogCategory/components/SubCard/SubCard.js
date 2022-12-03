@@ -1,7 +1,7 @@
 import './SubCard.scss';
 import Button from '../../../../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
-
+import pl from '../../../../../assets/img/pl-plate.png'
 const SubCard = ({
     ThumbnailPicture,
     ID,
@@ -23,7 +23,7 @@ const SubCard = ({
         <div className="SubCard draggable">
             <div className="SubCard__main" onClick={() => nav(Link)}>
                 <div className="SubCard__img">
-                    <img src={ThumbnailPicture} alt="" />
+                    <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt="" />
                 </div>
                 <div className="SubCard__name">
                     {Name}
