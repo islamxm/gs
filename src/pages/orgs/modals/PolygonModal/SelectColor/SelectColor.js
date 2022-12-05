@@ -32,6 +32,7 @@ const SelectColor = ({setColor, color}) => {
             </div>
             <div className="SelectColor__value" style={{color: color}}>
                 <Input
+                    shadow={true}
                     value={localInp?.toUpperCase()}
                     onChange={e => onChange(e.target.value)}
                     error={error}

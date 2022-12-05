@@ -30,7 +30,6 @@ const SelectKmlPol = ({visible, close, list, updatePolList, resetFile}) => {
     }
 
     useEffect(() => {
-        
         if(transformed.length > 0) {
             os.addPol(token, transformed[indx]).then(res => {
                 if(res && indx <= transformed.length) {
@@ -42,6 +41,8 @@ const SelectKmlPol = ({visible, close, list, updatePolList, resetFile}) => {
                 }
             })
         }
+
+       
     }, [transformed, indx])
 
     const selectAll = () => {
@@ -50,7 +51,7 @@ const SelectKmlPol = ({visible, close, list, updatePolList, resetFile}) => {
 
     const onSave = () => {
         setLoad(true)
-      
+        console.log(selected)
         const transformedPolygons = selected.map(item => {
             return {
                 OrganisationID: orgId,
@@ -63,7 +64,7 @@ const SelectKmlPol = ({visible, close, list, updatePolList, resetFile}) => {
                 Delivery: [],
                 MinPrice: '',
                 DeliveryTime: '',
-                Name: '',
+                Name: item?.properties?.name ? item?.properties?.name : '',
                 Color: item.properties.fill,
                 IsOnlyForOnlinePayment: '0'
             }

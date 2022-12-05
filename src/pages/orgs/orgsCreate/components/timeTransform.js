@@ -35,7 +35,7 @@ const timeTransform = (time, index) => {
             name: weekItemName(index),
             values: {
                 start: timeFormat(Number(time?.split('-')[0]) / 60),
-                end: timeFormat(Number(time?.split('-')[1]) / 60)
+                end: timeFormat(Math.floor(Number(time?.split('-')[1]) / 60) + ((Number(time?.split('-')[1]) % 60) / 100))
             },
             rest: ''
         }

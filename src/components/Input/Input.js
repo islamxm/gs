@@ -33,7 +33,7 @@ const Input = ({
     }, [value])
 
     const focusInp = () => {
-        console.log(inpRef.current.focus())
+        // console.log(inpRef.current.focus())
     }
 
     return (

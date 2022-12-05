@@ -41,9 +41,9 @@ const pmValueFind = (value) => {
     switch(value) {
         case '0':
             return 'Оплата наличными'
-        case '1':
-            return 'Оплата по карте в приложении'
         case '2':
+            return 'Оплата по карте в приложении'
+        case '1':
             return 'Оплата по карте при получении'
     }
 }
@@ -171,6 +171,7 @@ const OrgsCreatePage = () => {
                 setTimeStepReservation(thisOrg?.TimeStepReservation != '0' ? thisOrg.TimeStepReservation : '')
                 setHaveReservation(thisOrg?.HaveReservation)
                 setNotifyWhenNewReservation(thisOrg?.NotifyWhenNewReservation)
+                
                 setWeekTimes([
                     timeTransform(thisOrg?.MonTime, 0), 
                     timeTransform(thisOrg?.TueTime, 1), 
@@ -225,7 +226,7 @@ const OrgsCreatePage = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-org')
                 }
-           
+
                
                 setIIkoID(thisOrg?.IIkoID)
                 setIIkoIDTerminal(thisOrg?.IIkoIDTerminal)
@@ -336,24 +337,29 @@ const OrgsCreatePage = () => {
 
     const addPayMethods = () => {
         const cs = pm;
-        os.addPay(token, {
-            OrganisationID: createdId ? createdId : orgId,
-            Payments: [
-                {
-                    PaymentType: paymethods[pm.length].PaymentType,
-                    IsNeedToChangeCash: paymethods[pm.length].IsNeedToChangeCash ? '1' : '0'
-                }
-            ]
-        }).then(res => {
-           
-            setPm(res.map(item => {
-                return {
-                    ...item,
-                    value: pmValueFind(item.PaymentType)
-                }
-            }))
-        })
-        
+        let csN = paymethods.map(i => Number(i.PaymentType))
+        let pmN = cs.map(i => Number(i.PaymentType))
+        let dif = csN.filter(n => pmN.indexOf(n) === -1);
+
+        if(dif.length > 0) {
+            const addItem = paymethods.find(i => Number(i.PaymentType) == dif[0])
+            os.addPay(token, {
+                OrganisationID: createdId ? createdId : orgId,
+                Payments: [
+                    {
+                        PaymentType: addItem.PaymentType,
+                        IsNeedToChangeCash: addItem.IsNeedToChangeCash ? '1' : '0'  
+                    }
+                ],
+            }).then(res => {
+                setPm(res.map(item => {
+                    return {
+                        ...item,
+                        value: pmValueFind(item.PaymentType)
+                    }
+                }))
+            })
+        }
     }
 
     const deletePayMethod = (index, id) => {
@@ -425,8 +431,12 @@ const OrgsCreatePage = () => {
         if(weekTimes.length > 0) {
             weekArray = weekTimes.map(item => {
                 if(!item.rest) {
+                    console.log(Number(item.values.start.slice(0,2)))
+                    console.log(Number(item.values.start.slice(3,5)))
+                    console.log(Number(item.values.end.slice(0,2)))
+                    console.log(Number(item.values.end.slice(3,5)))
                     return (
-                        `${60 * (Number(item.values.start.slice(0,2)) + Number(item.values.start.slice(3,5)) / 100)}-${60 * (Number(item.values.end.slice(0,2)) + (Number(item.values.end.slice(3,5)) / 100))}`
+                        `${60 * (Number(item.values.start.slice(0,2)) + Number(item.values.start.slice(3,5)))}-${(60 * Number(item.values.end.slice(0,2))) + Number(item.values.end.slice(3,5))}`
                     )
                 }
                 return 'Closed'
@@ -505,6 +515,7 @@ const OrgsCreatePage = () => {
         data.append('FriTime', weekArray[4])
         data.append('SatTime', weekArray[5])
         data.append('SunTime', weekArray[6])
+        console.log(data.get('MonTime'))
         data.append('Timezone', Timezone)
         // data.append('CountTimeStepsPreorder', CountTimeStepsPreorder)
         checkNumValue(data, 'CountTimeStepsPreorder', CountTimeStepsPreorder)

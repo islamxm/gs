@@ -8,13 +8,13 @@ const paymethods = [
     },
     {
         value: 'Оплата по карте в приложении',
-        PaymentType: 1,
+        PaymentType: 2,
         IsNeedToChangeCash: '0',
         // delete: true
     },
     {
         value: 'Оплата по карте при получении',
-        PaymentType: 2,
+        PaymentType: 1,
         IsNeedToChangeCash: '0',
         // delete: true
     }

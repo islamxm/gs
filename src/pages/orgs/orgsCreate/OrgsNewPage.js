@@ -320,24 +320,29 @@ const OrgsNewPage = () => {
 
     const addPayMethods = () => {
         const cs = pm;
-        os.addPay(token, {
-            OrganisationID: createdId ? createdId : orgId,
-            Payments: [
-                {
-                    PaymentType: paymethods[pm.length].PaymentType,
-                    IsNeedToChangeCash: paymethods[pm.length].IsNeedToChangeCash ? '1' : '0'
-                }
-            ]
-        }).then(res => {
-            console.log(res)
-            setPm(res.map(item => {
-                return {
-                    ...item,
-                    value: pmValueFind(item.PaymentType)
-                }
-            }))
-        })
-        
+        let csN = paymethods.map(i => Number(i.PaymentType))
+        let pmN = cs.map(i => Number(i.PaymentType))
+        let dif = csN.filter(n => pmN.indexOf(n) === -1);
+
+        if(dif.length > 0) {
+            const addItem = paymethods.find(i => Number(i.PaymentType) == dif[0])
+            os.addPay(token, {
+                OrganisationID: createdId ? createdId : orgId,
+                Payments: [
+                    {
+                        PaymentType: addItem.PaymentType,
+                        IsNeedToChangeCash: addItem.IsNeedToChangeCash ? '1' : '0'  
+                    }
+                ],
+            }).then(res => {
+                setPm(res.map(item => {
+                    return {
+                        ...item,
+                        value: pmValueFind(item.PaymentType)
+                    }
+                }))
+            })
+        }
     }
 
     const deletePayMethod = (index, id) => {
