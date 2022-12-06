@@ -94,7 +94,8 @@ const CatalogPage = () => {
                                                     onDragOver={e => handleDragOver(e)}
                                                     onDrop={e => submitOrder(e, item)}
                                                     draggable={true}
-                                                    span={4} 
+                                                    span={6}
+                                                    xxl={4}
                                                     key={index}
                                                     style={{transition: 'all .3s ease'}}>
                                                     <CatItem

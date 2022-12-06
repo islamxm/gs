@@ -104,6 +104,8 @@ const CreateSubcategory = ({visible, close, update, data}) => {
         body.append('CategoryID', categoryId)
         body.append('Picture', Picture)
         
+
+        
         if(!data) {
             cs.addProd(token, body).then(res => {
                 

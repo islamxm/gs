@@ -5,10 +5,11 @@
     flex-direction: column;
     height: 100%;
     background-color: #fff;
-    height: 250px;
+    height: 260px;
     
     &__img {
         height: 150px;
+        flex: 0 0 auto;
 
         img {
             width: 100%;
@@ -24,15 +25,40 @@
         flex-direction: column;
         justify-content: space-between;
         flex: 1 0 auto;
+
+        
         
         &_name {
             font-weight: 500;
             color: #666;
-            margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+
+            &_el {
+
+            }
+
+            // &_grad {
+            //     position: absolute;
+            //     bottom: 0;
+            //     left: 0;
+            //     height: 20px;
+            //     width: 100%;
+                
+              
+            //     background: linear-gradient(0deg, rgba(255,255,255,1) 60%, rgba(255,255,255,0.22314863445378152) 100%);
+            //     content: '';
+                
+            // }
         }
 
         &_price {
             font-weight: 600;
+            margin-top: 15px;
             &_actual {
                 color:#FC5834;
             }

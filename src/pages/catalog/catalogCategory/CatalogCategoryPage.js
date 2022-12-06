@@ -108,7 +108,6 @@ const CatalogCategoryPage = () => {
     }
     
     useEffect(() => {
-        console.log(list)
         if(token && list && list.length > 0) {
             as.orderSort(token, 'products', list.map(item => item.ID).join(',')).then(res => {
             })
