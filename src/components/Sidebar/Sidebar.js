@@ -30,6 +30,7 @@ const Sidebar = () => {
     const [isHide, setIsHide] = useState(true)
     const dispatch = useDispatch();
 
+    const url = new URLSearchParams(window.location.search);
 
     useEffect(() => {
         setCatLoad(true)
@@ -80,14 +81,16 @@ const Sidebar = () => {
                 <SidebarItem
                     labelHide={isHide}
                     name={'Организации'}
-                    link={'/organizations'}
+                    root={'/organizations'}
+                    link={`/organizations?p=Организации`}
                     icon={<FiHome/>}
                 />
                 <SidebarItem
                     labelHide={isHide}
                     toggleSidebar={setIsHide}
                     name={'Каталог'}
-                    link={'/catalog'}
+                    root={'/catalog'}
+                    link={'/catalog?p=Каталог'}
                     isSubmenu={catalog?.length > 0 ? true : false}
                     icon={<CatalogIcon size={22}/>}
                 >   
@@ -105,7 +108,8 @@ const Sidebar = () => {
                                         labelHide={isHide}
                                         icon={<FiCodesandbox/>}
                                         name={item.Name}
-                                        link={`/catalog/${item.ID}`}
+                                        root={`/catalog/${item.ID}`}
+                                        link={`/catalog/${item.ID}?p=Каталог&p=${item.Name}`}
                                         />
                                 ))
                             ) : null
@@ -117,6 +121,7 @@ const Sidebar = () => {
                     labelHide={isHide}
                     name={'Сториз'}
                     link={'/stories'}
+                    root={'/stories'}
                     icon={<CgTag style={{transform: 'rotate(-45deg)'}}/>}
                     />
                 <SidebarItem
@@ -126,9 +131,24 @@ const Sidebar = () => {
                     toggleSidebar={setIsHide}
                     icon={<StatIcon size={22}/>}
                     >
-                        <SidebarItem labelHide={isHide} name={'Клиенты'} link={'/clients'} icon={<FiUsers/>}/>
-                        <SidebarItem labelHide={isHide} name={'Заказы'} link={'/orders'} icon={<OrderIcon size={22}/>}/>
-                        <SidebarItem labelHide={isHide} name={'Статистика'} link={'/statistic'} icon={<StatisticIcon size={22}/>}/>
+                        <SidebarItem 
+                            labelHide={isHide} 
+                            name={'Клиенты'} 
+                            link={'/clients'} 
+                            root={'/clients'}
+                            icon={<FiUsers/>}/>
+                        <SidebarItem 
+                            labelHide={isHide} 
+                            name={'Заказы'} 
+                            link={'/orders'} 
+                            root={'/orders'}
+                            icon={<OrderIcon size={22}/>}/>
+                        <SidebarItem 
+                            labelHide={isHide} 
+                            name={'Статистика'} 
+                            link={'/statistic'} 
+                            root={'/statistic'}
+                            icon={<StatisticIcon size={22}/>}/>
                 </SidebarItem>
                 <SidebarItem
                     labelHide={isHide}
@@ -137,10 +157,30 @@ const Sidebar = () => {
                     isSubmenu={true}
                     icon={<SettingsIcon size={22}/>}
                     >
-                        <SidebarItem labelHide={isHide} name={'Корзина'} link={'/basket'} icon={<BsBag/>}/>
-                        <SidebarItem labelHide={isHide} name={'Интеграции'} link={'/integr'} icon={<IntegrIcon size={22}/>}/>
-                        <SidebarItem labelHide={isHide} name={'Все настройки'} link={'/allsettings'} icon={<FiSettings/>}/>
-                        <SidebarItem labelHide={isHide} name={'Удаленные объекты'} link={'/trash'} icon={<TrashIcon size={22}/>}/>
+                        <SidebarItem 
+                            root={'/basket'}
+                            labelHide={isHide} 
+                            name={'Корзина'} 
+                            link={'/basket'} 
+                            icon={<BsBag/>}/>
+                        <SidebarItem 
+                            labelHide={isHide} 
+                            root={'/integr'}
+                            name={'Интеграции'} 
+                            link={'/integr'} 
+                            icon={<IntegrIcon size={22}/>}/>
+                        <SidebarItem 
+                            labelHide={isHide} 
+                            name={'Все настройки'} 
+                            link={'/allsettings'}
+                            root={'/allsettings'} 
+                            icon={<FiSettings/>}/>
+                        <SidebarItem 
+                            labelHide={isHide} 
+                            name={'Удаленные объекты'} 
+                            link={'/trash'}
+                            root={'/trash'} 
+                            icon={<TrashIcon size={22}/>}/>
                 </SidebarItem>
             </div>
         </motion.div>

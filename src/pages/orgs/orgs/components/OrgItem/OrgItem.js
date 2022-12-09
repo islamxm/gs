@@ -39,14 +39,16 @@ const OrgItem = ({
 }) => {
     const nav = useNavigate()
     const {brandId} = useParams()
+
+    const url = new URLSearchParams(window.location.search)
     
 
     return (
         <div className="OrgItem draggable" onClick={() => {
             if(brandId) {
-                nav(`/organizations/${brandId}/${ID}`)
+                nav(`/organizations/${brandId}/${ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${Name}`)
             } else {
-                nav(`/organizations/nobrand/${ID}`)
+                nav(`/organizations/nobrand/${ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${Name}`)
             }
         }}>
                     <div className="OrgItem__img">

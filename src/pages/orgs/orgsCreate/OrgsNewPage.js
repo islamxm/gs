@@ -96,6 +96,7 @@ const OrgsNewPage = () => {
     const [TimeStepReservation, setTimeStepReservation] = useState('')
     const [HaveReservation, setHaveReservation] = useState('0')
     const [NotifyWhenNewReservation, setNotifyWhenNewReservation] = useState('0')
+    const [HideInApp, setHideInApp] = useState('0')
 
 
     //переключать в зависимости от настроек юзера
@@ -191,6 +192,7 @@ const OrgsNewPage = () => {
                 setRKeeperIP(thisOrg?.RKeeperIP)
                 setRKeeperPort(thisOrg?.RKeeperPort)
                 setPrimehillToken(thisOrg?.PrimehillToken)
+                setHideInApp(thisOrg?.HideInApp)
 
             })
             os.getPols(token, {OrganisationID: orgId}).then(res => {
@@ -283,6 +285,7 @@ const OrgsNewPage = () => {
                 setRKeeperIP(thisOrg?.RKeeperIP)
                 setRKeeperPort(thisOrg?.RKeeperPort)
                 setPrimehillToken(thisOrg?.PrimehillToken)
+                setHideInApp(thisOrg?.HideInApp)
 
             })
             os.getPols(token, {OrganisationID: orgId}).then(res => {
@@ -482,6 +485,7 @@ const OrgsNewPage = () => {
         data.append('RKeeperPort', RKeeperPort)
         data.append('PrimehillToken', PrimehillToken)
         data.append('CanOverwrite', CanOverwrite)
+        data.append('HideInApp', HideInApp)
         
         setSaveLoad(true) 
         if(!orgId) {
@@ -788,6 +792,20 @@ const OrgsNewPage = () => {
                                     <TimeSelect 
                                         save={saveTime} 
                                         list={weekTimes}
+                                        />
+                                </Row>
+                                <Row className='row-custom'>
+                                    <Checkbox
+                                        checked={HideInApp == '1'}
+                                        onChange={e => {
+                                            if(e.target.checked) {
+                                                setHideInApp('1')
+                                            } else {
+                                                setHideInApp('0')
+                                            }
+                                        }}
+                                        id="HideInApp"
+                                        text={'Скрыть в приложении'}
                                         />
                                 </Row>
                                 <Row className='row-custom'>

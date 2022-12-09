@@ -99,7 +99,7 @@ const OrgsCreatePage = () => {
     const [TimeStepReservation, setTimeStepReservation] = useState('')
     const [HaveReservation, setHaveReservation] = useState('0')
     const [NotifyWhenNewReservation, setNotifyWhenNewReservation] = useState('0')
-
+    const [HideInApp, setHideInApp] = useState('0')
     
     const [RKeeperLogin, setRKeeperLogin] = useState('')
     const [RKeeperIP, setRKeeperIP] = useState('') 
@@ -126,6 +126,7 @@ const OrgsCreatePage = () => {
         if(orgId && brandId != 'nobrand' && token && settings.IsHaveBrands == '1') {
             os.getOrgs(token, {BrandID: brandId}).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
+                console.log(thisOrg)
                 if(thisOrg?.ThumbnailPicture || thisOrg?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-org', '1')
                 } else {
@@ -149,7 +150,7 @@ const OrgsCreatePage = () => {
                 setLattitude(thisOrg?.Lattitude)
                 setLongitude(thisOrg?.Longitude)
                 setCanOverwrite(thisOrg?.CanOverwrite)
-                
+                setHideInApp(thisOrg?.HideInApp)
                 if(thisOrg.Lattitude && thisOrg.Longitude) {
                     setCoords({lat:Number(thisOrg.Lattitude), lng: Number(thisOrg.Longitude)})
                 } else {
@@ -221,6 +222,7 @@ const OrgsCreatePage = () => {
         if(orgId && brandId == 'nobrand' && token && settings?.IsHaveBrands == '0') {
             os.getOrgs(token).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
+                console.log(thisOrg)
                 if(thisOrg?.ThumbnailPicture || thisOrg?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-org', '1')
                 } else {
@@ -279,6 +281,7 @@ const OrgsCreatePage = () => {
                 setRKeeperIP(thisOrg?.RKeeperIP)
                 setRKeeperPort(thisOrg?.RKeeperPort)
                 setPrimehillToken(thisOrg?.PrimehillToken)
+                setHideInApp(thisOrg?.HideInApp)
 
             })
             os.getPols(token, {OrganisationID: orgId}).then(res => {
@@ -431,10 +434,6 @@ const OrgsCreatePage = () => {
         if(weekTimes.length > 0) {
             weekArray = weekTimes.map(item => {
                 if(!item.rest) {
-                    console.log(Number(item.values.start.slice(0,2)))
-                    console.log(Number(item.values.start.slice(3,5)))
-                    console.log(Number(item.values.end.slice(0,2)))
-                    console.log(Number(item.values.end.slice(3,5)))
                     return (
                         `${60 * (Number(item.values.start.slice(0,2)) + Number(item.values.start.slice(3,5)))}-${(60 * Number(item.values.end.slice(0,2))) + Number(item.values.end.slice(3,5))}`
                     )
@@ -498,7 +497,6 @@ const OrgsCreatePage = () => {
         data.append('Address', Address)
         data.append('Phone', Phone)
         data.append('Email', Email)
-        
         // data.append('MinPriceForLocalSale', MinPriceForLocalSale)
         checkNumValue(data, 'MinPriceForLocalSale', MinPriceForLocalSale);
         // data.append('LocalOrderSale', LocalOrderSale)
@@ -528,7 +526,7 @@ const OrgsCreatePage = () => {
         data.append('NotifyWhenNewOrder', NotifyWhenNewOrder)
         data.append('NotifyWhenOrderChanges', NotifyWhenOrderChanges)
         data.append('NotifyWhenNewReservation', NotifyWhenNewReservation);
-        
+        data.append('HideInApp', HideInApp);
         data.append('RKeeperLogin', RKeeperLogin)
         data.append('RKeeperIP', RKeeperIP)
         data.append('RKeeperPort', RKeeperPort)
@@ -537,7 +535,6 @@ const OrgsCreatePage = () => {
         // for(var pair of data.entries()) {
         //     console.log(pair[0]+ ': '+ pair[1]);
         // }  
-
         setSaveLoad(true) 
         if(!orgId) {
             os.addOrg(token, data).then(res => {
@@ -592,8 +589,6 @@ const OrgsCreatePage = () => {
     
 
     const addPay = (item, selected) => {
-        console.log(selected)
-        console.log(item)
         if(item.PaymentType != selected.PaymentType && !pm.find(i => i.PaymentType == item.PaymentType)) {
             os.deletePay(token, {ID: selected.ID}).then(res => {
                 if(res) {
@@ -820,6 +815,20 @@ const OrgsCreatePage = () => {
                                     <TimeSelect 
                                         save={saveTime} 
                                         list={weekTimes}
+                                        />
+                                </Row>
+                                <Row className='row-custom'>
+                                    <Checkbox
+                                        checked={HideInApp == '1'}
+                                        onChange={e => {
+                                            if(e.target.checked) {
+                                                setHideInApp('1')
+                                            } else {
+                                                setHideInApp('0')
+                                            }
+                                        }}
+                                        id="HideInApp"
+                                        text={'Скрыть в приложении'}
                                         />
                                 </Row>
                                 <Row className='row-custom'>

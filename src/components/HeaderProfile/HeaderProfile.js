@@ -1,33 +1,52 @@
 import './HeaderProfile.scss';
 import logo from '../../assets/img/logo.svg';
-import {BsChevronCompactLeft, BsChevronCompactDown} from 'react-icons/bs';
+import {BsChevronLeft, BsChevronCompactDown, BsArrowRightShort} from 'react-icons/bs';
 import { Dropdown } from 'antd';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
-import {useLocation} from 'react-router-dom';
-import { useEffect } from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Bc from '../Bc/Bc';
 
+
+
+
 const HeaderProfile = () => {
     const {sidebarOpen, settings, user} = useSelector(state => state)
     const loc = useLocation()
+    const [back, setBack] = useState(false);
+    const [links, setLinks] = useState([])
+    const nav = useNavigate();
+
+
+    const url = useMemo(() => {
+        return new URLSearchParams(window.location.search)
+    }, [window.location.search])
 
 
     const updateHead = (path) => {
         if(path == ('/')) {
             return (
-                <Link to={'/organizations'}>Организации</Link>
+                <div className="HeaderProfile__main_nav_head_item">
+                    <Link to={'/organizations'}>Организации</Link>
+                </div>
+                
             )
         }
         if(path.includes('organizations')) {
             return (
-                <Link to={'/organizations'}>Организации</Link>
+                <div className="HeaderProfile__main_nav_head_item">
+                    <Link to={'/organizations'}>Организации</Link>
+                </div>
+                
             )
         }
         if(path.includes('catalog')) {
             return (
-                <Link to={'/catalog'}>Каталог</Link>
+                <div className="HeaderProfile__main_nav_head_item">
+                    <Link to={'/catalog'}>Каталог</Link>
+                </div>
             )
         }
         if(path.includes('stories')) {
@@ -57,6 +76,20 @@ const HeaderProfile = () => {
     }
 
 
+    useEffect(() => {
+        // console.log(url.getAll('p'))
+        setLinks(url.getAll('p'))
+    }, [url])
+
+    useEffect(() => {
+        if(links?.length > 0) {
+            setBack(true)
+        } else {
+            setBack(false)
+        }
+    }, [links])
+
+
     return (
         <header className="HeaderProfile">
             <div className="HeaderProfile__in">
@@ -68,7 +101,26 @@ const HeaderProfile = () => {
                     <div className="HeaderProfile__main_nav">
                         <div className="HeaderProfile__main_nav_head">
                             {
+                                back ? (
+                                    <div className="HeaderProfile__main_nav_head_back" onClick={() => nav(-1)}>
+                                         <BsChevronLeft/>
+                                    </div>
+                                   
+                                ) : null
+                            }
+                            {/* {
                                 updateHead(loc?.pathname)
+                            } */}
+                            {
+                                links && links.length > 0 ? (
+                                    links.map((item, index) => (
+                                        <div className={"HeaderProfile__main_nav_head_item"}>
+                                            {index != 0 ? <BsArrowRightShort className='HeaderProfile__main_nav_head_item_icon'/> : null}
+                                            {item}
+                                        </div>
+                                        
+                                    ))
+                                ) : null
                             }
                         </div>
                     </div>

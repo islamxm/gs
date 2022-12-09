@@ -38,6 +38,7 @@ const Text = ({
             name={name} 
             value={value} 
             id={id} 
+            ref={inpRef}
             className={"Text" + (shadow ? ' shadow ' : '')} 
             // placeholder={placeholder}
             

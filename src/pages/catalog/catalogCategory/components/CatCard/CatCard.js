@@ -38,7 +38,7 @@ const CatCard = ({
 
     const nameSizeChange = () => {
         if(nameRef?.current) {
-            console.log(nameRef.current.scrollHeight)
+        
             if(nameRef.current.scrollHeight > 43) {
                 setGrad(true)
             } else {
@@ -58,7 +58,7 @@ const CatCard = ({
 
 
     return (
-        <div className="CatCard draggable" onClick={() => editPlate(ID)}>
+        <div className="CatCard draggable" onClick={() => editPlate(ID, Name)}>
             <div className="CatCard__img">
                 <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt="" />
             </div>

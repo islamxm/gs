@@ -30,6 +30,8 @@ const CatalogCategoryPage = () => {
     const [load, setLoad] = useState(false)
     const [currentItem, setCurrentItem] = useState(null)
 
+    const url = new URLSearchParams(window.location.search)
+
 
     
     const toCreatePlate = () => {
@@ -46,15 +48,15 @@ const CatalogCategoryPage = () => {
         cs.addProd(token, data).then(res => {
             
             if(subcategoryId) {
-                nav(`/catalog/${categoryId}/${subcategoryId}/editPlate/${res}/now`)
+                nav(`/catalog/${categoryId}/${subcategoryId}/editPlate/${res}/now?p=Создать блюдо`)
             } else {
-                nav(`/catalog/${categoryId}/editPlate/${res}/now`)
+                nav(`/catalog/${categoryId}/editPlate/${res}/now?p=Создать блюдо`)
             }
         })
     }
 
-    const toEditPlate = (id) => {
-        nav(`/catalog/${categoryId}/editPlate/${id}`)
+    const toEditPlate = (id, name) => {
+        nav(`/catalog/${categoryId}/editPlate/${id}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${name}`)
     }
 
 
@@ -63,7 +65,7 @@ const CatalogCategoryPage = () => {
             setLoad(true)
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 setList(res.filter(item => item.ParentID == '0'))
-                console.log(res)
+   
             }).finally(_ => setLoad(false))
         }
         if(token && categoryId && subcategoryId) {
@@ -125,6 +127,7 @@ const CatalogCategoryPage = () => {
                 visible={createSubcategory} 
                 close={closeSubcategoryModal} 
                 update={updateList}/>
+                {/* <HeaderProfile/> */}
                 <main className="Main">
                 <div className="pageBody">
                     <div className="CatalogCategoryPage__body pageBody-content">
@@ -153,7 +156,7 @@ const CatalogCategoryPage = () => {
                                                             style={{transition: 'all .3s ease'}}
                                                             >
                                                             <SubCard
-                                                                Link={`/catalog/${categoryId}/${item.ID}`}
+                                                                Link={`/catalog/${categoryId}/${item.ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${item.Name}`}
                                                                 {...item}
                                                                 selectEdit={editSubcat}
                                                                 />

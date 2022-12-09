@@ -41,7 +41,6 @@ const App = () => {
                     <Header/>
                 ) : (
                     <HeaderProfile/>
-                    
                 )
             }
             {

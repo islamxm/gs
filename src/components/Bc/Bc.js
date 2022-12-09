@@ -8,10 +8,7 @@ const Bc = ({parent}) => {
     const params = useParams()
     const [links, setLinks] = useState([])
 
-    useEffect(() => {
-        console.log(params)
-        
-    }, [params, parent])
+
 
 
 

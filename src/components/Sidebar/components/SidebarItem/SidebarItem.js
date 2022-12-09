@@ -13,7 +13,8 @@ const SidebarItem = ({
     name,
     icon,
     labelHide,
-    toggleSidebar
+    toggleSidebar,
+    root
 }) => {
     const loc = useLocation();
     const submenuRef = useRef();
@@ -43,10 +44,12 @@ const SidebarItem = ({
         }
     }, [isOpen])
 
+   
+
 
     return (
         <div className={"SidebarItem"}>
-            <div className={"SidebarItem__main" + ((loc?.pathname.includes(link) && children?.length > 0) || (children && children.length > 0 && children?.find(item => item?.props?.link == loc?.pathname)?.props?.link == loc?.pathname && !isOpen) || (loc?.pathname == link && !children) ? ' active ' : '')}>
+            <div className={"SidebarItem__main" + ((loc?.pathname.includes(root) && children?.length > 0) || (children && children.length > 0 && children?.find(item => item?.props?.root == loc?.pathname)?.props?.root == loc?.pathname && !isOpen) || (loc?.pathname == root && !children) ? ' active ' : '')}>
                 {
                     link ? (
                         <NavLink onClick={isSubmenu ? toggleSubmenu : null}  to={link} className="SidebarItem__main_label">

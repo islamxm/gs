@@ -35,6 +35,8 @@ const CatalogPage = () => {
     const [selectedCat, setSelectedCat] = useState(null)
     const [currentItem, setCurrentItem] = useState(null)
 
+    const url = new URLSearchParams(window.location.search)
+
 
 
 
@@ -43,9 +45,6 @@ const CatalogPage = () => {
             setLoad(true)
             cs.getCats(token, {OrganisationID: 0}).then(res => {
                 setCats(res);
-                console.log(res.map(item => item.ItemOrder))
-                console.log(res.map(item => item.Name))
-                console.log(res.map(item => item.ID))
             }).finally(_ => setLoad(false))
         }
     }, [token])
@@ -76,6 +75,7 @@ const CatalogPage = () => {
             exit={{opacity: 0}}
             className="CatalogPage page">
             <CreateCategory setSelectedCat={setSelectedCat} editItem={selectedCat} updateList={setCats} visible={createCategory} close={() => setCreateCategory(false)}/>
+            {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
                     <div className="CatalogPage__body pageBody-content">
@@ -100,7 +100,7 @@ const CatalogPage = () => {
                                                     style={{transition: 'all .3s ease'}}>
                                                     <CatItem
                                                         {...item}
-                                                        Link={`/catalog/${item.ID}`}
+                                                        Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
                                                         selectEdit={editCategory}/>
                                                 </Col>
                                             ))

@@ -61,8 +61,6 @@ const OrgsPage = () => {
             os.getOrgs(token)
             .then(res => {
                 setList(res)
-                console.log(res)
-                console.log(res.map(item => item.ItemOrder))
             })
             .finally(_ => setLoadList(false))
 
@@ -111,15 +109,15 @@ const OrgsPage = () => {
             const data = new FormData()
             data.append('OrganisationBrand', brandId)
             os.addOrg(token, data).then(res => {
-                console.log(res)
-                nav(`/organizations/${brandId}/${res}/now`)
+           
+                nav(`/organizations/${brandId}/${res}/now?p=Добавить организацию`)
             })
         } else {
             const data = new FormData()
             data.append('OrganisationBrand', 0)
             os.addOrg(token).then(res => {
-                console.log(res)
-                nav(`/organizations/nobrand/${res}/now`)
+               
+                nav(`/organizations/nobrand/${res}/now?p=Добавить организацию`)
                 
             })
         }

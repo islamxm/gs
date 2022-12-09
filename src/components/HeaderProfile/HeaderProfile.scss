@@ -67,11 +67,29 @@
             }
 
             &_head {
-                a {
+                display: flex;
+                
+
+                &_back {
+                    cursor: pointer;
+                    margin-right: 20px;
                     &:hover {
                         color: var(--light_violet);
                     }
                 }
+                
+
+                &_item {
+                    margin-right: 20px;
+                    display: flex;
+                    align-items: center;
+
+                    &_icon {
+                        margin-right: 20px;
+                    }
+                }
+
+               
             }
         }
 

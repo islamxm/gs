@@ -11,7 +11,7 @@ const ConfirmModal = ({visible, close, text}) => {
 
     return (
         <Modal className='Modal ConfirmModal' open={visible} onCancel={closeHandle}>
-
+            
         </Modal>
     )
 }
