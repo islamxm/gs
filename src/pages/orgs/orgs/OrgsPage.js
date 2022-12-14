@@ -61,6 +61,7 @@ const OrgsPage = () => {
             os.getOrgs(token)
             .then(res => {
                 setList(res)
+                console.log(res.map(item => item.ItemOrder))
             })
             .finally(_ => setLoadList(false))
 
@@ -93,12 +94,12 @@ const OrgsPage = () => {
     useEffect(() => {
         if(brandId && token && list && list.length > 0) {
             as.orderSort(token, 'organisations', list.map(item => item.ID).join(',')).then(res => {
-               
+                console.log(res)
             })
         }
         if(!brandId && token && list && list.length > 0) {
             as.orderSort(token, 'brands', list.map(item => item.ID).join(',')).then(res => {
-              
+                console.log(res)
             })
         }
     }, [list, brandId, token])

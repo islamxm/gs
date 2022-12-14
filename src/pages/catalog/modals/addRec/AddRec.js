@@ -121,6 +121,7 @@ const AddRec = ({visible, close, data, update, plateId}) => {
                         >
                         <div className="Modal__form_row">
                             <Input
+                                maskType={String}
                                 shadow={true}
                                 value={Search}
                                 onChange={e => setSearch(e.target.value)}

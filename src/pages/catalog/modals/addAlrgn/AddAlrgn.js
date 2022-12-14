@@ -64,7 +64,8 @@ const AddAlrgn = ({visible, close, data, update, plateId}) => {
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <Input
-                        shadow
+                        maskType={String}
+                        shadow={true}
                         value={Name}
                         onChange={(e) => setName(e.target.value)} 
                         placeholder={'Название аллергена'}/>

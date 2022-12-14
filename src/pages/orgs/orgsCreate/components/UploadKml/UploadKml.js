@@ -25,7 +25,6 @@ const UploadKml = ({getKml, updatePolList}) => {
         setLl(null)
         setSelectKmlPolModal(false)
         resetFile()
-        console.log('closed')
     }
 
     const resetFile = () => {

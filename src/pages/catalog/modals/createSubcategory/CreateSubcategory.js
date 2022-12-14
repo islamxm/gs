@@ -195,6 +195,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                     }
                     <Col span={24}>
                         <Input
+                            maskType={String}
                             shadow={true}
                             value={Name}
                             onChange={e => setName(e.target.value)} 
@@ -202,6 +203,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                     </Col>
                     <Col span={24}>
                         <Input
+                            maskType={String}
                             shadow={true}
                             value={IIkoID}
                             onChange={e => setIIkoID(e.target.value)} 

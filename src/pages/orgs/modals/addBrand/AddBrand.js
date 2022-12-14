@@ -80,6 +80,7 @@ const AddBrand  = ({visible, close, updateList}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Input 
+                        maskType={Number}
                         shadow={true} 
                         value={markerID} 
                         onChange={e => setMarkerID(e.target.value)} 

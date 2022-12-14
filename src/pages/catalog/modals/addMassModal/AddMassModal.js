@@ -63,6 +63,7 @@ const AddMassModal = ({visible, close, update, plateId}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        scale={5}
                         shadow 
                         value={Price}
                         onChange={e => setPrice(e.target.value)}
@@ -70,6 +71,7 @@ const AddMassModal = ({visible, close, update, plateId}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        scale={5}
                         shadow
                         value={SalePrice}
                         onChange={e => setSalePrice(e.target.value)}

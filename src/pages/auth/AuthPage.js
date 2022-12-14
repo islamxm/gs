@@ -65,6 +65,7 @@ const AuthPage = () => {
                                 <Form className='AuthPage__body_form'>
                                     <div className="AuthPage__body_form_item">
                                         <Input
+                                            maskType={String}
                                             name={'Login'}
                                             placeholder={'Логин'}
                                             type={'text'}
@@ -76,6 +77,7 @@ const AuthPage = () => {
                                     </div>
                                     <div className="AuthPage__body_form_item">
                                         <Input
+                                            maskType={String}
                                             name={'Password'}
                                             placeholder={'Пароль'}
                                             type={'password'}

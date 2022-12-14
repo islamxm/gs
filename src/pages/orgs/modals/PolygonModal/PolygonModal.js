@@ -267,6 +267,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             </Col>
                             <Col span={24}>
                                 <Input
+                                    maskType={String}
                                     shadow={true}
                                     placeholder={'Название'}
                                     value={Name}
@@ -275,6 +276,8 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             </Col>
                             <Col span={24}>
                                 <Input 
+                                    scale={5}
+                                    maskType={Number}
                                     value={MinPrice}
                                     onChange={(e) => setMinPrice(e.target.value)}
                                     shadow 
@@ -282,6 +285,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             </Col>
                             <Col span={24}>
                                 <Input
+                                    maskType={Number}
                                     value={DeliveryTime}
                                     onChange={(e) => setDeliveryTime(e.target.value)} 
                                     shadow 

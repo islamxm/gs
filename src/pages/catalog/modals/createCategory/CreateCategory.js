@@ -200,6 +200,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        maskType={String}
                         shadow={true}
                         value={Name}
                         onChange={(e) => setName(e.target.value)} 
@@ -207,6 +208,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        maskType={String}
                         shadow={true}
                         value={IIkoID}
                         onChange={(e) => setIIkoID(e.target.value)} 

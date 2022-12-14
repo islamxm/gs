@@ -19,7 +19,7 @@ const EditAlrgn = ({visible, close}) => {
             <h2 className="Modal__head">Изменить аллерген</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
-                    <Input placeholder={'Название аллергена'}/>
+                    <Input maskType={String} placeholder={'Название аллергена'}/>
                 </div>
                 <div className="Modal__form_action">
                     <Button 

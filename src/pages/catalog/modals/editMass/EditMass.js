@@ -71,6 +71,7 @@ const EditMass = ({visible, close, selected, plateId, update}) => {
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <Input
+                        
                         shadow={true}
                         value={localMass} 
                         onChange={(e) => setLocalMass(e.target.value)}
@@ -78,6 +79,7 @@ const EditMass = ({visible, close, selected, plateId, update}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Input
+                        scale={5}
                         shadow={true}
                         value={localPrice} 
                         onChange={(e) => setLocalPrice(e.target.value)}

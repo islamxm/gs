@@ -18,7 +18,7 @@ const BrandItem = ({
 
     return (
         <div className="BrandItem draggable">
-             <Link to={`/organizations/${ID}`} className="BrandItem__img">
+             <Link to={`/organizations/${ID}?p=Организации`} className="BrandItem__img">
                 {
                     LogoUrl ? (
                         <img src={LogoUrl} alt=""/>

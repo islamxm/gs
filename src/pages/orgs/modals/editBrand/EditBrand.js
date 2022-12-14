@@ -126,6 +126,7 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Input 
+                        maskType={Number}
                         value={markerId} 
                         onChange={handleMarker} 
                         placeholder={'ID бренда'}/>

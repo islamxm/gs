@@ -78,6 +78,7 @@ const PolyPrice = ({
                 <Row gutter={[0,10]}>
                     <Col span={24}>
                         <Input 
+                            scale={5}
                             shadow={true}
                             onChange={e => setMinPrice(e.target.value)}
                             value={MinPrice}
@@ -85,6 +86,7 @@ const PolyPrice = ({
                     </Col>
                     <Col span={24}>
                         <Input
+                            scale={5}
                             shadow={true}
                             value={DeliveryPrice}
                             onChange={e => setDeliveryPrice(e.target.value)} 

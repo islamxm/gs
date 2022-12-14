@@ -124,6 +124,7 @@ const OrgsCreatePage = () => {
     //получение данных при редактировании
     useEffect(() => {
         if(orgId && brandId != 'nobrand' && token && settings.IsHaveBrands == '1') {
+            console.log('with brand')
             os.getOrgs(token, {BrandID: brandId}).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
                 console.log(thisOrg)
@@ -220,6 +221,7 @@ const OrgsCreatePage = () => {
             })
         }
         if(orgId && brandId == 'nobrand' && token && settings?.IsHaveBrands == '0') {
+            console.log('no brand')
             os.getOrgs(token).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
                 console.log(thisOrg)
@@ -728,28 +730,56 @@ const OrgsCreatePage = () => {
                                     </Col>
                                 </Row>
                                 <Row className='row-custom'>
-                                    <Input value={Name} onChange={(e) => setName(e.target.value)} placeholder={'Название организации'}/>
+                                    <Input 
+                                        maskType={String}
+                                        value={Name} 
+                                        onChange={(e) => setName(e.target.value)} 
+                                        placeholder={'Название организации'}/>
                                 </Row>
                                 <Row className='row-custom'>
-                                    <Text value={Description} onChange={(e) => setDescription(e.target.value)} height={180} placeholder={'Описание'}/>
+                                    <Text 
+                                        value={Description} 
+                                        onChange={(e) => setDescription(e.target.value)} 
+                                        height={180} 
+                                        placeholder={'Описание'}/>
                                 </Row>
                                 <Row className='row-custom'>
-                                    <Input value={Address} onChange={(e) => setAddress(e.target.value)} placeholder={'Адрес'}/>
+                                    <Input 
+                                        maskType={String}
+                                        value={Address} 
+                                        onChange={(e) => setAddress(e.target.value)} 
+                                        placeholder={'Адрес'}/>
                                 </Row>  
                                 <Row className='row-custom'>
-                                    <Input value={Phone} onChange={(e) => setPhone(e.target.value)} placeholder={'Телефон'}/>
+                                    <Input 
+                                        maskType={'+{7}(000)000-00-00'}
+                                        value={Phone} 
+                                        onChange={(e) => setPhone(e.target.value)} 
+                                        placeholder={'Телефон'}/>
                                 </Row>  
                                 <Row className='row-custom'>
-                                    <Input value={Email} onChange={(e) => setEmail(e.target.value)} placeholder={'Email'}/>
+                                    <Input
+                                        maskType={String} 
+                                        value={Email} 
+                                        type={'email'}
+                                        onChange={(e) => setEmail(e.target.value)} 
+                                        placeholder={'Email'}/>
                                 </Row> 
                                 {
                                     settings?.IsHaveIIko == '1' ? (
                                         <>
                                             <Row className='row-custom'>
-                                                <Input value={IIkoIDTerminal} onChange={(e) => setIIkoIDTerminal(e.target.value)} placeholder={'ID кассовой станции'}/>
+                                                <Input 
+                                                    maskType={String}
+                                                    value={IIkoIDTerminal} 
+                                                    onChange={(e) => setIIkoIDTerminal(e.target.value)} 
+                                                    placeholder={'ID кассовой станции'}/>
                                             </Row>  
                                             <Row className='row-custom'>
-                                                <Input value={IIkoID} onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
+                                                <Input 
+                                                    maskType={String}
+                                                    value={IIkoID} 
+                                                    onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
                                             </Row> 
                                         </>
                                     ) : null
@@ -758,13 +788,24 @@ const OrgsCreatePage = () => {
                                     settings?.IsHaveRKeeper == '1' ? (
                                         <>
                                             <Row className='row-custom'>
-                                                <Input value={RKeeperLogin} onChange={(e) => setRKeeperLogin(e.target.value)} placeholder={'Логин RKeeper'}/>
+                                                <Input
+                                                    maskType={String} 
+                                                    value={RKeeperLogin} 
+                                                    onChange={(e) => setRKeeperLogin(e.target.value)} 
+                                                    placeholder={'Логин RKeeper'}/>
                                             </Row>  
                                             <Row className='row-custom'>
-                                                <Input value={RKeeperIP} onChange={(e) => setRKeeperIP(e.target.value)} placeholder={'IP RKeeper'}/>
+                                                <Input 
+                                                    maskType={String}
+                                                    value={RKeeperIP} 
+                                                    onChange={(e) => setRKeeperIP(e.target.value)} placeholder={'IP RKeeper'}/>
                                             </Row>  
                                             <Row className='row-custom'>
-                                                <Input value={RKeeperPort} onChange={(e) => setRKeeperPort(e.target.value)} placeholder={'Порт RKeeper'}/>
+                                                <Input
+                                                    maskType={String} 
+                                                    value={RKeeperPort} 
+                                                    onChange={(e) => setRKeeperPort(e.target.value)} 
+                                                    placeholder={'Порт RKeeper'}/>
                                             </Row>  
                                         </>
                                     ) : null
@@ -772,15 +813,22 @@ const OrgsCreatePage = () => {
                                 {
                                     settings?.IsHavePrimehill == '1' ? (
                                         <Row className='row-custom'>
-                                            <Input value={PrimehillToken} onChange={(e) => setPrimehillToken(e.target.value)} placeholder={'Токен PrimeHill'}/>
+                                            <Input
+                                                maskType={String} 
+                                                value={PrimehillToken} onChange={(e) => setPrimehillToken(e.target.value)} placeholder={'Токен PrimeHill'}/>
                                         </Row>  
                                     ) : null
                                 }                                 
                                 <Row className='row-custom'>
-                                    <Input value={MinPriceForLocalSale} onChange={(e) => setMinPriceForLocalSale(e.target.value)} placeholder={'Минимальная сумма заказа'}/>
+                                    <Input 
+                                        scale={5}
+                                        value={MinPriceForLocalSale} 
+                                        onChange={(e) => setMinPriceForLocalSale(e.target.value)} placeholder={'Минимальная сумма заказа'}/>
                                 </Row>  
                                 <Row className='row-custom'>
-                                    <Input value={LocalOrderSale} onChange={(e) => setLocalOrderSale(e.target.value)} placeholder={'Скидка на самовывоз отсюда'}/>
+                                    <Input 
+                                        value={LocalOrderSale} 
+                                        onChange={(e) => setLocalOrderSale(e.target.value)} placeholder={'Скидка на самовывоз отсюда'}/>
                                 </Row> 
                                 <Row className='row-custom'>
                                     <Checkbox 
@@ -806,6 +854,7 @@ const OrgsCreatePage = () => {
                                 </Row>
                                 <Row className='row-custom'>
                                     <Input 
+                                        maskType={String}
                                         value={TimetableDescription} 
                                         onChange={(e) => setTimetableDescription(e.target.value)} 
                                         placeholder={'Описание времени работы'}
@@ -845,10 +894,10 @@ const OrgsCreatePage = () => {
                                         text={'Уведомления в телеграм-боте и на E-Mail'}/>
                                 </Row> 
                                 {
-                                    IsNeedToNotify ? (
+                                    IsNeedToNotify == '1' ? (
                                         <>
                                             <Row className='row-custom'>
-                                                <Input value={BotToken} onChange={(e) => setBotToken(e.target.value)} placeholder={'API-key бота'}/>
+                                                <Input maskType={String} value={BotToken} onChange={(e) => setBotToken(e.target.value)} placeholder={'API-key бота'}/>
                                             </Row> 
                                             <Row className='row-custom'>
                                                 <Checkbox 

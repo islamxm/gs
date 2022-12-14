@@ -180,6 +180,7 @@ const IntegrPage = () => {
                                             </Col>
                                             <Col span={24}>
                                                 <Input 
+                                                    maskType={String}
                                                     placeholder={'API key'}
                                                     value={PaymentSystemToken}
                                                     onChange={e => setPaymentSystemToken(e.target.value)}
@@ -194,6 +195,7 @@ const IntegrPage = () => {
                                             </Col>
                                             <Col span={24}>
                                                 <Input 
+                                                    maskType={String}
                                                     placeholder={'API key'}
                                                     value={SMSruToken}
                                                     onChange={e => setSMSruToken(e.target.value)}
@@ -208,6 +210,7 @@ const IntegrPage = () => {
                                             </Col>
                                             <Col span={24}>
                                                 <Input
+                                                    maskType={String}
                                                     placeholder={'Token'}
                                                     value={AuthBotToken}
                                                     onChange={e => setAuthBotToken(e.target.value)}
@@ -236,6 +239,7 @@ const IntegrPage = () => {
                                             </Col>
                                             <Col span={24}>
                                                 <Input 
+                                                    maskType={String}
                                                     placeholder={'API key'}
                                                     value={iikoCloudApi}
                                                     onChange={e => setiikoCloudApi(e.target.value)}
@@ -248,6 +252,7 @@ const IntegrPage = () => {
                                             <>
                                             <Col span={24}>
                                                 <Input
+                                                    maskType={String}
                                                     placeholder={'ID точки продаж для выгрузки'}
                                                     value={iikoTargetID}
                                                     onChange={e => setiikoTargetID(e.target.value)}
@@ -255,6 +260,7 @@ const IntegrPage = () => {
                                             </Col>
                                             <Col span={24}>
                                                 <Input
+                                                    maskType={String}
                                                     placeholder={'ID группы для выгрузки'}
                                                     value={iikoTargetGroup}
                                                     onChange={e => setiikoTargetGroup(e.target.value)}

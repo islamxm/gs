@@ -18,9 +18,7 @@ const Text = ({
     useEffect(() => {
         if(value) {
             setValidFocus(true)
-        } else {
-            setValidFocus(false)
-        }
+        } 
     }, [value])
 
     const focusInp = () => {
@@ -34,6 +32,16 @@ const Text = ({
             </div>
             <textarea 
             onChange={onChange}
+            onBlur={() => {
+                if(!value) {
+                    setValidFocus(false)
+                } else {
+                    setValidFocus(true)
+                }
+            }}
+            onFocus={(e) => {
+                setValidFocus(true)
+            }}
             style={{height: height}} 
             name={name} 
             value={value} 

@@ -503,6 +503,7 @@ const EditPlateNew = () => {
                                 
                                 <Row className="row-custom">
                                     <Input
+                                        maskType={String}
                                         value={Name}
                                         onChange={(e) => setName(e.target.value)}  
                                         placeholder={'Название блюда'}/>
@@ -511,6 +512,7 @@ const EditPlateNew = () => {
                                     settings?.IsHaveIIko == '1' ? (
                                         <Row className="row-custom">
                                             <Input 
+                                                maskType={String}
                                                 value={IIkoID}
                                                 onChange={(e) => setIIkoID(e.target.value)}
                                                 placeholder={'ID в iIko'}/>
@@ -554,12 +556,14 @@ const EditPlateNew = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Input
+                                        scale={5}
                                         value={Price}
                                         onChange={(e) => setPrice(e.target.value)}
                                         placeholder={'Цена'}/>
                                 </Row>
                                 <Row className="row-custom">
                                     <Input
+                                        scale={5}
                                         value={SalePrice}
                                         onChange={(e) => setSalePrice(e.target.value)} 
                                         placeholder={'Цена со скидкой'}/>
