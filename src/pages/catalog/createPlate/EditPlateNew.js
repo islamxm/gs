@@ -488,7 +488,12 @@ const EditPlateNew = () => {
                                                         <div className="def-label">ID в iIko</div>
                                                         <div className="def-value">{IIkoID}</div>
                                                     </Col>
-                                                ) : null
+                                                ) : (
+                                                    <Col span={12}>
+                                                        <div className="def-label">ID в RKeeper</div>
+                                                        <div className="def-value">{IIkoID}</div>
+                                                    </Col>
+                                                )
                                             }
                                             
                                         </Row>
