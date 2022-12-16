@@ -83,6 +83,9 @@ const AddMod = ({visible, close, plateId, update}) => {
         let r = [...mods]
         let m = r.splice(index, 1)
         setMods([...r])
+        setModCreateModal(false)
+        setSelected(null)
+        
     }
 
     const selectType = (value) => {
@@ -117,6 +120,7 @@ const AddMod = ({visible, close, plateId, update}) => {
     return (
         <Modal className='Modal' width={650} open={visible} onCancel={closeHandle}>
             <AddModItem
+                onDelete={removeMod}
                 data={selected} 
                 update={setMods} 
                 visible={modCreateModal} 
@@ -163,14 +167,18 @@ const AddMod = ({visible, close, plateId, update}) => {
                                             <div onClick={() => editItem(item, index)} className="AddMod__body_item_main panel">
                                                 <Row gutter={[20, 0]}>
                                                     <Col span={14}>
-                                                        <input value={item.Name} readOnly type="text" className='AddMod__body_item_name' placeholder='Название'/>
+                                                        <div className="AddMod__body_item_name">
+                                                            {item.Name}
+                                                        </div>
                                                     </Col>
                                                     <Col span={10}>
-                                                        <input value={item.Price} type="text" readOnly className='AddMod__body_item_value' placeholder='Цена'/>
+                                                        <div className="AddMod__body_item_value">
+                                                            {item.Price}₽
+                                                        </div>
                                                     </Col>
                                                 </Row>
                                             </div>
-                                            <div className="AddMod__body_item_action">
+                                            {/* <div className="AddMod__body_item_action">
                                                 <Button
                                                     onClick={() => removeMod(index)} 
                                                     before={<BsTrash size={20}/>} 
@@ -178,7 +186,7 @@ const AddMod = ({visible, close, plateId, update}) => {
                                                     text={'Удалить модификатор'} 
                                                     justify={'flex-start'} 
                                                     styles={{padding: 10}}/>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     ))
                                 ) : null

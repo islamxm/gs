@@ -35,6 +35,7 @@ import checkEmptyValue from '../../../funcs/checkEmptyValue';
 import checkNumValue from '../../../funcs/checkNumValue';
 import UploadKml from './components/UploadKml/UploadKml';
 import MapPolygonPic from '../../../components/MapPolygonPic/MapPolygonPic';
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal';
 
 const os = new orgService();
 const pmValueFind = (value) => {
@@ -588,7 +589,6 @@ const OrgsCreatePage = () => {
         openSelectPoly()
     }
 
-    
 
     const addPay = (item, selected) => {
         if(item.PaymentType != selected.PaymentType && !pm.find(i => i.PaymentType == item.PaymentType)) {
@@ -622,6 +622,7 @@ const OrgsCreatePage = () => {
         }
     }
 
+
     const deletePay = (selected) => {
         os.deletePay(token, {ID: selected.ID}).then(res => {
             if(res) {
@@ -636,6 +637,7 @@ const OrgsCreatePage = () => {
             
         })
     }
+
 
     const editPay = (e, selected) => {
         os.editPay(token, {
@@ -653,6 +655,7 @@ const OrgsCreatePage = () => {
             }
         })
     }
+
     
     useEffect(() => {
         if(!ThumbnailPrev || !Name) {
@@ -662,9 +665,19 @@ const OrgsCreatePage = () => {
         }
     }, [ThumbnailPrev, Name])
 
+    const [confirmDelete, setConfirmDelete] = useState(false)
 
+    const openDeleteConfirm = () => {
+        setConfirmDelete(true)
+    }
 
+    const closeDeleteConfirm = () => {
+        setConfirmDelete(false)
+    }
 
+    const deleteWithoutSave = () => {
+        deleteOrg()
+    }
 
     return (
         <motion.div 
@@ -688,6 +701,12 @@ const OrgsCreatePage = () => {
                 setPolList={setPolList}
                 visible={selectPolyModal}
                 close={closeSelectPoly}
+                />
+            <ConfirmModal
+                visible={confirmDelete}
+                close={closeDeleteConfirm}
+                text={'Удалить организацию?'}
+                cancel={deleteWithoutSave}
                 />
             {/* <HeaderProfile/> */}
             <main className="Main">
@@ -714,20 +733,40 @@ const OrgsCreatePage = () => {
                                     </Col>
                                 </Row>
                                 <Row className='row-custom'>
-                                    <Col span={24}>
-                                        <Checkbox
-                                            id={'CanOverwrite'}
-                                            checked={CanOverwrite == '1'}
-                                            text={'Разрешить iiko перезаписывать организацию'}
-                                            onChange={e => {
-                                                if(e.target.checked) {
-                                                    setCanOverwrite('1')
-                                                } else {
-                                                    setCanOverwrite('0')
-                                                }
-                                            }} 
-                                            />
-                                    </Col>
+                                    {
+                                        settings?.IsHaveIIko == '1' ? (
+                                            <Col span={24}>
+                                                <Checkbox
+                                                    id={'CanOverwrite'}
+                                                    checked={CanOverwrite == '1'}
+                                                    text={'Разрешить iiko перезаписывать организацию'}
+                                                    onChange={e => {
+                                                        if(e.target.checked) {
+                                                            setCanOverwrite('1')
+                                                        } else {
+                                                            setCanOverwrite('0')
+                                                        }
+                                                    }} 
+                                                    />
+                                            </Col>
+                                        ) : (
+                                            <Col span={24}>
+                                                <Checkbox
+                                                    id={'CanOverwrite'}
+                                                    checked={CanOverwrite == '1'}
+                                                    text={'Разрешить RKeeper перезаписывать организацию'}
+                                                    onChange={e => {
+                                                        if(e.target.checked) {
+                                                            setCanOverwrite('1')
+                                                        } else {
+                                                            setCanOverwrite('0')
+                                                        }
+                                                    }} 
+                                                    />
+                                            </Col>
+                                        )
+                                    }
+                                    
                                 </Row>
                                 <Row className='row-custom'>
                                     <Input 
@@ -982,7 +1021,7 @@ const OrgsCreatePage = () => {
                                         orgId ? (
                                             <Button 
                                             styles={{width: '100%', marginTop: 10}} 
-                                            onClick={deleteOrg} 
+                                            onClick={openDeleteConfirm} 
                                             disabled={false} 
                                             load={delLoad} 
                                             before={<BsTrash size={20}/>} 

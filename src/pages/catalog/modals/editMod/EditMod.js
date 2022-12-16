@@ -45,6 +45,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
     useEffect(() => {
         console.log(selected)
         if(selected) {
+            console.log(selected?.Title)
             setGroupModId(selected?.ID)
             setMods(selected?.Modificators)
             setIsRequired(selected?.IsRequired)
@@ -95,6 +96,8 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
         let r = [...mods]
         let m = r.splice(index, 1)
         setMods([...r])
+        setModCreateModal(false)
+        setEdit(null)
     }
 
 
@@ -126,7 +129,6 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
     }
 
     const onDelete = () => {
-        console.log(groupModId)
         setDelLoad(true)
         cs.deleteMod(token, {ItemID: plateId, groupModificatorID: groupModId}).then(res => {
             console.log(res)
@@ -139,18 +141,25 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
 
     return (
         <Modal className='Modal' width={650} open={visible} onCancel={closeHandle}>
-            <AddModItem update={setMods} data={edit} visible={modCreateModal} close={() => setModCreateModal(false)}/>
+            <AddModItem 
+                update={setMods} 
+                data={edit} 
+                visible={modCreateModal}
+                onDelete={removeMod} 
+                close={() => setModCreateModal(false)}/>
             <h2 className="Modal__head">Добавить группу модификаторов</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
                     <Input
                         shadow={true}
                         value={Title}
+                        maskType={String}
                         onChange={(e) => setTitle(e.target.value)} 
                         placeholder={'Название группы'}/>
                 </div>
                 <div className="Modal__form_row">
                     <DropCollapse
+                        shadow={true}
                         list={countModList}
                         selectItem={selectType}
                         afterIcon 
@@ -179,16 +188,20 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                                     mods.map((item, index) => (
                                         <div className="AddMod__body_item active" key={index}>
                                             <div className="AddMod__body_item_main panel" onClick={() => editMod({...item})}>
-                                                <Row gutter={[20, 0]}>
-                                                    <Col span={14}>
-                                                        <input value={item.Name} readOnly type="text" className='AddMod__body_item_name' placeholder='Название'/>
+                                                <Row gutter={[20, 10]}>
+                                                    <Col span={12}>
+                                                        <div className="AddMod__body_item_value">
+                                                            {item.Name}
+                                                        </div>
                                                     </Col>
-                                                    <Col span={10}>
-                                                        <input value={item.Price} type="text" readOnly className='AddMod__body_item_value' placeholder='Цена'/>
+                                                    <Col span={12}>
+                                                        <div className="AddMod__body_item_value">
+                                                            {item.Price}₽
+                                                        </div>
                                                     </Col>
                                                 </Row>
                                             </div>
-                                            <div className="AddMod__body_item_action">
+                                            {/* <div className="AddMod__body_item_action">
                                                 <Button
                                                     onClick={() => removeMod(index)} 
                                                     before={<BsTrash size={20}/>} 
@@ -196,7 +209,7 @@ const EditMod = ({visible, close, selected, plateId, update}) => {
                                                     text={'Удалить модификатор'} 
                                                     justify={'flex-start'} 
                                                     styles={{padding: 10}}/>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     ))
                                 ) : null

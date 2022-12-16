@@ -31,6 +31,7 @@ import {motion} from 'framer-motion';
 import Loader from '../../../components/Loader/Loader';
 import checkNumValue from '../../../funcs/checkNumValue';
 import SaveIcon from '../../../icons/SaveIcon/SaveIcon';
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal';
 
 const LOCAL_STORAGE = window.localStorage;
 
@@ -405,6 +406,10 @@ const EditPlatePage = () => {
         })
     }
 
+    const [confirmDelete, setConfirmDelete] = useState(false)
+    const openDeleteConfirm = () => setConfirmDelete(true)
+    const closeDeleteConfirm  = () => setConfirmDelete(false)
+    const deleteConfirmAccept = () => deletePlate()
 
     if(pageLoad) {
         return (
@@ -429,6 +434,12 @@ const EditPlatePage = () => {
             {/* <AddAlrgn visible={addAllergen} close={closeAddAllergen}/>
             <EditAlrgn visible={editAllergen} close={closeEditAllergen}/> */}
             {/* <HeaderProfile/> */}
+            <ConfirmModal
+                visible={confirmDelete}
+                cancel={deleteConfirmAccept}
+                close={closeDeleteConfirm}
+                text={'Удалить блюдо?'}
+                />
             <main className="Main">
                 <div className="pageBody">
                     <div className="CreatePlatePage__body pageBody-content">
@@ -710,7 +721,7 @@ const EditPlatePage = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Button
-                                        onClick={deletePlate}
+                                        onClick={openDeleteConfirm}
                                         variant={'danger'}
                                         load={delLoad}
                                         text={'Удалить блюдо'} 

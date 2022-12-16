@@ -13,6 +13,7 @@ import catService from '../../../../services/catService';
 import {Row, Col} from 'antd';
 import PlUpload from '../../../../components/PlUpload/PlUpload';
 import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
+import ConfirmModal from '../../../../components/ConfirmModal/ConfirmModal';
 
 
 
@@ -142,8 +143,19 @@ const CreateSubcategory = ({visible, close, update, data}) => {
         })
     }
 
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
+    const openDeleteConfirm = () => setDeleteConfirm(true)
+    const closeDeleteConfirm = () => setDeleteConfirm(false)
+    const deleteConfirmAccept = () => onDelete()
+
     return (
         <Modal open={visible} onCancel={closeHandle} className="Modal CreateSubcategory">
+            <ConfirmModal
+                visible={deleteConfirm}
+                close={closeDeleteConfirm}
+                cancel={deleteConfirmAccept}
+                text={'Удалить подкатегорию?'}
+                />
             <h2 className="Modal__head">
                 {
                     data ? (
@@ -247,7 +259,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                                     <Button
                                         load={delLoad}
                                         styles={{width: '100%'}}
-                                        onClick={onDelete} 
+                                        onClick={openDeleteConfirm} 
                                         type={'button'}  
                                         variant={'danger'}
                                         before={<BsTrash size={20}/>} 

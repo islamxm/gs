@@ -60,7 +60,6 @@ const IntegrPage = () => {
             setPageLoad(true)
             is.getIntSettings(token).then(res => {
                 if(res) {
-                    console.log(res)
                     setAuthBotToken(res.AuthBotToken)
                     setAutoSaveOrganisations(res.AutoSaveOrganisations)
                     setAutoSavePlates(res.AutoSavePlates)
@@ -127,7 +126,7 @@ const IntegrPage = () => {
     const startInt = () => {
         setIntLoad(true)
         is.startInt(token).then(res => {
-            console.log(res)
+            
             if(res?.error == '1') {
                 message.error(res?.message)
             } else {
@@ -144,6 +143,9 @@ const IntegrPage = () => {
         setPaymentSystemType(item)
     }
 
+    
+
+
     if(pageLoad) {
         return (
             <div className="page">
@@ -153,6 +155,8 @@ const IntegrPage = () => {
             </div>
         )
     }
+
+
 
     return (
         <motion.div
@@ -230,23 +234,27 @@ const IntegrPage = () => {
                                 </Row>
                                 
                             </Col>
+                            
                             <Col span={12}>
                                 <Row gutter={[0,25]}>
-                                    <Col span={24}>
-                                        <Row gutter={[0, 10]}>
+                                    {
+                                        settings?.IsHaveIIko == '1' ? (
                                             <Col span={24}>
-                                                <div className="def-label">iIko Cloud API token</div>
+                                                <Row gutter={[0,10]}>
+                                                    <Col span={24}>
+                                                        <div className="def-label">iIko Cloud API token</div>
+                                                    </Col>
+                                                    <Col span={24}>
+                                                        <Input
+                                                            maskType={String}
+                                                            value={iikoCloudApi}
+                                                            onChange={e => setiikoCloudApi(e.target.value)}
+                                                            />
+                                                    </Col>
+                                                </Row>
                                             </Col>
-                                            <Col span={24}>
-                                                <Input 
-                                                    maskType={String}
-                                                    placeholder={'API key'}
-                                                    value={iikoCloudApi}
-                                                    onChange={e => setiikoCloudApi(e.target.value)}
-                                                    />
-                                            </Col>
-                                        </Row>
-                                    </Col>
+                                        ) : null
+                                    }
                                     {
                                         settings?.IsHaveIIko == '1' ? (
                                             <>
@@ -272,71 +280,160 @@ const IntegrPage = () => {
                                     
                                     <Col span={24}>
                                         <Row gutter={[0, 10]}>
-                                            <Col span={24}>
-                                                <Checkbox 
-                                                    text={'Автоматически загружать из iIko блюда'}
-                                                    checked={AutoSavePlates == '1'}
-                                                    onChange={e => {
-                                                        if(e.target.checked) {
-                                                            setAutoSavePlates('1')
-                                                        } else {
-                                                            setAutoSavePlates('0')
-                                                        }
-                                                    }}
-                                                    id={'AutoSavePlates'}
-                                                    />
-                                            </Col>
-                                            <Col span={24}>
-                                                <Checkbox 
-                                                    text={'Автоматически загружать из iIko организации'}
-                                                    checked={AutoSaveOrganisations == '1'}
-                                                    onChange={e => {
-                                                        if(e.target.checked) {
-                                                            setAutoSaveOrganisations('1')
-                                                        } else {
-                                                            setAutoSaveOrganisations('0')
-                                                        }
-                                                    }}
-                                                    id={'AutoSaveOrganisations'}
-                                                    />
-                                            </Col>
-                                            <Col span={24}>
-                                                <Checkbox 
-                                                    text={'Разрешить iIko создание новых организации'}
-                                                    checked={CanCreateNewOrganisations == '1'}
-                                                    onChange={e => {
-                                                        if(e.target.checked) {
-                                                            setCanCreateNewOrganisations('1')
-                                                        } else {
-                                                            setCanCreateNewOrganisations('0')
-                                                        }
-                                                    }}
-                                                    id={'CanCreateNewOrganisations'}
-                                                    />
-                                            </Col>
-                                            <Col span={24}>
-                                                <Checkbox 
-                                                    text={'Разрешить iIko создание новых блюд'}
-                                                    checked={CanCreateNewPlates == '1'}
-                                                    onChange={e => {
-                                                        if(e.target.checked) {
-                                                            setCanCreateNewPlates('1')
-                                                        } else {
-                                                            setCanCreateNewPlates('0')
-                                                        }
-                                                    }}
-                                                    id={'CanCreateNewPlates'}
-                                                    />
-                                            </Col>
+                                            {
+                                                settings.IsHaveIIko == '1' ? (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Автоматически загружать из iIko блюда'}
+                                                            checked={AutoSavePlates == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setAutoSavePlates('1')
+                                                                } else {
+                                                                    setAutoSavePlates('0')
+                                                                }
+                                                            }}
+                                                            id={'AutoSavePlates'}
+                                                            />
+                                                    </Col>
+                                                ) : (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Автоматически загружать из RKeeper блюда'}
+                                                            checked={AutoSavePlates == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setAutoSavePlates('1')
+                                                                } else {
+                                                                    setAutoSavePlates('0')
+                                                                }
+                                                            }}
+                                                            id={'AutoSavePlates'}
+                                                            />
+                                                    </Col>
+                                                )
+                                            }
+                                            {
+                                                settings?.IsHaveIIko == '1' ? (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Автоматически загружать из iIko организации'}
+                                                            checked={AutoSaveOrganisations == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setAutoSaveOrganisations('1')
+                                                                } else {
+                                                                    setAutoSaveOrganisations('0')
+                                                                }
+                                                            }}
+                                                            id={'AutoSaveOrganisations'}
+                                                            />
+                                                    </Col>
+                                                ) : (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Автоматически загружать из RKeeper организации'}
+                                                            checked={AutoSaveOrganisations == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setAutoSaveOrganisations('1')
+                                                                } else {
+                                                                    setAutoSaveOrganisations('0')
+                                                                }
+                                                            }}
+                                                            id={'AutoSaveOrganisations'}
+                                                            />
+                                                    </Col>
+                                                )
+                                            }
+                                            {
+                                                settings?.IsHaveIIko == '1' ? (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Разрешить iIko создание новых организации'}
+                                                            checked={CanCreateNewOrganisations == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setCanCreateNewOrganisations('1')
+                                                                } else {
+                                                                    setCanCreateNewOrganisations('0')
+                                                                }
+                                                            }}
+                                                            id={'CanCreateNewOrganisations'}
+                                                            />
+                                                    </Col>
+                                                ) : (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Разрешить RKeeper создание новых организации'}
+                                                            checked={CanCreateNewOrganisations == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setCanCreateNewOrganisations('1')
+                                                                } else {
+                                                                    setCanCreateNewOrganisations('0')
+                                                                }
+                                                            }}
+                                                            id={'CanCreateNewOrganisations'}
+                                                            />
+                                                    </Col>
+                                                )
+                                            }
+                                            {
+                                                settings?.IsHaveIIko == '1' ? (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Разрешить iIko создание новых блюд'}
+                                                            checked={CanCreateNewPlates == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setCanCreateNewPlates('1')
+                                                                } else {
+                                                                    setCanCreateNewPlates('0')
+                                                                }
+                                                            }}
+                                                            id={'CanCreateNewPlates'}
+                                                            />
+                                                    </Col>
+                                                ) : (
+                                                    <Col span={24}>
+                                                        <Checkbox 
+                                                            text={'Разрешить RKeeper создание новых блюд'}
+                                                            checked={CanCreateNewPlates == '1'}
+                                                            onChange={e => {
+                                                                if(e.target.checked) {
+                                                                    setCanCreateNewPlates('1')
+                                                                } else {
+                                                                    setCanCreateNewPlates('0')
+                                                                }
+                                                            }}
+                                                            id={'CanCreateNewPlates'}
+                                                            />
+                                                    </Col>
+                                                )
+                                            }
+                                            
                                         </Row>
                                     </Col>
                                     <Col span={24}>
-                                        <Button 
-                                            load={intLoad}
-                                            onClick={startInt}
-                                            text={'Синхронизировать все данные с iIko'}
-                                            styles={{width: '100%'}}
-                                            />
+                                        {
+                                            settings?.IsHaveIIko == '1' ? (
+                                                <Button 
+                                                    load={intLoad}
+                                                    onClick={startInt}
+                                                    text={'Синхронизировать все данные с iIko'}
+                                                    styles={{width: '100%'}}
+                                                    />
+                                            ) : (
+                                                <Button 
+                                                    load={intLoad}
+                                                    onClick={startInt}
+                                                    text={'Синхронизировать все данные с RKeeper'}
+                                                    styles={{width: '100%'}}
+                                                    />
+                                            )
+                                        }
+                                        
                                     </Col>
                                 </Row>
                             </Col>

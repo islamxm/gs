@@ -34,6 +34,8 @@ import MapMarker from '../../../components/MapMarker/MapMarker';
 import checkNumValue from '../../../funcs/checkNumValue';
 import MapPolygonPic from '../../../components/MapPolygonPic/MapPolygonPic';
 import UploadKml from './components/UploadKml/UploadKml';
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal';
+
 const os = new orgService();
 const pmValueFind = (value) => {
     switch(value) {
@@ -645,6 +647,22 @@ const OrgsNewPage = () => {
     }
 
 
+
+    const [confirmDelete, setConfirmDelete] = useState(false)
+
+    const openDeleteConfirm = () => {
+        setConfirmDelete(true)
+    }
+
+    const closeDeleteConfirm = () => {
+        setConfirmDelete(false)
+    }
+
+    const deleteWithoutSave = () => {
+        deleteOrg()
+    }
+
+
     return (
         <motion.div 
             initial={{opacity: 0}}
@@ -659,7 +677,16 @@ const OrgsNewPage = () => {
                 close={closeSelectLocation}
                 coords={coords}
                 />
+
+            {/* Выйти без сохранения (удалить) */}
             
+            {/* Удалить без сохранения */}
+            <ConfirmModal 
+                text={'Удалить организацию?'}
+                cancel={deleteWithoutSave}
+                visible={confirmDelete}
+                close={closeDeleteConfirm}
+                />
             <PolygonModal
                 data={editPolygon}
                 orgId={createdId ? createdId : orgId}
@@ -913,7 +940,7 @@ const OrgsNewPage = () => {
                                         orgId ? (
                                             <Button 
                                             styles={{width: '100%', marginTop: 10}} 
-                                            onClick={deleteOrg} 
+                                            onClick={openDeleteConfirm} 
                                             disabled={false} 
                                             load={delLoad} 
                                             before={<BsTrash size={20}/>} 

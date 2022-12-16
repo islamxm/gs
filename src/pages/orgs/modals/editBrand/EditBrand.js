@@ -13,6 +13,7 @@ import orgService from '../../../../services/orgService';
 import {FiDownload} from 'react-icons/fi';
 import { MoonLoader } from 'react-spinners';
 import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
+import ConfirmModal from '../../../../components/ConfirmModal/ConfirmModal';
 
 const os = new orgService()
 
@@ -83,9 +84,28 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
             closeModal()
         })
     }
+
+
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
+    const openDeleteConfirm = () => {
+        setDeleteConfirm(true)
+    }
+    const closeDeleteConfirm = () => {
+        setDeleteConfirm(false)
+    }
+
+    const deleteConfirmAccept = () => {
+        deleteBrand()
+    }
     
     return (
         <Modal width={540} className='Modal' open={visible} onCancel={closeModal}>
+            <ConfirmModal
+                text={'Удалить бренд'}
+                visible={deleteConfirm}
+                close={closeDeleteConfirm}
+                cancel={deleteConfirmAccept}
+                />
             <h2 className="Modal__head">Изменить бренд</h2>
             <form className="Modal__form">
                 <div className="Modal__form_row">
@@ -143,7 +163,7 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
                         disabled={!markerId}/>
 
                     <Button 
-                        onClick={deleteBrand}
+                        onClick={openDeleteConfirm}
                         type={'button'} 
                         before={<BsTrash size={20}/>} 
                         justify={'flex-start'} 

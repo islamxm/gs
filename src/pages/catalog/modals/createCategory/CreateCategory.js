@@ -12,6 +12,7 @@ import catService from '../../../../services/catService';
 import orgService from '../../../../services/orgService';
 import { catalogUpdate } from '../../../../store/actions';
 import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
+import ConfirmModal from '../../../../components/ConfirmModal/ConfirmModal';
 const os = new orgService()
 const cs = new catService()
 
@@ -170,9 +171,22 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
         })
     }
 
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
+
+    const openDeleteConfirm = () => setDeleteConfirm(true)
+    const closeDeleteConfirm = () => setDeleteConfirm(false)
+    const deleteConfirmAccept = () => {
+        deleteCat()
+    }
 
     return (
         <Modal className='Modal' open={visible} width={700} onCancel={handleClose}>
+            <ConfirmModal
+                text={'Удалить категорию'}
+                visible={deleteConfirm}
+                cancel={deleteConfirmAccept}
+                close={closeDeleteConfirm}
+                />
             <h2 className="Modal__head">
                 {
                     editItem ? (
@@ -262,8 +276,6 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                 
                 
                 <div className="Modal__form_action">
-                    
-
                     {
                         editItem ? (
                             <>
@@ -277,7 +289,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                                 text={'Сохранить'}
                                 />
                             <Button 
-                                onClick={deleteCat} 
+                                onClick={openDeleteConfirm} 
                                 styles={{marginTop: 20}} 
                                 load={delLoad} 
                                 type={'button'} 

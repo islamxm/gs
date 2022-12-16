@@ -37,7 +37,7 @@ const countModList = [
 
 
 
-const AddModItem = ({visible, close, update, data}) => {
+const AddModItem = ({visible, close, update, data, onDelete}) => {
     const [Name, setName] = useState('')
     const [Price, setPrice] = useState('')
     const [IIkoID, setIIkoID] = useState('')
@@ -117,24 +117,25 @@ const AddModItem = ({visible, close, update, data}) => {
                 <div className="AddMod">
                     <div className="AddMod__body">
                         <div className="AddMod__body_list">
-                            <div className="AddMod__body_item active">
-                                <div className="AddMod__body_item_main panel">
-                                    <Row gutter={[20, 0]}>
-                                        <Col span={14}>
-                                            <input
+                            <div className="AddMod__body_item noshadow active">
+                                <div className="AddMod__body_item_main">
+                                    <Row gutter={[20, 20]}>
+                                        <Col span={24}>
+                                            <Input
+                                                shadow={true}
+                                                value={Name}
+                                                maskType={String}
+                                                placeholder='Название'
                                                 onChange={e => setName(e.target.value)}
-                                                value={Name} 
-                                                type="text" 
-                                                className='AddMod__body_item_name' 
-                                                placeholder='Название'/>
+                                                />
                                         </Col>
-                                        <Col span={10}>
-                                            <input
+                                        <Col span={24}>
+                                            <Input
+                                                shadow={true}
                                                 value={Price}
-                                                onChange={e => setPrice(e.target.value)} 
-                                                type="text" 
-                                                className='AddMod__body_item_value' 
-                                                placeholder='Цена'/>
+                                                onChange={e => setPrice(e.target.value)}
+                                                placeholder="Цена"
+                                                />
                                         </Col>
                                     </Row>
                                 </div>
@@ -146,13 +147,32 @@ const AddModItem = ({visible, close, update, data}) => {
 
                 </div>
                 <div className="Modal__form_action">
-                    <Button
-                        disabled={!Name || !Price} 
-                        type={'button'} 
-                        onClick={onSave}  
-                        before={<SaveIcon color={'#fff'} size={20}/>} 
-                        justify={'flex-start'} 
-                        text={'Сохранить'}/>
+                    <Row gutter={[10,10]}>
+                        <Col span={24}>
+                            <Button
+                            disabled={!Name || !Price} 
+                            type={'button'} 
+                            onClick={onSave}  
+                            before={<SaveIcon color={'#fff'} size={20}/>} 
+                            justify={'flex-start'} 
+                            text={'Сохранить'}/>
+                        </Col>
+                        {
+                            data ? (
+                                <Col span={24}>
+                                    <Button
+                                    variant={'danger'}
+                                    type={'button'} 
+                                    onClick={() => onDelete(data?.index)}  
+                                    before={<SaveIcon color={'#fff'} size={20}/>} 
+                                    justify={'flex-start'} 
+                                    text={'Удалить'}/>
+                                </Col>
+                            ) : null
+                        }
+                    </Row>
+                    
+                    
                 </div>
             </div>
         </Modal>

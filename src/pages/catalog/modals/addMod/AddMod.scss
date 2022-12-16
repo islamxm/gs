@@ -9,12 +9,14 @@
         &_item.active {
 
             .AddMod__body_item_name, .AddMod__body_item_value {
-                border-color: var(--light_violet);
+                // border-color: var(--light_violet);
             }
 
            
         }
-
+        &_item.noshadow {
+            box-shadow: unset;
+        }
         &_item {
             background-color: #fff;
             border-radius: 10px;
@@ -24,11 +26,13 @@
             width: 100%;
 
             &_main {
-                
+                padding: 0;
             }
 
             &_name {
-                display: block;
+                display: flex;
+                align-items: center;
+                height: 100%;
                 width: 100%;
                 border: none;
                 outline: none;
@@ -45,7 +49,9 @@
             }
 
             &_value {
-                display: block;
+                display: flex;
+                align-items: center;
+                height: 100%;
                 width: 100%;
                 border: none;
                 outline: none;
@@ -53,7 +59,7 @@
                 font-weight: 600;
                 color: var(--violet);
                 border-radius: 10px;
-                border: 1px solid transparent;
+                // border: 1px solid transparent;
                 transition: all .3s ease;
 
                 &::placeholder {
