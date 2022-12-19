@@ -94,8 +94,11 @@ const CatalogPage = () => {
                                                     onDragOver={e => handleDragOver(e)}
                                                     onDrop={e => submitOrder(e, item)}
                                                     draggable={true}
-                                                    span={6}
+                                                    // span={6}
                                                     xxl={4}
+                                                    lg={8}
+                                                    md={12}
+                                                    xs={24}
                                                     key={index}
                                                     style={{transition: 'all .3s ease'}}>
                                                     <CatItem
@@ -105,7 +108,12 @@ const CatalogPage = () => {
                                                 </Col>
                                             ))
                                         }
-                                        <Col span={4} style={{height: 250}}>
+                                        <Col
+                                            xxl={4}
+                                            lg={8}
+                                            md={12}
+                                            xs={24} 
+                                            style={{height: 250}}>
                                             <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
                                         </Col>
                                     </Row>

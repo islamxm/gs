@@ -160,7 +160,9 @@ const OrgsPage = () => {
                                                     <Col 
                                                         key={index}
                                                         style={{transition: 'all .3s ease'}}
-                                                        span={8}
+                                                        xl={8}
+                                                        xs={24}
+                                                        md={12}
                                                         onDragLeave={e => handleDragLeave(e)}
                                                         onDragEnd={(e) => handleDragEnd(e)}
                                                         onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
@@ -173,7 +175,11 @@ const OrgsPage = () => {
                                                 ))
                                             ): null
                                         }
-                                        <Col span={8}>
+                                        <Col
+                                            xl={8}
+                                            xs={24}
+                                            md={12}
+                                            >
                                             <Pl onClick={createOrg} 
                                             style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
                                             text={'Добавить ресторан'}/>
@@ -228,7 +234,9 @@ const OrgsPage = () => {
                                                     <Col 
                                                         key={index}
                                                         style={{transition: 'all .3s ease'}}
-                                                        span={8}
+                                                        xl={8}
+                                                        xs={24}
+                                                        md={12}
                                                         onDragLeave={e => handleDragLeave(e)}
                                                         onDragEnd={(e) => handleDragEnd(e)}
                                                         onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
@@ -241,7 +249,11 @@ const OrgsPage = () => {
                                                 ))
                                             ): null
                                         }
-                                        <Col span={8}>
+                                        <Col
+                                            xl={8}
+                                            xs={24}
+                                            md={12}
+                                            >
                                             <Pl 
                                                 onClick={createOrg}
                                                 style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
@@ -306,7 +318,9 @@ const OrgsPage = () => {
                                                     <Col 
                                                         key={index}
                                                         style={{transition: 'all .3s ease'}}
-                                                        span={8}
+                                                        xl={8}
+                                                        xs={24}
+                                                        md={12}
                                                         onDragLeave={e => handleDragLeave(e)}
                                                         onDragEnd={(e) => handleDragEnd(e)}
                                                         onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
@@ -325,7 +339,11 @@ const OrgsPage = () => {
                                                 ))
                                             ) : null
                                         }
-                                        <Col span={8}>
+                                        <Col
+                                            xl={8}
+                                            xs={24}
+                                            md={12}
+                                            >
                                         <Pl onClick={openAddBrand} style={{backgroundColor: '#fff', height: 223}} text={'Добавить бренд'}/>
                                         </Col>
                                     </Row>

@@ -78,6 +78,7 @@ const AddBrand  = ({visible, close, updateList}) => {
                         }
                     </div>
                 </div>
+                
                 <div className="Modal__form_row">
                     <Input 
                         maskType={Number}

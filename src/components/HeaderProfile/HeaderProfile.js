@@ -13,7 +13,7 @@ import Bc from '../Bc/Bc';
 
 
 const HeaderProfile = () => {
-    const {sidebarOpen, settings, user} = useSelector(state => state)
+    const {sidebarOpen, settings, user, backFunc} = useSelector(state => state)
     const loc = useLocation()
     const [back, setBack] = useState(false);
     const [links, setLinks] = useState([])
@@ -102,9 +102,18 @@ const HeaderProfile = () => {
                         <div className="HeaderProfile__main_nav_head">
                             {
                                 back ? (
-                                    <div className="HeaderProfile__main_nav_head_back" onClick={() => nav(-1)}>
-                                         <BsChevronLeft/>
-                                    </div>
+                                    (
+                                        backFunc ? (
+                                            <div className="HeaderProfile__main_nav_head_back" onClick={backFunc}>
+                                                <BsChevronLeft/>
+                                            </div>
+                                        ) : (
+                                            <div className="HeaderProfile__main_nav_head_back" onClick={() => nav(-1)}>
+                                                <BsChevronLeft/>
+                                            </div>
+                                        )
+                                    )
+                                    
                                    
                                 ) : null
                             }

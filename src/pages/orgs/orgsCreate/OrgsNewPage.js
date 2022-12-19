@@ -750,14 +750,21 @@ const OrgsNewPage = () => {
                                             <Row className='row-custom'>
                                                 <Input maskType={String} value={IIkoIDTerminal} onChange={(e) => setIIkoIDTerminal(e.target.value)} placeholder={'ID кассовой станции'}/>
                                             </Row>  
-                                            <Row className='row-custom'>
-                                                <Input maskType={String} value={IIkoID} onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
-                                            </Row> 
                                         </>
                                         
                                     ) : null 
                                 } 
-
+                                {
+                                    settings?.IsHaveIIko == '1' ? (
+                                        <Row className='row-custom'>
+                                            <Input maskType={String} value={IIkoID} onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
+                                        </Row> 
+                                    ) : (
+                                        <Row className='row-custom'>
+                                            <Input maskType={String} value={IIkoID} onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в RKeeper'}/>
+                                        </Row> 
+                                    )
+                                }
                                 {
                                     settings?.IsHaveRKeeper == '1' ? (
                                         <>
@@ -802,12 +809,11 @@ const OrgsNewPage = () => {
                                         text={'Можно заказать отсюда'}/>
                                 </Row>  
                                 <Row className='row-custom'>
-                                    <DropCollapse 
-                                        afterIcon 
-                                        label={'Часовой пояс'}
-                                        list={timezones}
+                                    <Input
                                         value={Timezone}
-                                        selectItem={selectTmz}
+                                        onChange={e => setTimezone(e.target.value)}
+                                        maskType={String}
+                                        placeholder={'Часовой пояс'}
                                         />
                                 </Row>
                                 <Row className='row-custom'>

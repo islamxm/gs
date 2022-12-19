@@ -146,6 +146,7 @@ const EditBrand  = ({visible, close, selected, updateList}) => {
                 </div>
                 <div className="Modal__form_row">
                     <Input 
+                        shadow={true}
                         maskType={Number}
                         value={markerId} 
                         onChange={handleMarker} 

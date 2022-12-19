@@ -91,7 +91,7 @@ const OrgsCreatePage = () => {
     const [NotifyWhenNewOrder, setNotifyWhenNewOrder] = useState('0')
     const [NotifyWhenIIkoErrors, setNotifyWhenIIkoErrors] = useState('0')
     const [NotifyWhenOrderChanges, setNotifyWhenOrderChanges] = useState('0')
-    const [Timezone, setTimezone] = useState(timezones[0].value)
+    const [Timezone, setTimezone] = useState('')
     const [CountTimeStepsPreorder, setCountTimeStepsPreorder] = useState('');
     const [TimeStep, setTimeStep] = useState('');
     const [Disabled, setDisabled] = useState('0')
@@ -125,16 +125,14 @@ const OrgsCreatePage = () => {
     //получение данных при редактировании
     useEffect(() => {
         if(orgId && brandId != 'nobrand' && token && settings.IsHaveBrands == '1') {
-            console.log('with brand')
             os.getOrgs(token, {BrandID: brandId}).then(res => {
                 const thisOrg = res.find(item => item.ID == orgId)
-                console.log(thisOrg)
                 if(thisOrg?.ThumbnailPicture || thisOrg?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-org', '1')
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-org')
                 }
-                
+                console.log(thisOrg.Timezone)
                 setIIkoID(thisOrg?.IIkoID)
                 setIIkoIDTerminal(thisOrg?.IIkoIDTerminal)
                 setOrganisationBrand(thisOrg?.OrganisationBrand)
@@ -222,17 +220,15 @@ const OrgsCreatePage = () => {
             })
         }
         if(orgId && brandId == 'nobrand' && token && settings?.IsHaveBrands == '0') {
-            console.log('no brand')
             os.getOrgs(token).then(res => {
+
                 const thisOrg = res.find(item => item.ID == orgId)
-                console.log(thisOrg)
                 if(thisOrg?.ThumbnailPicture || thisOrg?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-org', '1')
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-org')
                 }
-
-               
+                console.log(thisOrg.Timezone)
                 setIIkoID(thisOrg?.IIkoID)
                 setIIkoIDTerminal(thisOrg?.IIkoIDTerminal)
                 setOrganisationBrand(thisOrg?.OrganisationBrand)
@@ -814,15 +810,28 @@ const OrgsCreatePage = () => {
                                                     onChange={(e) => setIIkoIDTerminal(e.target.value)} 
                                                     placeholder={'ID кассовой станции'}/>
                                             </Row>  
-                                            <Row className='row-custom'>
-                                                <Input 
-                                                    maskType={String}
-                                                    value={IIkoID} 
-                                                    onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
-                                            </Row> 
+                                            
                                         </>
                                     ) : null
                                 }
+                                {
+                                    settings?.IsHaveIIko == '1' ? (
+                                        <Row className='row-custom'>
+                                            <Input 
+                                                maskType={String}
+                                                value={IIkoID} 
+                                                onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в iIko'}/>
+                                        </Row> 
+                                    ) : (
+                                        <Row className='row-custom'>
+                                            <Input 
+                                                maskType={String}
+                                                value={IIkoID} 
+                                                onChange={(e) => setIIkoID(e.target.value)} placeholder={'ID в RKeeper'}/>
+                                        </Row> 
+                                    )
+                                }
+                                
                                 {
                                     settings?.IsHaveRKeeper == '1' ? (
                                         <>
@@ -883,12 +892,11 @@ const OrgsCreatePage = () => {
                                         text={'Можно заказать отсюда'}/>
                                 </Row>  
                                 <Row className='row-custom'>
-                                    <DropCollapse 
-                                        afterIcon 
-                                        label={'Часовой пояс'}
-                                        list={timezones}
+                                    <Input
+                                        maskType={String}
                                         value={Timezone}
-                                        selectItem={selectTmz}
+                                        onChange={e => setTimezone(e.target.value)}
+                                        placeholder={'Часовой пояс'}
                                         />
                                 </Row>
                                 <Row className='row-custom'>

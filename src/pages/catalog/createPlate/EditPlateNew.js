@@ -15,7 +15,7 @@ import Mod from './components/Mod/Mod';
 import DefList from './components/DefList/DefList';
 import catService from '../../../services/catService';
 import orgService from '../../../services/orgService';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AddAlrgn from '../modals/addAlrgn/AddAlrgn';
 import EditAlrgn from '../modals/editAlrgn/EditAlrgn';
 import { useEffect, useState } from 'react';
@@ -32,14 +32,13 @@ import Loader from '../../../components/Loader/Loader';
 import checkNumValue from '../../../funcs/checkNumValue';
 import SaveIcon from '../../../icons/SaveIcon/SaveIcon';
 import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal';
+import { updateBackFunc } from '../../../store/actions';
+import DialogModal from '../../../components/DialogModal/DialogModal';
+
 
 const LOCAL_STORAGE = window.localStorage;
 
-const picListTransform = (index, list, func) => {
-    const pr = list;
-    const rm = pr.splice(index, 1)
-    func([...pr])
-}
+
 
 const delTypes = {
     onlyDelivery: 0,
@@ -53,6 +52,7 @@ const os = new orgService();
 
 const EditPlateNew = () => {
     const {token, settings} = useSelector(state => state)
+    const dispatch = useDispatch()
     const {categoryId, subcategoryId, plateId} = useParams()
     const [createdId, setCreatedId] = useState(null)
     const [saveLoad, setSaveLoad] = useState(false)
@@ -99,7 +99,9 @@ const EditPlateNew = () => {
     const [addAllergen, setAddAllergen] = useState(false);
     const [editAllergen, setEditAllergen] = useState(false);
 
-
+    // useEffect(() => {
+    //     dispatch()
+    // }, [])
     
 
     useEffect(() => {
@@ -238,8 +240,7 @@ const EditPlateNew = () => {
                 }
             })
         }
-    }
-    
+    } 
 
     //получаем список организаций
     useEffect(() => {
@@ -255,9 +256,6 @@ const EditPlateNew = () => {
             })
         }
     }, [token])
-
-
-    
 
     const addOrg = () => {
         setOrgsList(state => [...state, orgs[0]])
@@ -285,8 +283,6 @@ const EditPlateNew = () => {
         let rm = ur.splice(index, 1, value)
         setWeekTimes([...ur]);
     }
-
-
     //создаем блюдо
     const editPlate = () => {
         LOCAL_STORAGE.setItem('gs-creating-plate', '1')
@@ -371,7 +367,6 @@ const EditPlateNew = () => {
             }
         }).finally(_ => setSaveLoad(false))
     }
-
     const deletePlate = () => {
         setDelLoad(true)
         cs.delProd(token, {ID: plateId}).then(res => {
@@ -385,7 +380,6 @@ const EditPlateNew = () => {
             setDelLoad(false)
         })
     }
-
     useEffect(() => {
         if(Picture?.length == 0 || !Name) {
             LOCAL_STORAGE.removeItem('gs-creating-plate')
@@ -394,10 +388,12 @@ const EditPlateNew = () => {
         }
     }, [Picture, Name])
 
+    
+
     useEffect(() => {
         return () => {
             if(LOCAL_STORAGE.getItem('gs-creating-plate')) {
-                console.log('coxранено')
+                
             } else {
                 cs.delProd(token, {ID: plateId, Delete: 'hard'}).then(res => {
                     console.log(res)
@@ -418,6 +414,18 @@ const EditPlateNew = () => {
         deletePlate()
     }
 
+    
+
+    // const [dm, setDm] = useState(false)
+    // const openDm = () => setDm(true)
+    // const closeDm = () => setDm(false)
+    // const acceptDm = () => {}
+    // const cancelDm = () => {}
+
+    // useEffect(() => {
+    //     dispatch(updateBackFunc(openDm))
+    // }, [])
+
 
     if(pageLoad) {
         return (
@@ -430,7 +438,6 @@ const EditPlateNew = () => {
             </div>
         )
     }
-
     
     return (
         <motion.div 

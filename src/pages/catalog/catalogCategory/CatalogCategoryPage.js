@@ -152,7 +152,10 @@ const CatalogCategoryPage = () => {
                                                             onDrop={e => submitOrder(e, item)}
                                                             draggable={true}
                                                             key={index}
-                                                            span={4}
+                                                            xxl={4}
+                                                            lg={8}
+                                                            md={12}
+                                                            xs={24}
                                                             style={{transition: 'all .3s ease'}}
                                                             >
                                                             <SubCard
@@ -172,7 +175,10 @@ const CatalogCategoryPage = () => {
                                                         onDragOver={e => handleDragOver(e)}
                                                         onDrop={e => submitOrder(e, item)}
                                                         draggable={true}
-                                                            span={4}
+                                                            xxl={4}
+                                                            lg={8}
+                                                            md={12}
+                                                            xs={24}
                                                             key={index}
                                                             >
                                                             <CatCard editPlate={toEditPlate} {...item}/>
@@ -182,7 +188,13 @@ const CatalogCategoryPage = () => {
                                             })
                                             
                                         }
-                                        <Col className='CatalogCategoryPage__body_list_add' span={4} style={{minHeight: 250}}>
+                                        <Col 
+                                            className='CatalogCategoryPage__body_list_add' 
+                                            xxl={4}
+                                            lg={8}
+                                            md={12}
+                                            xs={24} 
+                                            style={{minHeight: 250}}>
                                             <Pl onClick={toCreatePlate} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
                                             <Pl onClick={() => setCreateSubcategory(true)} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
                                         </Col>

@@ -8,6 +8,7 @@ const gState = {
             JSON.parse(LOCAL_STORAGE.getItem('gs-user-data')) : null,
     catalog: null,
     sidebarOpen: true,
+    backFunc: null
 }
 
 
@@ -42,6 +43,11 @@ const reducer = (state = gState, action) => {
             return {
                 ...state,
                 brands: action.brands
+            }
+        case 'BACK_FUNC':
+            return {
+                ...state,
+                backFunc: action.backFunc
             }
         default: 
             return state
