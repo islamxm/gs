@@ -1,7 +1,7 @@
 import './CatItem.scss';
 import Button from '../../../../../components/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const CatItem = ({
@@ -17,12 +17,27 @@ const CatItem = ({
     selectEdit,
 }) => {
     const nav = useNavigate()
+    const [tm, setTm] = useState(false)
 
+    const clickHandle = () => {
+        setTimeout(() => {
+            setTm(true)
+        }, 100)
+    
+    }
 
+    const checkClick = () => {
+        if(tm) {
+            setTm(false)
+            return;
+        } else {
+            nav(Link)
+        }
+    }
 
     return (
-        <div className="CatItem draggable">
-            <div className="CatItem__main" onClick={() => nav(Link)}>
+        <div className="CatItem">
+            <div className="CatItem__main" onMouseUp={checkClick} onMouseDown={clickHandle}>
                 <div className="CatItem__main_name">
                     {Name}
                 </div>

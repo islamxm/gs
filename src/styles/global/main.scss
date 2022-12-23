@@ -108,14 +108,29 @@ body {
 }
 
 .draggable.dragStart {
-    opacity: 0;
+    opacity: 0 !important;
     
 }
 
 .draggable.dragOver {
-    border-color: var(--light_violet);
+    border-left-color: var(--light_violet);
     border-style: dashed !important;
     opacity: .5;
 }
 
+
+.ddd {
+    // height: 1000px;
+    display: flex;
+
+
+    &__item {
+        padding: 10px;
+    }
+
+    &__item.ddd__item-ds {
+        
+    }
+
+}
 

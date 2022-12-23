@@ -19,6 +19,13 @@ import {
     sortItems
 } from '../../../funcs/dragSort';
 import authService from '../../../services/dataService';
+import {
+    GridContextProvider,
+    GridDropZone,
+    GridItem,
+    swap,
+    move
+  } from "react-grid-drag";
 
 
 
@@ -34,6 +41,22 @@ const CatalogPage = () => {
     const [load, setLoad] = useState(false)
     const [selectedCat, setSelectedCat] = useState(null)
     const [currentItem, setCurrentItem] = useState(null)
+    const [gridHeight, setGridHeight] = useState(250)
+
+    useEffect(() => {
+        if(cats?.length > 0) {
+            if(cats.length % 4 == 0) {
+                setGridHeight(Math.round(cats.length / 4 + cats.length % 4) * 280 + 280)
+            } else {
+                setGridHeight(Math.round(cats.length / 4 + cats.length % 4) * 280)
+            }
+            
+        } else {
+            setGridHeight(280)
+        }
+    }, [cats])
+    
+
 
     const url = new URLSearchParams(window.location.search)
 
@@ -60,11 +83,27 @@ const CatalogPage = () => {
 
     useEffect(() => {
        
-        if(token && cats && cats.length > 0) {
-            as.orderSort(token, 'categories', cats.map(item => item.ID).join(','))
-        }
+        // if(token && cats && cats.length > 0) {
+        //     as.orderSort(token, 'categories', cats.map(item => item.ID).join(','))
+        // }
+        console.log(cats.map(item => item?.Name))
     }, [token, cats])
 
+
+    const orderChange = (sourceId, sourceIndex, targetIndex, targetId) => {
+        
+        if(sourceIndex == cats.length) {
+            return;
+        } else {
+            const nextState = swap(cats, sourceIndex, targetIndex);
+            setCats(nextState)
+        }
+        console.log('sourceId', sourceId)
+        console.log('sourceIndex', sourceIndex)
+        console.log('targetIndex', targetIndex)
+        console.log('targetId', targetId)
+        
+    }
     
 
     return (
@@ -84,40 +123,74 @@ const CatalogPage = () => {
                                 <Loader/>
                             ) : (
                                 <div className="CatalogPage__body_list">
-                                    <Row gutter={[30,30]}>
-                                        {
-                                            cats.sort(sortItems).map((item, index) => (
-                                                <Col
-                                                    onDragLeave={e => handleDragLeave(e)}
-                                                    onDragEnd={(e) => handleDragEnd(e)}
-                                                    onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                                    onDragOver={e => handleDragOver(e)}
-                                                    onDrop={e => submitOrder(e, item)}
-                                                    draggable={true}
-                                                    // span={6}
-                                                    xxl={4}
-                                                    lg={8}
-                                                    md={12}
-                                                    xs={24}
-                                                    key={index}
-                                                    style={{transition: 'all .3s ease'}}>
-                                                    <CatItem
-                                                        {...item}
-                                                        Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
-                                                        selectEdit={editCategory}/>
-                                                </Col>
-                                            ))
-                                        }
-                                        <Col
-                                            xxl={4}
-                                            lg={8}
-                                            md={12}
-                                            xs={24} 
-                                            style={{height: 250}}>
-                                            <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
-                                        </Col>
-                                    </Row>
+                                    <GridContextProvider
+                                        onChange={orderChange}
+
+                                        >
+                                        <GridDropZone
+                                            className='ddd'
+                                            boxesPerRow={4}
+                                            style={{height: gridHeight}}
+                                            rowHeight={280}
+                                            >
+                                            {
+                                                cats?.map((item, index)=> (
+                                                    <GridItem 
+                                                        
+                                                        key={index} 
+                                                        className={"ddd__item"}>
+                                                        <CatItem
+                                                            {...item}
+                                                            Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
+                                                            selectEdit={editCategory}/>
+                                                    </GridItem>
+                                                ))
+                                            }
+                                            <GridItem
+                                            
+                                                className='ddd__item ddd__item-ds'
+                                                >
+                                                <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
+                                            </GridItem>
+                                            
+                                        </GridDropZone>
+                                    </GridContextProvider>
                                 </div>
+                                // <div className="CatalogPage__body_list">
+                                //     <Row gutter={[30,30]}>
+                                //         {
+                                //             cats.sort(sortItems).map((item, index) => (
+                                //                 <Col
+                                //                     // onDragLeave={e => handleDragLeave(e)}
+                                //                     // onDragEnd={(e) => handleDragEnd(e)}
+                                //                     // onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
+                                //                     // onDragOver={e => handleDragOver(e)}
+                                //                     // onDrop={e => submitOrder(e, item)}
+                                //                     // draggable={true}
+                                //                     // span={6}
+                                //                     xxl={4}
+                                //                     lg={8}
+                                //                     md={12}
+                                //                     xs={24}
+                                //                     key={index}
+                                //                     style={{transition: 'all .3s ease'}}>
+                                //                     <CatItem
+                                //                         {...item}
+                                //                         Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
+                                //                         selectEdit={editCategory}/>
+                                //                 </Col>
+                                //             ))
+                                //         }
+                                //         <Col
+                                //             xxl={4}
+                                //             lg={8}
+                                //             md={12}
+                                //             xs={24} 
+                                //             style={{height: 250}}>
+                                //             <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
+                                //         </Col>
+                                //     </Row>
+                                // </div>
                             )
                         }
                     </div>
