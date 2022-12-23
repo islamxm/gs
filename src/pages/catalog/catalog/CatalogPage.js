@@ -83,10 +83,10 @@ const CatalogPage = () => {
 
     useEffect(() => {
        
-        // if(token && cats && cats.length > 0) {
-        //     as.orderSort(token, 'categories', cats.map(item => item.ID).join(','))
-        // }
-        console.log(cats.map(item => item?.Name))
+        if(token && cats && cats.length > 0) {
+            as.orderSort(token, 'categories', cats.map(item => item.ID).join(','))
+        }
+
     }, [token, cats])
 
 
