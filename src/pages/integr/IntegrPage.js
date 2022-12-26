@@ -246,6 +246,7 @@ const IntegrPage = () => {
                                                     </Col>
                                                     <Col span={24}>
                                                         <Input
+                                                            placeholder={'Iiko API key'}
                                                             maskType={String}
                                                             value={iikoCloudApi}
                                                             onChange={e => setiikoCloudApi(e.target.value)}
