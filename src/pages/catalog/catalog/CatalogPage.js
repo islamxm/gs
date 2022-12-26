@@ -52,16 +52,16 @@ const CatalogPage = () => {
 
     useEffect(() => {
         if(cats?.length > 0) {
-            if(cats.length % 4 == 0) {
-                setGridHeight(Math.round(cats.length / 4 + cats.length % 4) * 280 + 280)
+            if(cats.length % boxRow == 0) {
+                setGridHeight(Math.round(cats.length / boxRow + cats.length % boxRow) * 280 + 280)
             } else {
-                setGridHeight(Math.round(cats.length / 4 + cats.length % 4) * 280)
+                setGridHeight(Math.round(cats.length / boxRow + cats.length % boxRow) * 280)
             }
             
         } else {
             setGridHeight(280)
         }
-    }, [cats])
+    }, [cats, boxRow])
 
     useEffect(() => {
         windowResize()
@@ -145,7 +145,7 @@ const CatalogPage = () => {
                                             {
                                                 cats?.map((item, index)=> (
                                                     <GridItem 
-                                                        key={item.Name} 
+                                                        key={item.ID} 
                                                         className={"ddd__item"}>
                                                         <CatItem
                                                             {...item}

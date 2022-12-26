@@ -57,16 +57,16 @@ const OrgsPage = () => {
 
     useEffect(() => {
         if(list?.length > 0) {
-            if(list.length % 4 == 0) {
-                setGridHeight(Math.round(list.length / 4 + list.length % 4) * 280 + 280)
+            if(list.length % boxRow == 0) {
+                setGridHeight(Math.round(list.length / boxRow + list.length % boxRow) * 280 + 280)
             } else {
-                setGridHeight(Math.round(list.length / 4 + list.length % 4) * 280)
+                setGridHeight(Math.round(list.length / boxRow + list.length % boxRow) * 280)
             }
             
         } else {
             setGridHeight(280)
         }
-    }, [list])
+    }, [list, boxRow])
     useEffect(() => {
         windowResize()
         window.addEventListener('resize', windowResize)
@@ -212,7 +212,7 @@ const OrgsPage = () => {
                                                 list?.length > 0 ? (
                                                     list.map((item, index) => (
                                                         <GridItem
-                                                            key={item.Name}
+                                                            key={item.ID}
                                                             className={"ddd__item"}
                                                             >
                                                             <OrgItem {...item} index={index}/>
@@ -285,7 +285,7 @@ const OrgsPage = () => {
                                                     list.map((item, index) => (
                                                         <GridItem
                                                             className='ddd__item'
-                                                            key={item.Name}
+                                                            key={item.ID}
                                                             >
                                                             <OrgItem {...item} index={index}/>
                                                         </GridItem>
