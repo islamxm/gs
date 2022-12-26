@@ -22,7 +22,7 @@ const CatItem = ({
     const clickHandle = () => {
         setTimeout(() => {
             setTm(true)
-        }, 100)
+        }, 200)
     
     }
 
