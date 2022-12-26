@@ -16,7 +16,12 @@ import pageEnterAnimProps from '../../../funcs/pageEnterAnimProps';
 import {handleDragEnd, handleDragLeave, handleDragOver, handleDragStart, handleDrop, sortItems} from '../../../funcs/dragSort'
 import authService from '../../../services/dataService';
 import SubCard from './components/SubCard/SubCard';
-
+import {
+    GridContextProvider,
+    GridDropZone,
+    GridItem,
+    swap
+  } from "react-grid-drag";
 const as = new authService();
 const cs = new catService();
 
@@ -29,18 +34,31 @@ const CatalogCategoryPage = () => {
     const [list, setList] = useState([])
     const [load, setLoad] = useState(false)
     const [currentItem, setCurrentItem] = useState(null)
+    const [gridHeight, setGridHeight] = useState(250)
+    const [boxRow, setBoxRows]= useState(5)
 
     const url = new URLSearchParams(window.location.search)
 
+    const windowResize = () => {
+        if(window.innerWidth >= 1200) {
+            setBoxRows(5)
+        }
+        if(window.innerWidth >= 768 && window.innerWidth < 1200) {
+            setBoxRows(3)
+        }
+        if(window.innerWidth < 768) {
+            setBoxRows(2)
+        }
+        
+    }
 
+    useEffect(() => {
+        windowResize()
+        window.addEventListener('resize', windowResize)
+        return () => window.removeEventListener('resize', windowResize)
+    }, []) 
     
     const toCreatePlate = () => {
-        
-        // if(subcategoryId) {
-        //      nav(`/catalog/${categoryId}/${subcategoryId}/createPlate`)
-        // } else {
-        //     nav(`/catalog/${categoryId}/createPlate`)
-        // }
         let data = new FormData()
         data.append('ParentID', subcategoryId ? subcategoryId : 0)
         data.append('CategoryID', categoryId)
@@ -116,6 +134,28 @@ const CatalogCategoryPage = () => {
         }
     }, [list, token])
 
+    const orderChange = (sourceId, sourceIndex, targetIndex, targetId) => {
+        if(sourceIndex == list.length) {
+            return;
+        } else {
+            const nextState = swap(list, sourceIndex, targetIndex);
+            setList(nextState)
+        }
+    }
+
+    useEffect(() => {
+        if(list?.length > 0) {
+            if(list.length % 4 == 0) {
+                setGridHeight(Math.round(list.length / 4 + list.length % 4) * 280 + 280)
+            } else {
+                setGridHeight(Math.round(list.length / 4 + list.length % 4) * 280)
+            }
+            
+        } else {
+            setGridHeight(280)
+        }
+    }, [list])
+
     return (
         <motion.div
             {...pageEnterAnimProps}
@@ -139,69 +179,52 @@ const CatalogCategoryPage = () => {
                                    
                                     {...pageEnterAnimProps}
                                     >
-                                    <Row gutter={[30, 30]}>
-                                        {
-                                            list.sort(sortItems).map((item, index) => {
-                                                if(item.IsSubCategory == '1') {
-                                                    return (
-                                                        <Col
-                                                            onDragLeave={e => handleDragLeave(e)}
-                                                            onDragEnd={(e) => handleDragEnd(e)}
-                                                            onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                                            onDragOver={e => handleDragOver(e)}
-                                                            onDrop={e => submitOrder(e, item)}
-                                                            draggable={true}
-                                                            key={index}
-                                                            xxl={4}
-                                                            lg={8}
-                                                            md={12}
-                                                            xs={24}
-                                                            style={{transition: 'all .3s ease'}}
-                                                            >
-                                                            <SubCard
-                                                                Link={`/catalog/${categoryId}/${item.ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${item.Name}`}
-                                                                {...item}
-                                                                selectEdit={editSubcat}
-                                                                />
-                                                        </Col>
-                                                    )
-                                                } else {
-                                                    return (
-                                                        <Col 
-                                                        style={{transition: 'all .3s ease'}}
-                                                        onDragLeave={e => handleDragLeave(e)}
-                                                        onDragEnd={(e) => handleDragEnd(e)}
-                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                                        onDragOver={e => handleDragOver(e)}
-                                                        onDrop={e => submitOrder(e, item)}
-                                                        draggable={true}
-                                                            xxl={4}
-                                                            lg={8}
-                                                            md={12}
-                                                            xs={24}
-                                                            key={index}
-                                                            >
-                                                            <CatCard editPlate={toEditPlate} {...item}/>
-                                                        </Col>
-                                                    )
-                                                }
-                                            })
-                                            
-                                        }
-                                        <Col 
-                                            className='CatalogCategoryPage__body_list_add' 
-                                            xxl={4}
-                                            lg={8}
-                                            md={12}
-                                            xs={24} 
-                                            style={{minHeight: 250}}>
+                                    <GridContextProvider
+                                        onChange={orderChange}
+                                        >
+                                        <GridDropZone
+                                            boxesPerRow={boxRow}
+                                            style={{height: gridHeight}}
+                                            rowHeight={280}
+                                            >
+                                            {
+                                                list?.map((item, index) => {
+                                                    if(item.IsSubCategory == '1')  {
+                                                        return (
+                                                            <GridItem
+                                                                key={item.Name}
+                                                                className={'ddd__item'}
+                                                                >
+                                                                <SubCard
+                                                                    Link={`/catalog/${categoryId}/${item.ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${item.Name}`}
+                                                                    {...item}
+                                                                    selectEdit={editSubcat}
+                                                                    />
+                                                            </GridItem>
+                                                        )
+                                                    } else {
+                                                        return (
+                                                            
+                                                            <GridItem
+                                                                key={item.Name}
+                                                                className={'ddd__item'}
+                                                                >
+                                                                <CatCard editPlate={toEditPlate} {...item}/>
+                                                            </GridItem>
+                                                        )
+                                                    }
+                                                    
+                                                })
+                                            }
+                                            <GridItem 
+                                            className='ddd__item ddd__item-ds CatalogCategoryPage__body_list_add'>
                                             <Pl onClick={toCreatePlate} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
                                             <Pl onClick={() => setCreateSubcategory(true)} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
-                                        </Col>
-                                        
-                                        
-                                        
-                                    </Row>
+                                            </GridItem>
+
+                                        </GridDropZone>
+                                    </GridContextProvider>
+                         
                                 </motion.div>
                                 
                                 

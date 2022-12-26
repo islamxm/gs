@@ -8,6 +8,7 @@
         height: 175px;
         overflow: hidden;
         pointer-events: none;
+        touch-action: none;
         img {
             width: 100%;
             height: 100%;

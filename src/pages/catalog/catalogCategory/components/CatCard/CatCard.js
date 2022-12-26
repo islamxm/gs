@@ -35,6 +35,23 @@ const CatCard = ({
 
     const nameRef = useRef()
     const [grad, setGrad] = useState(false)
+    const [tm, setTm] = useState(false)
+
+    const clickHandle = () => {
+        setTimeout(() => {
+            setTm(true)
+        }, 200)
+    
+    }
+
+    const checkClick = () => {
+        if(tm) {
+            setTm(false)
+            return;
+        } else {
+            editPlate(ID, Name)
+        }
+    }
 
     const nameSizeChange = () => {
         if(nameRef?.current) {
@@ -58,7 +75,7 @@ const CatCard = ({
 
 
     return (
-        <div className="CatCard draggable" onClick={() => editPlate(ID, Name)}>
+        <div className="CatCard draggable" onMouseUp={checkClick} onMouseDown={clickHandle}>
             <div className="CatCard__img">
                 <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt="" />
             </div>

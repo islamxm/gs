@@ -1,9 +1,11 @@
 .CatItem {
-    display: block;
+    
     display: flex;
     flex-direction: column;
     height: 260px;
     justify-content: space-between;
+    width: 100%;
+
     
     &__main {
         border-radius: 10px;

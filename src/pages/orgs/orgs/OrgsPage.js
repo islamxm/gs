@@ -15,7 +15,12 @@ import authService from '../../../services/dataService';
 import { handleDragStart, handleDragOver, handleDrop, sortItems, handleDragEnd, handleDragLeave } from '../../../funcs/dragSort';
 import {motion} from 'framer-motion';
 import HeaderProfile from '../../../components/HeaderProfile/HeaderProfile';
-
+import {
+    GridContextProvider,
+    GridDropZone,
+    GridItem,
+    swap
+  } from "react-grid-drag";
 
 
 
@@ -34,6 +39,48 @@ const OrgsPage = () => {
     const [addBrandModal, setAddBrandModal] = useState(false)
     const [editBrandModal, setEditBrandModal] = useState(false)
     const [currentItem, setCurrentItem] = useState(null)
+    const [gridHeight, setGridHeight] = useState(250)
+    const [boxRow, setBoxRows]= useState(4)
+
+    const windowResize = () => {
+        if(window.innerWidth >= 1200) {
+            setBoxRows(4)
+        }
+        if(window.innerWidth >= 768 && window.innerWidth < 1200) {
+            setBoxRows(3)
+        }
+        if(window.innerWidth < 768) {
+            setBoxRows(2)
+        }
+        
+    }
+
+    useEffect(() => {
+        if(list?.length > 0) {
+            if(list.length % 4 == 0) {
+                setGridHeight(Math.round(list.length / 4 + list.length % 4) * 280 + 280)
+            } else {
+                setGridHeight(Math.round(list.length / 4 + list.length % 4) * 280)
+            }
+            
+        } else {
+            setGridHeight(280)
+        }
+    }, [list])
+    useEffect(() => {
+        windowResize()
+        window.addEventListener('resize', windowResize)
+        return () => window.removeEventListener('resize', windowResize)
+    }, []) 
+
+    const orderChange = (sourceId, sourceIndex, targetIndex, targetId) => {
+        if(sourceIndex == list.length) {
+            return;
+        } else {
+            const nextState = swap(list, sourceIndex, targetIndex);
+            setList(nextState)
+        }
+    }
     
 
     useEffect(() => {
@@ -104,13 +151,12 @@ const OrgsPage = () => {
         }
     }, [list, brandId, token])
 
-    
+
     const createOrg = () => {
         if(brandId) {
             const data = new FormData()
             data.append('OrganisationBrand', brandId)
             os.addOrg(token, data).then(res => {
-           
                 nav(`/organizations/${brandId}/${res}/now?p=Добавить организацию`)
             })
         } else {
@@ -123,6 +169,8 @@ const OrgsPage = () => {
             })
         }
     }
+
+
     // location.pathname != '/organizations' && 
     if(location.pathname.includes('/organizations/') && settings?.IsHaveBrands == '1') {
         return (
@@ -153,38 +201,35 @@ const OrgsPage = () => {
                                     transition={{duration: 0.5}}
                                     exit={{opacity: 0}}
                                     >
-                                    <Row gutter={[20,20]}>
-                                        {
-                                            list && list.length > 0 ? (
-                                                list.sort(sortItems).map((item, index) => (
-                                                    <Col 
-                                                        key={index}
-                                                        style={{transition: 'all .3s ease'}}
-                                                        xl={8}
-                                                        xs={24}
-                                                        md={12}
-                                                        onDragLeave={e => handleDragLeave(e)}
-                                                        onDragEnd={(e) => handleDragEnd(e)}
-                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                                        onDragOver={e => handleDragOver(e)}
-                                                        onDrop={e => submitOrder(e, item)}
-                                                        draggable={true}
-                                                        >
-                                                        <OrgItem {...item} index={index}/>
-                                                    </Col>
-                                                ))
-                                            ): null
-                                        }
-                                        <Col
-                                            xl={8}
-                                            xs={24}
-                                            md={12}
+                                    <GridContextProvider
+                                        onChange={orderChange}>
+                                        <GridDropZone
+                                            boxesPerRow={boxRow}
+                                            style={{height: gridHeight}}
+                                            rowHeight={280}
                                             >
-                                            <Pl onClick={createOrg} 
-                                            style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
-                                            text={'Добавить ресторан'}/>
-                                        </Col>
-                                    </Row>
+                                            {
+                                                list?.length > 0 ? (
+                                                    list.map((item, index) => (
+                                                        <GridItem
+                                                            key={item.Name}
+                                                            className={"ddd__item"}
+                                                            >
+                                                            <OrgItem {...item} index={index}/>
+                                                        </GridItem>
+                                                    ))
+                                                ) : null
+                                            }
+                                            <GridItem
+                                                className='ddd__item ddd__item-ds'
+                                                >
+                                                <Pl onClick={createOrg} 
+                                                style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
+                                                text={'Добавить ресторан'}/>
+                                            </GridItem>
+                                        </GridDropZone>
+                                    </GridContextProvider>
+                                   
                                 </motion.div>
                                 
                                 
@@ -227,41 +272,38 @@ const OrgsPage = () => {
                                     transition={{duration: 0.5}}
                                     exit={{opacity: 0}}
                                     >
-                                    <Row gutter={[20,20]}>
-                                        {
-                                            list && list.length > 0 ? (
-                                                list.sort(sortItems).map((item, index) => (
-                                                    <Col 
-                                                        key={index}
-                                                        style={{transition: 'all .3s ease'}}
-                                                        xl={8}
-                                                        xs={24}
-                                                        md={12}
-                                                        onDragLeave={e => handleDragLeave(e)}
-                                                        onDragEnd={(e) => handleDragEnd(e)}
-                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                                        onDragOver={e => handleDragOver(e)}
-                                                        onDrop={e => submitOrder(e, item)}
-                                                        draggable={true}
-                                                        >
-                                                        <OrgItem {...item} index={index}/>
-                                                    </Col>
-                                                ))
-                                            ): null
-                                        }
-                                        <Col
-                                            xl={8}
-                                            xs={24}
-                                            md={12}
+                                    <GridContextProvider
+                                        onChange={orderChange}
+                                        >
+                                        <GridDropZone
+                                            boxesPerRow={boxRow}
+                                            style={{height: gridHeight}}
+                                            rowHeight={280}
                                             >
-                                            <Pl 
+                                            {
+                                                list?.length > 0 ? (
+                                                    list.map((item, index) => (
+                                                        <GridItem
+                                                            className='ddd__item'
+                                                            key={item.Name}
+                                                            >
+                                                            <OrgItem {...item} index={index}/>
+                                                        </GridItem>
+                                                    ))
+                                                ) : null
+                                            }
+                                            <GridItem
+                                                className='ddd__item ddd__item-ds'
+                                                >
+                                                <Pl 
                                                 onClick={createOrg}
                                                 style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
                                                 text={'Добавить ресторан'}
-                                                
                                                 />
-                                        </Col>
-                                    </Row>
+                                            </GridItem>
+                                        </GridDropZone>
+                                    </GridContextProvider> 
+                                  
                                 </motion.div>
                                 
                                 
@@ -294,11 +336,8 @@ const OrgsPage = () => {
             {/* Header */}
             {/* <HeaderProfile/> */}
             <main className="Main">
-                
                 <div className="pageBody">
-                    
                     {/* <div className="spc"></div> */}
-                    
                     <div className="OrgsPage__body pageBody-content">
                         
                         {
@@ -311,23 +350,22 @@ const OrgsPage = () => {
                                     transition={{duration: 0.5}}
                                     exit={{opacity: 0}}
                                     >
-                                    <Row gutter={[20,20]}>
-                                        {
-                                            list && list.length > 0 ? (
-                                                list.sort(sortItems).map((item, index) => (
-                                                    <Col 
-                                                        key={index}
-                                                        style={{transition: 'all .3s ease'}}
-                                                        xl={8}
-                                                        xs={24}
-                                                        md={12}
-                                                        onDragLeave={e => handleDragLeave(e)}
-                                                        onDragEnd={(e) => handleDragEnd(e)}
-                                                        onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                                        onDragOver={e => handleDragOver(e)}
-                                                        onDrop={e => submitOrder(e, item)}
-                                                        draggable={true}>
-                                                        <BrandItem 
+                                    <GridContextProvider
+                                        onChange={orderChange}
+                                        >
+                                        <GridDropZone
+                                            boxesPerRow={boxRow}
+                                            style={{height: gridHeight}}
+                                            rowHeight={280}
+                                            >
+                                            {
+                                                list?.length > 0 ? (
+                                                    list.map((item, index) => (
+                                                        <GridItem
+                                                            className='ddd__item'
+                                                            key={item.ID}
+                                                            >
+                                                            <BrandItem 
                                                             Disabled={item.Disabled}
                                                             ID={item.ID}
                                                             ItemOrder={item.ItemOrder}
@@ -335,18 +373,18 @@ const OrgsPage = () => {
                                                             MarkerID={item.MarkerID}
                                                             editModal={openEditBrand}
                                                             />
-                                                    </Col>
-                                                ))
-                                            ) : null
-                                        }
-                                        <Col
-                                            xl={8}
-                                            xs={24}
-                                            md={12}
-                                            >
-                                        <Pl onClick={openAddBrand} style={{backgroundColor: '#fff', height: 223}} text={'Добавить бренд'}/>
-                                        </Col>
-                                    </Row>
+                                                        </GridItem>
+                                                    ))
+                                                ) : null
+                                            }
+                                            <GridItem
+                                                className='ddd__item ddd__item-ds'
+                                                >
+                                                <Pl onClick={openAddBrand} style={{backgroundColor: '#fff', height: 223}} text={'Добавить бренд'}/>
+                                            </GridItem>
+                                        </GridDropZone>   
+                                    </GridContextProvider>
+                                 
                                 </motion.div>
                                 
                                 

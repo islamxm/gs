@@ -10,21 +10,13 @@ import { useEffect, useState } from 'react';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
 import {motion} from 'framer-motion';
-import {
-    handleDragEnd, 
-    handleDragLeave, 
-    handleDragOver, 
-    handleDragStart, 
-    handleDrop, 
-    sortItems
-} from '../../../funcs/dragSort';
+
 import authService from '../../../services/dataService';
 import {
     GridContextProvider,
     GridDropZone,
     GridItem,
-    swap,
-    move
+    swap
   } from "react-grid-drag";
 
 
@@ -34,14 +26,29 @@ const cs = new catService()
 
 
 
+
+
 const CatalogPage = () => {
     const {token} = useSelector(state => state)
     const [createCategory, setCreateCategory] = useState(false);
     const [cats, setCats] = useState([])
     const [load, setLoad] = useState(false)
     const [selectedCat, setSelectedCat] = useState(null)
-    const [currentItem, setCurrentItem] = useState(null)
     const [gridHeight, setGridHeight] = useState(250)
+    const [boxRow, setBoxRows]= useState(5)
+
+    const windowResize = () => {
+        if(window.innerWidth >= 1200) {
+            setBoxRows(5)
+        }
+        if(window.innerWidth >= 768 && window.innerWidth < 1200) {
+            setBoxRows(3)
+        }
+        if(window.innerWidth < 768) {
+            setBoxRows(2)
+        }
+        
+    }
 
     useEffect(() => {
         if(cats?.length > 0) {
@@ -55,6 +62,12 @@ const CatalogPage = () => {
             setGridHeight(280)
         }
     }, [cats])
+
+    useEffect(() => {
+        windowResize()
+        window.addEventListener('resize', windowResize)
+        return () => window.removeEventListener('resize', windowResize)
+    }, []) 
     
 
 
@@ -77,9 +90,7 @@ const CatalogPage = () => {
         setCreateCategory(true)
     }
 
-    const submitOrder = (e, item) => {
-        handleDrop(e, item, setCats, currentItem, cats);
-    }
+
 
     useEffect(() => {
        
@@ -91,19 +102,17 @@ const CatalogPage = () => {
 
 
     const orderChange = (sourceId, sourceIndex, targetIndex, targetId) => {
-        
         if(sourceIndex == cats.length) {
             return;
         } else {
             const nextState = swap(cats, sourceIndex, targetIndex);
             setCats(nextState)
         }
-        console.log('sourceId', sourceId)
-        console.log('sourceIndex', sourceIndex)
-        console.log('targetIndex', targetIndex)
-        console.log('targetId', targetId)
-        
     }
+
+
+
+
     
 
     return (
@@ -125,19 +134,18 @@ const CatalogPage = () => {
                                 <div className="CatalogPage__body_list">
                                     <GridContextProvider
                                         onChange={orderChange}
-
                                         >
                                         <GridDropZone
-                                            className='ddd'
-                                            boxesPerRow={4}
+                                            
+                                            // className='ddd'
+                                            boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
                                             rowHeight={280}
                                             >
                                             {
                                                 cats?.map((item, index)=> (
                                                     <GridItem 
-                                                        
-                                                        key={index} 
+                                                        key={item.Name} 
                                                         className={"ddd__item"}>
                                                         <CatItem
                                                             {...item}
@@ -156,41 +164,10 @@ const CatalogPage = () => {
                                         </GridDropZone>
                                     </GridContextProvider>
                                 </div>
-                                // <div className="CatalogPage__body_list">
-                                //     <Row gutter={[30,30]}>
-                                //         {
-                                //             cats.sort(sortItems).map((item, index) => (
-                                //                 <Col
-                                //                     // onDragLeave={e => handleDragLeave(e)}
-                                //                     // onDragEnd={(e) => handleDragEnd(e)}
-                                //                     // onDragStart={(e) => handleDragStart(e, item, setCurrentItem)}
-                                //                     // onDragOver={e => handleDragOver(e)}
-                                //                     // onDrop={e => submitOrder(e, item)}
-                                //                     // draggable={true}
-                                //                     // span={6}
-                                //                     xxl={4}
-                                //                     lg={8}
-                                //                     md={12}
-                                //                     xs={24}
-                                //                     key={index}
-                                //                     style={{transition: 'all .3s ease'}}>
-                                //                     <CatItem
-                                //                         {...item}
-                                //                         Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
-                                //                         selectEdit={editCategory}/>
-                                //                 </Col>
-                                //             ))
-                                //         }
-                                //         <Col
-                                //             xxl={4}
-                                //             lg={8}
-                                //             md={12}
-                                //             xs={24} 
-                                //             style={{height: 250}}>
-                                //             <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
-                                //         </Col>
-                                //     </Row>
-                                // </div>
+                                
+                                
+                                    
+
                             )
                         }
                     </div>

@@ -22,7 +22,6 @@ import HeaderProfile from "../components/HeaderProfile/HeaderProfile";
 import Header from "../components/Header/Header";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import MapTestPage from "../pages/maptest/MapTestPage";
 import OrgsNewPage from "../pages/orgs/orgsCreate/OrgsNewPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -49,7 +48,6 @@ const App = () => {
                 ) : null
             }
             <Routes>
-                <Route path="/test" element={<MapTestPage/>}/>
                 <Route path="/" element={<CheckAuth><OrgsPage/></CheckAuth>}/>
                 <Route path="/auth" element={<AuthPage/>}/>
                 <Route path="/organizations" element={<CheckAuth><OrgsPage/></CheckAuth>}/>

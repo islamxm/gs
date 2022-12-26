@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './OrgItem.scss';
 import { useNavigate, useParams } from 'react-router-dom';
-import {Col} from 'antd';
-import { Draggable } from 'react-beautiful-dnd';
 import pl from '../../../../../assets/img/pl-org.png';
+
 
 const OrgItem = ({
     Address,
@@ -39,18 +38,33 @@ const OrgItem = ({
 }) => {
     const nav = useNavigate()
     const {brandId} = useParams()
+    const [tm, setTm] = useState(null)
 
     const url = new URLSearchParams(window.location.search)
     
+    const clickHandle = () => {
+        setTimeout(() => {
+            setTm(true)
+        }, 200)
+    
+    }
 
-    return (
-        <div className="OrgItem draggable" onClick={() => {
+    const checkClick = () => {
+        if(tm) {
+            setTm(false)
+            return;
+        } else {
             if(brandId) {
                 nav(`/organizations/${brandId}/${ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${Name}`)
             } else {
                 nav(`/organizations/nobrand/${ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${Name}`)
             }
-        }}>
+        }
+    }
+
+
+    return (
+        <div className="OrgItem draggable" onMouseUp={checkClick} onMouseDown={clickHandle}>
                     <div className="OrgItem__img">
                         <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt="" />
                     </div>
