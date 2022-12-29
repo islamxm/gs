@@ -1043,6 +1043,14 @@ const OrgsCreatePage = () => {
                             </Col>
                             <Col span={12}>
                                 <Row className='row-custom'>
+                                    <Button
+                                        onClick={() => nav(`/catalog?p=Каталог&org=${orgId}`)}
+                                        styles={{width: '100%'}}
+                                        text={'Перейти в каталог'}
+                                        variant={'default'}
+                                        />
+                                </Row>
+                                <Row className='row-custom'>
                                     <div className="panel">
                                         <div className="panel-label">
                                             Местоположение на карте

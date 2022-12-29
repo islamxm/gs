@@ -123,7 +123,7 @@ const HeaderProfile = () => {
                             {
                                 links && links.length > 0 ? (
                                     links.map((item, index) => (
-                                        <div className={"HeaderProfile__main_nav_head_item"}>
+                                        <div key={index} className={"HeaderProfile__main_nav_head_item"}>
                                             {index != 0 ? <BsArrowRightShort className='HeaderProfile__main_nav_head_item_icon'/> : null}
                                             {item}
                                         </div>

@@ -63,7 +63,7 @@ const Mod = ({plateId}) => {
                                 </div>
                                 {
                                     item.Modificators.map((i, ind) => (
-                                        <div className="Mod__body_item">
+                                        <div className="Mod__body_item" key={ind}>
                                             <div className="Mod__body_item_name">{i.Name}</div>
                                             <div className="Mod__body_item_value">{i.Price} ₽</div>
                                         </div>

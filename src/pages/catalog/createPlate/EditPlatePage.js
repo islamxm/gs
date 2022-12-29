@@ -87,6 +87,7 @@ const EditPlatePage = () => {
     const [picPrevs, setPicPrevs] = useState([])
     const [weekTimes, setWeekTimes] = useState(weektimes)
     const [IsDynamicTimetable, setIsDynamicTimetable] = useState(0)
+    const [HideInApp, setHideInApp] = useState('0')
 
 
     const [massList, setMassList] = useState([])
@@ -105,13 +106,13 @@ const EditPlatePage = () => {
         if(plateId && token && categoryId && orgs.length > 0) {
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 const thisPlate = res.find(item => item.ID == plateId);
-                console.log(thisPlate)
+                
                 if(thisPlate?.Pictures?.length > 0 || thisPlate?.Name) {
                     LOCAL_STORAGE.setItem('gs-creating-plate', '1')
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-plate')
                 }
-
+                setHideInApp(thisPlate?.HideInApp)
                 setID(thisPlate?.ID)
                 setIIkoID(thisPlate?.IIkoID)
                 setCanOverwriteByIIko(thisPlate.CanOverwriteByIIko)
@@ -277,9 +278,6 @@ const EditPlatePage = () => {
         // }
     }
     const saveTime = (index, value) => {
-        console.log(value)
-        console.log(index)
-
         let ur = weekTimes;
         let rm = ur.splice(index, 1, value)
         setWeekTimes([...ur]);
@@ -308,6 +306,7 @@ const EditPlatePage = () => {
                 
             }) 
         }
+        data.append('HideInApp', HideInApp)
         data.append('ID', ID)
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
@@ -579,24 +578,29 @@ const EditPlatePage = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Input
+                                        maskType={String}
                                         value={Mass}
                                         onChange={(e) => setMass(e.target.value)}
                                         placeholder={'Масса'}/>
                                 </Row>
                                 <Row className="row-custom" style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
                                     <Input 
+                                        maskType={String}
                                         value={Calories}
                                         onChange={(e) => setCalories(e.target.value)}
                                         style={{width: '48%', marginBottom: 20}} placeholder={'Калории'}/>
                                     <Input 
+                                        maskType={String}
                                         value={Proteins}
                                         onChange={(e) => setProteins(e.target.value)}
                                         style={{width: '48%', marginBottom: 20}} placeholder={'Белки'}/>
                                     <Input
+                                        maskType={String}
                                         value={Fats}
                                         onChange={(e) => setFats(e.target.value)} 
                                         style={{width: '48%'}} placeholder={'Жиры'}/>
                                     <Input
+                                        maskType={String}
                                         value={Carbohydrates} 
                                         onChange={(e) => setCarbohydrates(e.target.value)}
                                         style={{width: '48%'}} 
@@ -714,6 +718,20 @@ const EditPlatePage = () => {
                                         </Row>
                                     ) : null
                                 }
+                                <Row className='custom-row'>
+                                    <Checkbox
+                                        id={'HideInApp'}
+                                        text={'Скрыть в приложении'}
+                                        value={HideInApp == '1'}
+                                        onChange={e => {
+                                            if(e.target.checked) {
+                                                setHideInApp('1')
+                                            } else {
+                                                setHideInApp('0')
+                                            }
+                                        }}
+                                        />
+                                </Row>
                                 <Row className="row-custom">
                                     <Button
                                         disabled={!Name}

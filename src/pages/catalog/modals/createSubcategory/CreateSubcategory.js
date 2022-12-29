@@ -30,6 +30,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
     const [CanOverwriteByIIko, setCanOverwriteByIIko] = useState('0')
     const [ID, setID] = useState(null)
     const [prev, setPrev] = useState(null)
+    const [HideInApp, setHideInApp] = useState('0')
 
 
     const closeHandle = () => {
@@ -40,11 +41,13 @@ const CreateSubcategory = ({visible, close, update, data}) => {
         close();
         setPicture(null)
         setPrev(null)
+        setHideInApp('0')
     }
 
     useEffect(() => {
         if(data) {
             console.log(data)
+            setHideInApp(data?.HideInApp)
             setName(data?.Name)
             setIIkoID(data?.IIkoID)
             setCanOverwriteByIIko(data?.CanOverwriteByIIko)
@@ -57,7 +60,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
     
     const addImg = (e) => {
         if(ID) {
-            console.log(ID)
+        
             const body = new FormData();
             body.append('Picture', e.target.files[0])
             body.append('ItemID', ID)
@@ -98,6 +101,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
     const onSubmit = () => {
         setSaveLoad(true)
         const body = new FormData();
+        body.append('HideInApp', HideInApp)
         body.append('Name', Name)
         body.append('IIkoID', IIkoID)
         body.append('IsSubCategory', '1')
@@ -240,7 +244,22 @@ const CreateSubcategory = ({visible, close, update, data}) => {
                             </Col>
                         ) : null
                     }
-                    
+                    <Col span={24}>
+                        <Checkbox
+                            shadow={true}
+                            checked={HideInApp == '1'}
+                            id={'HideInApp'}
+                            text={'Скрыть в приложении'}
+                            onChange={e => {
+                                if(e.target.checked) {
+                                    setHideInApp('1')
+                                } else {
+                                    setHideInApp('0')
+                                }
+                            }}
+                            />
+                    </Col>
+                     
                     <Col span={24}>
                         <Row gutter={[0, 20]}>
                             <Col span={24}>

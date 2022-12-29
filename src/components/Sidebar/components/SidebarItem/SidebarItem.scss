@@ -68,6 +68,7 @@
             padding: 20px;
             padding-right: 10px;
             width: 100%;
+            
 
             &_icon {
                 font-size: 22px;
@@ -91,6 +92,9 @@
             &_name {
                 // transition: all .3s ease;
                 white-space: nowrap;
+                text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap ;   
             }
 
         }

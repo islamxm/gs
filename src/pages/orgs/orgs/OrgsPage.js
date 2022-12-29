@@ -90,7 +90,7 @@ const OrgsPage = () => {
             os.getOrgs(token, {BrandID: brandId})
                 .then(res => {
                     setList(res)
-                    console.log(res)
+                    
                 })
                 .finally(_ => setLoadList(false))
         }
@@ -99,7 +99,7 @@ const OrgsPage = () => {
             os.getBrands(token)
                 .then(res => {
                     setList(res)
-                    console.log(res)
+                    
                 })
                 .finally(_ => setLoadList(false))
         }
@@ -108,7 +108,7 @@ const OrgsPage = () => {
             os.getOrgs(token)
             .then(res => {
                 setList(res)
-                console.log(res.map(item => item.ItemOrder))
+           
             })
             .finally(_ => setLoadList(false))
 
@@ -131,22 +131,16 @@ const OrgsPage = () => {
     }
     const closeEditBrand = () => setEditBrandModal(false)
 
-    
-
-
-    const submitOrder = (e, item, type) => {
-        handleDrop(e, item, setList, currentItem, list);
-    }
 
     useEffect(() => {
         if(brandId && token && list && list.length > 0) {
             as.orderSort(token, 'organisations', list.map(item => item.ID).join(',')).then(res => {
-                console.log(res)
+                
             })
         }
         if(!brandId && token && list && list.length > 0) {
             as.orderSort(token, 'brands', list.map(item => item.ID).join(',')).then(res => {
-                console.log(res)
+               
             })
         }
     }, [list, brandId, token])

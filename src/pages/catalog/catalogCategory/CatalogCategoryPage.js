@@ -22,6 +22,8 @@ import {
     GridItem,
     swap
   } from "react-grid-drag";
+import MiniPlate from './components/MiniPlate/MiniPlate';
+import { useRef } from 'react';
 const as = new authService();
 const cs = new catService();
 
@@ -35,28 +37,44 @@ const CatalogCategoryPage = () => {
     const [load, setLoad] = useState(false)
     const [currentItem, setCurrentItem] = useState(null)
     const [gridHeight, setGridHeight] = useState(250)
-    const [boxRow, setBoxRows]= useState(5)
+    const [boxRow, setBoxRows]= useState(10)
+    const [boxWidth, setBoxWidth] = useState(0)
 
-    const url = new URLSearchParams(window.location.search)
+    const itemBoxRef = useRef()
 
-    const windowResize = () => {
-        if(window.innerWidth >= 1200) {
-            setBoxRows(5)
+    const getBoxWidth = () => {
+        if(itemBoxRef?.current) {
+            console.log((itemBoxRef.current.scrollWidth - 80) / 120)
+            setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 120))
         }
-        if(window.innerWidth >= 768 && window.innerWidth < 1200) {
-            setBoxRows(3)
-        }
-        if(window.innerWidth < 768) {
-            setBoxRows(2)
-        }
-        
     }
 
     useEffect(() => {
-        windowResize()
-        window.addEventListener('resize', windowResize)
-        return () => window.removeEventListener('resize', windowResize)
-    }, []) 
+        getBoxWidth()
+        window.addEventListener('resize', getBoxWidth)
+        return () => window.removeEventListener('resize', getBoxWidth)
+    }, [])
+
+    const url = new URLSearchParams(window.location.search)
+
+    // const windowResize = () => {
+    //     if(window.innerWidth >= 1200) {
+    //         setBoxRows(10)
+    //     }
+    //     if(window.innerWidth >= 768 && window.innerWidth < 1200) {
+    //         setBoxRows(3)
+    //     }
+    //     if(window.innerWidth < 768) {
+    //         setBoxRows(2)
+    //     }
+        
+    // }
+
+    // useEffect(() => {
+    //     windowResize()
+    //     window.addEventListener('resize', windowResize)
+    //     return () => window.removeEventListener('resize', windowResize)
+    // }, []) 
     
     const toCreatePlate = () => {
         let data = new FormData()
@@ -170,7 +188,7 @@ const CatalogCategoryPage = () => {
                 {/* <HeaderProfile/> */}
                 <main className="Main">
                 <div className="pageBody">
-                    <div className="CatalogCategoryPage__body pageBody-content">
+                    <div className="CatalogCategoryPage__body pageBody-content" ref={itemBoxRef}>
                         {
                             load ? (
                                 <Loader/>
@@ -183,9 +201,10 @@ const CatalogCategoryPage = () => {
                                         onChange={orderChange}
                                         >
                                         <GridDropZone
+                                           
                                             boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
-                                            rowHeight={280}
+                                            rowHeight={150}
                                             >
                                             {
                                                 list?.map((item, index) => {
@@ -209,18 +228,19 @@ const CatalogCategoryPage = () => {
                                                                 key={item.Name}
                                                                 className={'ddd__item'}
                                                                 >
-                                                                <CatCard editPlate={toEditPlate} {...item}/>
+                                                                {/* <CatCard editPlate={toEditPlate} {...item}/> */}
+                                                                <MiniPlate editPlate={toEditPlate} {...item}/>
                                                             </GridItem>
                                                         )
                                                     }
                                                     
                                                 })
                                             }
-                                            <GridItem 
+                                            {/* <GridItem 
                                             className='ddd__item ddd__item-ds CatalogCategoryPage__body_list_add'>
                                             <Pl onClick={toCreatePlate} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
                                             <Pl onClick={() => setCreateSubcategory(true)} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
-                                            </GridItem>
+                                            </GridItem> */}
 
                                         </GridDropZone>
                                     </GridContextProvider>

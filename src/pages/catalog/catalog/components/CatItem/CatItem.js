@@ -14,6 +14,7 @@ const CatItem = ({
     ItemOrder,
     Name,
     Link,
+    HideInApp,
     selectEdit,
 }) => {
     const nav = useNavigate()
@@ -44,7 +45,7 @@ const CatItem = ({
             </div>
             <div className="CatItem__action">
                 <Button
-                    onClick={() => selectEdit({ID, IIkoID, ItemOrder, Name, HiddenInOrganisations, Disabled, CanOverwriteByIIko, AllowedDeliveryTypes})}
+                    onClick={() => selectEdit({ID, IIkoID, HideInApp, ItemOrder, Name, HiddenInOrganisations, Disabled, CanOverwriteByIIko, AllowedDeliveryTypes})}
                     justify={'center'}
                     styles={{width: '100%'}}
                     text={'Изменить'}/>

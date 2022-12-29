@@ -6,7 +6,7 @@ import { Col, Row } from 'antd';
 import Pl from '../../../components/Pl/Pl';
 import CreateCategory from '../modals/createCategory/CreateCategory';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
 import {motion} from 'framer-motion';
@@ -36,6 +36,10 @@ const CatalogPage = () => {
     const [selectedCat, setSelectedCat] = useState(null)
     const [gridHeight, setGridHeight] = useState(250)
     const [boxRow, setBoxRows]= useState(5)
+
+    const url = useMemo(() => {
+        return new URLSearchParams(window.location.search)
+    }, [window.location.search])
 
     const windowResize = () => {
         if(window.innerWidth >= 1200) {
@@ -71,7 +75,7 @@ const CatalogPage = () => {
     
 
 
-    const url = new URLSearchParams(window.location.search)
+
 
 
 
@@ -79,11 +83,20 @@ const CatalogPage = () => {
     useEffect(() => {
         if(token) {
             setLoad(true)
-            cs.getCats(token, {OrganisationID: 0}).then(res => {
-                setCats(res);
-            }).finally(_ => setLoad(false))
+            if(url.get('org')) {
+                console.log(url.get('org'))
+                cs.getCats(token, {OrganisationID: url.get('org')}).then(res => {
+                    setCats(res);
+                    console.log(res)
+                }).finally(_ => setLoad(false))
+            } else {
+                cs.getCats(token, {OrganisationID: 0}).then(res => {
+                    setCats(res);
+                }).finally(_ => setLoad(false))
+            }
+            
         }
-    }, [token])
+    }, [token, url])
 
     const editCategory = (obj) => {
         setSelectedCat(obj)

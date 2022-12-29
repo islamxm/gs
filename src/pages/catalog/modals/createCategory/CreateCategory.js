@@ -30,6 +30,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
     const [ItemOrder, setItemOrder] = useState(0)
     const [AllowedDeliveryTypes, setAllowedDeliveryTypes] = useState(1)
     const [isHideInOrg, setIsHideInOrg] = useState(false)
+    const [HideInApp, setHideInApp] = useState('0')
 
     const handleClose = () => {
         setSelectedCat(null)
@@ -38,12 +39,16 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
         setOrgsList([])
         setIIkoID('')
         setID('')
+        setHideInApp('0')
         close();
     }
+
+ 
 
     useEffect(() => {
         if(token) {
             os.getOrgs(token).then(res => {
+              
                 setOrgs(res.map(item => {
                     return {
                         value: item.Name,
@@ -57,6 +62,7 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
 
     useEffect(() => {
         if(editItem && orgs?.length > 0) {
+            setHideInApp(editItem?.HideInApp)
             setName(editItem.Name)
             setIIkoID(editItem.IIkoID)
             setIsHideInOrg(editItem.HiddenInOrganisations && editItem.HiddenInOrganisations != '/' ? true : false)
@@ -129,7 +135,8 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
             CanOverwriteByIIko,
             Name,
             HiddenInOrganisations: orgsList.length > 0 ? orgsList.map(item => `/${item.ID}`).join('/') + '/' : '',
-            AllowedDeliveryTypes
+            AllowedDeliveryTypes,
+            HideInApp
         }
         cs.addCat(token, data).then(res => {
             dispatch(catalogUpdate(res))
@@ -153,7 +160,6 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
 
     const editCat = () => {
         setLoad(true)
-        console.log(orgsList)
         const data = {
             ID,
             IIkoID,
@@ -161,7 +167,8 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
             ItemOrder,
             Name,
             HiddenInOrganisations: orgsList.map(item => `/${item.ID}`).join('/') + '/',
-            AllowedDeliveryTypes
+            AllowedDeliveryTypes,
+            HideInApp
         }
         cs.editCat(token, data).then(res => {
             updateList(res)
@@ -227,6 +234,15 @@ const CreateCategory = ({visible,close, updateList, editItem, setSelectedCat}) =
                         value={IIkoID}
                         onChange={(e) => setIIkoID(e.target.value)} 
                         placeholder={'ID в iIko'}/>
+                </div>
+                <div className="Modal__form_row">
+                    <Checkbox shadow={true} checked={HideInApp == '1'} onChange={(e) => {
+                        if(e.target.checked) {
+                            setHideInApp('1')
+                        } else {
+                            setHideInApp('0')
+                        }
+                    }} id={'HideInApp'} text={'Скрыть в приложении'}/>
                 </div>
                 <div className="Modal__form_row">
                     <Checkbox shadow={true} checked={isHideInOrg} onChange={(e) => {

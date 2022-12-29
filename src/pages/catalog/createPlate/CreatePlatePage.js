@@ -364,24 +364,29 @@ const CreatePlatePage = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Input
+                                        maskType={String}
                                         value={Mass}
                                         onChange={(e) => setMass(e.target.value)}
                                         placeholder={'Масса'}/>
                                 </Row>
                                 <Row className="row-custom" style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
                                     <Input 
+                                        maskType={String}
                                         value={Calories}
                                         onChange={(e) => setCalories(e.target.value)}
                                         style={{width: '48%', marginBottom: 20}} placeholder={'Калории'}/>
                                     <Input 
+                                        maskType={String}
                                         value={Proteins}
                                         onChange={(e) => setProteins(e.target.value)}
                                         style={{width: '48%', marginBottom: 20}} placeholder={'Белки'}/>
                                     <Input
+                                        maskType={String}
                                         value={Fats}
                                         onChange={(e) => setFats(e.target.value)} 
                                         style={{width: '48%'}} placeholder={'Жиры'}/>
                                     <Input
+                                        maskType={String}
                                         value={Carbohydrates} 
                                         onChange={(e) => setCarbohydrates(e.target.value)}
                                         style={{width: '48%'}} 

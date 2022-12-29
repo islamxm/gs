@@ -87,6 +87,7 @@ const EditPlateNew = () => {
     const [picPrevs, setPicPrevs] = useState([])
     const [weekTimes, setWeekTimes] = useState(weektimes)
     const [IsDynamicTimetable, setIsDynamicTimetable] = useState(0)
+    const [HideInApp, setHideInApp] = useState('0')
 
 
     const [massList, setMassList] = useState([])
@@ -107,7 +108,7 @@ const EditPlateNew = () => {
     useEffect(() => {
         
         if(plateId && token && categoryId) {
-            console.log(categoryId)
+           
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 console.log(res)
                 const thisPlate = res.find(item => item.ID == plateId);
@@ -116,6 +117,7 @@ const EditPlateNew = () => {
                 } else {
                     LOCAL_STORAGE.removeItem('gs-creating-plate')
                 }
+                setHideInApp(thisPlate?.HideInApp)
                 setID(thisPlate?.ID)
                 setIIkoID(thisPlate?.IIkoID)
                 setCanOverwriteByIIko(thisPlate?.CanOverwriteByIIko)
@@ -204,7 +206,7 @@ const EditPlateNew = () => {
 
     const deleteImage = (ID) => {
         cs.deletePlateImg(token, {ID: ID}).then(res => {
-            console.log(res)
+         
             if(res.error == 0) {
                 message.success('Картинка удалена')
                 const rm = Picture;
@@ -246,7 +248,7 @@ const EditPlateNew = () => {
     useEffect(() => {
         if(token) {
             os.getOrgs(token).then(res => {
-                console.log(res)
+         
                 setOrgs(res.map(item => {
                     return {
                         value: item.Name,
@@ -305,6 +307,7 @@ const EditPlateNew = () => {
                 
             }) 
         }
+        data.append('HideInApp', HideInApp)
         data.append('ID', ID)
         data.append('IIkoID', IIkoID)
         data.append('CanOverwriteByIIko',CanOverwriteByIIko)
@@ -594,24 +597,29 @@ const EditPlateNew = () => {
                                 </Row>
                                 <Row className="row-custom">
                                     <Input
+                                        maskType={String}
                                         value={Mass}
                                         onChange={(e) => setMass(e.target.value)}
                                         placeholder={'Масса'}/>
                                 </Row>
                                 <Row className="row-custom" style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
                                     <Input 
+                                        maskType={String}
                                         value={Calories}
                                         onChange={(e) => setCalories(e.target.value)}
                                         style={{width: '48%', marginBottom: 20}} placeholder={'Калории'}/>
                                     <Input 
+                                        maskType={String}
                                         value={Proteins}
                                         onChange={(e) => setProteins(e.target.value)}
                                         style={{width: '48%', marginBottom: 20}} placeholder={'Белки'}/>
                                     <Input
+                                        maskType={String}
                                         value={Fats}
                                         onChange={(e) => setFats(e.target.value)} 
                                         style={{width: '48%'}} placeholder={'Жиры'}/>
                                     <Input
+                                        maskType={String}
                                         value={Carbohydrates} 
                                         onChange={(e) => setCarbohydrates(e.target.value)}
                                         style={{width: '48%'}} 
@@ -735,7 +743,22 @@ const EditPlateNew = () => {
                                         </Row>
                                     ) : null
                                 }
-                                
+                                <Row className='row-custom'>
+                                    <Checkbox
+                                        id={'HideInApp'}
+                                        text={'Скрыть в приложении'}
+                                        checked={HideInApp == '1'}
+                                        onChange={e => {
+                                            if(e.target.value) {
+                                                setHideInApp('1')
+                                            } else {
+                                                setHideInApp('0')
+                                            }
+                                        }}
+                                        >
+
+                                    </Checkbox>
+                                </Row>
 
                                 <Row className="row-custom">
                                     <Button
@@ -757,6 +780,7 @@ const EditPlateNew = () => {
                                         before={<BsTrash size={20}/>} 
                                         styles={{width: '100%'}}/>
                                 </Row>
+
                             </Col>
                             {
                                 plateId ? (
