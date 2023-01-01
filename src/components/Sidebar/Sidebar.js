@@ -134,19 +134,19 @@ const Sidebar = () => {
                         <SidebarItem 
                             labelHide={isHide} 
                             name={'Клиенты'} 
-                            link={'/clients'} 
+                            link={'/clients?p=Клиенты'} 
                             root={'/clients'}
                             icon={<FiUsers/>}/>
                         <SidebarItem 
                             labelHide={isHide} 
                             name={'Заказы'} 
-                            link={'/orders'} 
+                            link={'/orders?p=Заказы'} 
                             root={'/orders'}
                             icon={<OrderIcon size={22}/>}/>
                         <SidebarItem 
                             labelHide={isHide} 
                             name={'Статистика'} 
-                            link={'/statistic'} 
+                            link={'/statistic?p=Статистика'} 
                             root={'/statistic'}
                             icon={<StatisticIcon size={22}/>}/>
                 </SidebarItem>

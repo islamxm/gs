@@ -13,6 +13,10 @@ import User from './modals/user/User';
 import Discount from './modals/discount/Discount';
 import {motion} from 'framer-motion';
 import { useDoubleTap } from 'use-double-tap';
+import { useSelector } from 'react-redux';
+import orderBy from './helpers/orderBy';
+import anService from '../../services/anService';
+import orderTypes from '../orders/helpers/orderTypes';
 
 const mock = [
     {
@@ -45,14 +49,37 @@ const mock = [
     
 ]
 
+const ans = new anService();
+
 
 const ClientsPage = () => {
+    const {token} = useSelector(state => state)
     const [selects, setSelects] = useState([]);
     const [selectedUser, setSelectedUser] = useState({});
     const [push, setPush] = useState(false);
     const [email, setEmail] = useState(false);
     const [user, setUser] = useState(false);
     const [discount, setDiscount] = useState(false);
+
+    const [OrderBy, setOrderBy] = useState(orderBy[0].name)
+    const [OrderType, setOrderType] = useState(orderTypes.asc)
+    const [Page, setPage] = useState(1)
+    const [list, setList] = useState([])
+
+
+    const getUsers = () => {
+        if(token) {
+            ans.getUsers(token, OrderBy, OrderType, Page).then(res => {
+                console.log(res)
+
+            })
+        }
+    }
+
+    useEffect(() => {
+        getUsers()
+    }, [token, OrderBy, OrderType, Page])
+
 
     const openPush = () => {
         setPush(true)
@@ -182,8 +209,6 @@ const ClientsPage = () => {
                                         ))
                                     ) : null
                                 }
-                                
-                                
                             </table>
                         </div>
                         <div className="ClientsPage__body_action">

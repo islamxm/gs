@@ -1,6 +1,30 @@
 .gs-table {
     width: 100%;
 
+    &__head {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+
+        &_label {
+            margin-right: 10px;
+        }
+        &_icon {
+            transition: all .3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &__head.active {
+
+        .gs-table__head_icon {
+            transform: rotate(180deg);
+        }
+    }
+
 
     &-status {
         color: #898989;
@@ -49,7 +73,10 @@
 
         td, th {
             // pointer-events: none;
+            
         }
+
+        
         &:first-child {
             
         }

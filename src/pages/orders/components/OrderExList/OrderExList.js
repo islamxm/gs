@@ -1,7 +1,11 @@
 import './OrderExList.scss';
 import Input from '../../../../components/Input/Input';
+import { useEffect } from 'react';
 
 const OrderExList = ({name, list}) => {
+    useEffect(() => {
+        console.log(list)
+    }, [list])
     return (
         <div className="OrderExList">
             <div className="OrderExList__name">{name}</div>
@@ -9,8 +13,8 @@ const OrderExList = ({name, list}) => {
                 {
                     list && list.length > 0 ? (
                         list.map((item, index) => (
-                            <div className="OrderExList__list_item">
-                                <Input shadow readOnly value={item.value}/>
+                            <div className="OrderExList__list_item" key={index}>
+                                <Input maskType={String} shadow readOnly value={`${item.Count} x ${item.Name}`}/>
                             </div>
                         ))
                     ) : null

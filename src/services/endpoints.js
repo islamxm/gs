@@ -67,6 +67,14 @@ const endpoints = {
 
 
 
+    //analytics
+    getOrders: `${BASE_DOMAIN}/analytics/getOrders`,
+    getStatuses: `${BASE_DOMAIN}/analytics/getStatuses`,
+    getUsers: `${BASE_DOMAIN}/analytics/getUsers`,
+    sendMailToAllUsers: `${BASE_DOMAIN}/analytics/sendMailToAllUsers`,
+    editOrderStatus: `${BASE_DOMAIN}/analytics/editOrderStatus`,
+    editOrderPaidStatus: `${BASE_DOMAIN}/analytics/editOrderPaidStatus`
+
 
 
 }

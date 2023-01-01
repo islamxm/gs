@@ -1,21 +1,30 @@
 import './OrderPlate.scss';
-import img from '../../../../assets/img/org.png';
+import plPlate from '../../../../assets/img/pl-plate.png';
 
 
-const OrderPlate = ({mod, comment}) => {
+const OrderPlate = ({
+    Comment,
+    Count,
+    ID,
+    Mass,
+    Modifiers,
+    Name,
+    Price,
+    ThumbnailPicture
+}) => {
     return (
         <div className="OrderPlate">
             <div className="OrderPlate__main">
                 <div className="OrderPlate__main_img">
-                    <img src={img} alt="" />
+                    <img src={ThumbnailPicture ? ThumbnailPicture : plPlate} alt={Name} />
                 </div>
                 <div className="OrderPlate__main_info">
                     <div className="OrderPlate__main_info_top">
-                        <div className="OrderPlate__main_info_top_name">1 x Название Блюда</div>
-                        <div className="OrderPlate__main_info_top_ms">100 г</div>
+                        <div className="OrderPlate__main_info_top_name">{Count} x {Name}</div>
+                        <div className="OrderPlate__main_info_top_ms">{Mass} г</div>
                     </div>
                     <div className="OrderPlate__main_info_price">
-                        Цена: 500₽
+                        Цена: {Price}₽
                     </div>
                 </div>
             </div>
@@ -23,12 +32,14 @@ const OrderPlate = ({mod, comment}) => {
                 <div className="OrderPlate__body_part">
                     <div className="OrderPlate__body_part_name">Модификаторы</div>
                     <div className="OrderPlate__body_part_value">
-                    дывдыв фв фыв ыфв ыфв ыфвф выфвфв ыфв ыфвы выфв фы выфв ыфв ыфв ви оыфвоырфовлрфыов рфлоыволыф 
+                    {Modifiers}
                     </div>
                 </div>
                 <div className="OrderPlate__body_part">
                     <div className="OrderPlate__body_part_name">Комментарий</div>
-                    <div className="OrderPlate__body_part_value">дывдыв фв фыв ыфв ыфв ыфвф выфвфв ыфв ыфвы выфв фы выфв ыфв ыфв ви оыфвоырфовлрфыов рфлоыволыф </div>
+                    <div className="OrderPlate__body_part_value">
+                        {Comment}
+                    </div>
                 </div>
             </div>
         </div>

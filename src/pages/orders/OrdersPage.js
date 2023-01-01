@@ -3,10 +3,23 @@ import HeaderProfile from '../../components/HeaderProfile/HeaderProfile';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Loader from '../../components/Loader/Loader';
 import useContent from '../../hooks/useContent';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import OrderInfo from './modals/OrderInfo/OrderInfo';
 import useModal from '../../hooks/useModal';
 import {motion} from 'framer-motion';
+import orderBy from './helpers/orderBy';
+import orderTypes from './helpers/orderTypes';
+import { useSelector } from 'react-redux';
+import anService from '../../services/anService';
+import {BsChevronDown} from 'react-icons/bs';
+import checkStatus from './helpers/checkStatus';
+import checkPay from './helpers/checkPay';
+import checkDelivery from './helpers/checkDelivery';
+import { Pagination } from 'antd';
+import {DoubleLeftOutlined, DoubleRightOutlined} from '@ant-design/icons';
+
+import * as _ from 'lodash';
+
 const statusConst = {
     new: 'NEW',
     notpay: 'NOTPAY',
@@ -15,90 +28,57 @@ const statusConst = {
     complete: 'COMPLETE'
 }
 
-const filterStatus = (status) => {
-    switch(status) {
-        case statusConst.new:
-            return (<div className='gs-table-status gs-table-status-new'>Новый</div>)
-        case statusConst.notpay:
-            return (<div className='gs-table-status gs-table-status-notpay'>Не оплачен</div>)
-        case statusConst.process:
-            return (<div className='gs-table-status gs-table-status-process'>В работе</div>)
-        case statusConst.complete:
-            return (<div className='gs-table-status'>Завершен</div>)
-        case statusConst.canceled:
-            return (<div className='gs-table-status'>Отменен</div>)
-        default:
-            return (<div className='gs-table-status'>Завершен</div>)
-    }
-}
-
-
-const mock = [
-    {
-        id: 1,
-        name: 'Alex',
-        status: statusConst.new,
-        sum: '1240 ₽',
-        delivery: 'Самовывоз',
-        payment: 'Картой при получении',
-        date: '03.04.2022 09:30'
-    },
-    {
-        id: 1,
-        name: 'Alex',
-        status: statusConst.notpay,
-        sum: '1240 ₽',
-        delivery: 'Самовывоз',
-        payment: 'Картой при получении',
-        date: '03.04.2022 09:30'
-    },
-    {
-        id: 1,
-        name: 'Alex',
-        status: statusConst.process,
-        sum: '1240 ₽',
-        delivery: 'Самовывоз',
-        payment: 'Картой при получении',
-        date: '03.04.2022 09:30'
-    },
-    {
-        id: 1,
-        name: 'Alex',
-        status: statusConst.canceled,
-        sum: '1240 ₽',
-        delivery: 'Самовывоз',
-        payment: 'Картой при получении',
-        date: '03.04.2022 09:30'
-    },
-    {
-        id: 1,
-        name: 'Alex',
-        status: statusConst.complete,
-        sum: '1240 ₽',
-        delivery: 'Самовывоз',
-        payment: 'Картой при получении',
-        date: '03.04.2022 09:30'
-    },
-]
 
 
 
+
+
+const ans = new anService();
 
 
 const OrdersPage = () => {
+    const {token} = useSelector(state => state)
     const {loading, view, error, setLoading, setView} = useContent();
     const {visible, hideModal, showModal} = useModal();
+    const [list, setList] = useState([])
+    const [selected, setSelected] = useState(null);
+    const [pp, setPp] = useState([])
+    const [OrderBy, setOrderBy] = useState(orderBy[0].name)
+    const [OrderType, setOrderType] = useState(orderTypes.asc)
+    const [page, setPage] = useState(0)
+
+    const getOrders = () => {
+        if(token) {
+            setLoading(true)
+            setPage(1)
+            const body = {
+                OrderBy,
+                OrderType,
+            }
+            ans.getOrders(token, body).then(res => {
+                const pp = _.chunk(res.Orders, 30)
+                setPp(pp)
+                setPage(0)     
+            }).finally(_ => setLoading(false))
+        }
+    }
 
     useEffect(() => {
-        setLoading(true)
-        const tim = setTimeout(() => {
-            setLoading(false);
-        }, 1000)
-
-        return () => {
-            clearTimeout(tim);
+  
+        if(pp?.length > 0) {
+            setList(pp[page])
         }
-    }, [])
+    }, [page, pp])
+
+    const selectItem = (item) => {
+        setSelected(item)
+        showModal()
+    }
+  
+
+    useEffect(() => {
+        getOrders()
+    }, [token, OrderBy, OrderType])
 
     
     return (
@@ -107,45 +87,86 @@ const OrdersPage = () => {
             animate={{opacity: 1}}
             transition={{duration: 0.5}}
             exit={{opacity: 0}}
-
             className="OrdersPage page">
-            <OrderInfo visible={visible} close={hideModal}/>
+            <OrderInfo 
+                updateList={getOrders}
+                data={selected} 
+                visible={visible} 
+                close={hideModal}/>
             <main className="Main">
                 <div className="pageBody">
                     <div className="OrdersPage__body pageBody-content">
                         <div className="OrdersPage__body_table">
                             {
                                 !loading ? (
-                                    <table className="gs-table">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Имя</th>
-                                            <th>Статус</th>
-                                            <th>Сумма</th>
-                                            <th>Тип доставки</th>
-                                            <th>Тип оплаты</th>
-                                            <th>Дата заказа</th>
-                                        </tr>
-                                        <div className="spacer"></div>
-                                        {
-                                            mock && mock.length > 0 ? (
-                                                mock.map((item, index) => (
-                                                    <tr 
-                                                        onClick={showModal}
-                                                        className={'row'} 
-                                                        key={index}>
-                                                        <td>{item.id}</td>
-                                                        <td>{item.name}</td>
-                                                        <td>{filterStatus(item.status)}</td>
-                                                        <td>{item.sum}</td>
-                                                        <td>{item.delivery}</td>
-                                                        <td>{item.payment}</td>
-                                                        <td>{item.date}</td>
-                                                    </tr>
-                                                ))
-                                            ) : null
-                                        }
-                                    </table>
+                                    <>
+                                        <table className="gs-table">
+                                        
+                                                <tr>
+                                                    {
+                                                        orderBy?.length > 0 ? (
+                                                            orderBy.map((item, index) => (
+                                                                <th 
+                                                                    key={index}
+                                                                    onClick={() => setOrderBy(item.name)}
+                                                                    >
+                                                                    <div className={"gs-table__head" + ( OrderBy == item.name ? ' active ' : '')}>
+                                                                        <div className={"gs-table__head_label"}>
+                                                                        {item.label}
+                                                                        </div>
+                                                                        <div className="gs-table__head_icon">
+                                                                            <BsChevronDown/>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </th>
+                                                            ))
+                                                        ) : null
+                                                    }
+                                                
+                                                </tr>
+                                                <div className="spacer"></div>
+                                                {
+                                                    list && list.length > 0 ? (
+                                                        list.map((item, index) => (
+                                                            <tr 
+                                                                onClick={() => selectItem({...item})}
+                                                                className={'row'} 
+                                                                key={index}>
+                                                                <td>{item.ID}</td>
+                                                                <td>{item.UserName}</td>
+                                                                <td>{<div style={{color: checkStatus(Number(item.Status))?.color}}>{checkStatus(Number(item.Status))?.name}</div>}</td>
+                                                                <td>{item.Price} ₽</td>
+                                                                <td>{checkDelivery(Number(item.DeliveryType))}</td>
+                                                                <td>{checkPay(Number(item.PayType))}</td>
+                                                                <td>{item.DateCreated}</td>
+                                                            </tr>
+                                                        ))
+                                                    ) : null
+                                                }
+                                            </table>
+                                            <div className="OrdersPage__pag">
+                                                <button 
+                                                    onClick={() => setPage(0)}
+                                                    className="OrdersPage__pag_jm OrdersPage__pag_jm-start">
+                                                <DoubleLeftOutlined />
+                                                </button>
+                                                <Pagination 
+                                                defaultCurrent={page + 1}
+                                                current={page + 1}
+                                                total={pp.length}
+                                                pageSize={1}
+                                                onChange={e => setPage(e - 1)}
+                                                />
+                                                <button
+                                                    onClick={() => setPage(pp.length - 1)}
+                                                    className="OrdersPage__pag_jm OrdersPage__pag_jm-end">
+                                                <DoubleRightOutlined />
+                                                </button>
+                                            </div>
+                                        
+                                    </>
+                                    
                                 ) : <Loader/>
                             }
                         </div>
