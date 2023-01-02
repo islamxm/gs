@@ -45,7 +45,7 @@ const OrdersPage = () => {
     const [selected, setSelected] = useState(null);
     const [pp, setPp] = useState([])
     const [OrderBy, setOrderBy] = useState(orderBy[0].name)
-    const [OrderType, setOrderType] = useState(true)
+    const [OrderType, setOrderType] = useState(false)
     const [page, setPage] = useState(0)
     const [firstFetch, setFirstFetch] = useState(true)
 
@@ -60,6 +60,7 @@ const OrdersPage = () => {
             ans.getOrders(token, body).then(res => {
                 const pp = _.chunk(res.Orders, 30)
                 setPp(pp)
+                console.log(res.Orders)
                 // setPage(0)     
             }).finally(_ => {
                 setLoading(false)
