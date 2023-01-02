@@ -3,6 +3,13 @@
     &__body {
         position: relative;
 
+        &_pag {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         &_top {
             display: flex;
             align-items: center;
@@ -46,4 +53,6 @@
             }
         }
     }
+
+    
 }

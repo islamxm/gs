@@ -17,6 +17,8 @@ import { useSelector } from 'react-redux';
 import orderBy from './helpers/orderBy';
 import anService from '../../services/anService';
 import orderTypes from '../orders/helpers/orderTypes';
+import * as _ from 'lodash';
+import {Pagination} from 'antd';
 
 const mock = [
     {
@@ -63,22 +65,34 @@ const ClientsPage = () => {
 
     const [OrderBy, setOrderBy] = useState(orderBy[0].name)
     const [OrderType, setOrderType] = useState(orderTypes.asc)
-    const [Page, setPage] = useState(1)
+    const [Page, setPage] = useState(0)
     const [list, setList] = useState([])
+    const [pp, setPp] = useState([])
 
 
     const getUsers = () => {
         if(token) {
-            ans.getUsers(token, OrderBy, OrderType, Page).then(res => {
+            const body = {
+                OrderBy,
+                OrderType
+            }
+            ans.getUsers(token, body).then(res => {
                 console.log(res)
-
+                const ss = _.chunk(res.Users, 30)
+                setPp(ss)
             })
         }
     }
 
     useEffect(() => {
         getUsers()
-    }, [token, OrderBy, OrderType, Page])
+    }, [token, OrderBy, OrderType])
+
+    useEffect(() => {
+        if(pp.length > 0) {
+            setList(pp[Page])
+        }
+    }, [Page, pp])
 
 
     const openPush = () => {
@@ -120,34 +134,44 @@ const ClientsPage = () => {
 
     const selectAll = (e) => {
         if(e.target.checked) {
-            setSelects(mock);
-            console.log('checked')
+            setSelects(pp.flat())
         } else {
-            setSelects()
-
-            console.log('not checled')
+            setSelects(null)
         }
     }
 
-    const doubleClick = useDoubleTap((e) => {
+    const doubleClick = useDoubleTap((e, data) => {
         openUser()
 
     }, 150, {
         onSingleTap: (e) => {
+ 
             selectItem(e)
-            
         }
     })
 
-    const clickHandle = (e, name, bonus, phone) => {
+    useEffect(() => {
+        console.log(selects)
+    }, [selects])
+
+    const clickHandle = (e, {...item}) => {
+        if(e.currentTarget.classList.contains('active')) {
+            setSelects(state => [
+                ...state,
+                item
+            ])
+        } else {
+            const ff = selects;
+            const rm = ff.splice(ff.findIndex(i => i.ID == item.ID), 1)
+            setSelects([...ff])
+        }
         setSelectedUser({
-            name,
-            bonus,
-            phone
+            ...item
         })
-        doubleClick.onClick(e.currentTarget, name);
+        doubleClick.onClick(e.currentTarget, item);
     }
 
+    
 
     return (
         <motion.div 
@@ -192,25 +216,34 @@ const ClientsPage = () => {
                                 </tr>
                                 <div className="spacer"></div>
                                 {
-                                    mock && mock.length > 0 ? (
-                                        mock.map((item, index) => (
+                                    list?.length > 0 ? (
+                                        list.map((item, index) => (
                                             <tr 
-                                                onClick={(e) => clickHandle(e, item.name, item.bonus, item.phone)} 
+                                                onClick={(e) => clickHandle(e, {...item})} 
+                                                
                                                 className={'row'} 
-                                                key={index}>
-                                                <td>{item.id}</td>
-                                                <td>{item.name}</td>
-                                                <td>{item.phone}</td>
-                                                <td>{item.orders}</td>
-                                                <td>{item.sum}</td>
-                                                <td>{item.bonus} бонусов</td>
+                                                key={item.ID}>
+                                                <td>{item.ID}</td>
+                                                <td>{item.Name}</td>
+                                                <td>{item.Phone}</td>
+                                                <td>{item.OrdersCount}</td>
+                                                <td>{item.OrdersTotalPrice}</td>
+                                                <td>{item.Bonuses} бонусов</td>
                                                 <td>{item.date}</td>
                                             </tr>
                                         ))
                                     ) : null
                                 }
                             </table>
+                            <div className="ClientsPage__body_pag">
+                                <Pagination
+                                    onChange={e => setPage(e - 1)}
+                                    total={pp.length + 1}
+                                    current={Page}
+                                    />
+                            </div>
                         </div>
+                        
                         <div className="ClientsPage__body_action">
                             <Button onClick={openPush} styles={{boxShadow: '0px 0px 43px rgba(255, 255, 255, 0.5)'}} justify={'center'} text={'Отправить Push-уведомление выбранным пользователям'}/>
                             <Button onClick={openEmail} styles={{boxShadow: '0px 0px 43px rgba(255, 255, 255, 0.5)'}} justify={'center'} text={'Отправить E-mail выбранным пользователям'}/>

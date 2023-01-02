@@ -78,12 +78,14 @@ class anService {
         }
     }
 
-    getUsers = async (token, orderBy, orderType, page) => {
+    getUsers = async (token, body) => {
         try {
-            let res = await fetch(endpoints.getUsers + `?OrderBy=${orderBy}&OrderType=${orderType}&Page=${page}`, {
-                method: 'GET',
+            let res = await fetch(endpoints.getUsers, {
+                method: 'POST',
+                body: JSON.stringify(body),
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    ...headers
                 }
             })
             const result = await checkAuth(res)

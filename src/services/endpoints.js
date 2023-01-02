@@ -73,7 +73,9 @@ const endpoints = {
     getUsers: `${BASE_DOMAIN}/analytics/getUsers`,
     sendMailToAllUsers: `${BASE_DOMAIN}/analytics/sendMailToAllUsers`,
     editOrderStatus: `${BASE_DOMAIN}/analytics/editOrderStatus`,
-    editOrderPaidStatus: `${BASE_DOMAIN}/analytics/editOrderPaidStatus`
+    editOrderPaidStatus: `${BASE_DOMAIN}/analytics/editOrderPaidStatus`,
+    setPersonalSale: `${BASE_DOMAIN}/analytics/setPersonalSale`,
+    deletePersonalSale: `${BASE_DOMAIN}/analytics/removePersonalSale`,
 
 
 
