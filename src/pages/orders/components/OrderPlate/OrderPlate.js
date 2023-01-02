@@ -38,7 +38,11 @@ const OrderPlate = ({
                                 <div className="OrderPlate__body_part">
                                     <div className="OrderPlate__body_part_name">Модификаторы</div>
                                     <div className="OrderPlate__body_part_value">
-                                    {Modifiers}
+                                    {
+                                        Modifiers.split('\n').map(item => (
+                                            <div>{item}</div>
+                                        ))
+                                    }
                                     </div>
                                 </div>
                             ) : null
@@ -49,7 +53,11 @@ const OrderPlate = ({
                                 <div className="OrderPlate__body_part">
                                     <div className="OrderPlate__body_part_name">Комментарий</div>
                                     <div className="OrderPlate__body_part_value">
-                                        {Comment}
+                                        {
+                                            Comment.split('\n').map(item => (
+                                                <div>{item}</div>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             ) : null

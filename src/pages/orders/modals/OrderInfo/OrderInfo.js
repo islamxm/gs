@@ -116,6 +116,10 @@ const OrderInfo = ({visible, close, order, data, updateList}) => {
     }
     
 
+    useEffect(() => {
+        console.log('sadasasd \n adasds \n asdasdasd'.split('\n').join(''))
+    }, [])
+
 
     return (
         <Modal className='Modal OrderInfo' width={dataL?.Additions.length == 0 &&  dataL?.Cutlery.length == 0 ? 800 : 1200} open={visible} onCancel={closeHandle}>
@@ -179,7 +183,14 @@ const OrderInfo = ({visible, close, order, data, updateList}) => {
                             </div>
                             <div className="OrderInfo__main_item">
                                 <div className="OrderInfo__main_item_name">Подарок</div>
-                                <div className="OrderInfo__main_item_value">{dataL?.GiftID != '' ? dataL?.GiftID : 'Не указано'}</div>
+                                <div className="OrderInfo__main_item_value">
+                                    {
+                                        dataL?.GiftID != '' ? 
+                                            dataL?.GiftID.split('\\n').map(item => (
+                                                <div>{item}</div>
+                                            )) : 'Не указано'
+                                    }
+                                </div>
                             </div>
                             <div className="OrderInfo__main_item">
                                 <div className="OrderInfo__main_item_name">Способ оплаты</div>

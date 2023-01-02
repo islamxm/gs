@@ -69,7 +69,6 @@ const OrdersPage = () => {
                 setTotalPrice(_.sum(res.Orders.map(item => Number(item.SalePrice))))
                 setTotalOrders(res.TotalCount)
         
-                
                 // setPage(0)     
             }).finally(_ => {
                 setLoading(false)
@@ -79,7 +78,6 @@ const OrdersPage = () => {
     }
 
     useEffect(() => {
-  
         if(pp?.length > 0) {
             setList(pp[page])
         } else {
