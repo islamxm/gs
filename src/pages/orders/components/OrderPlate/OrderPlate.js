@@ -28,20 +28,36 @@ const OrderPlate = ({
                     </div>
                 </div>
             </div>
-            <div className="OrderPlate__body">
-                <div className="OrderPlate__body_part">
-                    <div className="OrderPlate__body_part_name">Модификаторы</div>
-                    <div className="OrderPlate__body_part_value">
-                    {Modifiers}
+            {
+                !Modifiers && !Comment ? (
+                    null
+                ) : (
+                    <div className="OrderPlate__body">
+                        {
+                            Modifiers ? (
+                                <div className="OrderPlate__body_part">
+                                    <div className="OrderPlate__body_part_name">Модификаторы</div>
+                                    <div className="OrderPlate__body_part_value">
+                                    {Modifiers}
+                                    </div>
+                                </div>
+                            ) : null
+                        }
+                        
+                        {
+                            Comment ? (
+                                <div className="OrderPlate__body_part">
+                                    <div className="OrderPlate__body_part_name">Комментарий</div>
+                                    <div className="OrderPlate__body_part_value">
+                                        {Comment}
+                                    </div>
+                                </div>
+                            ) : null
+                        }
                     </div>
-                </div>
-                <div className="OrderPlate__body_part">
-                    <div className="OrderPlate__body_part_name">Комментарий</div>
-                    <div className="OrderPlate__body_part_value">
-                        {Comment}
-                    </div>
-                </div>
-            </div>
+                )
+            }
+            
         </div>
     )
 }

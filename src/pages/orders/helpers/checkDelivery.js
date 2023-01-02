@@ -1,8 +1,8 @@
 const checkDelivery = (type) => {
     switch (type) {
-        case 1:
-            return 'Самовывоз'
         case 2:
+            return 'Самовывоз'
+        case 1:
             return 'Доставка'
     }
 }

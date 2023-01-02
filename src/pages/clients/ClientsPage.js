@@ -229,7 +229,7 @@ const ClientsPage = () => {
                                                 <td>{item.OrdersCount}</td>
                                                 <td>{item.OrdersTotalPrice}</td>
                                                 <td>{item.Bonuses} бонусов</td>
-                                                <td>{item.date}</td>
+                                                <td>{item.LastOrderDate}</td>
                                             </tr>
                                         ))
                                     ) : null

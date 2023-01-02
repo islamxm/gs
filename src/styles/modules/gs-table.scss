@@ -1,5 +1,23 @@
 .gs-table {
     width: 100%;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &__load {
+        
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(#fff, .5);
+        display: flex;
+        padding: 50px 30px;
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 10;
+    }
 
     &__head {
         display: flex;
@@ -15,11 +33,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0;
         }
     }
 
     &__head.active {
 
+        .gs-table__head_icon {
+            // transform: rotate(180deg);
+            opacity: 1;
+        }
+    }
+
+    &__head.asc {
         .gs-table__head_icon {
             transform: rotate(180deg);
         }

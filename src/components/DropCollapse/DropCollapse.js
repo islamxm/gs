@@ -6,7 +6,9 @@ import {BsChevronCompactDown} from 'react-icons/bs';
 import Button from '../Button/Button';
 import {BsTrash} from 'react-icons/bs';
 import Checkbox from '../Checkbox/Checkbox';
+import {LoadingOutlined} from '@ant-design/icons';
 const {Panel} = Collapse;
+
 
 
 const DropCollapse = ({
@@ -25,7 +27,9 @@ const DropCollapse = ({
     textAlign,
     delText,
     id ,
-    shadow
+    shadow,
+    justify,
+    load
 }) => {
     const [listActive, setListActive] = useState(false);
     const selectList = useRef(null);
@@ -60,8 +64,16 @@ const DropCollapse = ({
 
     return (
         <>
-            <div style={styles} className={"DropCollapse" + (listActive ? ' active ' : '') + (shadow ? ' shadow ' : '')}>
+            <div style={styles} className={"DropCollapse" + (listActive ? ' active ' : '') + (shadow ? ' shadow ' : '') + (justify ? justify : '')  + (load ? ' load ' : '')}>
+                {
+                    load ? (
+                        <div className="DropCollapse__load">
+                            <LoadingOutlined color='var(--violet)'/>
+                        </div>
+                    ) : null
+                }
                 <div onClick={handleList} className={"DropCollapse__head"}>
+                    
                     {
                         label && !value ? (
                             <div className="DropCollapse__head_label">{label}</div>

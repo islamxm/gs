@@ -18,6 +18,7 @@ import checkDelivery from './helpers/checkDelivery';
 import { Pagination } from 'antd';
 import {DoubleLeftOutlined, DoubleRightOutlined} from '@ant-design/icons';
 
+
 import * as _ from 'lodash';
 
 const statusConst = {
@@ -44,22 +45,26 @@ const OrdersPage = () => {
     const [selected, setSelected] = useState(null);
     const [pp, setPp] = useState([])
     const [OrderBy, setOrderBy] = useState(orderBy[0].name)
-    const [OrderType, setOrderType] = useState(orderTypes.asc)
+    const [OrderType, setOrderType] = useState(true)
     const [page, setPage] = useState(0)
+    const [firstFetch, setFirstFetch] = useState(true)
 
     const getOrders = () => {
         if(token) {
             setLoading(true)
-            setPage(1)
+            // setPage(1)
             const body = {
                 OrderBy,
-                OrderType,
+                OrderType: OrderType ? 'ASC' : 'DESC',
             }
             ans.getOrders(token, body).then(res => {
                 const pp = _.chunk(res.Orders, 30)
                 setPp(pp)
-                setPage(0)     
-            }).finally(_ => setLoading(false))
+                // setPage(0)     
+            }).finally(_ => {
+                setLoading(false)
+                setFirstFetch(false)
+            })
         }
     }
 
@@ -97,21 +102,32 @@ const OrdersPage = () => {
                 <div className="pageBody">
                     <div className="OrdersPage__body pageBody-content">
                         <div className="OrdersPage__body_table">
+                            
                             {
-                                !loading ? (
+                                !firstFetch ? (
                                     <>
-                                        <table className="gs-table">
                                         
+                                        <table className="gs-table">
+                                                {
+                                                    loading ? (
+                                                        <div className="gs-table__load">
+                                                            <Loader/>
+                                                        </div>
+                                                    ) : null
+                                                }
                                                 <tr>
                                                     {
                                                         orderBy?.length > 0 ? (
                                                             orderBy.map((item, index) => (
                                                                 <th 
                                                                     key={index}
-                                                                    onClick={() => setOrderBy(item.name)}
+                                                                    onClick={() => {
+                                                                        setOrderBy(item.name)
+                                                                        setOrderType(state => !state)
+                                                                    }}
                                                                     >
-                                                                    <div className={"gs-table__head" + ( OrderBy == item.name ? ' active ' : '')}>
-                                                                        <div className={"gs-table__head_label"}>
+                                                                    <div className={"gs-table__head" + ( OrderBy == item.name ? ' active ' : '') + (OrderType ? ' asc ' : '')}>
+                                                                        <div className={"gs-table__head_label"}> 
                                                                         {item.label}
                                                                         </div>
                                                                         <div className="gs-table__head_icon">
