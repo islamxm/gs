@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './MiniPlate.scss';
 import pl from '../../../../../assets/img/pl-plate.png'
+import { Tooltip } from 'antd';
 
 const MiniPlate = ({
     AllowedDeliveryTypes,
@@ -54,7 +55,14 @@ const MiniPlate = ({
                 <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt={Name} />
             </div>
             <div className="MiniPlate__body">
-                <div className="MiniPlate__body_name">{Name}</div>
+                <Tooltip
+                    trigger={'hover'}
+                    placement={'bottom'}
+                    title={Name}
+                    >
+                    <div className="MiniPlate__body_name">{Name}</div>
+                </Tooltip>
+                
                 <div className="MiniPlate__body_prices">
                     <div className="MiniPlate__body_prices_actual">
                     {Number(Prices[0]?.SalePrice) > 0 ? Prices[0]?.SalePrice : Prices[0]?.Price}₽
