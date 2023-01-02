@@ -17,7 +17,7 @@ import checkPay from './helpers/checkPay';
 import checkDelivery from './helpers/checkDelivery';
 import { Pagination } from 'antd';
 import {DoubleLeftOutlined, DoubleRightOutlined} from '@ant-design/icons';
-
+import OrdersInfo from './components/OrdersInfo/OrdersInfo';
 
 import * as _ from 'lodash';
 
@@ -48,6 +48,10 @@ const OrdersPage = () => {
     const [OrderType, setOrderType] = useState(false)
     const [page, setPage] = useState(0)
     const [firstFetch, setFirstFetch] = useState(true)
+    const [search, setSearch] = useState('')
+
+    const [totalOrders, setTotalOrders] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const getOrders = () => {
         if(token) {
@@ -56,11 +60,16 @@ const OrdersPage = () => {
             const body = {
                 OrderBy,
                 OrderType: OrderType ? 'ASC' : 'DESC',
+                Search: search
             }
+            
             ans.getOrders(token, body).then(res => {
                 const pp = _.chunk(res.Orders, 30)
                 setPp(pp)
-                console.log(res.Orders)
+                setTotalPrice(_.sum(res.Orders.map(item => Number(item.SalePrice))))
+                setTotalOrders(res.TotalCount)
+        
+                
                 // setPage(0)     
             }).finally(_ => {
                 setLoading(false)
@@ -73,6 +82,8 @@ const OrdersPage = () => {
   
         if(pp?.length > 0) {
             setList(pp[page])
+        } else {
+            setList([])
         }
     }, [page, pp])
 
@@ -83,8 +94,9 @@ const OrdersPage = () => {
   
 
     useEffect(() => {
+    
         getOrders()
-    }, [token, OrderBy, OrderType])
+    }, [token, OrderBy, OrderType, search])
 
     
     return (
@@ -102,7 +114,14 @@ const OrdersPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     <div className="OrdersPage__body pageBody-content">
+                        <OrdersInfo
+                            total={totalOrders}
+                            price={totalPrice}
+                            value={search}
+                            setValue={setSearch}
+                            />
                         <div className="OrdersPage__body_table">
+
                             
                             {
                                 !firstFetch ? (
@@ -153,7 +172,7 @@ const OrdersPage = () => {
                                                                 <td>{item.ID}</td>
                                                                 <td>{item.UserName}</td>
                                                                 <td>{<div style={{color: checkStatus(Number(item.Status))?.color}}>{checkStatus(Number(item.Status))?.name}</div>}</td>
-                                                                <td>{item.Price} ₽</td>
+                                                                <td>{item.SalePrice} ₽</td>
                                                                 <td>{checkDelivery(Number(item.DeliveryType))}</td>
                                                                 <td>{checkPay(Number(item.PayType))}</td>
                                                                 <td>{item.DateCreated}</td>
@@ -162,25 +181,32 @@ const OrdersPage = () => {
                                                     ) : null
                                                 }
                                             </table>
-                                            <div className="OrdersPage__pag">
-                                                <button 
-                                                    onClick={() => setPage(0)}
-                                                    className="OrdersPage__pag_jm OrdersPage__pag_jm-start">
-                                                <DoubleLeftOutlined />
-                                                </button>
-                                                <Pagination 
-                                                defaultCurrent={page + 1}
-                                                current={page + 1}
-                                                total={pp.length}
-                                                pageSize={1}
-                                                onChange={e => setPage(e - 1)}
-                                                />
-                                                <button
-                                                    onClick={() => setPage(pp.length - 1)}
-                                                    className="OrdersPage__pag_jm OrdersPage__pag_jm-end">
-                                                <DoubleRightOutlined />
-                                                </button>
-                                            </div>
+                                            {
+                                                list?.length <= 30 ? (
+                                                    null
+                                                ) : (
+                                                    <div className="OrdersPage__pag">
+                                                        <button 
+                                                            onClick={() => setPage(0)}
+                                                            className="OrdersPage__pag_jm OrdersPage__pag_jm-start">
+                                                        <DoubleLeftOutlined />
+                                                        </button>
+                                                        <Pagination 
+                                                        defaultCurrent={page + 1}
+                                                        current={page + 1}
+                                                        total={pp.length}
+                                                        pageSize={1}
+                                                        onChange={e => setPage(e - 1)}
+                                                        />
+                                                        <button
+                                                            onClick={() => setPage(pp.length - 1)}
+                                                            className="OrdersPage__pag_jm OrdersPage__pag_jm-end">
+                                                        <DoubleRightOutlined />
+                                                        </button>
+                                                    </div>
+                                                )
+                                            }
+                                            
                                         
                                     </>
                                     

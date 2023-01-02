@@ -142,6 +142,10 @@ const OrderInfo = ({visible, close, order, data, updateList}) => {
                                 <div className="OrderInfo__main_item_value">{dataL?.SalePrice != '' ? dataL?.SalePrice : 'Не указано'}₽</div>
                             </div>
                             <div className="OrderInfo__main_item">
+                                <div className="OrderInfo__main_item_name">Бонусов получено</div>
+                                <div className="OrderInfo__main_item_value">{dataL?.BonusesRecieved != '' ? dataL?.BonusesRecieved : 'Не указано'}</div>
+                            </div>
+                            <div className="OrderInfo__main_item">
                                 <div className="OrderInfo__main_item_name">Бонусов потрачено</div>
                                 <div className="OrderInfo__main_item_value">{dataL?.BonusesSpent != '' ? dataL?.BonusesSpent : 'Не указано'}</div>
                             </div>
@@ -163,7 +167,7 @@ const OrderInfo = ({visible, close, order, data, updateList}) => {
                             </div>
                             <div className="OrderInfo__main_item">
                                 <div className="OrderInfo__main_item_name">Дата подачи</div>
-                                <div className="OrderInfo__main_item_value">{dataL?.OrderDate == 'now' ? 'как можно быстрее' : dataL?.OrderDate}</div>
+                                <div className="OrderInfo__main_item_value">{dataL?.OrderDate == 'now' ? 'Как можно быстрее' : dataL?.OrderDate}</div>
                             </div>
                             <div className="OrderInfo__main_item">
                                 <div className="OrderInfo__main_item_name">Комментарий</div>

@@ -1,7 +1,7 @@
 .gs-table {
     width: 100%;
     position: relative;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
 
     &__load {
@@ -113,11 +113,11 @@
                 
                 
                 &:first-child {
-                    border-radius: 10px 0 0 0;
+                    border-radius: 15px 0 0 0;
                 }
 
                 &:last-child {
-                    border-radius: 0 10px 0 0 ;
+                    border-radius: 0 15px 0 0 ;
                 }
             }
         }
@@ -125,11 +125,11 @@
 
             td {
                 &:first-child {
-                    border-radius: 0 0 0 10px;
+                    border-radius: 0 0 0 15px;
                 }
 
                 &:last-child {
-                    border-radius: 0 0 10px 0;
+                    border-radius: 0 0 15px 0;
                 }
             }
         }
@@ -143,21 +143,43 @@
             
             
             &:first-child {
-                border-radius: 10px 0 0 10px;
+                border-radius: 15px 0 0 15px;
             }
             
 
             &:last-child {
-                border-radius: 0 10px 10px 0;
+                border-radius: 0 15px 15px 0;
             }
 
         }
 
         td {
             background-color: #fff;
-            padding: 20px 10px;
+            padding: 15px 10px;
             color: rgba(0, 0, 0, 0.5);
             font-weight: 600;
+
+            &:nth-child(1) {
+                width: 10.6%;
+            }
+            &:nth-child(2) {
+                width: 16%;
+            }
+            &:nth-child(3) {
+                width: 17.7%;
+            }
+            &:nth-child(4) {
+                width: 11.3%;
+            }
+            &:nth-child(5) {
+                width: 13.5%;
+            }
+            &:nth-child(6) {
+                width: 16.6%;
+            }
+            &:nth-child(7) {
+                width: 14.3%;
+            }
         }
     }
 }
