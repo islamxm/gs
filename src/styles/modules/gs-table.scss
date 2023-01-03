@@ -179,6 +179,9 @@
             }
             &:nth-child(7) {
                 width: 14.3%;
+                // width: 210px !important;
+                white-space: nowrap;
+               
             }
         }
     }

@@ -50,31 +50,32 @@ const MiniPlate = ({
 
 
     return (
-        <div className="MiniPlate" onMouseUp={checkClick} onMouseDown={clickHandle}>
-            <div className="MiniPlate__img">
-                <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt={Name} />
-            </div>
-            <div className="MiniPlate__body">
-                <Tooltip
-                    trigger={'hover'}
-                    placement={'bottom'}
-                    title={Name}
-                    >
+        <Tooltip
+            placement='bottom'
+            title={Name}
+            trigger='hover'
+            >
+            <div className="MiniPlate" onMouseUp={checkClick} onMouseDown={clickHandle}>
+                <div className="MiniPlate__img">
+                    <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt={Name} />
+                </div>
+                <div className="MiniPlate__body">
                     <div className="MiniPlate__body_name">{Name}</div>
-                </Tooltip>
-                
-                <div className="MiniPlate__body_prices">
-                    <div className="MiniPlate__body_prices_actual">
-                    {Number(Prices[0]?.SalePrice) > 0 ? Prices[0]?.SalePrice : Prices[0]?.Price}₽
+                    
+                    <div className="MiniPlate__body_prices">
+                        <div className="MiniPlate__body_prices_actual">
+                        {Number(Prices[0]?.SalePrice) > 0 ? Prices[0]?.SalePrice : Prices[0]?.Price}₽
+                        </div>
+                        {
+                            Number(Prices[0]?.SalePrice) > 0 ? (
+                                <div className="MiniPlate__body_prices_main">{Prices[0]?.Price}₽</div>
+                            ) : null
+                        }    
                     </div>
-                    {
-                        Number(Prices[0]?.SalePrice) > 0 ? (
-                            <div className="MiniPlate__body_prices_main">{Prices[0]?.Price}₽</div>
-                        ) : null
-                    }    
                 </div>
             </div>
-        </div>
+        </Tooltip>
+        
     )
 }
 
