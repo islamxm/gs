@@ -1,38 +1,44 @@
 import './OrderItem.scss';
+import checkStatus from '../../../orders/helpers/checkStatus';
+import checkDelivery from '../../../orders/helpers/checkDelivery';
+
+
 
 const OrderItem = ({
     style, 
-    orderNumber, 
-    date, 
-    type, 
-    address, 
-    status, 
-    bonus, 
-    price
+    BonusesRecieved,
+    BonusesSpent,
+    DateCreated,
+    DeliveryAddress,
+    DeliveryType,
+    ID,
+    OrderDate,
+    Price,
+    Status
 }) => {
     return (
         <div className="OrderItem" style={style}>
-            <div className="OrderItem__head">Заказ №134</div>
+            <div className="OrderItem__head">Заказ №{ID}</div>
             <div className="OrderItem__body">
                 <div className="OrderItem__body_item">
-                    <div className="OrderItem__body_item_name">Заказано 03.03.2022 08:32</div>
-                    <div className="OrderItem__body_item_value">Как можно скорее</div>
+                    <div className="OrderItem__body_item_name">Заказано {OrderDate == 'now' ? 'Как можно скорее' : OrderDate}</div>
+                    <div className="OrderItem__body_item_value">{Status}</div>
                 </div>
                 <div className="OrderItem__body_item">
                     <div className="OrderItem__body_item_name">Доставка</div>
-                    <div className="OrderItem__body_item_value">ул. Ленина, д. 102, кв. 14, этаж 3</div>
+                    <div className="OrderItem__body_item_value">{DeliveryAddress}</div>
                 </div>
                 <div className="OrderItem__body_item">
                     <div className="OrderItem__body_item_name">Статус</div>
-                    <div className="OrderItem__body_item_value">В ожидании</div>
+                    <div className="OrderItem__body_item_value">{Status}</div>
                 </div>
                 <div className="OrderItem__body_item">
                     <div className="OrderItem__body_item_name">Бонусов потрачено</div>
-                    <div className="OrderItem__body_item_value">34</div>
+                    <div className="OrderItem__body_item_value">{BonusesSpent}</div>
                 </div>
             </div>
             <div className="OrderItem__price">
-                2 345₽
+                {Price}₽
             </div>
         </div>
     )

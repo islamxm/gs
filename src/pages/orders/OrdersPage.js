@@ -18,6 +18,7 @@ import checkDelivery from './helpers/checkDelivery';
 import { Pagination } from 'antd';
 import {DoubleLeftOutlined, DoubleRightOutlined} from '@ant-design/icons';
 import OrdersInfo from './components/OrdersInfo/OrdersInfo';
+import TablePag from '../../components/TablePag/TablePag';
 
 import * as _ from 'lodash';
 
@@ -136,9 +137,9 @@ const OrdersPage = () => {
                                                 <tr>
                                                     {
                                                         orderBy?.length > 0 ? (
-                                                            orderBy.map((item, index) => (
+                                                            orderBy.map((item) => (
                                                                 <th 
-                                                                    key={index}
+                                                                    key={item.ID}
                                                                     onClick={() => {
                                                                         setOrderBy(item.name)
                                                                         setOrderType(state => !state)
@@ -162,11 +163,11 @@ const OrdersPage = () => {
                                                 <div className="spacer"></div>
                                                 {
                                                     list && list.length > 0 ? (
-                                                        list.map((item, index) => (
+                                                        list.map((item) => (
                                                             <tr 
                                                                 onClick={() => selectItem({...item})}
                                                                 className={'row'} 
-                                                                key={index}>
+                                                                key={item.ID}>
                                                                 <td>{item.ID}</td>
                                                                 <td>{item.UserName}</td>
                                                                 <td>{<div style={{color: checkStatus(Number(item.Status))?.color}}>{checkStatus(Number(item.Status))?.name}</div>}</td>
@@ -180,28 +181,19 @@ const OrdersPage = () => {
                                                 }
                                             </table>
                                             {
-                                                list?.length <= 30 ? (
+                                                pp?.length == 1 ? (
                                                     null
                                                 ) : (
-                                                    <div className="OrdersPage__pag">
-                                                        <button 
-                                                            onClick={() => setPage(0)}
-                                                            className="OrdersPage__pag_jm OrdersPage__pag_jm-start">
-                                                        <DoubleLeftOutlined />
-                                                        </button>
-                                                        <Pagination 
-                                                        defaultCurrent={page + 1}
+                                                    
+                                                    <TablePag
+                                                        style={{padding: '40px 0'}}
+                                                        pageSize={1}
                                                         current={page + 1}
                                                         total={pp.length}
-                                                        pageSize={1}
                                                         onChange={e => setPage(e - 1)}
+                                                        jumpToEnd={() => setPage(pp.length - 1)}
+                                                        jumpToStart={() => setPage(0)}
                                                         />
-                                                        <button
-                                                            onClick={() => setPage(pp.length - 1)}
-                                                            className="OrdersPage__pag_jm OrdersPage__pag_jm-end">
-                                                        <DoubleRightOutlined />
-                                                        </button>
-                                                    </div>
                                                 )
                                             }
                                             

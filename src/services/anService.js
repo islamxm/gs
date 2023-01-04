@@ -95,6 +95,24 @@ class anService {
         }
     }
 
+    sendMailToUsers = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.sendMailToUsers, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    ...headers
+                },
+                body: JSON.stringify(body)
+            })
+
+            const result = await checkAuth(res);
+            return result;
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     sendMailToAllUsers = async (token, title, body) => {
         try {
             let res = await fetch(endpoints.sendMailToAllUsers, {
@@ -114,6 +132,85 @@ class anService {
             console.log(err)
         }
     }
+
+    sendPushToUsers = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.sendPushToUsers, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    ...headers
+                },
+                body: JSON.stringify(body)
+            })
+            const result = await checkAuth(res)
+            return result;
+        } catch(err) {
+            console.log(err)
+        }
+    } 
+
+    sendPushToAllUsers = async (token, title, body) => {
+        try {
+            let res = await fetch(endpoints.sendPushToAllUsers, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    ...headers
+                },
+                body: JSON.stringify({
+                    Title: title,
+                    Body: body
+                })
+            })
+            const result = await checkAuth(res)
+            return result;
+        }catch(err) {
+            console.log(err)
+        }
+    }
+
+    setPersonalSale = async (token, body) => {
+        try {
+            let res = await fetch(endpoints.setPersonalSale, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(body)
+            }) 
+
+            const result = await checkAuth(res);
+            return result;
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    removePersonalSale = async (token, id) => {
+        try {
+            let res = await fetch(endpoints.deletePersonalSale, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    UserID: id
+                })
+            })
+            const result = await checkAuth(res);
+            return result;
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+
+
+
 }
 
 export default anService;

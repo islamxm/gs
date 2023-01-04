@@ -1,24 +1,25 @@
 import './DishItem.scss';
 import img from '../../../../assets/img/org.png';
-
+import pl from '../../../../assets/img/pl-plate.png';
 
 const DishItem = ({
     style,
-    image,
-    name,
-    price
+    ID,
+    Name,
+    ThumbnailPicture,
+    Price
 }) => {
     return (
         <div className="DishItem" style={style}>
             <div className="DishItem__img">
-                <img src={img} alt="" />
+                <img src={ThumbnailPicture ? ThumbnailPicture : pl} alt={Name} />
             </div>
             <div className="DishItem__body">
                 <div className="DishItem__body_name">
-                    Название Блюда
+                    {Name}
                 </div>
                 <div className="DishItem__body_price">
-                    500₽
+                    {Price ? Price : 0}₽
                 </div>
 
             </div>

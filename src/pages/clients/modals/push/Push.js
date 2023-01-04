@@ -8,10 +8,22 @@ import {BsTrash} from 'react-icons/bs';
 import { useState } from 'react';
 
 
-const Push = ({visible, close}) => {
+const Push = ({visible, close, load, onSave}) => {
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
+
 
     const closeHandle = () => {
+        setTitle('')
+        setBody('')
         close();
+    }
+
+    const handleSave = () => {
+        onSave({
+            Title: title,
+            Body: body
+        })
     }
 
 
@@ -20,13 +32,26 @@ const Push = ({visible, close}) => {
             <h2 className="Modal__head">Отправить Push-уведомление всем пользователям</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
-                    <Input placeholder={'Заголовок уведомления'}/>
+                    <Input 
+                        onChange={e => setTitle(e.target.value)}
+                        value={title}
+                        shadow
+                        maskType={String}
+                        placeholder={'Заголовок уведомления'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Тело уведомления'}/>
+                    <Input 
+                        maskType={String}
+                        onChange={e => setBody(e.target.value)}
+                        value={body}
+                        shadow
+                        placeholder={'Тело уведомления'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button text={'Отправить Push-уведомление'}/>
+                    <Button 
+                        load={load}
+                        onClick={handleSave}
+                        text={'Отправить Push-уведомление'}/>
                 </div>
             </div>
         </Modal>

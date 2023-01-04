@@ -19,37 +19,10 @@ import anService from '../../services/anService';
 import orderTypes from '../orders/helpers/orderTypes';
 import * as _ from 'lodash';
 import {Pagination} from 'antd';
-
-const mock = [
-    {
-        id: '123',
-        name: 'Иван',
-        phone: '+7 977 524 73 08',
-        orders: '12 заказов',
-        sum: '1240 ₽',
-        bonus: '120',
-        date: '03.04.2022 09:30'
-    },
-    {
-        id: '123',
-        name: 'Андрей',
-        phone: '+7 977 524 73 08',
-        orders: '12 заказов',
-        sum: '1240 ₽',
-        bonus: '120',
-        date: '03.04.2022 09:30'
-    },
-    {
-        id: '123',
-        name: 'Степан',
-        phone: '+7 977 524 73 08',
-        orders: '12 заказов',
-        sum: '1240 ₽',
-        bonus: '120',
-        date: '03.04.2022 09:30'
-    }
-    
-]
+import TablePag from '../../components/TablePag/TablePag';
+import ClientsInfo from './components/ClientsInfo/ClientsInfo';
+import Loader from '../../components/Loader/Loader';
+import {BsChevronDown} from 'react-icons/bs';
 
 const ans = new anService();
 
@@ -62,35 +35,49 @@ const ClientsPage = () => {
     const [email, setEmail] = useState(false);
     const [user, setUser] = useState(false);
     const [discount, setDiscount] = useState(false);
+    const [firstFetch, setFirstFetch] = useState(true)
+    const [pushLoad, setPushLoad] = useState(false)
+    const [emailLoad, setEmailLoad] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [OrderBy, setOrderBy] = useState(orderBy[0].name)
-    const [OrderType, setOrderType] = useState(orderTypes.asc)
+    const [OrderType, setOrderType] = useState(false)
+    const [Search, setSearch] = useState('') 
     const [Page, setPage] = useState(0)
     const [list, setList] = useState([])
     const [pp, setPp] = useState([])
-
+    const [keyDown, setKeyDown] = useState(false)
+    const [tm, setTm] = useState(0)
+    const [clicked, setClicked] = useState(false)
 
     const getUsers = () => {
         if(token) {
+            setLoading(true)
             const body = {
                 OrderBy,
-                OrderType
+                OrderType: OrderType ? 'ASC' : 'DESC',
+                Search
             }
             ans.getUsers(token, body).then(res => {
-                console.log(res)
                 const ss = _.chunk(res.Users, 30)
                 setPp(ss)
+
+            }).finally(_ => {
+                setFirstFetch(false)
+                setLoading(false)
             })
         }
     }
 
     useEffect(() => {
         getUsers()
-    }, [token, OrderBy, OrderType])
+    }, [token, OrderBy, OrderType, Search])
 
     useEffect(() => {
-        if(pp.length > 0) {
+        if(pp?.length > 0) {
             setList(pp[Page])
+        } else {
+            setList([])
         }
     }, [Page, pp])
 
@@ -128,49 +115,78 @@ const ClientsPage = () => {
     }
 
 
-    const selectItem = (e) => {
-        e.classList.toggle('active');
-    }
+  
 
     const selectAll = (e) => {
         if(e.target.checked) {
             setSelects(pp.flat())
         } else {
-            setSelects(null)
+            setSelects([])
         }
     }
 
-    const doubleClick = useDoubleTap((e, data) => {
+    const doubleClick = useDoubleTap((e, item) => {
         openUser()
-
     }, 150, {
-        onSingleTap: (e) => {
- 
-            selectItem(e)
-        }
+       onSingleTap: (e, item) => {
+       }
     })
 
-    useEffect(() => {
-        console.log(selects)
-    }, [selects])
 
-    const clickHandle = (e, {...item}) => {
-        if(e.currentTarget.classList.contains('active')) {
-            setSelects(state => [
-                ...state,
-                item
-            ])
-        } else {
-            const ff = selects;
-            const rm = ff.splice(ff.findIndex(i => i.ID == item.ID), 1)
-            setSelects([...ff])
-        }
-        setSelectedUser({
-            ...item
-        })
-        doubleClick.onClick(e.currentTarget, item);
+    const clickHandle = (e, item) => {
+        setSelectedUser(item)
+        openUser()
+        // if(e.currentTarget.classList.contains('active')) {
+        //     const mm = selects;
+        //     const rm = mm.splice(mm.findIndex(i => i.ID == item.ID), 1)
+        //     setSelects([...mm])
+        // } else {
+        //     setSelects(state => [...state, item])
+        // }
+        // doubleClick.onClick()
+        
     }
 
+    const rightClickHandle = (e, item) => {
+        e.preventDefault()
+        if(e.currentTarget.classList.contains('active')) {
+            const mm = selects;
+            const rm = mm.splice(mm.findIndex(i => i.ID == item.ID), 1)
+            setSelects([...mm])
+        } else {    
+            setSelects(state => [...state, item])
+        }
+    }   
+
+
+
+    const sendPush = (body) => {
+        setPushLoad(true)
+        ans.sendPushToUsers(token, {
+            ...body,
+            UsersID: selects.map(item => item.ID)
+        }).then(res => {
+            if(!res.error) {
+                closePush()
+            } else {
+                //handle error
+            }
+        })
+    }
+    
+    const sendEmail = (body) => {
+        setEmailLoad(true)
+        ans.sendMailToUsers(token, {
+            ...body,
+            UsersID: selects.map(item => item.ID)
+        }).then(res => {
+            if(!res.error) {
+                closeEmail()
+            } else {
+                //handle error
+            }
+        })
+    }
     
 
     return (
@@ -181,9 +197,18 @@ const ClientsPage = () => {
             exit={{opacity: 0}}
 
             className="ClientsPage page">
-            <Push  visible={push} close={closePush}/>
-            <Email visible={email} close={closeEmail}/>
+            <Push
+                onSave={sendPush}
+                load={pushLoad}  
+                visible={push} 
+                close={closePush}/>
+            <Email
+                onSave={sendEmail}
+                load={emailLoad} 
+                visible={email} 
+                close={closeEmail}/>
             <User 
+                data={selectedUser}
                 visible={user} 
                 close={closeUser}
                 name={selectedUser?.name}  
@@ -191,62 +216,120 @@ const ClientsPage = () => {
                 phone={selectedUser?.phone}
                 addDiscount={openDiscount}
                 />
-            <Discount visible={discount} close={closeDiscount}/>
+            {/* <Discount visible={discount} close={closeDiscount}/> */}
             <main className="Main">
                 <div className="pageBody">
                     <div className="ClientsPage__body pageBody-content">
-                        <div className="ClientsPage__body_top">
-                            <div className="ClientsPage__body_top_search">
-                                <Input placeholder={'Поиск'}/>
-                            </div>
-                            <div className="ClientsPage__body_top_all">
-                                <Checkbox onChange={selectAll} id={'all'} text={'Выбрать всех'}/>
-                            </div>
-                        </div>
+                        <ClientsInfo
+                            value={Search}
+                            setValue={setSearch}
+                            selectAll={selectAll}
+                            />
                         <div className="ClientsPage__body_table">
-                            <table className='gs-table'>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Имя</th>
-                                    <th>Телефон</th>
-                                    <th>Кол-во заказов</th>
-                                    <th>На сумму</th>
-                                    <th>Бонусы</th>
-                                    <th>Дата последнего заказа</th>
-                                </tr>
-                                <div className="spacer"></div>
-                                {
-                                    list?.length > 0 ? (
-                                        list.map((item, index) => (
-                                            <tr 
-                                                onClick={(e) => clickHandle(e, {...item})} 
-                                                
-                                                className={'row'} 
-                                                key={item.ID}>
-                                                <td>{item.ID}</td>
-                                                <td>{item.Name}</td>
-                                                <td>{item.Phone}</td>
-                                                <td>{item.OrdersCount}</td>
-                                                <td>{item.OrdersTotalPrice}</td>
-                                                <td>{item.Bonuses} бонусов</td>
-                                                <td>{item.LastOrderDate}</td>
+                            {
+                                !firstFetch ? (
+                                    <>
+                                        <table className='gs-table'>
+                                            {
+                                                loading ? (
+                                                    <div className="gs-table__load">
+                                                        <Loader/>
+                                                    </div>
+                                                ) : null
+                                            }
+                                            {/* <tr>
+                                                <th>ID</th>
+                                                <th>Имя</th>
+                                                <th>Телефон</th>
+                                                <th>Кол-во заказов</th>
+                                                <th>На сумму</th>
+                                                <th>Бонусы</th>
+                                                <th>Дата последнего заказа</th>
+                                            </tr> */}
+                                            <tr>
+                                                {
+                                                    orderBy?.length > 0 ? (
+                                                        orderBy.map((item, index) => (
+                                                            <th 
+                                                                key={index}
+                                                                onClick={() => {
+                                                                    setOrderBy(item.name)
+                                                                    setOrderType(state => !state)
+                                                                }}
+                                                                >
+                                                                <div className={"gs-table__head" + ( OrderBy == item.name ? ' active ' : '') + (OrderType ? ' asc ' : '')}>
+                                                                    <div className={"gs-table__head_label"}> 
+                                                                    {item.label}
+                                                                    </div>
+                                                                    <div className="gs-table__head_icon">
+                                                                        <BsChevronDown/>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </th>
+                                                        ))
+                                                    ) : null
+                                                }
+                                            
                                             </tr>
-                                        ))
-                                    ) : null
-                                }
-                            </table>
-                            <div className="ClientsPage__body_pag">
-                                <Pagination
-                                    onChange={e => setPage(e - 1)}
-                                    total={pp.length + 1}
-                                    current={Page}
-                                    />
-                            </div>
+                                            <div className="spacer"></div>
+                                            {
+                                                list?.length > 0 ? (
+                                                    list.map((item, index) => (
+                                                        <tr 
+                                                            onContextMenu={e => rightClickHandle(e,item)}
+                                                            onClick={(e) => clickHandle(e, item)}
+                                                            className={'row' + (selects.find(i => i.ID == item.ID) ? ' active ' : '')} 
+                                                            key={item.ID}>
+                                                            <td>{item.ID}</td>
+                                                            <td>{item.Name ? item.Name : 'Не указано'}</td>
+                                                            <td>{item.Phone ? item.Phone : 'Не указано'}</td>
+                                                            <td>{item.OrdersCount}</td>
+                                                            <td>{item.OrdersTotalPrice}₽</td>
+                                                            <td>{item.Bonuses} бонусов</td>
+                                                            <td>{item.LastOrderDate ? item.LastOrderDate : 'Не указано'}</td>
+                                                        </tr>
+                                                    ))
+                                                ) : null
+                                            }
+                                        </table>
+                                        {
+                                            pp.length == 1 ? (
+                                                null
+                                            ) : (
+                                                <TablePag
+                                                    style={{padding: '40px 0'}}
+                                                    total={pp.length}
+                                                    current={Page + 1}
+                                                    onChange={e => setPage(e - 1)}
+                                                    pageSize={1}
+                                                    jumpToStart={e => setPage(0)}
+                                                    jumpToEnd={e => setPage(pp.length - 1)}
+                                                    />
+                                            )
+                                        }
+                                    </>
+                                ) : (
+                                    <Loader/>
+                                )
+                            }
+                            
+                            
                         </div>
                         
                         <div className="ClientsPage__body_action">
-                            <Button onClick={openPush} styles={{boxShadow: '0px 0px 43px rgba(255, 255, 255, 0.5)'}} justify={'center'} text={'Отправить Push-уведомление выбранным пользователям'}/>
-                            <Button onClick={openEmail} styles={{boxShadow: '0px 0px 43px rgba(255, 255, 255, 0.5)'}} justify={'center'} text={'Отправить E-mail выбранным пользователям'}/>
+                            <Button 
+                                disabled={selects.length == 0}
+                                onClick={openPush} 
+                                styles={{boxShadow: '0px 0px 43px rgba(255, 255, 255, 0.5)'}} 
+                                justify={'center'} 
+                                text={'Отправить Push-уведомление выбранным пользователям'}/>
+                            <Button 
+                                disabled={selects.length == 0}
+                                onClick={openEmail} 
+                                styles={{boxShadow: '0px 0px 43px rgba(255, 255, 255, 0.5)'}} 
+                                justify={'center'} 
+                                text={'Отправить E-mail выбранным пользователям'}/>
                         </div>
                     </div>
                 </div>

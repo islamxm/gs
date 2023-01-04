@@ -1,6 +1,5 @@
 import './UploadKml.scss';
 import {BsDownload} from 'react-icons/bs';
-import layerSrc from '../../../../../NEW Карта Ноябрь 2022.kml';
 import kmlParser from 'js-kml-parser';
 import orgService from '../../../../../services/orgService';
 import { useSelector } from 'react-redux';

@@ -8,10 +8,19 @@ import {BsTrash} from 'react-icons/bs';
 import { useState } from 'react';
 
 
-const Email = ({visible, close}) => {
+const Email = ({visible, close, load, onSave}) => {
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
 
     const closeHandle = () => {
         close();
+    }
+
+    const handleSave = () => {
+        onSave({
+            Title: title,
+            Body: body 
+        })
     }
 
 
@@ -20,13 +29,27 @@ const Email = ({visible, close}) => {
             <h2 className="Modal__head">Отправить E-mail выбранным пользователям</h2>
             <div className="Modal__form">
                 <div className="Modal__form_row">
-                    <Input placeholder={'Заголовок письма'}/>
+                    <Input 
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                        maskType={String}
+                        shadow
+                        placeholder={'Заголовок письма'}/>
                 </div>
                 <div className="Modal__form_row">
-                    <Input placeholder={'Тело письма'}/>
+                    <Input
+                        value={body}
+                        onChange={e => setBody(e.target.value)}
+                        maskType={String}
+                        shadow
+                        placeholder={'Тело письма'}/>
                 </div>
                 <div className="Modal__form_action">
-                    <Button text={'Отправить E-mail'}/>
+                    <Button 
+                        disabled={!title || !body}
+                        load={load}
+                        onClick={handleSave}
+                        text={'Отправить E-mail'}/>
                 </div>
             </div>
         </Modal>

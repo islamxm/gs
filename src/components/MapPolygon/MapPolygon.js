@@ -10,7 +10,7 @@ import {
 import Loader from '../Loader/Loader';
 import { useState, useRef, useEffect, useCallback } from "react";
 import {BsTrash} from 'react-icons/bs';
-import ppp from '../../NEW Карта Ноябрь 2022.kml';
+
 
 
 let libs = ['drawing']
