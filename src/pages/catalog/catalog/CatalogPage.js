@@ -6,10 +6,11 @@ import { Col, Row } from 'antd';
 import Pl from '../../../components/Pl/Pl';
 import CreateCategory from '../modals/createCategory/CreateCategory';
 import { useSelector } from 'react-redux';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useCallback, useState, useMemo } from 'react';
 import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
 import {motion} from 'framer-motion';
+import GridToggle from '../../../components/GridToggle/GridToggle';
 
 import authService from '../../../services/dataService';
 import {
@@ -18,6 +19,10 @@ import {
     GridItem,
     swap
   } from "react-grid-drag";
+import useGridType from '../../../hooks/useGridType';
+import { useRef } from 'react';
+import pageEnterAnimProps from '../../../funcs/pageEnterAnimProps';
+import MiniCat from '../../../components/MiniCat/MiniCat';
 
 
 
@@ -36,42 +41,56 @@ const CatalogPage = () => {
     const [selectedCat, setSelectedCat] = useState(null)
     const [gridHeight, setGridHeight] = useState(250)
     const [boxRow, setBoxRows]= useState(5)
+    const [rowHeight, setRowHeight] = useState(150)
+    const itemBoxRef = useRef()
+    const {gridType, setGridType} = useGridType()
 
     const url = useMemo(() => {
         return new URLSearchParams(window.location.search)
     }, [window.location.search])
 
-    const windowResize = () => {
-        if(window.innerWidth >= 1200) {
-            setBoxRows(5)
-        }
-        if(window.innerWidth >= 768 && window.innerWidth < 1200) {
-            setBoxRows(3)
-        }
-        if(window.innerWidth < 768) {
-            setBoxRows(2)
-        }
-        
-    }
 
-    useEffect(() => {
-        if(cats?.length > 0) {
-            if(cats.length % boxRow == 0) {
-                setGridHeight(Math.round(cats.length / boxRow + cats.length % boxRow) * 280 + 280)
-            } else {
-                setGridHeight(Math.round(cats.length / boxRow + cats.length % boxRow) * 280)
+    const getBoxWidth = useCallback(() => {
+        if(itemBoxRef?.current) {
+            if(gridType == 'small') {
+                setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 120))
+            }
+            if(gridType == 'big') {
+                setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 260))
             }
             
-        } else {
-            setGridHeight(280)
         }
-    }, [cats, boxRow])
+    }, [gridType])
 
     useEffect(() => {
-        windowResize()
-        window.addEventListener('resize', windowResize)
-        return () => window.removeEventListener('resize', windowResize)
-    }, []) 
+        if(cats?.length > 0 && boxRow) {
+            if(cats.length % boxRow == 0) {
+                setGridHeight(Math.round(cats.length / boxRow) * rowHeight + rowHeight)
+            } else {
+                setGridHeight(Math.round(cats.length / boxRow + 1) * rowHeight)
+            }
+        } else {
+            setGridHeight(rowHeight)
+        }
+        // console.log('количество элементов',cats?.length)
+        // console.log('количество элементов в одной строке', boxRow)
+        // console.log('gridType', gridType)
+        // console.log('высота элемента', rowHeight)
+        // console.log('делим общее количество на количество элементов в одной строке', Math.round(cats?.length / boxRow))
+        // console.log('получаем остаток', cats?.length % boxRow)
+    }, [cats, boxRow, gridType, rowHeight])
+
+    
+    useEffect(() => {
+        if(gridType == 'big') {
+            setRowHeight(280)
+        } else {
+            setRowHeight(170)
+        }
+        getBoxWidth()
+        window.addEventListener('resize', getBoxWidth)
+        return () => window.removeEventListener('resize', getBoxWidth)
+    }, [gridType])
     
 
 
@@ -139,12 +158,18 @@ const CatalogPage = () => {
             {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
-                    <div className="CatalogPage__body pageBody-content">
+                    <div className="CatalogPage__body pageBody-content" ref={itemBoxRef}>
+                        <GridToggle
+                            selectBig={() => setGridType('big')}
+                            selectSmall={() => setGridType('small')}
+                            />
                         {
                             load ? (
                                 <Loader/>
                             ) : (
-                                <div className="CatalogPage__body_list">
+                                <motion.div
+                                    {...pageEnterAnimProps}
+                                    >
                                     <GridContextProvider
                                         onChange={orderChange}
                                         >
@@ -153,22 +178,33 @@ const CatalogPage = () => {
                                             // className='ddd'
                                             boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
-                                            rowHeight={280}
+                                            rowHeight={rowHeight}
                                             >
                                             {
                                                 cats?.map((item, index)=> (
                                                     <GridItem 
                                                         key={item.ID} 
                                                         className={"ddd__item"}>
-                                                        <CatItem
-                                                            {...item}
-                                                            Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
-                                                            selectEdit={editCategory}/>
+                                                        {
+                                                            gridType == 'big' ? (
+                                                                <CatItem
+                                                                {...item}
+                                                                Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
+                                                                selectEdit={editCategory}/>
+                                                            ) : (
+                                                                <MiniCat
+                                                                    {...item}
+                                                                    Link={`/catalog/${item.ID}?p=${url.get('p')}&p=${item.Name}`}
+                                                                    selectEdit={editCategory}
+                                                                    />
+                                                            )
+                                                        }
+                                                        
                                                     </GridItem>
                                                 ))
                                             }
                                             <GridItem
-                                            
+                                                
                                                 className='ddd__item ddd__item-ds'
                                                 >
                                                 <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
@@ -176,7 +212,7 @@ const CatalogPage = () => {
                                             
                                         </GridDropZone>
                                     </GridContextProvider>
-                                </div>
+                                </motion.div>
                                 
                                 
                                     

@@ -3,7 +3,7 @@ import BrandItem from './components/BrandItem/BrandItem';
 import OrgItem from './components/OrgItem/OrgItem';
 import Pl from '../../../components/Pl/Pl';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import AddBrand from '../modals/addBrand/AddBrand';
 import orgService from '../../../services/orgService';
 import { useSelector } from 'react-redux';
@@ -21,6 +21,11 @@ import {
     GridItem,
     swap
   } from "react-grid-drag";
+import useGridType from '../../../hooks/useGridType';
+import pageEnterAnimProps from '../../../funcs/pageEnterAnimProps';
+import GridToggle from '../../../components/GridToggle/GridToggle';
+import MiniBrand from '../../../components/MiniBrand/MiniBrand';
+import MiniOrg from '../../../components/MiniOrg/MiniOrg';
 
 
 
@@ -41,37 +46,47 @@ const OrgsPage = () => {
     const [currentItem, setCurrentItem] = useState(null)
     const [gridHeight, setGridHeight] = useState(250)
     const [boxRow, setBoxRows]= useState(4)
+    const [rowHeight, setRowHeight] = useState(120)
+    const {gridType, setGridType} = useGridType()
+    const itemBoxRef = useRef()
 
-    const windowResize = () => {
-        if(window.innerWidth >= 1200) {
-            setBoxRows(4)
+    const getBoxWidth = useCallback(() => {
+        if(itemBoxRef?.current) {
+            if(gridType == 'small') {
+                setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 120))
+            }
+            if(gridType == 'big') {
+                setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 260))
+            }
+            
         }
-        if(window.innerWidth >= 768 && window.innerWidth < 1200) {
-            setBoxRows(3)
-        }
-        if(window.innerWidth < 768) {
-            setBoxRows(2)
-        }
-        
-    }
+    }, [gridType])
+    
 
     useEffect(() => {
         if(list?.length > 0) {
             if(list.length % boxRow == 0) {
-                setGridHeight(Math.round(list.length / boxRow + list.length % boxRow) * 280 + 280)
+                setGridHeight(Math.round(list.length / boxRow) * rowHeight + rowHeight)
             } else {
-                setGridHeight(Math.round(list.length / boxRow + list.length % boxRow) * 280)
+                setGridHeight(Math.round(list.length / boxRow + 1) * rowHeight)
             }
             
         } else {
-            setGridHeight(280)
+            setGridHeight(rowHeight)
         }
-    }, [list, boxRow])
+    }, [list, boxRow, rowHeight, gridType])
+
+
     useEffect(() => {
-        windowResize()
-        window.addEventListener('resize', windowResize)
-        return () => window.removeEventListener('resize', windowResize)
-    }, []) 
+        if(gridType == 'big') {
+            setRowHeight(280)
+        } else {
+            setRowHeight(170)
+        }
+        getBoxWidth()
+        window.addEventListener('resize', getBoxWidth)
+        return () => window.removeEventListener('resize', getBoxWidth)
+    }, [gridType])
 
     const orderChange = (sourceId, sourceIndex, targetIndex, targetId) => {
         if(sourceIndex == list.length) {
@@ -181,26 +196,26 @@ const OrgsPage = () => {
             {/* <HeaderProfile/> */}
             <main className="Main">
                 <div className="pageBody">
-                
+
                     {/* <div className="spc"></div> */}
-                    <div className="OrgsPage__body pageBody-content">
-                        
+                    <div className="OrgsPage__body pageBody-content" ref={itemBoxRef}>
+                        <GridToggle
+                            selectBig={() => setGridType('big')}
+                            selectSmall={() => setGridType('small')}
+                            />
                         {
                             loadList ? (
                                 <Loader/>
                             ) : (
                                 <motion.div
-                                    initial={{opacity: 0}}
-                                    animate={{opacity: 1}}
-                                    transition={{duration: 0.5}}
-                                    exit={{opacity: 0}}
+                                    {...pageEnterAnimProps}
                                     >
                                     <GridContextProvider
                                         onChange={orderChange}>
                                         <GridDropZone
                                             boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
-                                            rowHeight={280}
+                                            rowHeight={rowHeight}
                                             >
                                             {
                                                 list?.length > 0 ? (
@@ -209,7 +224,14 @@ const OrgsPage = () => {
                                                             key={item.ID}
                                                             className={"ddd__item"}
                                                             >
-                                                            <OrgItem {...item} index={index}/>
+                                                            {
+                                                                gridType == 'big' ? (
+                                                                    <OrgItem {...item}/>
+                                                                ) : (
+                                                                    <MiniOrg {...item}/>
+                                                                )
+                                                            }
+                                                            
                                                         </GridItem>
                                                     ))
                                                 ) : null
@@ -218,7 +240,7 @@ const OrgsPage = () => {
                                                 className='ddd__item ddd__item-ds'
                                                 >
                                                 <Pl onClick={createOrg} 
-                                                style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
+                                                style={{backgroundColor: '#fff'}} 
                                                 text={'Добавить ресторан'}/>
                                             </GridItem>
                                         </GridDropZone>
@@ -254,8 +276,11 @@ const OrgsPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     
-                    <div className="OrgsPage__body pageBody-content">
-                        
+                    <div className="OrgsPage__body pageBody-content" ref={itemBoxRef}>
+                        <GridToggle
+                            selectBig={() => setGridType('big')}
+                            selectSmall={() => setGridType('small')}
+                            />
                         {
                             loadList ? (
                                 <Loader/>
@@ -272,7 +297,7 @@ const OrgsPage = () => {
                                         <GridDropZone
                                             boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
-                                            rowHeight={280}
+                                            rowHeight={rowHeight}
                                             >
                                             {
                                                 list?.length > 0 ? (
@@ -281,7 +306,13 @@ const OrgsPage = () => {
                                                             className='ddd__item'
                                                             key={item.ID}
                                                             >
-                                                            <OrgItem {...item} index={index}/>
+                                                            {
+                                                                gridType == 'big' ? (
+                                                                    <OrgItem {...item}/>
+                                                                ) : (
+                                                                    <MiniOrg {...item}/>
+                                                                )
+                                                            }
                                                         </GridItem>
                                                     ))
                                                 ) : null
@@ -291,7 +322,7 @@ const OrgsPage = () => {
                                                 >
                                                 <Pl 
                                                 onClick={createOrg}
-                                                style={{backgroundColor: '#fff', minHeight: 223, width: '100%'}} 
+                                                style={{backgroundColor: '#fff'}} 
                                                 text={'Добавить ресторан'}
                                                 />
                                             </GridItem>
@@ -332,17 +363,17 @@ const OrgsPage = () => {
             <main className="Main">
                 <div className="pageBody">
                     {/* <div className="spc"></div> */}
-                    <div className="OrgsPage__body pageBody-content">
-                        
+                    <div className="OrgsPage__body pageBody-content" ref={itemBoxRef}>
+                        <GridToggle
+                            selectBig={() => setGridType('big')}
+                            selectSmall={() => setGridType('small')}
+                            />
                         {
                             loadList ? (
                                 <Loader/>
                             ) : (
                                 <motion.div
-                                    initial={{opacity: 0}}
-                                    animate={{opacity: 1}}
-                                    transition={{duration: 0.5}}
-                                    exit={{opacity: 0}}
+                                    {...pageEnterAnimProps}
                                     >
                                     <GridContextProvider
                                         onChange={orderChange}
@@ -350,7 +381,7 @@ const OrgsPage = () => {
                                         <GridDropZone
                                             boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
-                                            rowHeight={280}
+                                            rowHeight={rowHeight}
                                             >
                                             {
                                                 list?.length > 0 ? (
@@ -359,14 +390,27 @@ const OrgsPage = () => {
                                                             className='ddd__item'
                                                             key={item.ID}
                                                             >
-                                                            <BrandItem 
-                                                            Disabled={item.Disabled}
-                                                            ID={item.ID}
-                                                            ItemOrder={item.ItemOrder}
-                                                            LogoUrl={item.LogoUrl}
-                                                            MarkerID={item.MarkerID}
-                                                            editModal={openEditBrand}
-                                                            />
+                                                            {
+                                                                gridType == 'big' ? (
+                                                                    <BrandItem 
+                                                                        Disabled={item.Disabled}
+                                                                        ID={item.ID}
+                                                                        ItemOrder={item.ItemOrder}
+                                                                        LogoUrl={item.LogoUrl}
+                                                                        MarkerID={item.MarkerID}
+                                                                        editModal={openEditBrand}
+                                                                        />
+                                                                ) : (
+                                                                    <MiniBrand
+                                                                        Disabled={item.Disabled}
+                                                                        ID={item.ID}
+                                                                        ItemOrder={item.ItemOrder}
+                                                                        LogoUrl={item.LogoUrl}
+                                                                        MarkerID={item.MarkerID}
+                                                                        editModal={openEditBrand}
+                                                                        />
+                                                                )
+                                                            }
                                                         </GridItem>
                                                     ))
                                                 ) : null
@@ -374,7 +418,10 @@ const OrgsPage = () => {
                                             <GridItem
                                                 className='ddd__item ddd__item-ds'
                                                 >
-                                                <Pl onClick={openAddBrand} style={{backgroundColor: '#fff', height: 223}} text={'Добавить бренд'}/>
+                                                <Pl 
+                                                    onClick={openAddBrand} 
+                                                    style={{backgroundColor: '#fff'}} 
+                                                    text={'Добавить бренд'}/>
                                             </GridItem>
                                         </GridDropZone>   
                                     </GridContextProvider>

@@ -205,7 +205,6 @@ const ClientsPage = () => {
                 const mm = [...fullList];
                 const firstIndex = mm.findIndex(i => i.ID == item.ID);
                 const secondIndex = mm.findIndex(i => i.ID == lastSelected.ID);
-
                 let rm = [];
                 if(firstIndex > secondIndex) {
                     rm = mm.splice(secondIndex, firstIndex - secondIndex + 1)
@@ -214,11 +213,7 @@ const ClientsPage = () => {
                     rm = mm.splice(firstIndex, secondIndex - firstIndex + 1)
 
                 }
-
-                const newArr = [...selects, ...rm]
-
-
-                const res = newArr.reduce((o, i) => {
+                const res = [...selects, ...rm].reduce((o, i) => {
                     if(!o.find(v => v.ID == i.ID)) {
                         o.push(i)
                     }
@@ -230,10 +225,6 @@ const ClientsPage = () => {
         }
     }   
 
-
-    useEffect(() => {
-        console.log('last selected', lastSelected?.ID)
-    }, [lastSelected])
 
     const sendPush = (body) => {
         setPushLoad(true)

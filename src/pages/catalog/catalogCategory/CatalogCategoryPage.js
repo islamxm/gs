@@ -24,6 +24,11 @@ import {
   } from "react-grid-drag";
 import MiniPlate from './components/MiniPlate/MiniPlate';
 import { useRef } from 'react';
+import GridToggle from '../../../components/GridToggle/GridToggle';
+import useGridType from '../../../hooks/useGridType';
+import { useCallback } from 'react';
+import MiniSub from '../../../components/MiniSub/MiniSub';
+
 const as = new authService();
 const cs = new catService();
 
@@ -35,46 +40,42 @@ const CatalogCategoryPage = () => {
     const [selectedSubcat, setSelectedSubcat] = useState(null)
     const [list, setList] = useState([])
     const [load, setLoad] = useState(false)
-    const [currentItem, setCurrentItem] = useState(null)
     const [gridHeight, setGridHeight] = useState(250)
     const [boxRow, setBoxRows]= useState(10)
-    const [boxWidth, setBoxWidth] = useState(0)
-
+    const [rowHeight, setRowHeight] = useState(150)
     const itemBoxRef = useRef()
 
-    const getBoxWidth = () => {
+    const {gridType, setGridType} = useGridType()
+
+  
+
+    const getBoxWidth = useCallback(() => {
         if(itemBoxRef?.current) {
-            console.log((itemBoxRef.current.scrollWidth - 80) / 120)
-            setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 120))
+            if(gridType == 'small') {
+                setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 120))
+            }
+            if(gridType == 'big') {
+                setBoxRows(Math.round((itemBoxRef.current.scrollWidth - 80) / 260))
+            }
+            
         }
-    }
+    }, [gridType])
+
+
+    
 
     useEffect(() => {
+        if(gridType == 'big') {
+            setRowHeight(280)
+        } else {
+            setRowHeight(170)
+        }
         getBoxWidth()
         window.addEventListener('resize', getBoxWidth)
         return () => window.removeEventListener('resize', getBoxWidth)
-    }, [])
+    }, [gridType])
 
     const url = new URLSearchParams(window.location.search)
-
-    // const windowResize = () => {
-    //     if(window.innerWidth >= 1200) {
-    //         setBoxRows(10)
-    //     }
-    //     if(window.innerWidth >= 768 && window.innerWidth < 1200) {
-    //         setBoxRows(3)
-    //     }
-    //     if(window.innerWidth < 768) {
-    //         setBoxRows(2)
-    //     }
-        
-    // }
-
-    // useEffect(() => {
-    //     windowResize()
-    //     window.addEventListener('resize', windowResize)
-    //     return () => window.removeEventListener('resize', windowResize)
-    // }, []) 
     
     const toCreatePlate = () => {
         let data = new FormData()
@@ -101,7 +102,6 @@ const CatalogCategoryPage = () => {
             setLoad(true)
             cs.getProds(token, {CategoryID: categoryId}).then(res => {
                 setList(res.filter(item => item.ParentID == '0'))
-   
             }).finally(_ => setLoad(false))
         }
         if(token && categoryId && subcategoryId) {
@@ -140,11 +140,7 @@ const CatalogCategoryPage = () => {
         setCreateSubcategory(false)
         setSelectedSubcat(null)
     }
-    
-    const submitOrder = (e, item) => {
-        handleDrop(e, item, setList, currentItem, list);
-    }
-    
+
     useEffect(() => {
         if(token && list && list.length > 0) {
             as.orderSort(token, 'products', list.map(item => item.ID).join(',')).then(res => {
@@ -164,15 +160,15 @@ const CatalogCategoryPage = () => {
     useEffect(() => {
         if(list?.length > 0) {
             if(list.length % boxRow == 0) {
-                setGridHeight(Math.round(list.length / boxRow + list.length % boxRow) * 280 + 280)
+                setGridHeight(Math.round(list.length / boxRow) * rowHeight + rowHeight)
             } else {
-                setGridHeight(Math.round(list.length / boxRow + list.length % boxRow) * 280)
+                setGridHeight(Math.round(list.length / boxRow + 1) * rowHeight)
             }
             
         } else {
             setGridHeight(280)
         }
-    }, [list, boxRow])
+    }, [list, boxRow, gridType, rowHeight])
 
     return (
         <motion.div
@@ -189,6 +185,10 @@ const CatalogCategoryPage = () => {
                 <main className="Main">
                 <div className="pageBody">
                     <div className="CatalogCategoryPage__body pageBody-content" ref={itemBoxRef}>
+                        <GridToggle
+                            selectBig={() => setGridType('big')}
+                            selectSmall={() => setGridType('small')}
+                            />
                         {
                             load ? (
                                 <Loader/>
@@ -204,7 +204,7 @@ const CatalogCategoryPage = () => {
                                            
                                             boxesPerRow={boxRow}
                                             style={{height: gridHeight}}
-                                            rowHeight={150}
+                                            rowHeight={rowHeight}
                                             >
                                             {
                                                 list?.map((item, index) => {
@@ -214,33 +214,54 @@ const CatalogCategoryPage = () => {
                                                                 key={item.ID}
                                                                 className={'ddd__item'}
                                                                 >
-                                                                <SubCard
-                                                                    Link={`/catalog/${categoryId}/${item.ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${item.Name}`}
-                                                                    {...item}
-                                                                    selectEdit={editSubcat}
-                                                                    />
+                                                                {
+                                                                    gridType == 'small' ? (
+                                                                        <MiniSub
+                                                                            Link={`/catalog/${categoryId}/${item.ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${item.Name}`}
+                                                                            {...item}
+                                                                            selectEdit={editSubcat}
+                                                                            />
+                                                                    ) : (
+                                                                        <SubCard
+                                                                            Link={`/catalog/${categoryId}/${item.ID}?${url.getAll('p').map(item => `p=${item}`).join('&')}&p=${item.Name}`}
+                                                                            {...item}
+                                                                            selectEdit={editSubcat}
+                                                                            />
+                                                                    )
+                                                                }
+                                                                
                                                             </GridItem>
                                                         )
                                                     } else {
                                                         return (
                                                             
                                                             <GridItem
-                                                                key={item.Name}
+                                                                key={item.ID}
                                                                 className={'ddd__item'}
                                                                 >
-                                                                {/* <CatCard editPlate={toEditPlate} {...item}/> */}
-                                                                <MiniPlate editPlate={toEditPlate} {...item}/>
+                                                                
+                                                                {
+                                                                    gridType == 'small' ? (
+                                                                        <MiniPlate editPlate={toEditPlate} {...item}/>
+                                                                    ) : (
+                                                                        <CatCard editPlate={toEditPlate} {...item}/>
+                                                                    )
+                                                                }
                                                             </GridItem>
                                                         )
                                                     }
                                                     
                                                 })
                                             }
-                                            {/* <GridItem 
-                                            className='ddd__item ddd__item-ds CatalogCategoryPage__body_list_add'>
-                                            <Pl onClick={toCreatePlate} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
-                                            <Pl onClick={() => setCreateSubcategory(true)} style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
-                                            </GridItem> */}
+                                            <GridItem 
+                                                className='ddd__item ddd__item-ds CatalogCategoryPage__body_list_add'>
+                                                <Pl 
+                                                    onClick={toCreatePlate} 
+                                                    style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
+                                                <Pl 
+                                                    onClick={() => setCreateSubcategory(true)} 
+                                                    style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
+                                            </GridItem>
 
                                         </GridDropZone>
                                     </GridContextProvider>

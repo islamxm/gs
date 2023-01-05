@@ -1,0 +1,46 @@
+.GridToggle {
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &__in { 
+        display: flex;
+        align-items: center;
+    }
+
+    &__item {
+        height: 60px;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background-color: var(--violet);
+        transition: all .3s ease;
+        
+        font-size: 20px;
+        line-height: 20px;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        margin: 0 5px;
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        &:hover {
+            opacity: .8;
+        }
+
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+}

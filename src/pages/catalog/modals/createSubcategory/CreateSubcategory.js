@@ -31,7 +31,7 @@ const CreateSubcategory = ({visible, close, update, data}) => {
     const [ID, setID] = useState(null)
     const [prev, setPrev] = useState(null)
     const [HideInApp, setHideInApp] = useState('0')
-
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
 
     const closeHandle = () => {
         setName('')
@@ -144,13 +144,17 @@ const CreateSubcategory = ({visible, close, update, data}) => {
             update()
             setDelLoad(false)
             closeHandle()
+            
         })
     }
 
-    const [deleteConfirm, setDeleteConfirm] = useState(false)
+    
     const openDeleteConfirm = () => setDeleteConfirm(true)
     const closeDeleteConfirm = () => setDeleteConfirm(false)
-    const deleteConfirmAccept = () => onDelete()
+    const deleteConfirmAccept = () => {
+        onDelete()
+        closeDeleteConfirm()
+    }
 
     return (
         <Modal open={visible} onCancel={closeHandle} className="Modal CreateSubcategory">

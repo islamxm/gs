@@ -34,14 +34,13 @@ const CatCard = ({
 }) => {
 
     const nameRef = useRef()
-    const [grad, setGrad] = useState(false)
+
     const [tm, setTm] = useState(false)
 
     const clickHandle = () => {
         setTimeout(() => {
             setTm(true)
         }, 200)
-    
     }
 
     const checkClick = () => {
@@ -52,26 +51,6 @@ const CatCard = ({
             editPlate(ID, Name)
         }
     }
-
-    const nameSizeChange = () => {
-        if(nameRef?.current) {
-        
-            if(nameRef.current.scrollHeight > 43) {
-                setGrad(true)
-            } else {
-                setGrad(false)
-            }
-        }
-    }
-
-    useEffect(() => {
-        nameSizeChange()
-        window.addEventListener('resize', nameSizeChange)
-
-        return () => {
-            window.removeEventListener('resize', nameSizeChange)
-        }
-    }, [nameRef])
 
 
     return (
