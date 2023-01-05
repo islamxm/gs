@@ -45,10 +45,46 @@ const ClientsPage = () => {
     const [Search, setSearch] = useState('') 
     const [Page, setPage] = useState(0)
     const [list, setList] = useState([])
+    const [fullList, setFullList] = useState([])
     const [pp, setPp] = useState([])
-    const [keyDown, setKeyDown] = useState(false)
-    const [tm, setTm] = useState(0)
-    const [clicked, setClicked] = useState(false)
+    const [shiftDown, setShiftDown] = useState(false)
+    const [ctrlDown, setCtrlDown] = useState(false)
+    const [lastSelected, setLastSelected] = useState(null)
+
+
+    const keyDownHandle = (e) => {
+        
+        if(e.keyCode == 16 && e.code == 'ShiftLeft') {
+            console.log('shift pressed')
+            setShiftDown(true)
+            setCtrlDown(false)
+        } else if(e.keyCode == 91 && e.code == 'MetaLeft') {
+            console.log('control pressed')
+            setCtrlDown(true)
+            setShiftDown(false)
+        } else {
+            setCtrlDown(false)
+            setShiftDown(false)
+        }
+    }
+
+    const keyUpHandle = (e) => {
+        setCtrlDown(false)
+        setShiftDown(false)
+    }
+
+
+    useEffect(() => {
+        window.addEventListener('keydown', keyDownHandle)
+        window.addEventListener('keyup', keyUpHandle)
+        return () => {
+            window.removeEventListener('keydown', keyDownHandle)
+            window.removeEventListener('keyup', keyUpHandle)
+        }
+    }, [])
+
+    
+
 
     const getUsers = () => {
         if(token) {
@@ -61,6 +97,7 @@ const ClientsPage = () => {
             ans.getUsers(token, body).then(res => {
                 const ss = _.chunk(res.Users, 30)
                 setPp(ss)
+                setFullList(res.Users)
 
             }).finally(_ => {
                 setFirstFetch(false)
@@ -110,9 +147,7 @@ const ClientsPage = () => {
         setDiscount(true)
     }
 
-    const closeDiscount = () => {
-        setDiscount(false)
-    }
+  
 
 
   
@@ -125,15 +160,15 @@ const ClientsPage = () => {
         }
     }
 
-    const doubleClick = useDoubleTap((e, item) => {
-        openUser()
-    }, 150, {
-       onSingleTap: (e, item) => {
-       }
-    })
+    // const doubleClick = useDoubleTap((e, item) => {
+    //     openUser()
+    // }, 150, {
+    //    onSingleTap: (e, item) => {
+    //    }
+    // })
 
 
-    const clickHandle = (e, item) => {
+    const fdf = (e, item) => {
         setSelectedUser(item)
         openUser()
         // if(e.currentTarget.classList.contains('active')) {
@@ -147,18 +182,58 @@ const ClientsPage = () => {
         
     }
 
-    const rightClickHandle = (e, item) => {
+    const clickHandle = (e, item) => {
         e.preventDefault()
-        if(e.currentTarget.classList.contains('active')) {
-            const mm = selects;
-            const rm = mm.splice(mm.findIndex(i => i.ID == item.ID), 1)
-            setSelects([...mm])
-        } else {    
-            setSelects(state => [...state, item])
+        if(!ctrlDown && !shiftDown) {
+            setSelectedUser(item)
+            openUser()
+        }
+        if(ctrlDown && !shiftDown) {
+            if(e.currentTarget.classList.contains('active')) {
+                const mm = selects;
+                const rm = mm.splice(mm.findIndex(i => i.ID == item.ID), 1)
+                setSelects([...mm])
+                setLastSelected(null)
+            } else {    
+                setSelects(state => [...state, item])
+                setLastSelected(item)
+            }
+        }
+        if(!ctrlDown && shiftDown) {
+
+            if(lastSelected !== null) {
+                const mm = [...fullList];
+                const firstIndex = mm.findIndex(i => i.ID == item.ID);
+                const secondIndex = mm.findIndex(i => i.ID == lastSelected.ID);
+
+                let rm = [];
+                if(firstIndex > secondIndex) {
+                    rm = mm.splice(secondIndex, firstIndex - secondIndex + 1)
+                }
+                if(secondIndex > firstIndex) {
+                    rm = mm.splice(firstIndex, secondIndex - firstIndex + 1)
+
+                }
+
+                const newArr = [...selects, ...rm]
+
+
+                const res = newArr.reduce((o, i) => {
+                    if(!o.find(v => v.ID == i.ID)) {
+                        o.push(i)
+                    }
+                    return o;
+                }, [])
+
+                setSelects(res)
+            }
         }
     }   
 
 
+    useEffect(() => {
+        console.log('last selected', lastSelected?.ID)
+    }, [lastSelected])
 
     const sendPush = (body) => {
         setPushLoad(true)
@@ -187,6 +262,8 @@ const ClientsPage = () => {
             }
         })
     }
+
+    
     
 
     return (
@@ -277,7 +354,7 @@ const ClientsPage = () => {
                                                 list?.length > 0 ? (
                                                     list.map((item, index) => (
                                                         <tr 
-                                                            onContextMenu={e => rightClickHandle(e,item)}
+                                                            
                                                             onClick={(e) => clickHandle(e, item)}
                                                             className={'row' + (selects.find(i => i.ID == item.ID) ? ' active ' : '')} 
                                                             key={item.ID}>
