@@ -363,7 +363,7 @@ const ClientsPage = () => {
                                             }
                                         </table>
                                         {
-                                            pp.length == 1 ? (
+                                            pp.length <= 1  ? (
                                                 null
                                             ) : (
                                                 <TablePag
