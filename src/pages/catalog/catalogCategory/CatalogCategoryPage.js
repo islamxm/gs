@@ -257,10 +257,10 @@ const CatalogCategoryPage = () => {
                                                 className='ddd__item ddd__item-ds CatalogCategoryPage__body_list_add'>
                                                 <Pl 
                                                     onClick={toCreatePlate} 
-                                                    style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить блюдо'}/>
+                                                    style={{height: '49%', backgroundColor: '#fff', fontSize: gridType == 'small' ? 12 : 16, lineHeight: gridType == 'small' ? '15px' : '19px'}} text={'Добавить блюдо'}/>
                                                 <Pl 
                                                     onClick={() => setCreateSubcategory(true)} 
-                                                    style={{height: '49%', backgroundColor: '#fff'}} text={'Добавить подкатегорию'}/>
+                                                    style={{height: '49%', backgroundColor: '#fff', fontSize: gridType == 'small' ? 12 : 16, lineHeight: gridType == 'small' ? '15px' : '19px'}} text={'Добавить подкатегорию'}/>
                                             </GridItem>
 
                                         </GridDropZone>

@@ -1,5 +1,5 @@
 .MiniOrg {
-    height: 150px;
+    height: 90px;
     display: flex;  
     flex-direction: column;
     border-radius: 10px;
@@ -7,8 +7,9 @@
     background-color: #fff;
 
     &__img {
-        flex: 1 0 auto;
+        height: 100%;
         overflow: hidden;
+        max-height: 66px;
         
         img {
             width: 100%;
@@ -26,5 +27,7 @@
         white-space: nowrap;
         font-size: 12px;
         line-height: 14px;
+        color: #666;
+        font-weight: 500;
     }
 }

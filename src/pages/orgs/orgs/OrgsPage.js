@@ -81,7 +81,7 @@ const OrgsPage = () => {
         if(gridType == 'big') {
             setRowHeight(280)
         } else {
-            setRowHeight(170)
+            setRowHeight(110)
         }
         getBoxWidth()
         window.addEventListener('resize', getBoxWidth)
@@ -228,7 +228,7 @@ const OrgsPage = () => {
                                                                 gridType == 'big' ? (
                                                                     <OrgItem {...item}/>
                                                                 ) : (
-                                                                    <MiniOrg {...item}/>
+                                                                    <MiniOrg {...item}/> 
                                                                 )
                                                             }
                                                             
@@ -240,7 +240,7 @@ const OrgsPage = () => {
                                                 className='ddd__item ddd__item-ds'
                                                 >
                                                 <Pl onClick={createOrg} 
-                                                style={{backgroundColor: '#fff'}} 
+                                                style={{backgroundColor: '#fff', fontSize: gridType == 'small' ? 12 : 16, lineHeight: gridType == 'small' ? '15px' : '19px'}} 
                                                 text={'Добавить ресторан'}/>
                                             </GridItem>
                                         </GridDropZone>
@@ -322,7 +322,7 @@ const OrgsPage = () => {
                                                 >
                                                 <Pl 
                                                 onClick={createOrg}
-                                                style={{backgroundColor: '#fff'}} 
+                                                style={{backgroundColor: '#fff', fontSize: gridType == 'small' ? 12 : 16, lineHeight: gridType == 'small' ? '15px' : '19px'}} 
                                                 text={'Добавить ресторан'}
                                                 />
                                             </GridItem>
@@ -420,7 +420,7 @@ const OrgsPage = () => {
                                                 >
                                                 <Pl 
                                                     onClick={openAddBrand} 
-                                                    style={{backgroundColor: '#fff'}} 
+                                                    style={{backgroundColor: '#fff', fontSize: gridType == 'small' ? 12 : 16, lineHeight: gridType == 'small' ? '15px' : '19px'}} 
                                                     text={'Добавить бренд'}/>
                                             </GridItem>
                                         </GridDropZone>   

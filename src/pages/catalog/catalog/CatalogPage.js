@@ -85,7 +85,7 @@ const CatalogPage = () => {
         if(gridType == 'big') {
             setRowHeight(280)
         } else {
-            setRowHeight(170)
+            setRowHeight(110)
         }
         getBoxWidth()
         window.addEventListener('resize', getBoxWidth)
@@ -207,7 +207,7 @@ const CatalogPage = () => {
                                                 
                                                 className='ddd__item ddd__item-ds'
                                                 >
-                                                <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff'}}/>
+                                                <Pl onClick={() => setCreateCategory(true)} text={'Добавить категорию'} style={{backgroundColor: '#fff', fontSize: gridType == 'small' ? 12 : 16, lineHeight: gridType == 'small' ? '15px' : '19px'}}/>
                                             </GridItem>
                                             
                                         </GridDropZone>

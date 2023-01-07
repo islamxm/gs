@@ -21,8 +21,8 @@ const OrderItem = ({
             <div className="OrderItem__head">Заказ №{ID}</div>
             <div className="OrderItem__body">
                 <div className="OrderItem__body_item">
-                    <div className="OrderItem__body_item_name">Заказано {OrderDate == 'now' ? 'Как можно скорее' : OrderDate}</div>
-                    <div className="OrderItem__body_item_value">{Status}</div>
+                    <div className="OrderItem__body_item_name">Заказано {DateCreated}</div>
+                    <div className="OrderItem__body_item_value">{OrderDate == 'now' ? 'Как можно скорее' : OrderDate}</div>
                 </div>
                 <div className="OrderItem__body_item">
                     <div className="OrderItem__body_item_name">Доставка</div>

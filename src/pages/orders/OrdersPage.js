@@ -125,7 +125,6 @@ const OrdersPage = () => {
                             {
                                 !firstFetch ? (
                                     <>
-                                        
                                         <table className="gs-table">
                                                 {
                                                     loading ? (

@@ -62,7 +62,7 @@ const User = ({
         setAddLoad(true)
         anl.setPersonalSale(token, {
             ...body,
-            StopDate: moment(body.StopDate).format('DD.MM.YYYY'),
+            StopDate: moment(body.StopDate).format('YYYY-MM-DD'),
             UserID: data.ID
         }).then(res => {
             console.log(res)
@@ -70,7 +70,7 @@ const User = ({
                 closeDiscount()
                 setMessage(body.Message)
                 setSale(body.Sale)
-                setDate(moment(body.StopDate).format('DD.MM.YYYY'))
+                setDate(moment(body.StopDate).format('YYYY-MM-DD'))
             }
         }).finally(_ => setAddLoad(false))
     }, [data])

@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from 'date-fns/locale/ru';
+import moment from 'moment';
 
 
 registerLocale('ru', ru);
@@ -36,6 +37,7 @@ const Discount = ({visible, close, onSave, load}) => {
             StopDate: date
         })
     }
+
 
 
     return (
