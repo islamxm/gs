@@ -53,12 +53,13 @@ const ClientsPage = () => {
 
 
     const keyDownHandle = (e) => {
-        
+        console.log(e.keyCode)
+        console.log(e.code)
         if(e.keyCode == 16 && e.code == 'ShiftLeft') {
             console.log('shift pressed')
             setShiftDown(true)
             setCtrlDown(false)
-        } else if(e.keyCode == 91 && e.code == 'MetaLeft') {
+        } else if((e.keyCode == 91 && e.code == 'MetaLeft') || (e.keyCode == 17 && e.code == 'ControlLeft')) {
             console.log('control pressed')
             setCtrlDown(true)
             setShiftDown(false)
