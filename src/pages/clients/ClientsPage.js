@@ -277,6 +277,7 @@ const ClientsPage = () => {
                 visible={email} 
                 close={closeEmail}/>
             <User 
+                updateList={getUsers}
                 data={selectedUser}
                 visible={user} 
                 close={closeUser}

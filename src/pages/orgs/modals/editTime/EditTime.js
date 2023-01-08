@@ -160,15 +160,15 @@ const EditTime = ({
                     plate ? (
                         <>
                             <div className="Modal__form_row">
-                                <Checkbox checked={enabled} onChange={handleEnabled} id={'dayAll'} text={'Весь день'}/>
+                                <Checkbox shadow={true} checked={enabled} onChange={handleEnabled} id={'dayAll'} text={'Весь день'}/>
                             </div>
                             <div className="Modal__form_row">
-                                <Checkbox checked={ddisabled} onChange={handleDdisabled} id={'dayOff'} text={'Выключено'}/>
+                                <Checkbox shadow={true} checked={ddisabled} onChange={handleDdisabled} id={'dayOff'} text={'Выключено'}/>
                             </div>
                         </>
                     ) : (
                         <div className="Modal__form_row">
-                            <Checkbox checked={checked} onChange={handleWeekend} id={'weekend'} text={'Выходной'}/>
+                            <Checkbox shadow={true} checked={checked} onChange={handleWeekend} id={'weekend'} text={'Выходной'}/>
                         </div>
                     )
                 }

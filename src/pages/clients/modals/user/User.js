@@ -25,7 +25,7 @@ const anl = new anService();
 const User = ({
     visible, 
     close, 
-  
+    updateList,
     data
 }) => {
     const {token} = useSelector(state => state)
@@ -71,6 +71,7 @@ const User = ({
                 setMessage(body.Message)
                 setSale(body.Sale)
                 setDate(moment(body.StopDate).format('YYYY-MM-DD'))
+                updateList()
             }
         }).finally(_ => setAddLoad(false))
     }, [data])
@@ -82,6 +83,7 @@ const User = ({
                 setMessage('')
                 setSale(0)
                 setDate('')
+                updateList()
             }
         }).finally(_ => setRemoveLoad(false))
     }
@@ -137,6 +139,7 @@ const User = ({
                 visible={discount}
                 close={closeDiscount}
                 onSave={addDiscount}
+                updateList={updateList}
                 />
             <Push
                 load={pushLoad}
