@@ -718,7 +718,7 @@ const EditPlatePage = () => {
                                         </Row>
                                     ) : null
                                 }
-                                <Row className='custom-row'>
+                                <Row className='row-custom'>
                                     <Checkbox
                                         id={'HideInApp'}
                                         text={'Скрыть в приложении'}
