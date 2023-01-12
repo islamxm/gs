@@ -13,7 +13,7 @@ import SaveIcon from '../../../../icons/SaveIcon/SaveIcon';
 import MapPolygon from '../../../../components/MapPolygon/MapPolygon';
 import SelectColor from './SelectColor/SelectColor';
 import Checkbox from '../../../../components/Checkbox/Checkbox';
-
+import Text from '../../../../components/Text/Text';
 const os = new orgService()
 
 
@@ -33,17 +33,24 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
     const [Color, setColor] = useState('')
     const [IsOnlyForOnlinePayment, setIsOnlyForOnlinePayment] = useState('0')
 
+    const [textCoords, setTextCoords] = useState()
+
     useEffect(() => {
         if(data) {
+            
             setMinPrice(data?.MinPrice)
             setDelivery(data?.Delivery)
             setDeliveryTime(data?.DeliveryTime)
-            setCoords(data?.Coordinates)
+            // setCoords(data?.Coordinates)
+            setTextCoords(data?.Coordinates.map(item => {
+                return `${item.lat},${item.lng}`
+            }).join(' '))
             setColor(data?.Color)
             setName(data?.Name)
             setIsOnlyForOnlinePayment(data?.IsOnlyForOnlinePayment)
         } else {
-            setCoords(null)
+            // setCoords(null)
+            setTextCoords('')
             setColor('#000000')
         }
     }, [data, visible])
@@ -70,7 +77,26 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
         close();
     }
 
-
+    useEffect(() => {
+        if(textCoords) {
+            console.log(textCoords)
+            const arr = textCoords.split(' ');
+            const r = arr.filter(item => {
+                const ff = item.split(',')
+                if(ff.length == 2) {
+                    return item
+                }
+                
+            }).map(g => {
+                const tt = g.split(',')
+                return {
+                    lat: Number(tt[0]),
+                    lng: Number(tt[1])
+                }
+            })
+            setCoords(r)
+        }
+    }, [textCoords])
 
     const removeDelItem = (index) => {
         const r = Delivery;
@@ -78,16 +104,24 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
         setDelivery([...r])
     }
 
+    useEffect(() => {
+        if(selected?.length > 0) {
+            setTextCoords(selected.map(item => {
+                return `${item.lat()},${item.lng()}`
+            }).join(' '))
+        }
+    }, [selected])
 
     const onSave = () => {    
         if(!data) {
-            if(selected) {
+            if(textCoords) {
                 const data = {
                     OrganisationID: orgId,
                     Disabled: '0',
-                    Coordinates: selected.map(item => {
-                        return `${item.lat()},${item.lng()}`
-                    }).join(' '),
+                    // Coordinates: selected.map(item => {
+                    //     return `${item.lat()},${item.lng()}`
+                    // }).join(' '),
+                    Coordinates: textCoords,
                     MinPrice,
                     DeliveryTime,
                     Delivery,
@@ -144,15 +178,15 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
             }
             
         } else {
-            
-            if(selected) {
+            if(textCoords) {
                 os.editPol(token, {
                     PolygonID: data.PolygonID,
                     OrganisationID: orgId,
                     Disabled: '0',
-                    Coordinates: selected.map(item => {
-                        return `${item.lat()},${item.lng()}`
-                    }).join(' '),
+                    // Coordinates: selected.map(item => {
+                    //     return `${item.lat()},${item.lng()}`
+                    // }).join(' '),
+                    Coordinates: textCoords,
                     MinPrice,
                     DeliveryTime,
                     Delivery,
@@ -182,9 +216,10 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                     Disabled: '0',
                     MinPrice,
                     DeliveryTime,
-                    Coordinates: data.Coordinates.map(item => {
-                        return `${item.lat},${item.lng}`
-                    }).join(' '),
+                    // Coordinates: data.Coordinates.map(item => {
+                    //     return `${item.lat},${item.lng}`
+                    // }).join(' '),
+                    Coordinates: textCoords,
                     Delivery,
                     Name,
                     Color,
@@ -233,7 +268,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
         })
     }
 
-
+    
 
     return (
         <Modal width={1220} className="Modal" open={visible} onCancel={closeHandle}>
@@ -242,7 +277,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
             <form className="Modal__form">
                 <Row gutter={[25, 0]}>
                     <Col span={14}>
-                        <Row gutter={[0, 15]}>
+                        <Row gutter={[0, 20]}>
                             <Col span={24}>
                                 <div className="Modal__form_map" style={{height: 290}}>  
                                     <MapPolygon
@@ -259,6 +294,7 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                             </Col>
                             <Col span={24}>
                                 <Checkbox
+                                    shadow={true}
                                     id={'IsOnlyForOnlinePayment'}
                                     text={'Только для онлайн оплаты'}
                                     checked={IsOnlyForOnlinePayment == '1'}
@@ -318,44 +354,61 @@ const PolygonModal = ({visible, close, data, orgId,setPolList}) => {
                        
                     </Col>
                     <Col span={10}>
-                        <Row gutter={[0,10]}>
-                            <Col span={24} className="def-label">
+                        <Row gutter={[0,20]}>
+                            <Col span={24}>
+                                {/* <Input
+                                    shadow={true}
+                                    placeholder={'Координаты'}
+                                    value={textCoords}
+                                    maskType={String}
+                                    /> */}
+                                <Text
+                                    value={textCoords}
+                                    placeholder={'Координаты'}
+                                    shadow
+                                    onChange={(e) => setTextCoords(e.target.value)}
+                                    />
+                            </Col>
+                            <Col span={24} className="def-label" style={{margin: 0}}>
                                 Таблица цен доставки
                             </Col>
-                            <Col span={24}>
-                                <div className="SelectPoly__list">
-                                    {
-                                        Delivery && Delivery.length > 0 ? (
-                                            Delivery.map((item, index) => (
-                                                <div className="SelectPoly__item" key={index}>
-                                                    <div className="SelectPoly__item_main" onClick={() => openEditPrice({...item})}>
-                                                        <div className="SelectPoly__item_p">
-                                                            <div className="SelectPoly__item_p_name">Сумма заказа от</div>
-                                                            <div className="SelectPoly__item_p_value">{item.MinPrice}</div>
+                            {
+                                Delivery && Delivery.length > 0 ? (
+                                    <Col span={24}>
+                                        <div className="SelectPoly__list">
+                                            {
+                                                Delivery.map((item, index) => (
+                                                    <div className="SelectPoly__item" key={index}>
+                                                        <div className="SelectPoly__item_main" onClick={() => openEditPrice({...item})}>
+                                                            <div className="SelectPoly__item_p">
+                                                                <div className="SelectPoly__item_p_name">Сумма заказа от</div>
+                                                                <div className="SelectPoly__item_p_value">{item.MinPrice}</div>
+                                                            </div>
+                                                            <div className="SelectPoly__item_p">
+                                                                <div className="SelectPoly__item_p_name">Цена доставки</div>
+                                                                <div className="SelectPoly__item_p_value">{item.DeliveryPrice}</div>
+                                                            </div>
                                                         </div>
-                                                        <div className="SelectPoly__item_p">
-                                                            <div className="SelectPoly__item_p_name">Цена доставки</div>
-                                                            <div className="SelectPoly__item_p_value">{item.DeliveryPrice}</div>
+                                                        
+                                                        <div className="SelectPoly__item_action">
+                                                            <Button
+                                                                type={'button'}
+                                                                styles={{width: '100%'}} 
+                                                                variant={'danger'} 
+                                                                text={'Удалить цену'} 
+                                                                before={<BsTrash/>}
+                                                                onClick={() => removeDelItem(index)}
+                                                                />
                                                         </div>
                                                     </div>
-                                                    
-                                                    <div className="SelectPoly__item_action">
-                                                        <Button
-                                                            type={'button'}
-                                                            styles={{width: '100%'}} 
-                                                            variant={'danger'} 
-                                                            text={'Удалить цену'} 
-                                                            before={<BsTrash/>}
-                                                            onClick={() => removeDelItem(index)}
-                                                            />
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : null
-                                    }
-                                   
-                                </div>
-                            </Col>
+                                                ))
+                                            }
+                                        
+                                        </div>
+                                    </Col>
+                                ) : null
+                            }
+                            
                             <Col span={24}>
                                 <Pl 
                                     shadow={true}

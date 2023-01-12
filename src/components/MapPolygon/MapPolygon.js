@@ -22,11 +22,13 @@ const MapPolygon = ({
     id,
     color,
 }) => {
+    useEffect(() => {
+        console.log(polygonCoords)
+    }, [polygonCoords])
     const {isLoaded} = useLoadScript({
         id: id,
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: libs,
-        
     })
     const mapRef = useRef(null)
     const polyRef = useRef(null)
