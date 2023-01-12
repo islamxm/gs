@@ -14,15 +14,18 @@ const MiniStorie = ({
     ID,
     ItemOrder,
     images,
-    selectStorie
+    selectStorie,
+    openStorie
 }) => {
     const nav = useNavigate()
     const [tm, setTm] = useState(false)
+    const [time, setTime] = useState();
+
 
     const clickHandle = () => {
-        setTimeout(() => {
+        setTime(setTimeout(() => {
             setTm(true)
-        }, 200)
+        }, 200))
     
     }
 
@@ -31,7 +34,20 @@ const MiniStorie = ({
             setTm(false)
             return;
         } else {
-           console.log('clicked')
+            clearTimeout(time)
+            selectStorie({
+                AllowedDeliveryTypes,
+                ButtonActionItemID,
+                ButtonText,
+                ButtonTypeAction,
+                Disabled,
+                HiddenInOrganisations,
+                HideInApp,
+                ID,
+                ItemOrder,
+                images,
+            })
+            openStorie()
         }
     }
     return (

@@ -80,7 +80,9 @@ const AddStorie = ({visible, close, selectCat, data}) => {
     return (
         <Modal className="Modal" open={visible} width={1000} onCancel={closeHandle}>
             <h2 className="Modal__head">
-                Добавить сториз
+                {
+                    data ? 'Редактировать сториз' : 'Добавить сториз'
+                }
             </h2>
             <div className="Modal__form">
                 <Row gutter={[30, 0]}>
@@ -147,7 +149,7 @@ const AddStorie = ({visible, close, selectCat, data}) => {
                             <Pl onClick={selectCat} text={'Выбрать категорию'} style={{justifyContent: 'flex-start', color: '#7B99FF', backgroundColor: '#fff'}}/>
                         </Row>
                         <Row className='row-custom'>
-                            <Input placeholder={'Текст на кнопке'}/>
+                            <Input shadow placeholder={'Текст на кнопке'}/>
                         </Row>
 
                     </Col>

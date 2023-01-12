@@ -172,7 +172,10 @@ const StoriesPage = () => {
                                                                         {...item}
                                                                         />
                                                                     ) : (
-                                                                        <MiniStorie {...item}/>
+                                                                        <MiniStorie 
+                                                                            openStorie={openAddStorie}
+                                                                            selectStorie={setSelectedStorie}
+                                                                            {...item}/>
                                                                     )
                                                                 }
                                                                 
