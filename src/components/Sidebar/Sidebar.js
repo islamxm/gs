@@ -120,7 +120,7 @@ const Sidebar = () => {
                 <SidebarItem
                     labelHide={isHide}
                     name={'Сториз'}
-                    link={'/stories'}
+                    link={'/stories?p=Сториз'}  
                     root={'/stories'}
                     icon={<CgTag style={{transform: 'rotate(-45deg)'}}/>}
                     />

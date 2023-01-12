@@ -81,6 +81,10 @@ const endpoints = {
     deletePersonalSale: `${BASE_DOMAIN}/analytics/removePersonalSale`,
 
 
+    //stories
+    getStories: `${BASE_DOMAIN}/stories/stories`,
+    createStories: `${BASE_DOMAIN}/stories/addStory`
+
 
 }
 

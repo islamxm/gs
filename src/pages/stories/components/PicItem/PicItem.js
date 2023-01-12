@@ -5,14 +5,23 @@ import { BsTrash } from 'react-icons/bs';
 
 
 
-const PicItem = ({image, remove, style}) => {
+const PicItem = ({
+    style,
+    BundleID,
+    Disabled,
+    ID,
+    ItemOrder,
+    Picture,
+    PictureThumbnail,
+    onDelete
+}) => {
     return (
         <div className="PicItem" style={style}>
             <div className="PicItem__img">
-                <img src={img} alt="" />
+                <img src={PictureThumbnail} alt="" />
             </div>
             <div className="PicItem__action">
-                <Button styles={{width: '100%', padding: 10}} variant={'danger'} text={'Удалить'} before={<BsTrash/>} justify={'center'}/>
+                <Button onClick={() => onDelete(ID)} styles={{width: '100%', padding: 10}} variant={'danger'} text={'Удалить'} before={<BsTrash/>} justify={'center'}/>
             </div>
         </div>  
     )

@@ -11,7 +11,6 @@ import catService from '../../../services/catService';
 import Loader from '../../../components/Loader/Loader';
 import {motion} from 'framer-motion';
 import GridToggle from '../../../components/GridToggle/GridToggle';
-
 import authService from '../../../services/dataService';
 import {
     GridContextProvider,
@@ -72,12 +71,7 @@ const CatalogPage = () => {
         } else {
             setGridHeight(rowHeight)
         }
-        // console.log('количество элементов',cats?.length)
-        // console.log('количество элементов в одной строке', boxRow)
-        // console.log('gridType', gridType)
-        // console.log('высота элемента', rowHeight)
-        // console.log('делим общее количество на количество элементов в одной строке', Math.round(cats?.length / boxRow))
-        // console.log('получаем остаток', cats?.length % boxRow)
+
     }, [cats, boxRow, gridType, rowHeight])
 
     
@@ -125,11 +119,9 @@ const CatalogPage = () => {
 
 
     useEffect(() => {
-       
         if(token && cats && cats.length > 0) {
             as.orderSort(token, 'categories', cats.map(item => item.ID).join(','))
         }
-
     }, [token, cats])
 
 
